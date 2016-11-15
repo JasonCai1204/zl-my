@@ -17,11 +17,11 @@ class Order extends Model
       'photos' => 'array'
     ];
 
-    protected function hospitals(){
+    protected function hospital(){
         return $this->belongsTo('App\Http\Models\Hospital');
     }
 
-    protected function doctors(){
+    protected function doctor(){
         return $this->belongsTo('App\Http\Models\Doctor');
     }
 

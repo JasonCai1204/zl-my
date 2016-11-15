@@ -26,12 +26,13 @@ class CreateDoctorsTable extends Migration
         Schema::create('doctors', function (Blueprint $table) {
             $table->increments('id');
             $table->string('avatar',225);
-            $table->string('name',7);
+            $table->string('name',5);
             $table->string('grading',5);
             $table->text('introduction');
             $table->string('phone_number',11)->unique();
             $table->string('password',225);
             $table->integer('hospital_id');
+            $table->tinyInteger('is_certified');
             $table->tinyInteger('is_recommended');
             $table->rememberToken();
             $table->softDeletes();

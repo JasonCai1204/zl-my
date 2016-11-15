@@ -2,19 +2,37 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Models as app;
 use Illuminate\Http\Request;
 
-class OrderController extends Controller
+class NewsController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+//        if($request->url() == '/'){
+//           $news = app\News::sortby('created_at','desc')
+//                             ->take(3)
+//                             ->get();
+//            return view('index',[
+//                'news' =>$news
+//            ]);
+//        }
+
+        $news = app\News::all();
+
+        return view('news.news',[
+              'news' =>$news
+            ]);
     }
+
+    /**
+     * CMS Start
+     */
 
     /**
      * Show the form for creating a new resource.
@@ -45,7 +63,11 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        //
+        $news = app\News::findOrFail($id);
+
+        return view('news.show',[
+            'news' => $news
+        ]);
     }
 
     /**
@@ -82,12 +104,7 @@ class OrderController extends Controller
         //
     }
 
-    //redirect order/create
-    public function getCreate(){
-        return view('orders.create',[
-            'hospitals' => "",
-            'doctors' => "",
-            'instances' => ""
-        ]);
-    }
+    /**
+     * CMS Start
+     */
 }

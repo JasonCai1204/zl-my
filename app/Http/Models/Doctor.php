@@ -13,7 +13,7 @@ class Doctor extends Model
 
     protected $guarded = [];
 
-    public function hospitals(){
+    public function hospital(){
         return $this->belongsTo('App\Http\Models\Hospital');
     }
 
