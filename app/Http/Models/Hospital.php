@@ -13,7 +13,7 @@ class Hospital extends Model
 
     protected $guarded = [];
 
-    public function cities()
+    public function city()
     {
         return $this->belongsTo('App\Http\Models\City');
     }

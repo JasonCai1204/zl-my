@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class OrderController extends Controller
+class AccountController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -82,12 +82,15 @@ class OrderController extends Controller
         //
     }
 
-    //redirect order/create
-    public function getCreate(){
-        return view('orders.create',[
-            'hospitals' => "",
-            'doctors' => "",
-            'instances' => ""
-        ]);
+    //signIn
+    public function signIn(){
+
     }
+
+    //signUp
+    public function signUp(){
+        //
+    }
+
+    //
 }

@@ -14,7 +14,15 @@ class DoctorController extends Controller
      */
     public function index()
     {
-        //
+        $recommendDoctors = App\Doctor::where('is_recommended','1')
+                            ->get();
+
+        $doctors = App\Doctor::all();
+
+        return view('doctors.doctor',[
+            'recommendDoctors' => $recommendDoctors,
+            'doctors' => $doctors
+        ]);
     }
 
     /**
@@ -50,7 +58,11 @@ class DoctorController extends Controller
      */
     public function show($id)
     {
-        //
+        $doctor = App\Doctor::findOrFail($id);
+
+        return view('doctors.show',[
+           'doctor' => $doctor
+        ]);
     }
 
     /**
@@ -92,7 +104,74 @@ class DoctorController extends Controller
      * CMS End
      */
 
+    //signIn
     public function getLogin(){
-        //
+        return view('doctors.signin');
     }
+
+    public function postLogin(){
+
+    }
+
+    //Select doctor
+    public function getSelect(){
+        $recommendDoctors = App\Doctor::where('is_recommended','1')
+            ->get();
+
+        $doctors = App\Doctor::all();
+
+        return view('doctors.select',[
+            'recommendDoctors' => $recommendDoctors,
+            'doctors' => $doctors
+        ]);
+    }
+
+    public function postSelect(Request $request){
+        $doctors = App\Doctor::where('id',$request->id)->get();
+
+        return view('orders/create',[
+            'doctors' => $doctors
+        ]);
+    }
+
+    //Select doctor from hospital
+    public function getHospitalSelect(Request $request){
+        $hospitalDoctors = App\Doctor::where('hospital_id',$request->id)->get();
+
+        return view('doctors.select',[
+            'recommendDoctors' => "",
+            'doctors' => "",
+            'hospitalDoctors' => $hospitalDoctors
+        ]);
+    }
+
+    public function postHospitalSelect(Request $request){
+        $hospitals = App\Hospital::where('id',$request->id)
+            ->get();
+
+        $doctors = App\Doctor::where('hospital_id',$request->id)
+                    ->get();
+
+        return view('orders/create',[
+            'hospitals' => $hospitals,
+            'doctors' => $doctors,
+        ]);
+    }
+
+
+    //getOrders
+//    public function getOrders(Request $request){
+//
+//        $doctors = App\Doctor::where('id','1')
+//                ->orders;
+//
+//        dd($doctors);
+//
+////        return view('doctors.order',[
+////            'orders' => $orders
+////        ]);
+//    }
+
+
+
 }

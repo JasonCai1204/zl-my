@@ -28,6 +28,7 @@ class CreateHospitalsTable extends Migration
             $table->string('name',30);
             $table->string('grading',9);
             $table->integer('city_id');
+            $table->text('introduction');
             $table->tinyInteger('is_recommended');
             $table->softDeletes();
             $table->timestamps();
