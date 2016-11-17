@@ -11,25 +11,20 @@
 |
 */
 
-//User
-Route::group(['domain' => 'zl-my.com'],  function () {
+// Doctor
+//Route::group(['domain' => '{doctor}.zl-my.com'], function () {
     //
-});
+//});
 
-////Doctor
-//Route::group(['domain' => 'doctor.zl-my.com'],['prefix' => 'doctor'],  function () {
-//    //
+// Api
+//Route::group(['domain' => '{api}.zl-my.com'],  function () {
+    //
 //});
-//
-////Api
-//Route::group(['domain' => 'api.zl-my.com'],['prefix' => 'api'],  function () {
-//    //
-//});
-//
-////Cms
-//Route::group(['domain' => 'cms.zl-my.com'],['prefix' => 'cms'],  function () {
-//    //
-//});
+
+// CMS
+Route::group(['domain' => '{cms}.zl-my.com'],  function () {
+
+});
 
 
 
@@ -106,67 +101,67 @@ Route::get('/','WebController@index');
 //Route::resource('master','MasterController');
 //
 ////Hospital
-////Route::get('hospital/list','HospitalController@list');
-////Route::get('hospitals','HospitalController@hospitals');
-//Route::get('hospital/select','HospitalController@getSelect');
-//Route::post('hospital/select','HospitalController@postSelect');
-//Route::resource('hospital','HospitalController');
-//
-////Route::get('hospital',function(){
-////return view('hospitals.select');
-////});
+//Route::get('hospital/list','HospitalController@list');
+//Route::get('hospitals','HospitalController@hospitals');
+Route::get('hospital/select','HospitalController@getSelect');
+Route::post('hospital/select','HospitalController@postSelect');
+Route::resource('hospital','HospitalController');
+
+//Route::get('hospital',function(){
+//return view('hospitals.select');
+//});
 //
 ////Type
 //Route::get('type/list','TypeController@list');
 //Route::resource('type','TypeController');
 //
-////Instance
-//Route::get('instance/list','InstanceController@list');
-//Route::get('instance/select','InstanceController@getSelect');
-//Route::post('instance/select','InstanceController@postSelect');
-//Route::get('instance/doctor/select','InstanceController@getDoctorSelect');
-////Route::resource('instance','InstanceController');
+//Instance
+Route::get('instance/list','InstanceController@list');
+Route::get('instance/select','InstanceController@getSelect');
+Route::post('instance/select','InstanceController@postSelect');
+Route::get('instance/doctor/select','InstanceController@getDoctorSelect');
+//Route::resource('instance','InstanceController');
+
+Route::get('instance',function(){
+   return view('instances.select');
+});
 //
-//Route::get('instance',function(){
-//   return view('instances.select');
+//Doctor
+//Route::get('doctor/list','DoctorController@list');
+
+Route::get('doctor/signin','DoctorController@getLogin');
+Route::post('doctor/signin','DoctorController@postLogin');
+Route::get('doctor/orders','DoctorController@getOrders');
+Route::get('doctor/select','DoctorController@getSelect');
+Route::post('doctor/select','DoctorController@postSelect');
+//Select doctor from hospital
+Route::get('doctor/hospital/select','DoctorController@getHospitalSelect');
+Route::post('doctor/hospital/select','DoctorController@postHospitalSelect');
+//Route::get('doctor/dashboard','DoctorController@dashboard');
+//Route::post('doctor/dashboard','DoctorController@dashboard');
+//Route::get('doctors','DoctorController@doctors');
+//Route::get('doctor/{doctor}/display', 'DoctorController@display');
+Route::resource('doctor','DoctorController');
+//Route::get();
+//
+//
+//Order
+//Route::get('order/list','OrderController@list');
+//Route::get('order/{id}/photo','OrderController@editPhoto');
+//Route::post('order/{id}/photo','OrderController@addPhoto');
+//Route::delete('order/{id}/photo','OrderController@deletePhoto');
+//Route::get('order/{id}/report','OrderController@editReport');
+//Route::put('order/{id}/report','OrderController@updatePhoto');
+//Route::post('order/{id}/report/photo','OrderController@uploadReportPhoto');
+//Route::post('order/postPhotos','OrderController@postPhotos');
+Route::get('orders/create','OrderController@getCreate');
+Route::post('orders/create','OrderController@postCreate');
+Route::get('order/{order}/display','OrderController@display');
+Route::get('order/msg','OrderController@getMsg');
+Route::resource('order','OrderController');
+//Route::get('order/create',function(){
+//    return view('orders.create');
 //});
-//
-////Doctor
-////Route::get('doctor/list','DoctorController@list');
-//
-//Route::get('doctor/signin','DoctorController@getLogin');
-//Route::post('doctor/signin','DoctorController@postLogin');
-//Route::get('doctor/orders','DoctorController@getOrders');
-//Route::get('doctor/select','DoctorController@getSelect');
-//Route::post('doctor/select','DoctorController@postSelect');
-////Select doctor from hospital
-//Route::get('doctor/hospital/select','DoctorController@getHospitalSelect');
-//Route::post('doctor/hospital/select','DoctorController@postHospitalSelect');
-////Route::get('doctor/dashboard','DoctorController@dashboard');
-////Route::post('doctor/dashboard','DoctorController@dashboard');
-////Route::get('doctors','DoctorController@doctors');
-////Route::get('doctor/{doctor}/display', 'DoctorController@display');
-//Route::resource('doctor','DoctorController');
-////Route::get();
-//
-//
-////Order
-////Route::get('order/list','OrderController@list');
-////Route::get('order/{id}/photo','OrderController@editPhoto');
-////Route::post('order/{id}/photo','OrderController@addPhoto');
-////Route::delete('order/{id}/photo','OrderController@deletePhoto');
-////Route::get('order/{id}/report','OrderController@editReport');
-////Route::put('order/{id}/report','OrderController@updatePhoto');
-////Route::post('order/{id}/report/photo','OrderController@uploadReportPhoto');
-////Route::post('order/postPhotos','OrderController@postPhotos');
-//Route::get('orders/create','OrderController@getCreate');
-//Route::post('orders/create','OrderController@postCreate');
-//Route::get('order/{order}/display','OrderController@display');
-//Route::get('order/msg','OrderController@getMsg');
-//Route::resource('order','OrderController');
-////Route::get('order/create',function(){
-////    return view('orders.create');
-////});
 //
 //Route::get('order',function(){
 //    return view('orders.order');

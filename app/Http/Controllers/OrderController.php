@@ -139,63 +139,6 @@ class OrderController extends Controller
         return view('orders.create');
     }
 
-    //
-    public function postCreate(Request $request){
-
-
-//        if($hopital_id = $request->hospital_id) {
-//            $hospitals = App\Hospital::where('id', $hopital_id)
-//                ->get();
-//
-//            $doctors = App\Doctor::where('hospital_id', $hopital_id)
-//                ->get();
-//
-//            return view('orders.create', [
-//                'hospitals' => $hospitals,
-//                'doctors' => $doctors
-//            ]);
-//        }
-//
-//        if($doctor_id = $request->doctor_id){
-//
-//            dd($request->all());
-//
-//            $doctors = App\Doctor::where('id', $doctor_id)
-//                        ->get();
-//
-//            $doctor = $doctors->first();
-//
-//            $hopital_id = $doctor->hospital_id;
-//
-//            $hospitals = App\Hospital::where('id',$hopital_id)->get();
-//
-//            $instances = $doctor->instances;
-//
-//            return view('orders.create', [
-//                'hospitals' => $hospitals,
-//                'doctors' => $doctors,
-//                'instances' => $instances
-//            ]);
-//        };
-//
-//        if($instance_id = $request->instance_id){
-//            $instances = App\Instance::findOrFail($instance_id);
-//
-////            $doctors = $instances->doctors-;
-//            dd($doctors);
-//        }
-
-
-//            $instances[] = '';
-//
-//            foreach( $doctors as $index => $doctor){
-//                $instances[] = $doctor->instances;
-//            }
-//
-//            dd($instances);
-
-
-    }
 
     /**
      * CMS begin
