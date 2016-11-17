@@ -81,4 +81,8 @@ class MasterController extends Controller
     {
         //
     }
+
+    /**
+     * CMS begin
+     */
 }

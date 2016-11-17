@@ -17,9 +17,6 @@ class CityController extends Controller
         //
     }
 
-    /**
-     * CMS Start
-     */
 
     /**
      * Show the form for creating a new resource.
@@ -88,7 +85,7 @@ class CityController extends Controller
     }
 
     /**
-     * CMS End
+     * CMS begin
      */
 
 }

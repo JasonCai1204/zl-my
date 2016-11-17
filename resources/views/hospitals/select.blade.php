@@ -8,8 +8,7 @@
 @if(count($recommendHospitals) > 0 || count($hospitals) > 0)
 <!--主体部分-->
 <div class="container" id="order_choice_hospital">
-    <form action="/hospital/select" method="post">
-        {{ csrf_field() }}
+    <form action="/orders/create" method="get">
     @if(count($recommendHospitals) > 0 )
         <div class="weui-cells__title">推荐医院</div>
         <div class="weui-cells weui-cells_radio">
@@ -19,7 +18,7 @@
                     <p>{{$recommendHospital->name}}</p>
                 </div>
                 <div class="weui-cell__ft">
-                    <input type="radio" class="weui-check" name="id" value="{{$recommendHospital->id}}">
+                    <input type="radio" class="weui-check" name="hospital_id" value="{{$recommendHospital->id}}">
                     <span class="weui-icon-checked"></span>
                 </div>
             </label>
@@ -36,7 +35,7 @@
                     <p>{{$hospital->name}}</p>
                 </div>
                 <div class="weui-cell__ft">
-                    <input type="radio" class="weui-check" name="id" value="{{$hospital->id}}">
+                    <input type="radio" class="weui-check" name="hospital_id" value="{{$hospital->id}}">
                     <span class="weui-icon-checked"></span>
                 </div>
             </label>

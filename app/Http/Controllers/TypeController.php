@@ -18,11 +18,6 @@ class TypeController extends Controller
 
 
     /**
-     * CMS Start
-     */
-
-
-    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -89,6 +84,6 @@ class TypeController extends Controller
     }
 
     /**
-     * CMS Start
+     * CMS begin
      */
 }

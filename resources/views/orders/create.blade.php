@@ -44,19 +44,46 @@
         <!--可选填写-->
         <div class="weui-cells__title">可选填写</div>
         <div class="weui-cells">
-            @if($hospitals || $doctors || $instances)
-                    @if(count($hospitals) > 0 && count($doctors)>0)
-                        <a href="/hospital/select" class="weui-cell  weui-cell_access" id="order_hospital">
-                            <div class="weui-cell__bd">
-                                <p>预约医院</p>
+            <!--跳转 choice_hospital页面-->
+            @if(isset($hospitals))
+                <a href="/hospital/select" class="weui-cell  weui-cell_access" id="order_hospital">
+                    <div class="weui-cell__bd">
+                        <p>预约医院</p>
+                    </div>
+                    @foreach($hospitals as $hospital)
+                    <div class="weui-cell__ft">
+                    {{$hospital->name}}
+                    </div>
+                    @endforeach
+                </a>
+            @elseif(!isset($hospitals))
+                <a href="/hospital/select" class="weui-cell  weui-cell_access" id="order_hospital">
+                    <div class="weui-cell__bd">
+                        <p>预约医院</p>
+                    </div>
+                    <div class="weui-cell__ft">
+
+                    </div>
+                </a>
+            @endif
+
+            <!--跳转 choice_doctor页面-->
+            @if(isset($doctors))
+                @if(isset($doctors) && isset($hospitals) && isset($instances))
+                    <a href="/doctor/select" class="weui-cell weui-cell_access" id="order_doctor">
+                        <div class="weui-cell__bd">
+                            <p>预约医生</p>
+                        </div>
+                        @foreach($doctors as $doctor)
+                            <div class="weui-cell__ft">
+                                {{$doctor->name}}
                             </div>
-                            @foreach($hospitals as $hospital )
-                                <div class="weui-cell__ft">
-                                    {{$hospital->name}}
-                                </div>
-                            @endforeach
-                        </a>
-                        <a href="/doctor/select" class="weui-cell weui-cell_access" id="order_doctor">
+                        @endforeach
+                    </a>
+                @endif
+
+                @if(isset($doctors) > 0 && isset($hospitals) && !isset($instances))
+                        <a href="/doctor/hospital/select?id={{$hospital->id}}" class="weui-cell weui-cell_access" id="order_doctor">
                             <div class="weui-cell__bd">
                                 <p>预约医生</p>
                             </div>
@@ -66,61 +93,21 @@
                                 </div>
                             @endforeach
                         </a>
-                        @endif
+                @endif
 
-                        <!--跳转 choice_hospital页面-->
-                        @if( count($hospitals) > 0 || count($doctors) > 0)
-                            <a href="/hospital/select" class="weui-cell  weui-cell_access" id="order_hospital">
-                                <div class="weui-cell__bd">
-                                    <p>预约医院</p>
-                                </div>
-                                @foreach($hospitals as $hospital )
-                                <div class="weui-cell__ft">
-                                    {{$hospital->name}}
-                                </div>
-                                @endforeach
-                            </a>
-                            <a href="/doctor/hospital/select?id={{$hospital->id}}" class="weui-cell weui-cell_access" id="order_doctor">
-                                <div class="weui-cell__bd">
-                                    <p>预约医生</p>
-                                </div>
-                                <div class="weui-cell__ft">
-                                </div>
-                            </a>
-                        @endif
-            @endif
+                @if(isset($doctors) && isset($hospitals) && !isset($instances))
+                    <a href="/doctor/hospital/select?id={{$hospital->id}}" class="weui-cell weui-cell_access" id="order_doctor">
+                        <div class="weui-cell__bd">
+                            <p>预约医生</p>
+                        </div>
+                        <div class="weui-cell__ft">
 
-                        {{--<!--跳转 choice_doctor页面-->--}}
-                        {{--<a href="/doctor/select" class="weui-cell weui-cell_access" id="order_doctor">--}}
-                            {{--<div class="weui-cell__bd">--}}
-                                {{--<p>预约医生</p>--}}
-                            {{--</div>--}}
-                            {{--<div class="weui-cell__ft">--}}
-                            {{--</div>--}}
-                        {{--</a>--}}
+                        </div>
+                    </a>
+                @endif
 
-                {{--<!--跳转 choice_cancer页面-->--}}
-                {{--<a href="/instance/select" class="weui-cell weui-cell_access" id="order_cancer">--}}
-                    {{--<div class="weui-cell__bd">--}}
-                        {{--<p>所患疾病</p>--}}
-                    {{--</div>--}}
-                    {{--<div class="weui-cell__ft">--}}
-                        {{--肺癌--}}
-                    {{--</div>--}}
-                {{--</a>--}}
-                {{--@endif--}}
-            {{--@endif--}}
 
-                <!--跳转 choice_hospital页面-->
-                <a href="/hospital/select" class="weui-cell  weui-cell_access" id="order_hospital">
-                    <div class="weui-cell__bd">
-                        <p>预约医院</p>
-                    </div>
-                    <div class="weui-cell__ft">
-
-                    </div>
-                </a>
-
+            @elseif(!isset($doctors))
                 <!--跳转 choice_doctor页面-->
                 <a href="/doctor/select" class="weui-cell weui-cell_access" id="order_doctor">
                     <div class="weui-cell__bd">
@@ -131,15 +118,46 @@
                     </div>
                 </a>
 
-                <!--跳转 choice_cancer页面-->
-                <a href="/select/instance" class="weui-cell weui-cell_access" id="order_cancer">
+            @endif
+
+            <!--跳转 choice_cancer页面-->
+            @if(isset($instances))
+                @if(isset($doctors) && isset($hospitals) && !isset($instances))
+                <a href="/instance/doctor/select?hospital_id={{$hospital->id}}&doctor_id={{$doctor->id}}" class="weui-cell weui-cell_access" id="order_cancer">
                     <div class="weui-cell__bd">
                         <p>所患疾病</p>
                     </div>
+                    {{--@foreach($instances as $instance)--}}
                     <div class="weui-cell__ft">
-
+                    {{--{{$instance->name}}--}}
                     </div>
+                    {{--@endforeach    --}}
                 </a>
+                @endif
+
+                @if(isset($doctors) && isset($hospitals) && isset($instances))
+                    <a href="/instance/select" class="weui-cell weui-cell_access" id="order_cancer">
+                        <div class="weui-cell__bd">
+                            <p>所患疾病</p>
+                        </div>
+                        @foreach($instances as $instance)
+                        <div class="weui-cell__ft">
+                            {{$instance->name}}
+                        </div>
+                        @endforeach
+                    </a>
+                @endif
+            @elseif(!isset($instances))
+                <!--跳转 choice_cancer页面-->
+                    <a href="/instance/select" class="weui-cell weui-cell_access" id="order_cancer">
+                        <div class="weui-cell__bd">
+                            <p>所患疾病</p>
+                        </div>
+                        <div class="weui-cell__ft">
+
+                        </div>
+                    </a>
+            @endif
 
             <!--选择性别-->
             <div class="weui-cell weui-cell_select weui-cell_select-after">

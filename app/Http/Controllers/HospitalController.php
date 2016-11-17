@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Models as App;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Model;
 
 class HospitalController extends Controller
 {
@@ -25,10 +26,6 @@ class HospitalController extends Controller
         ]);
 
     }
-
-    /**
-     * CMS Start
-     */
 
     /**
      * Show the form for creating a new resource.
@@ -102,10 +99,6 @@ class HospitalController extends Controller
         //
     }
 
-    /**
-     * CMS End
-     */
-
     //Search hospitals and doctors
     public function search(Request $request)
     {
@@ -151,13 +144,21 @@ class HospitalController extends Controller
         //Select hospital
         public function postSelect(Request $request){
 
-            $hospitals = App\Hospital::where('id',$request->id)
-                ->get();
-
-            return view('orders/create',[
-                'hospitals' => $hospitals,
-                'doctors' => ""
-            ]);
+//            $hospitals = App\Hospital::where('id',$request->id)
+//                ->get();
+//
+//            $doctors = App\Doctor::where('hospital_id',$request->id)
+//                ->get();
+//
+////            dd($doctors);
+//            return view('orders/create',[
+//                'hospitals' => $hospitals,
+//                'doctors' => $doctors
+//            ]);
         }
 
+
+        /**
+         * CMS begin
+         */
 }

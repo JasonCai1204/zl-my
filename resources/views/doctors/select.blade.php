@@ -5,9 +5,9 @@
 @section('content')
 
 <!--主体部分-->
-@if($recommendDoctors || $doctors)
+@if(isset($recommendDoctors) || isset($doctors))
 <div class="container" id="container_doctor">
-    <form action="/doctor/select" method="post">
+    <form action="/orders/create?{{$recommendDoctor->hospital->id}}" method="get">
         {{ csrf_field() }}
         @if(count($recommendDoctors) > 0 )
         <div class="weui-cells__title">推荐医生</div>
@@ -19,7 +19,7 @@
                     <span class="my_cell_index">{{$recommendDoctor->hospital->name}}</span>
                 </div>
                 <div class="weui-cell__ft">
-                    <input type="radio" class="weui-check" name="id" value="{{$recommendDoctor->id}}">
+                    <input type="radio" class="weui-check" name="doctor_id" value="{{$recommendDoctor->id}}">
                     <span class="weui-icon-checked"></span>
                 </div>
             </label>
@@ -37,7 +37,7 @@
                     <span class="my_cell_index">{{$doctor->hospital->name}}</span>
                 </div>
                 <div class="weui-cell__ft">
-                    <input type="radio" class="weui-check" name="id" value="{{$doctor->id}}>
+                    <input type="radio" class="weui-check" name="doctor_id" value="{{$doctor->id}}>
                     <span class="weui-icon-checked"></span>
                 </div>
             </label>
@@ -49,11 +49,12 @@
                 <input type="submit" value="完成" class="btnfixed">
             </div>
         </div>
+@endif
 
-@else($hospitalDoctors)
+@if(isset($hospitalDoctors))
         @if( count($hospitalDoctors) > 0 )
-         <form action="/doctor/hospital/select" method="post">
-             {{ csrf_field() }}
+         <form action="/orders/create" method="get">
+             <input type="hidden" name="hospital_id" value="{{$hospital_id}}">
             <div class="weui-cells weui-cells_radio">
                 @foreach( $hospitalDoctors as $hospitalDoctor )
                     <label class="weui-cell weui-check__label my_doctor_cell">
@@ -62,7 +63,7 @@
                             {{--<span class="my_cell_index">{{$hospitalDoctor->hospital->name}}</span>--}}
                         </div>
                         <div class="weui-cell__ft">
-                            <input type="radio" class="weui-check" name="id" value="{{$hospitalDoctor->id}}">
+                            <input type="radio" class="weui-check" name="doctor_id" value="{{$hospitalDoctor->id}}">
                             <span class="weui-icon-checked"></span>
                         </div>
                     </label>

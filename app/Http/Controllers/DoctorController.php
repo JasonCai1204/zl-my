@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Models as App;
+use Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class DoctorController extends Controller
 {
@@ -25,9 +27,6 @@ class DoctorController extends Controller
         ]);
     }
 
-    /**
-     * CMS Start
-     */
 
     /**
      * Show the form for creating a new resource.
@@ -100,16 +99,47 @@ class DoctorController extends Controller
     }
 
 
-    /**
-     * CMS End
-     */
-
     //signIn
     public function getLogin(){
         return view('doctors.signin');
     }
 
-    public function postLogin(){
+    public function postLogin(Request $request){
+        // Validation.
+
+        if($input =$request->all() ){
+            $rules = [
+                'phone_number' => 'required|numeric',
+                'password' => 'required|'
+            ];
+
+            $message = [
+                'phone_number.required' => '请输入手机号码',
+                'phone_number.password' => '请输入密码'
+            ];
+
+            $validator = Validator::make($input,$rules,$message);
+
+            if($validator->passes()){
+                //Find the doctor
+
+                $doctor = App\Doctor::where('phone_number', $request->phone_number)
+                        ->first();
+                // Success.
+                if ($doctor != null && Hash::check($request->password, $doctor->password)) {
+                    // The passwords match...
+                    session(['doctor' => $doctor]);
+                    return redirect('/doctor/orders');
+                }
+                else{
+                  // Staff not found.
+                    return view('doctors/signin',['errors' => '号码或密码错误']);
+                }
+
+            }else{
+                return back()->withErrors($validator);
+            }
+        }
 
     }
 
@@ -126,52 +156,56 @@ class DoctorController extends Controller
         ]);
     }
 
-    public function postSelect(Request $request){
-        $doctors = App\Doctor::where('id',$request->id)->get();
-
-        return view('orders/create',[
-            'doctors' => $doctors
-        ]);
-    }
-
-    //Select doctor from hospital
+//    public function postSelect(Request $request){
+//        $doctors = App\Doctor::where('id',$request->id)->get();
+//
+//        return view('orders/create',[
+//            'doctors' => $doctors
+//        ]);
+//    }
+//
+//    //Select doctor from hospital
     public function getHospitalSelect(Request $request){
+
         $hospitalDoctors = App\Doctor::where('hospital_id',$request->id)->get();
 
+//        dd($request->all());
         return view('doctors.select',[
-            'recommendDoctors' => "",
-            'doctors' => "",
-            'hospitalDoctors' => $hospitalDoctors
+            'hospitalDoctors' => $hospitalDoctors,
+            'hospital_id' => $request->id
         ]);
     }
-
-    public function postHospitalSelect(Request $request){
-        $hospitals = App\Hospital::where('id',$request->id)
-            ->get();
-
-        $doctors = App\Doctor::where('hospital_id',$request->id)
-                    ->get();
-
-        return view('orders/create',[
-            'hospitals' => $hospitals,
-            'doctors' => $doctors,
-        ]);
-    }
-
-
-    //getOrders
-//    public function getOrders(Request $request){
 //
-//        $doctors = App\Doctor::where('id','1')
-//                ->orders;
+//    public function postHospitalSelect(Request $request){
+//        $hospitals = App\Hospital::where('id',$request->id)
+//            ->get();
 //
-//        dd($doctors);
+//        $doctors = App\Doctor::where('hospital_id',$request->id)
+//                    ->get();
 //
-////        return view('doctors.order',[
-////            'orders' => $orders
-////        ]);
+//        return view('orders/create',[
+//            'hospitals' => $hospitals,
+//            'doctors' => $doctors,
+//        ]);
 //    }
 
 
+
+    //getOrders
+    public function getOrders(Request $request){
+
+//        $doctors = App\Doctor::where('id','1')
+//                ->orders();
+
+        dd('welcome');
+
+//        return view('doctors.order',[
+//            'orders' => $orders
+//        ]);
+    }
+
+    /**
+     * CMS begin
+     */
 
 }

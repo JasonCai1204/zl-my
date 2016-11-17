@@ -31,10 +31,6 @@ class NewsController extends Controller
     }
 
     /**
-     * CMS Start
-     */
-
-    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -105,6 +101,6 @@ class NewsController extends Controller
     }
 
     /**
-     * CMS Start
+     * CMS begin
      */
 }
