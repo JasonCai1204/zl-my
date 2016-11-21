@@ -16,15 +16,27 @@ class NewsController extends Controller
     {
 //        if($request->url() == '/'){
 //           $news = app\News::sortby('created_at','desc')
-//                             ->take(3)
+//                             ->take(15)
 //                             ->get();
 //            return view('index',[
 //                'news' =>$news
 //            ]);
 //        }
 
-        $news = app\News::all();
+        $news = app\News::select('id','title','cover_image')
+                ->orderby('created_at','desc')
+                ->skip(2)
+                ->take(2)
+                ->get();
 
+        foreach($news as $new){
+            $New[] = $new."url"."=>"."123" ;
+
+        }
+
+//        $News = json_encode($New);
+
+        dd($New);
         return view('news.news',[
               'news' =>$news
             ]);

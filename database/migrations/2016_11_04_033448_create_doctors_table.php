@@ -25,17 +25,17 @@ class CreateDoctorsTable extends Migration
     {
         Schema::create('doctors', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('avatar',225);
+            $table->string('avatar',225)->default('/images/doctor-default-avatar.png');
             $table->string('name',5);
             $table->string('grading',5);
             $table->text('introduction');
-            $table->string('phone_number',11)->unique();
-            $table->string('password',225);
+            $table->string('phone_number',11)->nullable();
+            $table->string('password',225)->nullable();
             $table->integer('hospital_id');
-            $table->tinyInteger('is_certified');
-            $table->tinyInteger('is_recommended');
-            $table->rememberToken();
-            $table->softDeletes();
+            $table->boolean('is_certified')->default(0);
+            $table->boolean('is_recommended')->default(0);
+            $table->rememberToken()->nullable();
+            $table->softDeletes()->nullable();
             $table->timestamps();
         });
     }

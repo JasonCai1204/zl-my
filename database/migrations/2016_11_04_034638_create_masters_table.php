@@ -19,7 +19,7 @@ class CreateMastersTable extends Migration
             $table->string('name',5);
             $table->string('phone_number',11)->unique();
             $table->string('password',225);
-            $table->rememberToken();
+            $table->rememberToken()->nullable();
             $table->timestamps();
         });
     }

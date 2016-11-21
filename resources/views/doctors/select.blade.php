@@ -7,8 +7,7 @@
 <!--主体部分-->
 @if(isset($recommendDoctors) || isset($doctors))
 <div class="container" id="container_doctor">
-    <form action="/orders/create?{{$recommendDoctor->hospital->id}}" method="get">
-        {{ csrf_field() }}
+    <form action="/orders/create" method="get">
         @if(count($recommendDoctors) > 0 )
         <div class="weui-cells__title">推荐医生</div>
         <div class="weui-cells weui-cells_radio">
@@ -51,8 +50,12 @@
         </div>
 @endif
 
+
+{{-- Select doctors from hospital--}}
+
 @if(isset($hospitalDoctors))
-        @if( count($hospitalDoctors) > 0 )
+<div class="container" id="container_doctor">
+    @if( count($hospitalDoctors) > 0 )
          <form action="/orders/create" method="get">
              <input type="hidden" name="hospital_id" value="{{$hospital_id}}">
             <div class="weui-cells weui-cells_radio">
@@ -84,6 +87,45 @@
     </form>
 </div>
 @endif
+
+{{--Select doctors from instance--}}
+
+@if(isset($instanceDoctors))
+    <div class="container" id="container_doctor">
+        @if( count($instanceDoctors) > 0 )
+            <form action="/orders/create" method="get">
+                <input type="hidden" name="instance_id" value="{{$instance_id}}">
+                <div class="weui-cells weui-cells_radio">
+                    @foreach( $instanceDoctors as $instanceDoctor )
+                        <label class="weui-cell weui-check__label my_doctor_cell">
+                            <div class="weui-cell__bd">
+                                <p>{{$instanceDoctor->name}}</p>
+                                {{--<span class="my_cell_index">{{$hospitalDoctor->hospital->name}}</span>--}}
+                            </div>
+                            <div class="weui-cell__ft">
+                                <input type="radio" class="weui-check" name="doctor_id" value="{{$instanceDoctor->id}}">
+                                <span class="weui-icon-checked"></span>
+                            </div>
+                        </label>
+                    @endforeach
+                </div>
+                <div class="fixedbash">
+                    <div class="btnPosition">
+                        <input type="submit" value="完成" class="btnfixed">
+                    </div>
+                </div>
+                @endif
+
+                <div class="fixedbash">
+                    <div class="btnPosition">
+                        <input type="submit" value="完成" class="btnfixed">
+                    </div>
+                </div>
+            </form>
+    </div>
+@endif
+
+
 @endsection
 
 @section('script')

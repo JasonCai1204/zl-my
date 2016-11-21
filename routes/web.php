@@ -134,9 +134,12 @@ Route::post('doctor/signin','DoctorController@postLogin');
 Route::get('doctor/orders','DoctorController@getOrders');
 Route::get('doctor/select','DoctorController@getSelect');
 Route::post('doctor/select','DoctorController@postSelect');
-//Select doctor from hospital
+//Select doctor from hospital.
 Route::get('doctor/hospital/select','DoctorController@getHospitalSelect');
-Route::post('doctor/hospital/select','DoctorController@postHospitalSelect');
+
+// Select doctor from instance.
+
+Route::get('doctor/instance/select','DoctorController@getInstanceSelect');
 //Route::get('doctor/dashboard','DoctorController@dashboard');
 //Route::post('doctor/dashboard','DoctorController@dashboard');
 //Route::get('doctors','DoctorController@doctors');
@@ -153,15 +156,15 @@ Route::resource('doctor','DoctorController');
 //Route::get('order/{id}/report','OrderController@editReport');
 //Route::put('order/{id}/report','OrderController@updatePhoto');
 //Route::post('order/{id}/report/photo','OrderController@uploadReportPhoto');
-//Route::post('order/postPhotos','OrderController@postPhotos');
+Route::post('order/postPhotos','OrderController@postPhotos');
 Route::get('orders/create','OrderController@getCreate');
 Route::post('orders/create','OrderController@postCreate');
 Route::get('order/{order}/display','OrderController@display');
 Route::get('order/msg','OrderController@getMsg');
 Route::resource('order','OrderController');
-//Route::get('order/create',function(){
-//    return view('orders.create');
-//});
+Route::get('test',function(){
+    return view('upload');
+});
 //
 //Route::get('order',function(){
 //    return view('orders.order');
@@ -169,10 +172,10 @@ Route::resource('order','OrderController');
 //
 ////News
 //Route::get('news/list','NewsController@list');
-//Route::resource('news','NewsController');
-////Route::get('news',function(){
-////    return view('news.news');
-////});
+Route::resource('news','NewsController');
+//Route::get('news',function(){
+//    return view('news.news');
+//});
 //
 //Route::get('cms', function(){
 //    return '欢迎';

@@ -28,7 +28,7 @@ $(function () {
             });
         })
     }
-    var thisfile , fileindex , url , fileslength , fileboxlength , ImgUrlList = [] , ImgFileList = [] , thisfiles;
+    var thisfile , fileindex , url , fileslength , fileboxlength , ImgUrlList = [] , ImgFileList = [] , thisfiles , basefile;
     var mask = $('#mask');
     var weuiActionsheet = $('#weui-actionsheet');
 
@@ -40,25 +40,39 @@ $(function () {
             ImgFileList.push(thisfiles[i]);
             if(getObjectURL(thisfiles[i])){
                 $("<li class='weui-uploader__file weui-uploader__file_status' style='background-image: url("+ getObjectURL(thisfiles[i]) +")'>" + "<div class='weui-uploader__file-content'>" + "<i class='weui-loading'></i>" + "</div>" + "</li>").appendTo($(".weui-uploader__files"));
-                var formData = new FormData();
-                formData.append('file',thisfiles[i]);
-                $.ajax({
-                    url:'', //预约单页面上传图片接口，返回图片标识（名称或连接等）
-                    type:'POST',
-                    cache:false,
-                    async: false,             //使用同步上传,避免ajax还没操作完for循环结束
-                    data: formData,           //formdata属于二进制文件,需测试是否能完全转化成图片
-                    processData: false,
-                    contentType: false
-                }).done(function (res) {
-                    if(res){
-                        $(".weui-uploader__file").eq(fileboxlength + i).removeClass('weui-uploader__file_status').children('div').remove();
-                        ImgUrlList.push(res);
-                    }
-                }).fail(function () {
-                    $(".weui-uploader__file").eq(fileboxlength + i).attr('data_flag','false');
-                    $(".weui-uploader__file-content").eq(fileboxlength + i).html("<i class='weui-icon-warn'></i>");
-                });
+                //var data = new FormData(document.querySelector("form"));
+                //data.append('file', thisfiles[i]);
+                //console.log(data.get('file'));
+                var reader = new FileReader();
+                var filename = this.files[i].name;
+                reader.readAsDataURL(this.files[i]);
+               reader.onload = function (e){
+                   console.log(this.result);
+                   basefile = this.result;
+                   $.post('/order/postPhotos'  ,{
+                       //$.ajax({
+                       //    url:"/order/postPhotos",
+                       //    type:"POST",
+                       "data": basefile,
+                       "formdata":{
+                           name:filename
+                       },
+                       "cache": false,
+                       "async": false,
+                       "processData": false,
+                       "contentType":false,
+                       "_token": _token
+                   }).done(function (res) {
+                       if(res){
+                           $(".weui-uploader__file").eq(fileboxlength + i).removeClass('weui-uploader__file_status').children('div').remove();
+                           ImgUrlList.push(res);
+                       }
+                   }).fail(function () {
+                       $(".weui-uploader__file").eq(fileboxlength + i).attr('data_flag','false');
+                       $(".weui-uploader__file-content").eq(fileboxlength + i).html("<i class='weui-icon-warn'></i>");
+                   });
+               }
+
             };
         };
         $("[type='hidden']").val(ImgUrlList.join(','));

@@ -145,10 +145,13 @@ class DoctorController extends Controller
 
     //Select doctor
     public function getSelect(){
+
+
         $recommendDoctors = App\Doctor::where('is_recommended','1')
             ->get();
 
         $doctors = App\Doctor::all();
+
 
         return view('doctors.select',[
             'recommendDoctors' => $recommendDoctors,
@@ -156,25 +159,38 @@ class DoctorController extends Controller
         ]);
     }
 
-//    public function postSelect(Request $request){
-//        $doctors = App\Doctor::where('id',$request->id)->get();
-//
-//        return view('orders/create',[
-//            'doctors' => $doctors
-//        ]);
-//    }
-//
+
 //    //Select doctor from hospital
     public function getHospitalSelect(Request $request){
 
-        $hospitalDoctors = App\Doctor::where('hospital_id',$request->id)->get();
+        $hospitalDoctors = App\Doctor::where('hospital_id',$request->hospital_id)
+            ->get();
 
-//        dd($request->all());
         return view('doctors.select',[
             'hospitalDoctors' => $hospitalDoctors,
-            'hospital_id' => $request->id
+            'hospital_id' => $request->hospital_id
         ]);
     }
+
+    // Select doctor from instance
+    public function getInstanceSelect(Request $request){
+        $instance_id = $request->instance_id;
+
+        $instance = App\Instance::where('id',$instance_id)->get();
+
+        $instanceDoctors = $instance->first()->doctors;
+
+        $instanceDoctor_id = $instanceDoctors->first()->id;
+
+//        dd($doctor_id);
+
+        return view('doctors.select',[
+            'instance_id' => $instance_id,
+            'instanceDoctors'=> $instanceDoctors,
+            'instanceDoctor_id' => $instanceDoctor_id
+        ]);
+    }
+
 //
 //    public function postHospitalSelect(Request $request){
 //        $hospitals = App\Hospital::where('id',$request->id)

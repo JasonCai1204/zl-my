@@ -20,6 +20,6 @@ class Instance extends Model
 
     public function doctors()
     {
-        return $this->belongsnamy('App\Http\Models\Doctor');
+        return $this->belongsToMany('App\Http\Models\Doctor');
     }
 }

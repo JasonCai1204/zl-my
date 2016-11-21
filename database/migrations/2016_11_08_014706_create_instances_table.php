@@ -18,7 +18,7 @@ class CreateInstancesTable extends Migration
             $table->string('name',9);
             $table->integer('type_id');
             $table->integer('sort');
-            $table->softDeletes();
+            $table->softDeletes()->nullable();
             $table->timestamps();
         });
     }
