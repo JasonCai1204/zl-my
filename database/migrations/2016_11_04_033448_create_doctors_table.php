@@ -25,7 +25,7 @@ class CreateDoctorsTable extends Migration
     {
         Schema::create('doctors', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('avatar',225)->default('/images/doctor-default-avatar.png');
+            $table->string('avatar',225)->nullable();
             $table->string('name',5);
             $table->string('grading',5);
             $table->text('introduction');

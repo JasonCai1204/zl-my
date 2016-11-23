@@ -16,8 +16,7 @@ class CreateTypesTable extends Migration
         Schema::create('types', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name',9);
-            $table->string('icon',225)->nullable()
-                                      ->default('/images/type-default-icon.png');
+            $table->string('icon',225)->nullable();
             $table->integer('sort');
             $table->softDeletes();
             $table->timestamps();
