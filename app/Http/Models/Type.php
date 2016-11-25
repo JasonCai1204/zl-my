@@ -9,13 +9,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Type extends Model
 {
     use SoftDeletes;
-
     protected $dates = ['deleted_at'];
 
-    protected $guarded = [];
+    protected $fillable = ['name', 'icon', 'sort'];
 
-    public function instances(){
-        return $this->hasMany('App\Http\Models\Type');
+    public function instances() {
+        return $this->hasMany('App\Http\Models\Instance');
     }
 
 }

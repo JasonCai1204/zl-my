@@ -8,12 +8,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Instance extends Model
 {
     use SoftDeletes;
-
     protected $dates = ['deleted_at'];
 
-    protected $guarded = [];
+    protected $fillable = ['name', 'type_id', 'sort'];
 
-    public function types()
+    public function type()
     {
         return $this->belongsto('App\Http\Models\Type');
     }

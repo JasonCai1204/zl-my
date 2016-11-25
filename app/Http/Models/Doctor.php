@@ -8,10 +8,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Doctor extends Model
 {
     use SoftDeletes;
-
     protected $dates = ['deleted_at'];
 
-    protected $guarded = [];
+    protected $fillable = ['name', 'avatar', 'grading', 'introduction', 'phone_number', 'password', 'hospital_id', 'is_certified', 'is_recommended'];
 
     public function hospital(){
         return $this->belongsTo('App\Http\Models\Hospital');
