@@ -7,12 +7,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Master extends Model
 {
-    use SoftDeletes;
-
-    protected $dates = ['deleted_at'];
-
-    protected $guarded = [];
-
     protected $hidden = [
         'password', 'remember_token',
     ];
