@@ -13,7 +13,7 @@ class Order extends Model
     protected $fillable = ['user_id', 'patient_name', 'phone_number', 'instance_id', 'hospital_id', 'doctor_id', 'gender', 'birthday', 'weight', 'smoking', 'wechat_id', 'detail', 'photos', 'condition_report', 'send_to_the_doctor_at'];
 
     protected $casts = [
-      'photos' => 'array'
+        'photos' => 'array'
     ];
 
     protected function hospital(){
@@ -26,5 +26,10 @@ class Order extends Model
 
     protected function instance(){
         return $this->belongsTo('App\Http\Models\Instance');
+    }
+
+    protected function user()
+    {
+        return $this->belongsTo('App\Http\Models\User');
     }
 }
