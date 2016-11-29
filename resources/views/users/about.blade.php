@@ -6,7 +6,7 @@
 <!--主体部分-->
 <div class="container">
     <div class="my_aboutus_head">
-        <img src="/storage/images/user/user-mobile-about-slogan.png" alt="">
+        <img src="/storage/images/user/app/web/user-mobile-about-slogan.png" alt="">
     </div>
     <div class="my_aboutus_cell">
         <p class="my_aboutus_cellhd">我们做什么</p>

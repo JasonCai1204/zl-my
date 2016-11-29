@@ -12,7 +12,7 @@
             <div class="weui-panel weui-panel_access">
                 <a href="javascript:;" class="weui-media-box weui-media-box_appmsg">
                     <div class="weui-media-box__hd">
-                        <img src="/storage/images/user/user-mobile-minepage-default-avatar.png" alt="" class="weui-media-box__thumb">
+                        <img src="/storage/images/user/app/web/user-mobile-minepage-default-avatar.png" alt="" class="weui-media-box__thumb">
                     </div>
                     <div class="weui-media-box__bd">
                         @if(!isset($user))

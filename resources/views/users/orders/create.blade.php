@@ -543,23 +543,27 @@
         });
 
 //        按钮点击展示
-        $(".my_drop1").on('click',function () {
+        $(".my_drop1")
+                .css('background-image','url("/storage/images/user/app/web/user-mobile-diseasedetail-open.jpg")')
+                .on('click',function () {
             drop1 = !drop1;
             if(drop1){
-                $(this).css('background-image','url(/storage/images/user/user-mobile-diseasedetail-close.jpg)');
+                $(this).css('background-image','url(/storage/images/user/app/web/user-mobile-diseasedetail-close.jpg)');
                 $(this).parent('.my_tips').css("height","initial");
             }else{
-                $(this).css('background-image','url(/storage/images/user/user-mobile-diseasedetail-open.jpg)');
+                $(this).css('background-image','url(/storage/images/user/app/web/user-mobile-diseasedetail-open.jpg)');
                 $(this).parent('.my_tips').css("height","20px");
             }
         });
-        $(".my_drop2").on('click',function () {
+        $(".my_drop2")
+                .css('background-image','url("/storage/images/user/app/web/user-mobile-dataupload-open.jpg")')
+                .on('click',function () {
             drop2 = !drop2;
             if(drop2){
-                $(this).css('background-image','url(/storage/images/user/user-mobile-dataupload-close.jpg)');
+                $(this).css('background-image','url(/storage/images/user/app/web/user-mobile-dataupload-close.jpg)');
                 $(this).parent('.my_tips').css("height","initial");
             }else{
-                $(this).css('background-image','url(/storage/images/user/user-mobile-dataupload-open.jpg)');
+                $(this).css('background-image','url(/storage/images/user/app/web/user-mobile-dataupload-open.jpg)');
                 $(this).parent('.my_tips').css("height","20px");
             }
         });

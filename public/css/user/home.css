@@ -1036,12 +1036,6 @@ input,input:focus,input:active{
     background-position: 0 0;
     background-repeat: no-repeat;
 }
-.my_drop1{
-    background-image: url("/storage/images/user/user-mobile-diseasedetail-open.jpg");
-}
-.my_drop2{
-    background-image: url("/storage/images/user/user-mobile-dataupload-open.jpg");
-}
 /*end*/
 
 /*电子协议*/

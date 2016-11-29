@@ -37,6 +37,23 @@ class NewsController extends Controller
 
     }
 
+    // Api android
+    public function loadMoreApi(Request $request)
+    {
+
+        $news = app\News::orderby('published_at','desc')
+            ->skip(15+($request->counter-1)*10)
+            ->take(11)
+            ->get();
+
+        return collect([
+            'data' =>[
+                ['a'=>'b'],['b'=>'c']
+            ]
+        ])->toJson();
+
+    }
+
 
     /**
      * Show the form for creating a new resource.

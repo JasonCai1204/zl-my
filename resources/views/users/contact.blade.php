@@ -36,7 +36,7 @@
         </div>
     </div>
     <div class="my_phone_qrcode">
-        <img src="/storage/images/user/mobile-contactus-qrcode.png" alt="">
+        <img src="/storage/images/user/app/web/mobile-contactus-qrcode.png" alt="">
         <p>关注微信公众号</p>
         <span>长按二维码 - 识别图中二维码</span>
     </div>

@@ -8,7 +8,7 @@
 <div class="container" id="container_home">
 
     <!--头部-->
-    <div class="my_home_header" style=" background-image: url('/storage/images/user/user-mobile-index-searchbar-bg.jpeg');">
+    <div class="my_home_header" style=" background-image: url('/storage/images/user/app/web/user-mobile-index-searchbar-bg.jpeg');">
         <div class="bd">
             <a href="search">
                 <div class="my_home_inner">
@@ -23,7 +23,7 @@
         <!--快速预约按钮-->
         <a href="orders/create" class="my_home_quickorder">
             <div class="my_quickorder_icon">
-                <img src="/storage/images/user/user-mobile-index-quickorder-icon.png" alt="">
+                <img src="/storage/images/user/app/web/user-mobile-index-quickorder-icon.png" alt="">
             </div>
             <p class="my_quickorder_label">快速预约</p>
             <span>医院、医生</span>
@@ -33,7 +33,7 @@
             <!--在线咨询按钮 coming soon-->
             <a href="javascript:;" class="my_home_ask" id="askonline">
                 <div class="my_ask_icon">
-                    <img src="/storage/images/user/user-mobile-index-serviceonline-icon.png" alt="">
+                    <img src="/storage/images/user/app/web/user-mobile-index-serviceonline-icon.png" alt="">
                 </div>
                 <div class="my_ask_label">
                     <p>在线咨询</p>
@@ -44,7 +44,7 @@
             <!--立即拨打按钮-->
             <a href="tel:400-8120533" class="my_home_ask my_has_before" style="border: 0;">
                 <div class="my_ask_icon">
-                    <img src="/storage/images/user/user-mobile-index-phoneask-icon.png" alt="">
+                    <img src="/storage/images/user/app/web/user-mobile-index-phoneask-icon.png" alt="">
                 </div>
                 <div class="my_ask_label">
                     <p>电话咨询</p>
@@ -75,7 +75,7 @@
     <div class="my_home_find my_has_after">
         <a href="/hospital" class="my_home_findhospital">
             <div class="my_findbtn_icon">
-                <img src="/storage/images/user/user-mobile-index-findhospital-icon.png" alt="">
+                <img src="/storage/images/user/app/web/user-mobile-index-findhospital-icon.png" alt="">
             </div>
             <div class="my_findbtn_label">
                 <p>找医院</p>
@@ -84,7 +84,7 @@
         </a>
         <a href="/doctor" class="my_home_finddoctor my_has_leftbefore">
             <div class="my_findbtn_icon">
-                <img src="/storage/images/user/user-mobile-index-finddoctor-icon.png" alt="">
+                <img src="/storage/images/user/app/web/user-mobile-index-finddoctor-icon.png" alt="">
             </div>
             <div class="my_findbtn_label">
                 <p>找医生</p>

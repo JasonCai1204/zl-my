@@ -12,8 +12,8 @@
 <!--固定在屏幕顶部-->
 <div class="logo_part">
     <div class="logo">
-        <a href="/" style="background-image: url('/storage/images/doctor/mobile-titlebar-logo.png');"></a>
-        <a href="/doctor/profile" class="doctor_logo" style="background-image: url('/storage/images/doctor/ doctor-mobile-titlebar-rightlogo.png')"></a>
+        <a href="/" style="background-image: url('/storage/images/doctor/app/web/mobile-titlebar-logo.png');"></a>
+        <a href="/doctor/profile" class="doctor_logo" style="background-image: url('/storage/images/doctor/app/web/doctor-mobile-titlebar-rightlogo.png')"></a>
     </div>
 </div>
 
