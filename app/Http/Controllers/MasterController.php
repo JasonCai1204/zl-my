@@ -93,7 +93,7 @@ class MasterController extends Controller
     public function store4cms(Request $request)
     {
         $this->validate($request, [
-            'id' => 'required|digits:2',
+            'id' => 'required|unique:masters|digits:6',
             'name' => 'required|max:5',
             'phone_number' => 'required|unique:masters|digits:11',
             'department_id' => 'required|exists:departments,id',
@@ -118,26 +118,22 @@ class MasterController extends Controller
         return view('cms.masters.index', ['data' => App\Master::orderBy('department_id')->orderBy('id')->get()]);
     }
 
-    public function show4cms(App\Department $department, $master)
+    public function show4cms(App\Master $master)
     {
-        $master = $department->masters->find($master);
-
         return view('cms.masters.show', [
             'data' => $master,
             'departments' => App\Department::orderBy('id')->get()
         ]);
     }
 
-    public function update4cms(Request $request, App\Department $department, $master)
+    public function update4cms(Request $request, App\Master $master)
     {
         $this->validate($request, [
-            'id' => 'required|digits:2',
+            'id' => 'required|unique:masters,id,' . $master->id . '|digits:6',
             'name' => 'required|max:5',
-            'phone_number' => 'required|unique:masters|digits:11',
+            'phone_number' => 'required|unique:masters,phone_number,' . $master->id . '|digits:11',
             'department_id' => 'required|exists:departments,id'
         ]);
-
-        $master = $department->masters->where('id', $master)->first();
 
         $master->id = $request->id;
         $master->name = $request->name;
@@ -149,33 +145,31 @@ class MasterController extends Controller
         return redirect('masters');
     }
 
-    public function destroy4cms(App\Department $department, $master)
+    public function destroy4cms(App\Master $master)
     {
-        $department->masters()->where('id', $master)->delete();
+        $master->delete();
         // TODO: I don't know...
         // $department->masters()->where('id', $master)->first()->delete();
 
         return redirect('masters');
     }
 
-    public function resetPassword4cms(App\Department $department, $master)
+    public function resetPassword4cms(App\Master $master)
     {
-        return view('cms.masters.password', ['data' => $department->masters->where('id', $master)->first()]);
+        return view('cms.masters.password', ['data' => $master]);
     }
 
-    public function updatePassword4cms(Request $request, App\Department $department, $master)
+    public function updatePassword4cms(Request $request, App\Master $master)
     {
         $this->validate($request, [
             'password' => 'required|confirmed|min:6'
         ]);
 
-        $master = $department->masters->where('id', $master)->first();
-
         $master->password = bcrypt($request->password);
 
         $master->save();
 
-        return redirect('masters/' . $department->id . '/' . $master->id);
+        return redirect('masters/' . $master->id);
     }
 
 }
