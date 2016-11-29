@@ -13,7 +13,7 @@
 <!--固定在屏幕上部的logo-->
 <div class="logo_part">
     <div class="logo">
-        <a href="http://zl-my.com" style="background-image: url('/storage/images/user/app/web/mobile-titlebar-logo.png');"></a>
+        <a href="http://zl-my.com" style="background-image: url('/storage/images/app/web/www/mobile-titlebar-logo.png');"></a>
     </div>
 </div>
 
@@ -23,19 +23,19 @@
 <div class="my_home_footer">
     <div class="weui-tabbar" id="my_footer_tabber">
         <a href="/" class="weui-tabbar__item my_tabbar_click">
-            <img src="/storage/images/user/app/web/user-mobile-item-index.png" alt="" class="weui-tabbar__icon">
+            <img src="/storage/images/app/web/www/user-mobile-item-index.png" alt="" class="weui-tabbar__icon">
             <p class="weui-tabbar__label">首页</p>
         </a>
         <a href="news" class="weui-tabbar__item">
-            <img src="/storage/images/user/app/web/user-mobile-item-advice.png" alt="" class="weui-tabbar__icon">
+            <img src="/storage/images/app/web/www/user-mobile-item-advice.png" alt="" class="weui-tabbar__icon">
             <p class="weui-tabbar__label">资讯</p>
         </a>
         <a href="recommends" class="weui-tabbar__item">
-            <img src="/storage/images/user/app/web/user-mobile-item-recommend.png" alt="" class="weui-tabbar__icon">
+            <img src="/storage/images/app/web/www/user-mobile-item-recommend.png" alt="" class="weui-tabbar__icon">
             <p class="weui-tabbar__label">推荐</p>
         </a>
         <a href="account" class="weui-tabbar__item">
-            <img src="/storage/images/user/app/web/user-mobile-item-account.png" alt="" class="weui-tabbar__icon">
+            <img src="/storage/images/app/web/www/user-mobile-item-account.png" alt="" class="weui-tabbar__icon">
             <p class="weui-tabbar__label">个人中心</p>
         </a>
     </div>

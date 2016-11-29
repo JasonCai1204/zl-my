@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\api;
 
 use App\Http\Models as app;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class NewsController extends Controller
 {
@@ -15,25 +16,17 @@ class NewsController extends Controller
     public function index(Request $request)
     {
         $news = app\News::orderby('published_at','desc')
-                ->take(15)
-                ->get();
+            ->skip(15)
+            ->take(11)
+            ->get();
 
-        return view('users.news.news',[
-              'news' =>$news
-            ]);
-    }
-
-    public function loadMore(Request $request)
-    {
-       $news = app\News::orderby('published_at','desc')
-           ->skip(15+($request->counter-1)*10)
-           ->take(11)
-           ->get();
-
-       return collect([
+        return collect([
+            'status'=> 1,
+            'msg'=> '加载成功',
             'data' => $news
         ])->toJson();
     }
+
 
     /**
      * Show the form for creating a new resource.

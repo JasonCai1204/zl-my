@@ -8,7 +8,7 @@
 <div class="container">
     <div class="my_aboutus_cell">
         <p class="my_aboutus_cellhd">常见问题</p>
-        <img src="/storage/images/user/app/web/user-mobile-problem-photo-1.png" alt="">
+        <img src="/storage/images/app/web/www/user-mobile-problem-photo-1.png" alt="">
     </div>
     <div class="my_aboutus_cell">
         <p class="my_aboutus_cellhd">我们做什么</p>

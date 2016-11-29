@@ -17,5 +17,25 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //})->middleware('auth:api');
 
+Route::group(['namespace' => 'api'], function(){
+
+// Index
+ Route::get('/','api\WebController@index');
+
 // News lists
-Route::get('loadmore','NewsController@loadMoreApi');
+ Route::resource('news','NewsController');
+
+// Recommend
+ Route::get('recommends','WebController@recommend');
+
+// Find Doctors
+ Route::resource('doctor','DoctorController');
+
+// Find hospitals
+ Route::resource('hospital','HospitalController');
+
+});
+
+
+
+

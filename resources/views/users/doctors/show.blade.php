@@ -7,7 +7,7 @@
 <div class="container">
     <div class="my_doctor_hd">
         <!--医生头像-->
-        <div class="my_doctor_pt" style="background-image: url('{{ Storage::url($doctor->avatar ?: '/images/user/app/web/user-mobile-doctor-default-avatar.png') }}');"></div>
+        <div class="my_doctor_pt" style="background-image: url('{{ Storage::url($doctor->avatar ?: '/images/app/web/www/user-mobile-doctor-default-avatar.png') }}');"></div>
         <p class="my_doctor_name">
             <!--医生姓名-->
             {{$doctor->name}}<span>{{$doctor->grading}}</span>
