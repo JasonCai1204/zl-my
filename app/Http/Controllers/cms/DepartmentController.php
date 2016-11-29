@@ -47,6 +47,11 @@ class DepartmentController extends Controller
             'name' => 'required|unique:departments,name,' . $department->id . '|max:9'
         ]);
 
+        // update it's master's id.
+        $department->masters()->update([
+            'department_id' => $request->id
+        ]);
+
         $department->id = $request->id;
         $department->name = $request->name;
 
