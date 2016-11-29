@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use \Illuminate\Support\Facades\DB;
 
 class CitiesTableSeeder extends Seeder
 {
@@ -13,18 +12,19 @@ class CitiesTableSeeder extends Seeder
     public function run()
     {
         DB::table('cities')->insert([
-            'name' => '广州',
-            'rank' => 1
-        ]);
-
-        DB::table('cities')->insert([
+//            'id' => 1,
             'name' => '北京',
-            'rank' => 2
         ]);
 
         DB::table('cities')->insert([
+//            'id' => 2,
             'name' => '上海',
-            'rank' => 3
         ]);
+
+        DB::table('cities')->insert([
+//            'id' => 3,
+            'name' => '广州',
+        ]);
+
     }
 }

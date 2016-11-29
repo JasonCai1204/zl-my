@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use \Illuminate\Support\Facades\DB;
 
 class OrdersTableSeeder extends Seeder
 {
@@ -14,20 +13,22 @@ class OrdersTableSeeder extends Seeder
     {
         DB::table('orders')->insert(
             [
-                'name' => '李一男',
-                'phone' => '18565700980',
-                'wechat' => 'igeneral76',
+//                'id' => 1,
+                'user_id' => '1',
+                'patient_name' => '李一男',
+                'phone_number' => '18565700981',
+                'instance_id' => 1,
                 'doctor_id' => 1,
-                'item_id' => 1,
-                'remark' => '我没有吸烟。',
-                'photos' => json_encode([
-                    '/images/1.jpg',
-                    '/images/2.jpg',
-                    '/images/3.jpg',
-                    '/images/4.jpg'
-                ]),
-                'paid_at' => \Carbon\Carbon::now(),
-                'reported_at' => \Carbon\Carbon::now(),
+                'hospital_id' => 1,
+                'gender' => 1,
+                'birthday' => \Carbon\Carbon::now(),
+                'smoking' => 1,
+                'weight' => 50,
+                'wechat_id' => 'abcd',
+                'detail' => '情况良好',
+                'photos' => '["/images/2016/11/22/1479806070/640638953708825067.jpg", "/images/2016/11/22/1479806071/input_defaultbg.png"]',
+                'condition_report' => '情况良好',
+                'send_to_the_doctor_at' => \Carbon\Carbon::now(),
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ]
@@ -35,9 +36,22 @@ class OrdersTableSeeder extends Seeder
 
         DB::table('orders')->insert(
             [
-                'name' => '张三',
-                'phone' => '14718070980',
-                'wechat' => 'fucking123',
+//                'id' => 2,
+                'user_id' => '1',
+                'patient_name' => '李二男',
+                'phone_number' => '18565700982',
+                'instance_id' => 1,
+                'doctor_id' => 1,
+                'hospital_id' => 1,
+                'gender' => 1,
+                'birthday' => \Carbon\Carbon::now(),
+                'smoking' => 1,
+                'weight' => 50,
+                'wechat_id' => 'abcd',
+                'detail' => '情况良好',
+                'photos' => '["/images/2016/11/22/1479806070/640638953708825067.jpg", "/images/2016/11/22/1479806071/input_defaultbg.png"]',
+                'condition_report' => '情况良好',
+                'send_to_the_doctor_at' => \Carbon\Carbon::now(),
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ]

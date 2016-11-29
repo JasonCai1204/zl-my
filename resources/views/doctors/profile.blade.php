@@ -13,7 +13,7 @@
                     <label class="weui-label">姓名</label>
                 </div>
                 <div class="weui-cell__bd">
-                    <input type="text" class="weui-input" value="周岱翰" readonly />
+                    <input type="text" class="weui-input" value="{{$doctor->name}}" readonly />
                 </div>
             </div>
             <div class="weui-cell">
@@ -21,7 +21,7 @@
                     <label class="weui-label">所在医院</label>
                 </div>
                 <div class="weui-cell__bd">
-                    <input type="text" class="weui-input" value="中山大学肿瘤防治中心" readonly />
+                    <input type="text" class="weui-input" value="{{$doctor->hospital->name}}" readonly />
                 </div>
             </div>
             <div class="weui-cell">
@@ -29,7 +29,7 @@
                     <label class="weui-label">职称</label>
                 </div>
                 <div class="weui-cell__bd">
-                    <input type="text" class="weui-input" value="主任医师" readonly />
+                    <input type="text" class="weui-input" value="{{$doctor->grading}}" readonly />
                 </div>
             </div>
             <div class="weui-cell">
@@ -37,14 +37,14 @@
                     <label class="weui-label">手机号码</label>
                 </div>
                 <div class="weui-cell__bd">
-                    <input type="number" class="weui-input" value="18512345678" readonly />
+                    <input type="number" class="weui-input" value="{{$doctor->phone_number}}" readonly />
                 </div>
             </div>
         </div>
             <div class="my_mine_logoff">
-                <a href="" class="btnLogin">退出登录</a>
+                <a href="/doctor/signin" class="btnLogin">退出登录</a>
             </div>
-            <a href="" class="btnLink">修改密码</a>
+            <a href="/doctor/password/reset" class="btnLink">修改密码</a>
     </form>
 </div>
 

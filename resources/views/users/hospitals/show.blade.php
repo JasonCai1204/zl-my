@@ -22,7 +22,7 @@
     </div>
     <div class="fixedbash">
         <div class="btnPosition">
-            <a href="" class="btnfixed">预约医院</a>
+            <a href="/orders/create?hospital_id={{$hospital_id or ''}}" class="btnfixed">预约医院</a>
         </div>
     </div>
 </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Models as App;
+use DB;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,11 +17,11 @@ class HospitalController extends Controller
     public function index()
     {
         $recommendHospitals = App\Hospital::where('is_recommended','1')
-                             ->get();
+                ->get();
 
         $hospitals = App\Hospital::all();
 
-        return view('hospitals.hospital',[
+        return view('users.hospitals.index',[
             'recommendHospitals' => $recommendHospitals,
             'hospitals' => $hospitals
         ]);
@@ -60,8 +61,9 @@ class HospitalController extends Controller
 
         $hospital->city = $hospital->city->name;
 
-        return view('hospitals.show',[
+        return view('users.hospitals.show',[
             'hospital' => $hospital,
+            'hospital_id' => $id,
         ]);
     }
 
@@ -99,66 +101,123 @@ class HospitalController extends Controller
         //
     }
 
-    //Search hospitals and doctors
+    // Search hospitals and doctors
     public function search(Request $request)
     {
         // When search has not  keyword "q".
 
         if (!$request->has('q')) {
-            return view('search',[
+            return view('users.search',[
                 'hospitals' => "",
                 'doctors' => ""
             ]);
         }
 
-        //Search hospital or doctor.
+        // Search hospital or doctor.
 
-        $hospitals = App\Hospital::where('name', 'like', '%' . $request->q . '%')->get();
+        $hospitals = App\Hospital::where('name', 'like', '%' . $request->q . '%')
+                ->get();
 
-        $doctors = App\Doctor::where('name', 'like', '%' . $request->q . '%')->get();
+        $doctors = App\Doctor::where('name', 'like', '%' . $request->q . '%')
+                ->get();
 
-        return view('search', [
+        return view('users.search', [
             'hospitals' => $hospitals,
             'doctors' => $doctors,
             'q' => $request->q
         ]);
     }
 
-        //Display hospitals
+        // Display hospitals
         public function getSelect()
         {
             $recommendHospitals = App\Hospital::where('is_recommended','1')
-                ->get();
+                    ->get();
 
             $hospitals = App\Hospital::all();
 
-//            dd('hospitals');
-
-            return view('hospitals.select',[
+            return view('users.hospitals.select',[
                 'recommendHospitals' => $recommendHospitals,
                 'hospitals' => $hospitals,
-//                'doctors' => ""
             ]);
         }
 
-        //Select hospital
-        public function postSelect(Request $request){
 
-//            $hospitals = App\Hospital::where('id',$request->id)
-//                ->get();
-//
-//            $doctors = App\Doctor::where('hospital_id',$request->id)
-//                ->get();
-//
-////            dd($doctors);
-//            return view('orders/create',[
-//                'hospitals' => $hospitals,
-//                'doctors' => $doctors
-//            ]);
+    // CMS
+    public function create4cms()
+    {
+        return view('cms.hospitals.create', ['cities' => App\City::orderBy(DB::raw('CONVERT(name USING gbk)'))->get()]);
+    }
+
+    public function store4cms(Request $request)
+    {
+        $hospital = new App\Hospital;
+        $nameConstraint = 'required|unique:hospitals|max:30';
+
+        // if the type has exist and been deleted.
+        if ($request->name != null && App\Hospital::onlyTrashed()->where('name', $request->name)->first() != null) {
+            $hospital = App\Hospital::onlyTrashed()->where('name', $request->name)->first();
+            $nameConstraint = 'required|unique:hospitals,name,'. $hospital->id . '|max:30';
         }
 
+        $this->validate($request, [
+            'name' => $nameConstraint,
+            'grading' => 'required|max:9',
+            'city_id' => 'required|exists:cities,id',
+            'introduction' => 'required'
+        ]);
 
-        /**
-         * CMS begin
-         */
+        $hospital->name = $request->name;
+        $hospital->grading = $request->grading;
+        $hospital->city_id = $request->city_id;
+        $hospital->introduction = $request->introduction;
+        $hospital->is_recommended = isset($request->is_recommended) ? 1 : 0;
+        $hospital->deleted_at = null;
+
+        $hospital->save();
+
+        return redirect('/hospitals');
+    }
+
+    public function index4cms()
+    {
+        return view('cms.hospitals.index', ['data' => App\Hospital::orderBy(DB::raw('CONVERT(name USING gbk)'))->get()]);
+    }
+
+    public function show4cms(App\Hospital $hospital)
+    {
+        return view('cms.hospitals.show', [
+            'data' => $hospital,
+            'cities' => App\City::orderBy(DB::raw('CONVERT(name USING gbk)'))->get()
+        ]);
+    }
+
+    public function update4cms(Request $request, App\Hospital $hospital)
+    {
+        $this->validate($request, [
+            'name' => 'required|unique:hospitals,name,' . $hospital->id . '|max:30',
+            'grading' => 'required|max:9',
+            'city_id' => 'required|exists:cities,id',
+            'introduction' => 'required'
+        ]);
+
+        $hospital->name = $request->name;
+        $hospital->grading = $request->grading;
+        $hospital->city_id = $request->city_id;
+        $hospital->introduction = $request->introduction;
+        $hospital->is_recommended = isset($request->is_recommended) ? 1 : 0;
+
+        $hospital->save();
+
+        return redirect('/hospitals');
+    }
+
+    public function destroy4cms(App\Hospital $hospital)
+    {
+        $hospital->delete();
+
+        return redirect('/hospitals');
+    }
+
+
 }

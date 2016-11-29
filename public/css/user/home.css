@@ -31,7 +31,6 @@ input,input:focus,input:active{
     height:32px;
     vertical-align: middle;
     margin:8px auto;
-    background-image: url('../img/mobile-titlebar-logo.png');
     background-size: cover;
 }
 .weui_tabbar{
@@ -226,10 +225,12 @@ input,input:focus,input:active{
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     margin:0 auto;
-    border:1px solid #d9d9d9;
     border-radius: 8px;
     width: 65px;
     height: 65px;
+}
+.my_quickorder_icon img{
+    width:inherit;
 }
 .my_quickorder_label{
     height:24px;
@@ -296,9 +297,11 @@ input,input:focus,input:active{
     display: inline-block;
     width: 32px;
     height: 32px;
-    border:1px solid #d9d9d9;
     border-radius: 8px;
     margin: 24px 12px 24px 24px;
+}
+.my_ask_icon img ,.my_findbtn_icon img{
+    width:inherit;
 }
 .my_ask_label,.my_findbtn_label{
     display: inline-block;
@@ -700,11 +703,12 @@ input,input:focus,input:active{
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    border:1px solid rgb(151,151,151);
     border-radius: 100%;
     margin:30px auto 5px;
-    background-color: rgb(216,216,216);
+    background-size: 100%;
+    background-repeat: no-repeat;
 }
+
 .my_doctor_name{
     display: block;
     text-align: center;
@@ -731,6 +735,15 @@ input,input:focus,input:active{
     position: absolute;
     top:78px;
     right:15px;
+}
+.unsignedtips{
+    display: block;
+    font-size: 14px;
+    color: #B2B2B2;
+    text-align: center;
+    margin-top: 10px;
+    position: relative;
+    left: -15px;
 }
 /*end*/
 
@@ -1006,3 +1019,34 @@ input,input:focus,input:active{
     border-bottom:1px solid rgb(210,211,213);
 }
 /*end*/
+
+/*快速预约两个按钮*/
+.my_tips{
+    margin-top:5px;
+    font-size: 12px;
+    margin-bottom: 15px;
+    overflow: hidden;
+    height:20px;
+}
+.my_drop1,.my_drop2{
+    display: block;
+    height: 22px;
+    width: 107px;
+    background-size: contain;
+    background-position: 0 0;
+    background-repeat: no-repeat;
+}
+.my_drop1{
+    background-image: url("/storage/images/user/user-mobile-diseasedetail-open.jpg");
+}
+.my_drop2{
+    background-image: url("/storage/images/user/user-mobile-dataupload-open.jpg");
+}
+/*end*/
+
+/*电子协议*/
+.weui-agree{
+    padding-top:15px;
+    padding-bottom:0px;
+}
+/*end 2016-11-24*/

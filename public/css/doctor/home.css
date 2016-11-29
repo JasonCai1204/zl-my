@@ -34,10 +34,10 @@ input[type="button"], input[type="submit"], input[type="reset"]{
     display: block;
     margin:0;
     padding:0;
-    width:32px;
-    height:32px;
+    width:24px;
+    height:24px;
     position: absolute;
-    top:8px;
+    top:12px;
     right:15px;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;

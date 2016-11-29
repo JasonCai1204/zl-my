@@ -13,21 +13,24 @@ class TypesTableSeeder extends Seeder
     public function run()
     {
         DB::table('types')->insert([
+//            'id' => 1,
             'name' => '胸部肿瘤',
-            'photo' => '/images/logo.png',
-            'rank' => 1
+            'icon' => 'http://tse2.mm.bing.net/th?id=OIP.M2b75abef0f9f5a12d52daa282fb81f31o2&pid=15.1',
+            'sort' => 1
         ]);
 
         DB::table('types')->insert([
+//            'id' => 2,
             'name' => '胃肠肿瘤',
-            'photo' => '/images/logo.png',
-            'rank' => 2
+            'icon' => 'http://tse2.mm.bing.net/th?id=OIP.M2b75abef0f9f5a12d52daa282fb81f31o2&pid=15.1',
+            'sort' => 2
         ]);
 
         DB::table('types')->insert([
+//            'id' => 3,
             'name' => '肝胆胰肿瘤',
-            'photo' => '/images/logo.png',
-            'rank' => 3
+            'icon' => 'http://tse2.mm.bing.net/th?id=OIP.M2b75abef0f9f5a12d52daa282fb81f31o2&pid=15.1',
+            'sort' => 3
         ]);
     }
 }

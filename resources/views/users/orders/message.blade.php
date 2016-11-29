@@ -17,7 +17,7 @@
                 我们的工作人员将在 24 小时内与您联系 请保持电话畅通。
             </p>
         </div>
-        <a href="" class="btnCommon">返回首页</a>
+        <a href="/" class="btnCommon">返回首页</a>
     </div>
 </div>
 

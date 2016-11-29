@@ -1,9 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use \Illuminate\Support\Facades\DB;
 
-class PositionsTableSeeder extends Seeder
+class DepartmentsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,15 +12,13 @@ class PositionsTableSeeder extends Seeder
     public function run()
     {
         DB::table('departments')->insert([
+            'id' => 1,
             'name' => '系统管理专家',
-            'updated_at' => \Carbon\Carbon::now(),
-            'created_at' => \Carbon\Carbon::now()
         ]);
 
         DB::table('departments')->insert([
+            'id' => 2,
             'name' => '客户服务专家',
-            'updated_at' => \Carbon\Carbon::now(),
-            'created_at' => \Carbon\Carbon::now()
         ]);
     }
 }

@@ -5,15 +5,20 @@
 @section('content')
 
 <!--不错误 不显示-->
-@if (count($errors) > 0)
-    <div class="my_form_warn">
-        <span>
-            {{$errors}}
-        </span>
-
-    </div>
-
+@if(isset($errors))
+    @if (count($errors) > 0)
+        <div class="my_form_warn">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>
+                        <span>{{ $error }}</span>
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 @endif
+
 
 <!--主体部分-->
 <div class="container" id="my_info_container">
@@ -30,7 +35,7 @@
                     <label class="weui-label">手机号码</label>
                 </div>
                 <div class="weui-cell__bd">
-                    <input type="number" class="weui-input" placeholder="必填" required name="phone_number" value="{{'phone_number'}}"/>
+                    <input type="number" class="weui-input" placeholder="必填" required name="phone_number" value="{{ old('phone_number') }}"/>
                 </div>
                 <!--<div class="weui-cell__ft">-->
                     <!--<i class="weui-icon-warn"></i>-->

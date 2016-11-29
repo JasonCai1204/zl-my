@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Models as App;
+use DB;
 use Illuminate\Http\Request;
 
 class CityController extends Controller
@@ -84,8 +85,52 @@ class CityController extends Controller
         //
     }
 
-    /**
-     * CMS begin
-     */
+    // CMS
+
+    public function index4cms()
+    {
+        return view('cms.cities.index', ['data' => App\City::orderBy(DB::raw('CONVERT(name USING gbk)'))->get()]);
+    }
+
+    public function create4cms()
+    {
+        return view('cms.cities.create');
+    }
+
+    public function store4cms(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required|unique:cities|max:9'
+        ]);
+
+        App\City::create(['name' => $request->name]);
+
+        return redirect('/cities');
+    }
+
+    public function show4cms(App\City $city)
+    {
+        return view('cms.cities.show', ['data' => $city]);
+    }
+
+    public function update4cms(Request $request, App\City $city)
+    {
+        $this->validate($request, [
+            'name' => 'required|unique:cities,name,' . $city->id . '|max:9'
+        ]);
+
+        $city->update(['name' => $request->name]);
+
+        return redirect('/cities');
+    }
+
+    public function destroy4cms(App\City $city)
+    {
+        $city->delete();
+
+        // TODO: Unset it's hospitals.
+
+        return redirect('/cities');
+    }
 
 }

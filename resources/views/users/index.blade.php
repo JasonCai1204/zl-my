@@ -8,11 +8,7 @@
 <div class="container" id="container_home">
 
     <!--头部-->
-    <div class="my_home_header" style=" background-image: url('/storage/images/user/user-mobile-index-searchbar-bg.png');">
-        <div class="my_home_slogan">
-            <span>帮您找名医</span>
-            <div class="my_home_sloganbg"></div>
-        </div>
+    <div class="my_home_header" style=" background-image: url('/storage/images/user/user-mobile-index-searchbar-bg.jpeg');">
         <div class="bd">
             <a href="search">
                 <div class="my_home_inner">
@@ -83,7 +79,7 @@
             </div>
             <div class="my_findbtn_label">
                 <p>找医院</p>
-                <span>知名医院</span>
+                <span>顶级医院</span>
             </div>
         </a>
         <a href="/doctor" class="my_home_finddoctor my_has_leftbefore">

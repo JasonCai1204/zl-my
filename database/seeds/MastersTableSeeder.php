@@ -1,9 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use \Illuminate\Support\Facades\DB;
 
-class StaffTableSeeder extends Seeder
+class MastersTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,20 +12,24 @@ class StaffTableSeeder extends Seeder
     public function run()
     {
         DB::table('masters')->insert([
+            'id' => 1,
+            'department_id' => 1,
             'name' => '陈沛锐',
-            'phone' => '18565700980',
+            'phone_number' => '18565700980',
             'password' => bcrypt('secret'),
-            'position_id' => 1,
             'updated_at' => \Carbon\Carbon::now(),
             'created_at' => \Carbon\Carbon::now()
         ]);
 
-         DB::table('masters')->insert([
-             'name' => '蔡炜',
-             'phone' => '13823595730',
-             'password' => bcrypt('secret'),
-             'position_id' => 1
-         ]);
+        DB::table('masters')->insert([
+            'id' => 2,
+            'department_id' => 1,
+            'name' => '蔡炜',
+            'phone_number' => '13823595730',
+            'password' => bcrypt('secret'),
+            'updated_at' => \Carbon\Carbon::now(),
+            'created_at' => \Carbon\Carbon::now()
+        ]);
         //
         // DB::table('staff')->insert([
         //     'name' => '陈沛伟',
@@ -35,11 +38,15 @@ class StaffTableSeeder extends Seeder
         //     'position_id' => 2
         // ]);
         //
-        // DB::table('staff')->insert([
-        //     'name' => '李一男',
-        //     'phone' => '14718070980',
-        //     'password' => bcrypt('secret'),
-        //     'position_id' => 2
-        // ]);
+
+        DB::table('masters')->insert([
+            'id' => 3,
+            'department_id' => 2,
+            'name' => '李一男',
+            'phone_number' => '14718070983',
+            'password' => bcrypt('secret'),
+            'updated_at' => \Carbon\Carbon::now(),
+            'created_at' => \Carbon\Carbon::now()
+        ]);
     }
 }

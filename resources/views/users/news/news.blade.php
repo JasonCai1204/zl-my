@@ -5,7 +5,7 @@
 @section('content')
 
 <!--主体部分-->
-<div class="content" id="container_advice">
+<div class="container" id="container_news">
     <div class="lists">
         @if(count('news') > 0)
             @foreach( $news as $new )
@@ -19,3 +19,9 @@
 </div>
 
 @endsection
+
+@section('script')
+    <script src="../js/user/dropload.min.js"></script>
+
+@endsection
+

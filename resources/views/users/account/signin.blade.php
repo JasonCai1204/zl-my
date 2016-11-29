@@ -1,16 +1,21 @@
 @extends('layouts.user-basic')
 
-@section('title','登录-肿瘤名医')
+@section('title','登录 - 肿瘤名医')
 
 @section('content')
-<!--不错误 不显示-->
-<div class="my_form_warn" style="display: none;">
-    <span>输入错误</span>
-</div>
+
+@if (isset($message))
+    <div class="my_form_warn" >
+        <span>
+            {{$message}}
+        </span>
+    </div>
+@endif
 
 <!--主体部分-->
 <div class="container" id="my_info_container">
-    <form action="">
+    <form action="/signin" method="post">
+        {{csrf_field()}}
         <!--
             当输入错误时,在weui_cell类名后面接上 weui-cell_warn 类,
             并在weui_cell块的最后加入 <div class="weui-cell__ft"> <i class="weui-icon-warn"></i> </div>
@@ -22,7 +27,7 @@
                     <label class="weui-label">手机号码</label>
                 </div>
                 <div class="weui-cell__bd">
-                    <input type="number" class="weui-input" placeholder="必填" required />
+                    <input type="number" class="weui-input" placeholder="必填" name="phone_number" required />
                 </div>
                 <!--<div class="weui-cell__ft">-->
                     <!--<i class="weui-icon-warn"></i>-->
@@ -33,7 +38,7 @@
                     <label class="weui-label">密码</label>
                 </div>
                 <div class="weui-cell__bd">
-                    <input type="password" class="weui-input" placeholder="必填" required />
+                    <input type="password" class="weui-input" placeholder="必填" name="password" required />
                 </div>
             </div>
         </div>

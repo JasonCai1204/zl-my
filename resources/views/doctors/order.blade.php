@@ -11,16 +11,16 @@
             预约单
         </div>
         @if($orders)
-            @if($orders>0)
+            @if(count($orders)>0)
         <div class="weui-panel__bd">
             <div class="weui-media-box weui-media-box_small-appmsg">
                 <div class="weui-cells">
                     @foreach($orders as $order)
-                    <a href="" class="weui-cell weui-cell_access">
+                    <a href="/doctor/orders/condition_report/?order_id={{$order->id}}" class="weui-cell weui-cell_access">
                         <div class="weui-cell__bd weui-cell_primary">
                             <p>{{$order->patient_name}}</p>
                             <span class="my_mine_desc">
-                                {{$order->instance_id->name}}
+                                {{$order->instance->name}}
                             </span>
                         </div>
                         <span class="weui-cell__ft">

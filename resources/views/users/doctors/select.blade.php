@@ -36,7 +36,7 @@
                     <span class="my_cell_index">{{$doctor->hospital->name}}</span>
                 </div>
                 <div class="weui-cell__ft">
-                    <input type="radio" class="weui-check" name="doctor_id" value="{{$doctor->id}}>
+                    <input type="radio" class="weui-check" name="doctor_id" value="{{$doctor->id}}">
                     <span class="weui-icon-checked"></span>
                 </div>
             </label>

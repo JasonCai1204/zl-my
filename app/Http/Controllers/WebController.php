@@ -9,10 +9,10 @@ class WebController extends Controller
 {
     public function index(){
 
-        $news = app\News::orderBy('created_at','desc')
+        $news = app\News::orderBy('published_at','desc')
             ->take(3)
             ->get();
-        return view('index',[
+        return view('users.index',[
             'news' =>$news
         ]);
 
@@ -24,7 +24,7 @@ class WebController extends Controller
 
         $doctors = app\Doctor::all();
 
-        return view('recommend',[
+        return view('users.recommend',[
             'hospitals' => $hospitals,
             'doctors' => $doctors,
         ]);

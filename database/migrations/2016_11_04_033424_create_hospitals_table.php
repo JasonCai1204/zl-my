@@ -11,10 +11,6 @@ class CreateHospitalsTable extends Migration
      * @param string $column
      */
 
-    public function tinyInteger($column,  $autoIncrement = false)
-    {
-        return $this->addColumn('tinyInteger', $column, compact('autoIncrement'));
-    }
 
     /**
      * Run the migrations.
