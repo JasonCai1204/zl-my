@@ -48,6 +48,6 @@ class CreateOrdersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ordersoctor_c');
+        Schema::dropIfExists('orders');
     }
 }
