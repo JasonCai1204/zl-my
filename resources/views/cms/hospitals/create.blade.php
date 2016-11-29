@@ -30,7 +30,7 @@
                             <label for="grading" class="col-md-4 control-label">等级*</label>
 
                             <div class="col-md-6">
-                                <input id="grading" type="text" class="form-control" name="grading" value="{{ old('grading') }}" required>
+                                <input id="grading" type="text" class="form-control" name="grading" value="{{ old('grading') ?: '三级甲等' }}" required>
 
                                 @if ($errors->has('grading'))
                                     <span class="help-block">

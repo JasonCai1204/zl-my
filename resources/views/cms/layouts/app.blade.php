@@ -13,7 +13,7 @@
     <!-- Styles -->
     <link href="/css/cms/app.css" rel="stylesheet">
     <link href="/css/cms/cms.css" rel="stylesheet">
-
+    @yield('css')
     <!-- Scripts -->
     <script>
         window.Laravel = <?php echo json_encode([
@@ -84,6 +84,7 @@
 
     <!-- Scripts -->
     <script src="/js/cms/app.js"></script>
+    @yield('js')
     <script src="/js/cms/cms.js"></script>
 </body>
 </html>
