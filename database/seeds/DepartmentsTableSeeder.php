@@ -12,13 +12,13 @@ class DepartmentsTableSeeder extends Seeder
     public function run()
     {
         DB::table('departments')->insert([
-            'id' => 1,
-            'name' => '系统管理专家',
+            'id' => 8601,
+            'name' => '总办',
         ]);
 
         DB::table('departments')->insert([
-            'id' => 2,
-            'name' => '客户服务专家',
+            'id' => 8602,
+            'name' => '信息技术部',
         ]);
     }
 }
