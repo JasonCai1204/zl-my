@@ -60,6 +60,5 @@ class Doctor_InstanceTableSeeder extends Seeder
             'doctor_id' => 9,
             'instance_id' => 8,
         ]);
-
     }
 }

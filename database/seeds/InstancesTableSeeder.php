@@ -73,6 +73,5 @@ class InstancesTableSeeder extends Seeder
             'type_id' => 3,
             'sort' => 3
         ]);
-
     }
 }

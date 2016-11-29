@@ -25,6 +25,5 @@ class CitiesTableSeeder extends Seeder
 //            'id' => 3,
             'name' => '广州',
         ]);
-
     }
 }

@@ -283,8 +283,5 @@ class NewsTableSeeder extends Seeder
             'updated_at' => \Carbon\Carbon::now(),
             'published_at' => \Carbon\Carbon::now(),
         ]);
-
-
-
     }
 }
