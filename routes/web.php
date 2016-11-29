@@ -11,12 +11,6 @@
 |
 */
 
-// Doctor
-//Route::group(['domain' => '{doctor}.zl-my.com'], function () {
-    //
-//});
-
-
 // Index
 Route::get('/','WebController@index');
 
@@ -112,106 +106,103 @@ Route::get('about',function(){
 });
 
 
+// ys
+Route::group(['domain' => '{ys}.zl-my.com', 'namespace' => 'ys'], function () {
+
+});
 
 
-
-// CMS
-Route::group(['domain' => '{cms}.zl-my.com'],  function () {
+// cms
+Route::group(['domain' => '{cms}.zl-my.com', 'namespace' => 'cms'],  function () {
 
     Route::get('/', function () {
         return view('cms.home');
     });
 
-// city
-    Route::get('cities', 'CityController@index4cms');
-    Route::get('cities/create', 'CityController@create4cms');
-    Route::post('cities', 'CityController@store4cms');
-    Route::get('cities/{city}', 'CityController@show4cms');
-    Route::put('cities/{city}', 'CityController@update4cms');
-    Route::delete('cities/{city}', 'CityController@destroy4cms');
+    // city
+    Route::get('cities', 'CityController@index');
+    Route::get('cities/create', 'CityController@create');
+    Route::post('cities', 'CityController@store');
+    Route::get('cities/{city}', 'CityController@show');
+    Route::put('cities/{city}', 'CityController@update');
+    Route::delete('cities/{city}', 'CityController@destroy');
 
-// hospital
-    Route::get('hospitals', 'HospitalController@index4cms');
-    Route::get('hospitals/create', 'HospitalController@create4cms');
-    Route::post('hospitals', 'HospitalController@store4cms');
-    Route::get('hospitals/{hospital}', 'HospitalController@show4cms');
-    Route::put('hospitals/{hospital}', 'HospitalController@update4cms');
-    Route::delete('hospitals/{hospital}', 'HospitalController@destroy4cms');
+    // hospital
+    Route::get('hospitals', 'HospitalController@index');
+    Route::get('hospitals/create', 'HospitalController@create');
+    Route::post('hospitals', 'HospitalController@store');
+    Route::get('hospitals/{hospital}', 'HospitalController@show');
+    Route::put('hospitals/{hospital}', 'HospitalController@update');
+    Route::delete('hospitals/{hospital}', 'HospitalController@destroy');
 
-// doctor
-    Route::get('doctors', 'DoctorController@index4cms');
-    Route::get('doctors/create', 'DoctorController@create4cms');
-    Route::post('doctors', 'DoctorController@store4cms');
-    Route::get('doctors/{doctor}', 'DoctorController@show4cms');
-    Route::put('doctors/{doctor}', 'DoctorController@update4cms');
-    Route::delete('doctors/{doctor}', 'DoctorController@destroy4cms');
-    Route::get('doctors/{doctor}/password', 'DoctorController@resetPassword4cms');
-    Route::post('doctors/{doctor}/password', 'DoctorController@updatePassword4cms');
+    // doctor
+    Route::get('doctors', 'DoctorController@index');
+    Route::get('doctors/create', 'DoctorController@create');
+    Route::post('doctors', 'DoctorController@store');
+    Route::get('doctors/{doctor}', 'DoctorController@show');
+    Route::put('doctors/{doctor}', 'DoctorController@update');
+    Route::delete('doctors/{doctor}', 'DoctorController@destroy');
+    Route::get('doctors/{doctor}/password', 'DoctorController@resetPassword');
+    Route::post('doctors/{doctor}/password', 'DoctorController@updatePassword');
 
-// type
-    Route::get('types', 'TypeController@index4cms');
-    Route::get('types/create', 'TypeController@create4cms');
-    Route::post('types', 'TypeController@store4cms');
-    Route::get('types/{type}', 'TypeController@show4cms');
-    Route::put('types/{type}', 'TypeController@update4cms');
-    Route::delete('types/{type}', 'TypeController@destroy4cms');
+    // type
+    Route::get('types', 'TypeController@index');
+    Route::get('types/create', 'TypeController@create');
+    Route::post('types', 'TypeController@store');
+    Route::get('types/{type}', 'TypeController@show');
+    Route::put('types/{type}', 'TypeController@update');
+    Route::delete('types/{type}', 'TypeController@destroy');
 
-// instance
-    Route::get('instances', 'InstanceController@index4cms');
-    Route::get('instances/create', 'InstanceController@create4cms');
-    Route::post('instances', 'InstanceController@store4cms');
-    Route::get('instances/{instance}', 'InstanceController@show4cms');
-    Route::put('instances/{instance}', 'InstanceController@update4cms');
-    Route::delete('instances/{instance}', 'InstanceController@destroy4cms');
+    // instance
+    Route::get('instances', 'InstanceController@index');
+    Route::get('instances/create', 'InstanceController@create');
+    Route::post('instances', 'InstanceController@store');
+    Route::get('instances/{instance}', 'InstanceController@show');
+    Route::put('instances/{instance}', 'InstanceController@update');
+    Route::delete('instances/{instance}', 'InstanceController@destroy');
 
-// user
-    Route::get('users', 'UserController@index4cms');
-    Route::get('users/{user}', 'UserController@show4cms');
-    Route::put('users/{user}', 'UserController@update4cms');
-    Route::get('users/{user}/password', 'UserController@resetPassword4cms');
-    Route::post('users/{user}/password', 'UserController@updatePassword4cms');
+    // user
+    Route::get('users', 'UserController@index');
+    Route::get('users/{user}', 'UserController@show');
+    Route::put('users/{user}', 'UserController@update');
+    Route::get('users/{user}/password', 'UserController@resetPassword');
+    Route::post('users/{user}/password', 'UserController@updatePassword');
 
-// order
-    Route::get('orders', 'OrderController@index4cms');
-    Route::get('orders/{order}', 'OrderController@show4cms');
-    Route::put('orders/{order}', 'OrderController@update4cms');
-    Route::get('orders/{order}/photos', 'OrderController@showPhotos4cms');
-    Route::post('orders/{order}/photos', 'OrderController@storePhotos4cms');
-    Route::get('orders/{order}/condition-report', 'OrderController@showConditionReport4cms');
-    Route::post('orders/{order}/condition-report', 'OrderController@storeConditionReport4cms');
+    // order
+    Route::get('orders', 'OrderController@index');
+    Route::get('orders/{order}', 'OrderController@show');
+    Route::put('orders/{order}', 'OrderController@update');
+    Route::get('orders/{order}/photos', 'OrderController@showPhotos');
+    Route::post('orders/{order}/photos', 'OrderController@storePhotos');
+    Route::get('orders/{order}/condition-report', 'OrderController@showConditionReport');
+    Route::post('orders/{order}/condition-report', 'OrderController@storeConditionReport');
 
-// helper
+    // helper
     Route::post('helper/upload-file', 'HelperController@uploadFile');
 
-// news
-    Route::get('news', 'NewsController@index4cms');
-    Route::get('news/create', 'NewsController@create4cms');
-    Route::post('news', 'NewsController@store4cms');
-    Route::get('news/{news}', 'NewsController@show4cms');
-    Route::put('news/{news}', 'NewsController@update4cms');
-    Route::delete('news/{news}', 'NewsController@destroy4cms');
+    // news
+    Route::get('news', 'NewsController@index');
+    Route::get('news/create', 'NewsController@create');
+    Route::post('news', 'NewsController@store');
+    Route::get('news/{news}', 'NewsController@show');
+    Route::put('news/{news}', 'NewsController@update');
+    Route::delete('news/{news}', 'NewsController@destroy');
 
-// department
-    Route::get('departments', 'DepartmentController@index4cms');
-    Route::get('departments/create', 'DepartmentController@create4cms');
-    Route::post('departments', 'DepartmentController@store4cms');
-    Route::get('departments/{department}', 'DepartmentController@show4cms');
-    Route::put('departments/{department}', 'DepartmentController@update4cms');
-    Route::delete('departments/{department}', 'DepartmentController@destroy4cms');
+    // department
+    Route::get('departments', 'DepartmentController@index');
+    Route::get('departments/create', 'DepartmentController@create');
+    Route::post('departments', 'DepartmentController@store');
+    Route::get('departments/{department}', 'DepartmentController@show');
+    Route::put('departments/{department}', 'DepartmentController@update');
+    Route::delete('departments/{department}', 'DepartmentController@destroy');
 
-// master
-    Route::get('masters', 'MasterController@index4cms');
-    Route::get('masters/create', 'MasterController@create4cms');
-    Route::post('masters', 'MasterController@store4cms');
-    Route::get('masters/{department}/{master}', 'MasterController@show4cms');
-    Route::put('masters/{department}/{master}', 'MasterController@update4cms');
-    Route::delete('masters/{department}/{master}', 'MasterController@destroy4cms');
-    Route::get('masters/{department}/{master}/password', 'MasterController@resetPassword4cms');
-    Route::post('masters/{department}/{master}/password', 'MasterController@updatePassword4cms');
+    // master
+    Route::get('masters', 'MasterController@index');
+    Route::get('masters/create', 'MasterController@create');
+    Route::post('masters', 'MasterController@store');
+    Route::get('masters/{master}', 'MasterController@show');
+    Route::put('masters/{master}', 'MasterController@update');
+    Route::delete('masters/{master}', 'MasterController@destroy');
+    Route::get('masters/{master}/password', 'MasterController@resetPassword');
+    Route::post('masters/{master}/password', 'MasterController@updatePassword');
 });
-
-
-
-
-
-
