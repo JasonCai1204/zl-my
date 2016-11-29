@@ -1,96 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\cms;
 
+use App\Http\Controllers\Controller;
 use App\Http\Models as App;
 use Illuminate\Http\Request;
 
 class MasterController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
-
-    // CMS
-    public function create4cms()
     {
         return view('cms.masters.create', ['departments' => App\Department::orderBy('id')->get()]);
     }
 
-    public function store4cms(Request $request)
+    public function store(Request $request)
     {
         $this->validate($request, [
             'id' => 'required|unique:masters|digits:6',
@@ -113,12 +36,12 @@ class MasterController extends Controller
         return redirect('masters');
     }
 
-    public function index4cms()
+    public function index()
     {
         return view('cms.masters.index', ['data' => App\Master::orderBy('department_id')->orderBy('id')->get()]);
     }
 
-    public function show4cms(App\Master $master)
+    public function show(App\Master $master)
     {
         return view('cms.masters.show', [
             'data' => $master,
@@ -126,7 +49,7 @@ class MasterController extends Controller
         ]);
     }
 
-    public function update4cms(Request $request, App\Master $master)
+    public function update(Request $request, App\Master $master)
     {
         $this->validate($request, [
             'id' => 'required|unique:masters,id,' . $master->id . '|digits:6',
@@ -145,7 +68,7 @@ class MasterController extends Controller
         return redirect('masters');
     }
 
-    public function destroy4cms(App\Master $master)
+    public function destroy(App\Master $master)
     {
         $master->delete();
         // TODO: I don't know...
@@ -154,12 +77,12 @@ class MasterController extends Controller
         return redirect('masters');
     }
 
-    public function resetPassword4cms(App\Master $master)
+    public function resetPassword(App\Master $master)
     {
         return view('cms.masters.password', ['data' => $master]);
     }
 
-    public function updatePassword4cms(Request $request, App\Master $master)
+    public function updatePassword(Request $request, App\Master $master)
     {
         $this->validate($request, [
             'password' => 'required|confirmed|min:6'
@@ -171,5 +94,4 @@ class MasterController extends Controller
 
         return redirect('masters/' . $master->id);
     }
-
 }

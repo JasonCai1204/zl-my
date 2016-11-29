@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\cms;
 
 use App\Http\Models as App;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class DepartmentController extends Controller
 {
-    // CMS
-    public function create4cms()
+    public function create()
     {
         return view('cms.departments.create');
     }
 
-    public function store4cms(Request $request)
+    public function store(Request $request)
     {
         $this->validate($request, [
             'id' => 'required|unique:departments|digits:4',
@@ -30,17 +30,17 @@ class DepartmentController extends Controller
         return redirect('departments');
     }
 
-    public function index4cms()
+    public function index()
     {
         return view('cms.departments.index', ['data' => App\Department::orderBy('id')->get()]);
     }
 
-    public function show4cms(App\Department $department)
+    public function show(App\Department $department)
     {
         return view('cms.departments.show', ['data' => $department]);
     }
 
-    public function update4cms(Request $request, App\Department $department)
+    public function update(Request $request, App\Department $department)
     {
         $this->validate($request, [
             'id' => 'required|unique:departments,id,'. $department->id . '|digits:4',
@@ -55,7 +55,7 @@ class DepartmentController extends Controller
         return redirect('departments');
     }
 
-    public function destroy4cms(App\Department $department)
+    public function destroy(App\Department $department)
     {
         // TODO: Delete it's all masters.
         if (count($department->masters) > 0) {
