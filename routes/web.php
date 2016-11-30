@@ -11,6 +11,110 @@
 |
 */
 
+// ys
+Route::group(['domain' => 'ys.zl-my.com', 'namespace' => 'ys'], function () {
+
+    Route::get('/', function () {
+        echo 'Hello world!';
+    });
+});
+
+// cms
+Route::group(['domain' => 'cms.zl-my.com', 'namespace' => 'cms'], function () {
+
+    Route::get('/', function () {
+        return view('cms.home');
+    });
+
+    // city
+    Route::get('cities', 'CityController@index');
+    Route::get('cities/create', 'CityController@create');
+    Route::post('cities', 'CityController@store');
+    Route::get('cities/{city}', 'CityController@show');
+    Route::put('cities/{city}', 'CityController@update');
+    Route::delete('cities/{city}', 'CityController@destroy');
+
+    // hospital
+    Route::get('hospitals', 'HospitalController@index');
+    Route::get('hospitals/create', 'HospitalController@create');
+    Route::post('hospitals', 'HospitalController@store');
+    Route::get('hospitals/{hospital}', 'HospitalController@show');
+    Route::put('hospitals/{hospital}', 'HospitalController@update');
+    Route::delete('hospitals/{hospital}', 'HospitalController@destroy');
+
+    // doctor
+    Route::get('doctors', 'DoctorController@index');
+    Route::get('doctors/create', 'DoctorController@create');
+    Route::post('doctors', 'DoctorController@store');
+    Route::get('doctors/{doctor}', 'DoctorController@show');
+    Route::put('doctors/{doctor}', 'DoctorController@update');
+    Route::delete('doctors/{doctor}', 'DoctorController@destroy');
+    Route::get('doctors/{doctor}/password', 'DoctorController@resetPassword');
+    Route::post('doctors/{doctor}/password', 'DoctorController@updatePassword');
+
+    // type
+    Route::get('types', 'TypeController@index');
+    Route::get('types/create', 'TypeController@create');
+    Route::post('types', 'TypeController@store');
+    Route::get('types/{type}', 'TypeController@show');
+    Route::put('types/{type}', 'TypeController@update');
+    Route::delete('types/{type}', 'TypeController@destroy');
+
+    // instance
+    Route::get('instances', 'InstanceController@index');
+    Route::get('instances/create', 'InstanceController@create');
+    Route::post('instances', 'InstanceController@store');
+    Route::get('instances/{instance}', 'InstanceController@show');
+    Route::put('instances/{instance}', 'InstanceController@update');
+    Route::delete('instances/{instance}', 'InstanceController@destroy');
+
+    // user
+    Route::get('users', 'UserController@index');
+    Route::get('users/{user}', 'UserController@show');
+    Route::put('users/{user}', 'UserController@update');
+    Route::get('users/{user}/password', 'UserController@resetPassword');
+    Route::post('users/{user}/password', 'UserController@updatePassword');
+
+    // order
+    Route::get('orders', 'OrderController@index');
+    Route::get('orders/{order}', 'OrderController@show');
+    Route::put('orders/{order}', 'OrderController@update');
+    Route::get('orders/{order}/photos', 'OrderController@showPhotos');
+    Route::post('orders/{order}/photos', 'OrderController@storePhotos');
+    Route::get('orders/{order}/condition-report', 'OrderController@showConditionReport');
+    Route::post('orders/{order}/condition-report', 'OrderController@storeConditionReport');
+
+    // helper
+    Route::post('helper/upload-file', 'HelperController@uploadFile');
+
+    // news
+    Route::get('news', 'NewsController@index');
+    Route::get('news/create', 'NewsController@create');
+    Route::post('news', 'NewsController@store');
+    Route::get('news/{news}', 'NewsController@show');
+    Route::put('news/{news}', 'NewsController@update');
+    Route::delete('news/{news}', 'NewsController@destroy');
+
+    // department
+    Route::get('departments', 'DepartmentController@index');
+    Route::get('departments/create', 'DepartmentController@create');
+    Route::post('departments', 'DepartmentController@store');
+    Route::get('departments/{department}', 'DepartmentController@show');
+    Route::put('departments/{department}', 'DepartmentController@update');
+    Route::delete('departments/{department}', 'DepartmentController@destroy');
+
+    // master
+    Route::get('masters', 'MasterController@index');
+    Route::get('masters/create', 'MasterController@create');
+    Route::post('masters', 'MasterController@store');
+    Route::get('masters/{master}', 'MasterController@show');
+    Route::put('masters/{master}', 'MasterController@update');
+    Route::delete('masters/{master}', 'MasterController@destroy');
+    Route::get('masters/{master}/password', 'MasterController@resetPassword');
+    Route::post('masters/{master}/password', 'MasterController@updatePassword');
+});
+
+
 // Index
 Route::get('/','WebController@index');
 
@@ -103,106 +207,4 @@ Route::get('support/qa',function(){
 // About
 Route::get('about',function(){
     return view('users.about');
-});
-
-
-// ys
-Route::group(['domain' => '{ys}.zl-my.com', 'namespace' => 'ys'], function () {
-
-});
-
-
-// cms
-Route::group(['domain' => '{cms}.zl-my.com', 'namespace' => 'cms'],  function () {
-
-    Route::get('/', function () {
-        return view('cms.home');
-    });
-
-    // city
-    Route::get('cities', 'CityController@index');
-    Route::get('cities/create', 'CityController@create');
-    Route::post('cities', 'CityController@store');
-    Route::get('cities/{city}', 'CityController@show');
-    Route::put('cities/{city}', 'CityController@update');
-    Route::delete('cities/{city}', 'CityController@destroy');
-
-    // hospital
-    Route::get('hospitals', 'HospitalController@index');
-    Route::get('hospitals/create', 'HospitalController@create');
-    Route::post('hospitals', 'HospitalController@store');
-    Route::get('hospitals/{hospital}', 'HospitalController@show');
-    Route::put('hospitals/{hospital}', 'HospitalController@update');
-    Route::delete('hospitals/{hospital}', 'HospitalController@destroy');
-
-    // doctor
-    Route::get('doctors', 'DoctorController@index');
-    Route::get('doctors/create', 'DoctorController@create');
-    Route::post('doctors', 'DoctorController@store');
-    Route::get('doctors/{doctor}', 'DoctorController@show');
-    Route::put('doctors/{doctor}', 'DoctorController@update');
-    Route::delete('doctors/{doctor}', 'DoctorController@destroy');
-    Route::get('doctors/{doctor}/password', 'DoctorController@resetPassword');
-    Route::post('doctors/{doctor}/password', 'DoctorController@updatePassword');
-
-    // type
-    Route::get('types', 'TypeController@index');
-    Route::get('types/create', 'TypeController@create');
-    Route::post('types', 'TypeController@store');
-    Route::get('types/{type}', 'TypeController@show');
-    Route::put('types/{type}', 'TypeController@update');
-    Route::delete('types/{type}', 'TypeController@destroy');
-
-    // instance
-    Route::get('instances', 'InstanceController@index');
-    Route::get('instances/create', 'InstanceController@create');
-    Route::post('instances', 'InstanceController@store');
-    Route::get('instances/{instance}', 'InstanceController@show');
-    Route::put('instances/{instance}', 'InstanceController@update');
-    Route::delete('instances/{instance}', 'InstanceController@destroy');
-
-    // user
-    Route::get('users', 'UserController@index');
-    Route::get('users/{user}', 'UserController@show');
-    Route::put('users/{user}', 'UserController@update');
-    Route::get('users/{user}/password', 'UserController@resetPassword');
-    Route::post('users/{user}/password', 'UserController@updatePassword');
-
-    // order
-    Route::get('orders', 'OrderController@index');
-    Route::get('orders/{order}', 'OrderController@show');
-    Route::put('orders/{order}', 'OrderController@update');
-    Route::get('orders/{order}/photos', 'OrderController@showPhotos');
-    Route::post('orders/{order}/photos', 'OrderController@storePhotos');
-    Route::get('orders/{order}/condition-report', 'OrderController@showConditionReport');
-    Route::post('orders/{order}/condition-report', 'OrderController@storeConditionReport');
-
-    // helper
-    Route::post('helper/upload-file', 'HelperController@uploadFile');
-
-    // news
-    Route::get('news', 'NewsController@index');
-    Route::get('news/create', 'NewsController@create');
-    Route::post('news', 'NewsController@store');
-    Route::get('news/{news}', 'NewsController@show');
-    Route::put('news/{news}', 'NewsController@update');
-    Route::delete('news/{news}', 'NewsController@destroy');
-
-    // department
-    Route::get('departments', 'DepartmentController@index');
-    Route::get('departments/create', 'DepartmentController@create');
-    Route::post('departments', 'DepartmentController@store');
-    Route::get('departments/{department}', 'DepartmentController@show');
-    Route::put('departments/{department}', 'DepartmentController@update');
-    Route::delete('departments/{department}', 'DepartmentController@destroy');
-
-    // master
-    Route::get('masters', 'MasterController@index');
-    Route::get('masters/create', 'MasterController@create');
-    Route::post('masters', 'MasterController@store');
-    Route::get('masters/{master}', 'MasterController@show');
-    Route::put('masters/{master}', 'MasterController@update');
-    Route::delete('masters/{master}', 'MasterController@destroy');
-    Route::get('masters/{master}/password', 'MasterController@resetPassword');
-    Route::post('masters/{master}/password', 'MasterController@updatePassword');
 });
