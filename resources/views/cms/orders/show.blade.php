@@ -116,7 +116,7 @@
                             <label for="birthday" class="col-md-4 control-label">出生年月</label>
 
                             <div class="col-md-6">
-                                <input id="birthday" type="month" class="form-control" name="birthday" placeholder="yyyy-mm-dd" value="{{ old('birthday') ?: $data->birthday }}">
+                                <input id="birthday" type="month" class="form-control" name="birthday" placeholder="yyyy-mm-dd" value="{{ (new DateTime(old('birthday') ?: $data->birthday))->format('Y-m') }}">
 
                                 @if ($errors->has('birthday'))
                                     <span class="help-block">
@@ -210,7 +210,7 @@
                             <label for="created_at" class="col-md-4 control-label">日期</label>
 
                             <div class="col-md-6">
-                                <input id="created_at" type="month" class="form-control" name="created_at" value="{{ $data->created_at }}" readonly>
+                                <input id="created_at" type="day" class="form-control" name="created_at" value="{{ $data->created_at }}" readonly>
                             </div>
                         </div>
 
