@@ -40,13 +40,14 @@
 
                             <div class="col-md-6">
                                 <input id="phone_number" type="number" class="form-control" name="phone_number" value="{{ old('phone_number') ?: $data->phone_number }}" required>
+
+                                @if ($errors->has('phone_number'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('phone_number') }}</strong>
+                                    </span>
+                                @endif
                             </div>
 
-                            @if ($errors->has('phone_number'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('phone_number') }}</strong>
-                                </span>
-                            @endif
                         </div>
 
                         <div class="form-group{{ $errors->has('instance_id') ? ' has-error' : '' }}">
