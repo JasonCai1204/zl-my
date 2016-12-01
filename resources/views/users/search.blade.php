@@ -11,7 +11,7 @@
                 <form class="weui-search-bar__form">
                     <div class="weui-search-bar__box">
                         <i class="weui-icon-search" style="top: 1px;"></i>
-                        <input name="q" type="search" class="weui-search-bar__input" id="searchInput" placeholder="搜索医院、医生" required/>
+                        <input name="q" type="search" class="weui-search-bar__input" id="searchInput" placeholder="搜索医院、医生" autofocus/>
                         <a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
                     </div>
                     <label class="weui-search-bar__label" id="searchText">

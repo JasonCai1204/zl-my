@@ -2,14 +2,11 @@
 <html lang="zh-cmn-Hans">
 <head>
     <meta charset="UTF-8">
-    <title>@yield('title')</title>
-    <!--XX 为用户输入的搜索关键词 未输入关键词时未空-->
-
+    <title>App 下载</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
-    <link rel="stylesheet" href="/css/user/weui.min.css">
-    <link rel="stylesheet" href="/css/user/home.css">
+    <link rel="stylesheet" href="css/user/home.css">
 </head>
-<body>
+<body style="background-color: white">
 <!--固定在屏幕上部的logo-->
 <div class="logo_part">
     <div class="logo">
@@ -17,9 +14,12 @@
     </div>
 </div>
 
-@yield('content')
-<script type="text/javascript" src="/js/user/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="/js/user/searchbar.js"></script>
-@yield('script')
+<!--主体部分-->
+<div class="container">
+    <div class="my_app_coming">
+        <span>Coming soon</span>
+        <span>即将到来...</span>
+    </div>
+</div>
 </body>
 </html>

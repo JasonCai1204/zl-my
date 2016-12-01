@@ -10,13 +10,28 @@ use Illuminate\Http\Request;
 class InstanceController extends Controller
 {
     //Select instance.
-    public function getSelect()
+    public function getSelect(Request $request)
     {
-        $instances = App\Instance::all();
+       if($request->hospital_id < 0 && $request->doctor_id < 0){
+           $instances = App\Instance::select('id','name')->get();
 
-        return view('users.instances.select',[
-            'instances' => $instances
-        ]);
+       }elseif($request->doctor_id > 0){
+           $doctor = App\Doctor::find($request->doctor_id);
+
+           $instances = $doctor->instances;
+
+       }else{
+
+       }
+
+
+        return collect([
+            'status' => 1,
+            'msg' => '加载成功',
+            'data' => $instances
+        ])->toJson();
+
+
     }
 
     //Select instance from doctor.

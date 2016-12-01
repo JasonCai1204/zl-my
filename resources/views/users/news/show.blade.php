@@ -1,8 +1,18 @@
-@extends('layouts.user-basic')
-
-@section('title','资讯内容 - 肿瘤名医')
-
-@section('content')
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <title>资讯内容 - 肿瘤名医</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" href="../css/user/weui.min.css">
+    <link rel="stylesheet" href="../css/user/home.css">
+</head>
+<body style="background-color: white">
+<div class="logo_part">
+    <div class="logo">
+        <a href="/" style="background-image: url('/storage/images/app/web/www/mobile-titlebar-logo.png');"></a>
+    </div>
+</div>
 
 @if($news)
 <div class="container" id="news_container" style="background-color: white;">
@@ -22,4 +32,5 @@
 </div>
 @endif
 
-@endsection
+</body>
+</html>

@@ -19,13 +19,6 @@
 </head>
 <body style="background-color: white">
 
-<!--固定在屏幕上部的logo-->
-<div class="logo_part">
-    <div class="logo">
-        <a href="http://zl-my.com" style="background-image: url('/storage/images/app/web/www/mobile-titlebar-logo.png');"></a>
-    </div>
-</div>
-
 <!--主体部分-->
 <div class="container">
     <div class="my_aboutus_head">
@@ -39,8 +32,8 @@
         <p class="my_aboutus_cellhd">我们怎么做</p>
         <p class="my_aboutus_cellbd">通过互联网+，一端联系庞大的肿瘤患者群体，一端聚集顶级肿瘤专家，在此平台上实现快速对接，同时引入保险和第三方医疗机构，保障整体体系的高效安全运转。</p>
     </div>
-    <div class="weui-cells weui-cell_access special_cells_access">
-        <a href="jacascript:;" class="weui-cell">
+    <div class="weui-cells weui-cell_access special_cells_access" style="margin-top: 0;">
+        <a href="javascript:;" class="weui-cell">
             <div class="weui-cell__bd weui-cell_primary">
                 <p style="color: #000;">CEO寄语</p>
             </div>
@@ -65,7 +58,7 @@
         </p>
     </div>
 </div>
-<script src="js/user/jquery-1.11.3.min.js"></script>
+<script src="../js/user/jquery-1.11.3.min.js"></script>
 <script type="text/javascript">
     var isHide = true;
     $(".container").on('click','.special_cells_access',function () {
@@ -73,14 +66,13 @@
             $('#ceo-address').slideDown();
             $('.special_cells_access .weui-cell__ft').after().css({
                 'transform':'rotate(45deg)',
-                'right':'0px'
+                'right':'-2px'
             })
             isHide = false;
         }else{
             $('#ceo-address').slideUp();
             $('.special_cells_access .weui-cell__ft').after().css({
                 'transform':'rotate(0deg)',
-                'right':'4px'
             })
             isHide = true;
         }

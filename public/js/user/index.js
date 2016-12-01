@@ -15,7 +15,6 @@ $(function () {
     var $iosDialog2 = $("#iosDialog2");
     $('body').on('click', '.weui-dialog__btn', function(){
         $(this).parents('.js_dialog').fadeOut(200);
-        console.log(1)
     });
     $('#askonline').on('click', function(){
         $iosDialog2.fadeIn(200);

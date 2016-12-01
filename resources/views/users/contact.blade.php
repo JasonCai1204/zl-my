@@ -1,9 +1,26 @@
-@extends('layouts.user-basic')
-
-@section('title','联系我们 - 肿瘤名医')
-
-@section('content')
-
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <title>联系我们 - 肿瘤名医</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" href="css/user/home.css">
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        .my_phone_qrcode{
+            margin-bottom:30px;
+        }
+    </style>
+</head>
+<body style="background-color: rgb(239,239,248)">
+<div class="logo_part">
+    <div class="logo">
+        <a href="/" style="background-image: url('/storage/images/app/web/www/mobile-titlebar-logo.png');"></a>
+    </div>
+</div>
 <!--主体部分-->
 <div class="container" id="container_contactus">
     <div>
@@ -36,10 +53,9 @@
         </div>
     </div>
     <div class="my_phone_qrcode">
-        <img src="/storage/images/app/web/www/mobile-contactus-qrcode.png" alt="">
-        <p>关注微信公众号</p>
+        <img src="/storage/images/app/web/www/mobile-contactus-qrcode.png" alt=""><p>关注微信公众号</p>
         <span>长按二维码 - 识别图中二维码</span>
     </div>
 </div>
-
-@endsection
+</body>
+</html>

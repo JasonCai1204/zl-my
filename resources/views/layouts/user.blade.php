@@ -13,7 +13,7 @@
 <!--固定在屏幕上部的logo-->
 <div class="logo_part">
     <div class="logo">
-        <a href="http://zl-my.com" style="background-image: url('/storage/images/app/web/www/mobile-titlebar-logo.png');"></a>
+        <a href="/" style="background-image: url('/storage/images/app/web/www/mobile-titlebar-logo.png');"></a>
     </div>
 </div>
 

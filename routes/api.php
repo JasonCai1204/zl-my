@@ -19,35 +19,50 @@ use Illuminate\Http\Request;
 
 Route::group(['namespace' => 'api'], function(){
 
- // Index
- Route::get('/','WebController@index');
+   // Index
+   Route::get('/','WebController@index');
 
- // News lists
- Route::resource('news','NewsController');
+   // Search
+   Route::get('search', 'HospitalController@search');
 
- // Recommend
- Route::get('recommends','WebController@recommend');
+   // News lists
+   Route::resource('news','NewsController');
 
- // Find Doctors
- Route::get('doctor','DoctorController@index');
- Route::get('doctor/detail','DoctorController@detail');
+   // Recommend
+   Route::get('recommends','WebController@recommend');
 
- // Find hospitals
- Route::get('hospital','HospitalController@index');
- Route::get('hospital/detail','HospitalController@detail');
+   // Find Doctors
+   Route::get('doctor','DoctorController@index');
+   Route::get('doctor/detail','DoctorController@detail');
 
- // Search
- Route::get('search', 'HospitalController@search');
+   // Find hospitals
+   Route::get('hospital','HospitalController@index');
+   Route::get('hospital/detail','HospitalController@detail');
 
-  // Qa
-  Route::get('support/qa',function(){
-   return view('api.qa');
-  });
+    // Qa
+    Route::get('support/qa',function(){
+     return view('api.qa');
+    });
 
- // About
- Route::get('about',function(){
-  return view('api.about');
- });
+   // About
+   Route::get('about',function(){
+    return view('api.about');
+   });
+
+   // Order
+   Route::post('order/postPhotos','OrderController@postPhotos');
+   Route::get('orders/create','OrderController@getCreate');
+   Route::post('orders/create','OrderController@postCreate');
+   Route::get('order/{order}/display','OrderController@display');
+   Route::get('order/msg','OrderController@getMsg');
+   Route::resource('order','OrderController');
+
+   // Instance
+   Route::get('instance/select','InstanceController@getSelect');
+   Route::post('instance/select','InstanceController@postSelect');
+   Route::get('instance/doctor/select','InstanceController@getDoctorSelect');
+
+
 
 });
 

@@ -9,17 +9,10 @@
 </head>
 <body style="background-color: white">
 
-<!--固定在屏幕上部的logo-->
-<div class="logo_part">
-    <div class="logo">
-        <a href="http://zl-my.com" style="background-image: url('/storage/images/app/web/www/mobile-titlebar-logo.png');"></a>
-    </div>
-</div>
 
 <!--主体部分-->
 <div class="container">
-    <div class="my_aboutus_cell">
-        <p class="my_aboutus_cellhd">常见问题</p>
+    <div class="my_aboutus_cell" style="padding: 0 0 25px;">
         <img src="/storage/images/app/web/www/user-mobile-problem-photo-1.png" alt="">
     </div>
     <div class="my_aboutus_cell">

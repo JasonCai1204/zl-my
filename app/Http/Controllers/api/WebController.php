@@ -41,7 +41,7 @@ class WebController extends Controller
         $doctors = app\Doctor::where('is_recommended',1)->get();
 
         foreach($doctors as $doctor){
-            $data['$doctors'][] = [
+            $data['doctors'][] = [
                 'id' => $doctor->id,
                 'name' => $doctor->name,
                 'grading' => $doctor->grading,
@@ -51,11 +51,11 @@ class WebController extends Controller
         }
 
         return collect([
+            'status' => 1,
+            'msg' => '加载成功',
             'data' => [
-                'status' => 1,
-                'msg' => '加载成功',
                 'hospitals' => $data['hospitals'],
-                'doctors' => $data['$doctors']
+                'doctors' => $data['doctors']
             ]
         ])->toJson();
     }

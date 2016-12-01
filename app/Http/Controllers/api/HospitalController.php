@@ -81,23 +81,55 @@ class HospitalController extends Controller
         if (!$request->has('q')) {
             return collect([
                 'status' => 1,
-                'meg' => '加载成功',
-                'data'=>['']
+                'msg' => '加载成功',
+                'data'=>[]
             ]);
         }
 
         // Search hospital or doctor.
         $hospitals = App\Hospital::where('name', 'like', '%' . $request->q . '%')
-        ->get();
+                ->select('id','name','grading','is_recommended','city_id')
+                ->get();
+
+        $data = [];
+
+        foreach($hospitals as $hospital){
+            $data['hospitals'][] = [
+                'id' => $hospital->id,
+                'name' => $hospital->name,
+                'grading' => $hospital->grading,
+                'is_recommended' => $hospital->is_recommended,
+                'city_name' => $hospital->city->name
+            ];
+        }
+
 
         $doctors = App\Doctor::where('name', 'like', '%' . $request->q . '%')
-        ->get();
+                ->select('id','avatar','name','grading','hospital_id','is_certified','is_recommended')
+                ->get();
 
-        return view('users.search', [
-            'hospitals' => $hospitals,
-            'doctors' => $doctors,
-            'q' => $request->q
-        ]);
+        foreach ($doctors as $doctor) {
+            $data['doctors'][] = [
+                'id' => $doctor->id,
+                'avatar' => $doctor->avatar,
+                'name' => $doctor->name,
+                'grading' => $doctor->grading,
+                'hospital_id' => $doctor->hospital_id,
+                'is_certified' => $doctor->is_certified,
+                'is_recommended' => $doctor->is_recommended,
+                'hospital_name' => $doctor->hospital->name,
+            ];
+        }
+
+        return collect([
+            'status' => 1,
+            'msg' => '加载成功',
+            'data'=>[
+                'hospitals' => isset($data['hospitals']) ? $data['hospitals'] : [],
+                'doctors' => isset($data['doctors']) ? $data['doctors'] : []
+            ]
+        ])->toJson();
+
     }
 
     // Display hospitals

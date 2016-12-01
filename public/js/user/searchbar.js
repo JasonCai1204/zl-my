@@ -25,7 +25,8 @@ $(function () {
             $searchInput = $('#searchInput'),
             $searchClear = $('#searchClear'),
             $searchCancel = $('#searchCancel');
-
+        $searchBar.addClass('weui-search-bar_focusing');
+        $searchInput.focus();
         function hideSearchResult(){
             $searchResult.hide();
             $searchInput.val('');
