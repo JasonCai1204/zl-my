@@ -13,7 +13,8 @@ return [
     |
     */
 
-    'password' => 'Passwords must be at least six characters and match the confirmation.',
+    // 'password' => 'Passwords must be at least six characters and match the confirmation.',
+    'password' => '密码长度必需多于 6 位，同时输入确认密码。',
     'reset' => 'Your password has been reset!',
     'sent' => 'We have e-mailed your password reset link!',
     'token' => 'This password reset token is invalid.',
