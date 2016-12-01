@@ -8,11 +8,7 @@
 
 @if (count($errors) > 0)
     <div class="my_form_warn" >
-            <span>
-                @foreach ($errors->all() as $error)
-                    {{ $error }}
-                @endforeach
-            </span>
+            <span>{{ $errors->first() }}</span>
     </div>
 @endif
 
@@ -43,45 +39,45 @@
                 <div class="weui-cell__hd">
                     <label class="weui-label">手机号码</label>
                 </div>
+                <div class="weui-cell__bd">
+                    <input type="number" class="weui-input" placeholder="必填" name="phone_number" value="{{old('phone_number')}}" required />
+                </div>
                 @if($errors->has('phone_number'))
                     <div class="weui-cell__ft">
                         <i class="weui-icon-warn"></i>
                     </div>
                 @endif
-                <div class="weui-cell__bd">
-                    <input type="number" class="weui-input" placeholder="必填" name="phone_number" value="{{old('phone_number')}}" required />
-                </div>
             </div>
             <div class="weui-cell {{ $errors->has('password') ? ' weui-cell_warn' : '' }}">
                 <div class="weui-cell__hd">
                     <label class="weui-label">密码</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input type="password" class="weui-input" placeholder="不少于 6 位" name="password" required />
                 </div>
                 @if($errors->has('password'))
                     <div class="weui-cell__ft">
                         <i class="weui-icon-warn"></i>
                     </div>
                 @endif
-                <div class="weui-cell__bd">
-                    <input type="password" class="weui-input" placeholder="不少于 6 位" name="password" required />
-                </div>
             </div>
             <div class="weui-cell {{ $errors->has('password_confirmation') ? ' weui-cell_warn' : '' }}">
                 <div class="weui-cell__hd">
                     <label class="weui-label">确认密码</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input type="password" class="weui-input" placeholder="再次输入密码" name="password_confirmation" required />
                 </div>
                 @if($errors->has('password_confirmation'))
                     <div class="weui-cell__ft">
                         <i class="weui-icon-warn"></i>
                     </div>
                 @endif
-                <div class="weui-cell__bd">
-                    <input type="password" class="weui-input" placeholder="再次输入" name="password_confirmation" required />
-                </div>
             </div>
         </div>
         <!--协议-->
         <label for="weuiAgree" class="weui-agree">
-            <input type="checkbox" id="weuiAgree" class="weui-agree__checkbox" checked name="">
+            <input type="checkbox" id="weuiAgree" class="weui-agree__checkbox" name="terms" checked>
             <span class="weui-agree__text">已阅读并同意<a href="/legal/terms">《借款额度合同及相关授权》</a></span>
         </label>
         <input type="submit" class="btnCommon" value="注册">

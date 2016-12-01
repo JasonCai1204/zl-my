@@ -27,7 +27,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -48,9 +48,20 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6|confirmed',
+            'name' => 'required|max:70',
+            'phone_number' => 'required|digits:11|unique:users',
+            'terms' => 'required',
+            'password' => 'required|min:6|confirmed'
+        ], [
+            'name.required' => '姓名不能为空。',
+            'name.max' => '姓名不能超过 70 位。',
+            'phone_number.required' => '手机号码不能为空。',
+            'phone_number.digits' => '手机号码必需是 11 位数字。',
+            'phone_number.unique' => '此手机号码已注册',
+            'terms.required' => '同意《服务条款》后方可注册。',
+            'password.required' => '密码不能为空。',
+            'password.min' => '密码不能少于 6 位。',
+            'password.confirmed' => '确认密码与密码不相同。'
         ]);
     }
 
@@ -64,8 +75,14 @@ class RegisterController extends Controller
     {
         return User::create([
             'name' => $data['name'],
-            'email' => $data['email'],
+            'phone_number' => $data['phone_number'],
             'password' => bcrypt($data['password']),
         ]);
     }
+
+    public function showRegistrationForm()
+    {
+        return view('auth.signup');
+    }
+
 }
