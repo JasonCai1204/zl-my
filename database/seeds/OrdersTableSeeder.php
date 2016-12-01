@@ -13,7 +13,7 @@ class OrdersTableSeeder extends Seeder
     {
         DB::table('orders')->insert(
             [
-//                'id' => 1,
+                'id' => 100001,
                 'user_id' => '1',
                 'patient_name' => '李一男',
                 'phone_number' => '18565700981',
@@ -36,7 +36,7 @@ class OrdersTableSeeder extends Seeder
 
         DB::table('orders')->insert(
             [
-//                'id' => 2,
+                'id' => 100002,
                 'user_id' => '1',
                 'patient_name' => '李二男',
                 'phone_number' => '18565700982',

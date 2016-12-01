@@ -20,7 +20,7 @@ class CreateOrdersTable extends Migration
     public function up()
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('id',6);
             $table->integer('user_id');
             $table->string('patient_name',5);
             $table->string('phone_number',11);
