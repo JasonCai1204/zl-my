@@ -13,6 +13,6 @@ class Master extends Model
     ];
 
     public function department(){
-        return $this->belongsTo('App\Http\Models\Department');
+        return $this->belongsTo('App\Department');
     }
 }

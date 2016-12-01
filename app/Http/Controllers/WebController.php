@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Models as app;
+use App as app;
 
 class WebController extends Controller
 {

@@ -10,15 +10,13 @@ class Instance extends Model
     use SoftDeletes;
     protected $dates = ['deleted_at'];
 
-    protected $fillable = ['name', 'type_id', 'sort'];
-
     public function type()
     {
-        return $this->belongsto('App\Http\Models\Type');
+        return $this->belongsto('App\Type');
     }
 
     public function doctors()
     {
-        return $this->belongsToMany('App\Http\Models\Doctor');
+        return $this->belongsToMany('App\Doctor');
     }
 }

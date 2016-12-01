@@ -13,7 +13,7 @@
                 <section>
                     <h2 class="title">肿瘤名医 <span class="my_article_date">{{$news->published_at->format('Y-m-d')}}</span></h2>
                     <section>
-                        <p class="my_article_text">{{$news->content}}  </p>
+                        <p class="my_article_text">{!!$news->content!!}</p>
                     </section>
                 </section>
             </div>

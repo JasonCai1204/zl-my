@@ -10,17 +10,15 @@ class Doctor extends Model
     use SoftDeletes;
     protected $dates = ['deleted_at'];
 
-    protected $fillable = ['name', 'avatar', 'grading', 'introduction', 'phone_number', 'password', 'hospital_id', 'is_certified', 'is_recommended'];
-
     public function hospital(){
-        return $this->belongsTo('App\Http\Models\Hospital');
+        return $this->belongsTo('App\Hospital');
     }
 
     public function instances(){
-        return $this->belongsToMany('App\Http\Models\Instance');
+        return $this->belongsToMany('App\Instance');
     }
 
     public function orders(){
-        return $this->hasMany('App\Http\Models\Order');
+        return $this->hasMany('App\Order');
     }
 }

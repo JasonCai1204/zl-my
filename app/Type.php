@@ -11,10 +11,8 @@ class Type extends Model
     use SoftDeletes;
     protected $dates = ['deleted_at'];
 
-    protected $fillable = ['name', 'icon', 'sort'];
-
     public function instances() {
-        return $this->hasMany('App\Http\Models\Instance');
+        return $this->hasMany('App\Instance');
     }
 
 }

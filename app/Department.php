@@ -11,6 +11,6 @@ class Department extends Model
     public $timestamps = false;
 
     public function masters(){
-        return $this->hasMany('App\Http\Models\Master');
+        return $this->hasMany('App\Master');
     }
 }

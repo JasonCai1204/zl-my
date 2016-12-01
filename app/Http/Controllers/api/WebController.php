@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use Illuminate\Http\Request;
-use App\Http\Models as app;
+use App as app;
 use App\Http\Controllers\Controller;
 
 class WebController extends Controller
@@ -34,7 +34,7 @@ class WebController extends Controller
                 'name' => $hospital->name,
                 'grading' => $hospital->grading,
                 'is_recommended' => $hospital->is_recommended,
-                'city_id' => $hospital->city_id
+                'city_name' => $hospital->city->name
             ];
         }
 

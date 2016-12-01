@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Models as App;
+use App as App;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 

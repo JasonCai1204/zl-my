@@ -10,15 +10,13 @@ class Hospital extends Model
     use SoftDeletes;
     protected $dates = ['deleted_at'];
 
-    protected $fillable = ['name', 'grading', 'city_id', 'introduction', 'is_recommended'];
-
     public function city()
     {
-        return $this->belongsTo('App\Http\Models\City');
+        return $this->belongsTo('App\City');
     }
 
     public function doctors(){
-        return $this->hasMany('App\Http\Models\Doctor');
+        return $this->hasMany('App\Doctor');
     }
 
 }

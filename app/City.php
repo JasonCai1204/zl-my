@@ -11,6 +11,6 @@ class City extends Model
     protected $fillable = ['name'];
 
     public function hospitals(){
-        return $this->hasMany('App\Http\Models\Hospital');
+        return $this->hasMany('App\Hospital');
     }
 }

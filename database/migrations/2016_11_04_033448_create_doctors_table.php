@@ -6,15 +6,6 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateDoctorsTable extends Migration
 {
-    /**
-     *create a new tiny integer column on the table
-     * @param string $column
-     */
-
-    public function tinyInteger($column,  $autoIncrement = false)
-    {
-        return $this->addColumn('tinyInteger', $column, compact('autoIncrement'));
-    }
 
     /**
      * Run the migrations.

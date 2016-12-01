@@ -19,7 +19,7 @@
                             <img src="/storage/images/doctor/my_article_mask.png" alt="">
                         </p>
                         <p class="my_article_text">
-                            {{$order->condition_report}}
+                            {!! $order->condition_report !!}
                         </p>
                     </section>
                 </section>
