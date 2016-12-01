@@ -15,19 +15,19 @@
 Route::group(['domain' => 'ys.zl-my.com', 'namespace' => 'ys'], function () {
 
     // Sign in.
-    Route::get('doctor/signin','DoctorController@getSignin');
-    Route::post('doctor/signin','DoctorController@postSignin');
+    Route::get('signin','DoctorController@getSignin');
+    Route::post('signin','DoctorController@postSignin');
     // Sign out.
-    Route::get('doctor/signout','DoctorController@getSignout');
+    Route::get('signout','DoctorController@signOut');
     // Modify password.
-    Route::get('doctor/password/reset','DoctorController@getReset');
-    Route::post('doctor/password/reset','DoctorController@postReset');
+    Route::get('password/reset','DoctorController@getReset');
+    Route::post('password/reset','DoctorController@postReset');
     // Profile
-    Route::get('doctor/profile','DoctorController@getProfile');
+    Route::get('profile','DoctorController@getProfile');
     // Order lists
-    Route::get('doctor/orders','DoctorController@getOrders');
+    Route::get('/','DoctorController@getOrders');
     // Condition_report
-    Route::get('doctor/orders/condition_report','DoctorController@getCondition_report');
+    Route::get('orders/condition_report','DoctorController@getCondition_report');
 
 });
 
@@ -201,4 +201,14 @@ Route::get('support/qa',function(){
 // About
 Route::get('about',function(){
     return view('users.about');
+});
+
+// Services
+Route::get('legal/terms',function(){
+    return view('users.services');
+});
+
+// Download
+Route::get('download',function(){
+    return view('users.download');
 });
