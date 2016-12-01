@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Validator;
 
 class OrderController extends Controller
 {
@@ -60,11 +61,11 @@ class OrderController extends Controller
 
                 $order->patient_name = $request->patient_name;
                 $order->phone_number = $request->phone_number;
-                $order->instance_id = $request->instance_id;
-                $order->hospital_id = $hospital_id;
-                $order->doctor_id = $doctor_id;
+                $order->instance_id = $request->instance_id ?: null;
+                $order->hospital_id = $hospital_id ?: null;
+                $order->doctor_id = $doctor_id ?: null;
                 $order->gender = $request->gender;
-                $order->birthday = $request->birthday;
+                $order->birthday = new Carbon($request->birthday . '-01 00:00:00');
                 $order->weight = $request->weight;
                 $order->smoking = $request->smoking ? 1 : 0;
                 $order->wechat_id = $request->wechat_id;
