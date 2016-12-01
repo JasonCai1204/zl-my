@@ -14,7 +14,7 @@ class OrderController extends Controller
     {
         $this->middleware('auth', ['only' => 'getCreate']);
     }
-    
+
     //redirect order/create
     public function getCreate(Request $request)
     {
