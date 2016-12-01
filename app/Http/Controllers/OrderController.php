@@ -10,6 +10,11 @@ use Validator;
 
 class OrderController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', ['only' => 'getCreate']);
+    }
+    
     //redirect order/create
     public function getCreate(Request $request)
     {
