@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\cms;
 
-use App\Http\Models as App;
+use App;
 use App\Http\Controllers\Controller;
 use DB;
 use Illuminate\Http\Request;

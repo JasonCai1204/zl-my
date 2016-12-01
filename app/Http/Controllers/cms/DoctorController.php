@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\cms;
 
 use App\Http\Controllers\Controller;
-use App\Http\Models as App;
+use App;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
