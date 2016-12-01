@@ -126,84 +126,79 @@ Route::group(['domain' => 'cms.zl-my.com', 'namespace' => 'cms'], function () {
     Route::post('masters/{master}/password', 'MasterController@updatePassword');
 });
 
+// User Authontication
+Route::group(['namespace' => 'Auth'], function () {
+    Route::get('signin', 'LoginController@showLoginForm');
+    Route::post('signin', 'LoginController@login');
+    Route::get('signup', 'RegisterController@showRegistrationForm');
+    Route::post('signup', 'RegisterController@register');
+    Route::post('signout', 'LoginController@logout');
+    Route::get('account/password/reset', 'ResetPasswordController@showResetForm');
+    Route::post('account/password/reset', 'ResetPasswordController@reset');
+});
 
-    // Index
-    Route::get('/','WebController@index');
+// Index
+Route::get('/','WebController@index');
 
-    // Search
-    Route::get('search', 'HospitalController@search');
+// Search
+Route::get('search', 'HospitalController@search');
 
-    // News
-    Route::resource('news','NewsController');
-    Route::get('loadmore','NewsController@loadMore');
+// News
+Route::resource('news','NewsController');
+Route::get('loadmore','NewsController@loadMore');
 
-    // Recommend
-    Route::get('recommends','WebController@recommend');
+// Recommend
+Route::get('recommends','WebController@recommend');
 
-    // Hospital
-    Route::get('hospital/select','HospitalController@getSelect');
-    Route::post('hospital/select','HospitalController@postSelect');
-    Route::resource('hospital','HospitalController');
+// Hospital
+Route::get('hospital/select','HospitalController@getSelect');
+Route::post('hospital/select','HospitalController@postSelect');
+Route::resource('hospital','HospitalController');
 
-    // Instance
-    Route::get('instance/select','InstanceController@getSelect');
-    Route::post('instance/select','InstanceController@postSelect');
-    Route::get('instance/doctor/select','InstanceController@getDoctorSelect');
-    Route::resource('instance','InstanceController');
+// Instance
+Route::get('instance/select','InstanceController@getSelect');
+Route::post('instance/select','InstanceController@postSelect');
+Route::get('instance/doctor/select','InstanceController@getDoctorSelect');
+Route::resource('instance','InstanceController');
 
-    // Doctor
-    Route::get('doctor/select','DoctorController@getSelect');
-    Route::post('doctor/select','DoctorController@postSelect');
-    // Select doctor from hospital.
-    Route::get('doctor/hospital/select','DoctorController@getHospitalSelect');
-    // Select doctor from instance.
-    Route::get('doctor/instance/select','DoctorController@getInstanceSelect');
-    Route::resource('doctor','DoctorController');
+// Doctor
+Route::get('doctor/select','DoctorController@getSelect');
+Route::post('doctor/select','DoctorController@postSelect');
+// Select doctor from hospital.
+Route::get('doctor/hospital/select','DoctorController@getHospitalSelect');
+// Select doctor from instance.
+Route::get('doctor/instance/select','DoctorController@getInstanceSelect');
+Route::resource('doctor','DoctorController');
 
-    // Order
-    Route::post('order/postPhotos','OrderController@postPhotos');
-    Route::get('orders/create','OrderController@getCreate');
-    Route::post('orders/create','OrderController@postCreate');
-    Route::get('order/{order}/display','OrderController@display');
-    Route::get('order/msg','OrderController@getMsg');
-    Route::resource('order','OrderController');
+// Order
+Route::post('order/postPhotos','OrderController@postPhotos');
+Route::get('orders/create','OrderController@getCreate');
+Route::post('orders/create','OrderController@postCreate');
+Route::get('order/{order}/display','OrderController@display');
+Route::get('order/msg','OrderController@getMsg');
+Route::resource('order','OrderController');
 
-    // User account.
-    Route::resource('account','UserController@index');
+// User account.
+Route::resource('account','UserController@index');
 
-    // Sign in.
-    Route::get('signin','UserController@getSignIn');
-    Route::post('signin','UserController@postSignIn');
+// Profile
+Route::get('account/user/profile','UserController@getProfile');
+Route::post('account/user/profile','UserController@postProfile');
 
-    // Sign out.
-    Route::get('signout','UserController@signOut');
+//  User orders
+Route::get('account/user/orders','UserController@getOrders');
 
-    // Sign up.
-    Route::get('signup','UserController@getSignUp');
-    Route::post('signup','UserController@postSignUp');
+// Contact
+Route::get('contact',function(){
+    return view('users.contact');
+});
 
-    // Profile
-    Route::get('account/user/profile','UserController@getProfile');
-    Route::post('account/user/profile','UserController@postProfile');
+// Qa
+Route::get('support/qa',function(){
+    return view('users.qa');
+});
 
-    // Modify password
-    Route::get('account/password/reset','UserController@getReset');
-    Route::post('account/password/reset','UserController@postReset');
-
-    //  User orders
-    Route::get('account/user/orders','UserController@getOrders');
-
-    // Contact
-    Route::get('contact',function(){
-        return view('users.contact');
-    });
-
-    // Qa
-    Route::get('support/qa',function(){
-        return view('users.qa');
-    });
-
-    // About
-    Route::get('about',function(){
-        return view('users.about');
-    });
+// About
+Route::get('about',function(){
+    return view('users.about');
+});
