@@ -13,7 +13,7 @@
 <div class="logo_part">
     <div class="logo">
         <a href="/" style="background-image: url('/storage/images/app/web/ys/mobile-titlebar-logo.png');"></a>
-        <a href="/doctor/profile" class="doctor_logo" style="background-image: url('/storage/images/app/web/ys/doctor-mobile-titlebar-rightlogo.png')"></a>
+        <a href="/profile" class="doctor_logo" style="background-image: url('/storage/images/app/web/ys/doctor-mobile-titlebar-rightlogo.png')"></a>
     </div>
 </div>
 

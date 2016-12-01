@@ -160,7 +160,8 @@ class DoctorController extends Controller
     // Get orders.
     public function getOrders(Request $request){
 
-        $doctors = App\Doctor::find(session('doctor.id'))
+//        $doctors = App\Doctor::find(session('doctor.id'))
+        $doctors = App\Doctor::find(1)
             ->first();
 
         $orders = $doctors->orders;
@@ -173,7 +174,8 @@ class DoctorController extends Controller
     // Get condition_report.
 
     public function getCondition_report(Request $request){
-        $order = App\Order::find($request->order_id);
+//        $order = App\Order::find($request->order_id);
+        $order = App\Order::find(1);
 
         return view('doctors.report',[
             'order'=> $order
@@ -185,7 +187,7 @@ class DoctorController extends Controller
     {
         session(['doctor' => null]);
 
-        return redirect('/doctor/signin');
+        return redirect('/signin');
     }
 
 

@@ -1,6 +1,6 @@
 @extends('layouts.user-basic')
 
-@section('title','选择医院-肿瘤名医')
+@section('title','选择医院 - 肿瘤名医')
 <!--固定在屏幕上部的logo-->
 
 @section('content')

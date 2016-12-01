@@ -1,6 +1,6 @@
 @extends('layouts.user-basic')
 
-@section('title','医院介绍-肿瘤名医')
+@section('title','医院介绍 - 肿瘤名医')
 
 @section('content')
 <!--主体部分-->

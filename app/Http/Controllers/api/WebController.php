@@ -22,20 +22,40 @@ class WebController extends Controller
 
     }
 
-    public function recommend(){
+    public function recommend()
+    {
+        $hospitals = app\Hospital::where('is_recommended',1)->get();
 
-        $hospitals = app\Hospital::where('is_recommended','1')
-                ->get();
+        $data = [];
 
-        $doctors = app\Doctor::where('is_recommended','1')
-            ->get();
+        foreach($hospitals as $hospital){
+            $data['hospitals'][] = [
+                'id' => $hospital->id,
+                'name' => $hospital->name,
+                'grading' => $hospital->grading,
+                'is_recommended' => $hospital->is_recommended,
+                'city_id' => $hospital->city_id
+            ];
+        }
+
+        $doctors = app\Doctor::where('is_recommended',1)->get();
+
+        foreach($doctors as $doctor){
+            $data['$doctors'][] = [
+                'id' => $doctor->id,
+                'name' => $doctor->name,
+                'grading' => $doctor->grading,
+                'is_recommended' => $doctor->is_recommended,
+                'hospital_name' => $doctor->hospital->name
+            ];
+        }
 
         return collect([
-            'status' => 1,
-            'msg' => '加载成功',
             'data' => [
-                'hospitals' => $hospitals,
-                'doctors' => $doctors
+                'status' => 1,
+                'msg' => '加载成功',
+                'hospitals' => $data['hospitals'],
+                'doctors' => $data['$doctors']
             ]
         ])->toJson();
     }

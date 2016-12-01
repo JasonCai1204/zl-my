@@ -197,10 +197,9 @@ class OrderController extends Controller
                     $order->detail = $request->detail;
 
                 if ($request->has('photos'))
-
-                $photos = explode(",", $request->photos);
-
-                $order->photos = json_encode($photos);
+                {
+                    $order->photos = explode(",", $request->photos);
+                }
 
                 $order->save();
 

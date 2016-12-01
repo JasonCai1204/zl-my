@@ -1,9 +1,15 @@
-@extends('layouts.user-basic')
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <title>资讯内容 - 肿瘤名医</title>
+    <!--XX 为用户输入的搜索关键词 未输入关键词时未空-->
 
-@section('title','资讯内容 - 肿瘤名医')
-
-@section('content')
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" href="/css/user/weui.min.css">
+    <link rel="stylesheet" href="/css/user/home.css">
+</head>
+<body>
 @if($news)
 <div class="container" id="news_container" style="background-color: white;">
     <div class="article">
@@ -22,4 +28,5 @@
 </div>
 @endif
 
-@endsection
+</body>
+</html>

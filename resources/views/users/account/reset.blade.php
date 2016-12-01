@@ -1,6 +1,6 @@
 @extends('layouts.user-basic')
 
-@section('title','修改密码-肿瘤名医')
+@section('title','修改密码 - 肿瘤名医')
 
 @section('content')
 
@@ -30,36 +30,48 @@
         -->
         <div class="weui-cells__title">修改密码</div>
         <div class="weui-cells weui-cells_form">
-            <div class="weui-cell">
+            <div class="weui-cell {{ $errors->has('password') ? ' weui-cell_warn' : '' }}">
                 <div class="weui-cell__hd">
                     <label class="weui-label">当前密码</label>
                 </div>
                 <div class="weui-cell__bd">
                     <input type="password" class="weui-input" placeholder="必填" name="password" required />
                 </div>
-                <!--<div class="weui-cell__ft">-->
-                    <!--<i class="weui-icon-warn"></i>-->
-                <!--</div>-->
+                @if($errors->has('password'))
+                    <div class="weui-cell__ft">
+                        <i class="weui-icon-warn"></i>
+                    </div>
+                @endif
             </div>
-            <div class="weui-cell">
+            <div class="weui-cell {{ $errors->has('newPassword') ? ' weui-cell_warn' : '' }}">
                 <div class="weui-cell__hd">
                     <label class="weui-label">新密码</label>
                 </div>
+                @if($errors->has('newPassword'))
+                    <div class="weui-cell__ft">
+                        <i class="weui-icon-warn"></i>
+                    </div>
+                @endif
                 <div class="weui-cell__bd">
                     <input type="password" class="weui-input" placeholder="不少于 6 位" name="newPassword" required />
                 </div>
             </div>
-            <div class="weui-cell">
+            <div class="weui-cell {{ $errors->has('password_confirmation') ? ' weui-cell_warn' : '' }}">
                 <div class="weui-cell__hd">
                     <label class="weui-label">确认密码</label>
                 </div>
+                @if($errors->has('password_confirmation'))
+                    <div class="weui-cell__ft">
+                        <i class="weui-icon-warn"></i>
+                    </div>
+                @endif
                 <div class="weui-cell__bd">
                     <input type="password" class="weui-input" placeholder="再次输入密码" name="newPassword_confirmation" required />
                 </div>
             </div>
         </div>
         <input type="submit" class="btnCommon" value="完成">
-        <a href="" class="btnCommon btnCencel">取消</a>
+        <a href="/account" class="btnCommon btnCencel">取消</a>
     </form>
 
 </div>

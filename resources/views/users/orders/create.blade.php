@@ -66,7 +66,7 @@
                     </div>
                     @foreach($hospitals as $hospital)
                     <div class="weui-cell__ft">
-                    {{$hospital->name}}
+                        <p>{{$hospital->name}}</p>
                     </div>
                     @endforeach
                 </a>
@@ -78,12 +78,12 @@
                     @if(isset($doctor_id))
                     @foreach($doctors as $doctor)
                         <div class="weui-cell__ft">
-                            {{$doctor->name}}
+                            <p>{{$doctor->name}}</p>
                         </div>
                     @endforeach
                     @else
                         <div class="weui-cell__ft">
-
+                            <p></p>
                         </div>
                     @endif
                 </a>
@@ -95,7 +95,7 @@
                         </div>
                         @foreach($instances as $instance)
                         <div class="weui-cell__ft">
-                            {{$instance->name}}
+                            <p>{{$instance->name}}</p>
                         </div>
                         @endforeach
                     </a>
@@ -105,7 +105,7 @@
                                 <p>所患疾病</p>
                             </div>
                             <div class="weui-cell__ft">
-
+                                <p></p>
                             </div>
                         </a>
                     @else
@@ -114,7 +114,7 @@
                             <p>所患疾病</p>
                         </div>
                         <div class="weui-cell__ft">
-
+                            <p></p>
                         </div>
                     </a>
                 @endif
@@ -126,7 +126,7 @@
                         <p>预约医院</p>
                     </div>
                     <div class="weui-cell__ft">
-
+                        <p></p>
                     </div>
                 </a>
 
@@ -142,12 +142,12 @@
                                 @if(isset($doctor_id))
                                     @foreach($doctors as $doctor)
                                         <div class="weui-cell__ft">
-                                            {{$doctor->name}}
+                                            <p>{{$doctor->name}}</p>
                                         </div>
                                     @endforeach
                                 @else
                                     <div class="weui-cell__ft">
-
+                                        <p></p>
                                     </div>
                                 @endif
                             </a>
@@ -157,7 +157,7 @@
                                     <p>预约医生</p>
                                 </div>
                                     <div class="weui-cell__ft">
-
+                                        <p></p>
                                     </div>
                             </a>
 
@@ -169,7 +169,7 @@
                         </div>
                         @foreach($instances as $instance)
                         <div class="weui-cell__ft">
-                            {{$instance->name}}
+                            <p>{{$instance->name}}</p>
                         </div>
                         @endforeach
                     </a>

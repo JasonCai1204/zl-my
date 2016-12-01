@@ -18,19 +18,47 @@ class DoctorController extends Controller
     */
     public function index()
     {
-        $recommendDoctors = App\Doctor::where('is_recommended','1')
-        ->get();
+        $doctors = App\Doctor::where('is_recommended','1')->get();
+
+        $data = [];
+        foreach ($doctors as $doctor) {
+            $data['recommended'][] = [
+                'id' => $doctor->id,
+                'avatar' => $doctor->avatar,
+                'name' => $doctor->name,
+                'grading' => $doctor->grading,
+                'hospital_id' => $doctor->hospital_id,
+                'is_certified' => $doctor->is_certified,
+                'is_recommended' => $doctor->is_recommended,
+                'hospital_name' => $doctor->hospital->name,
+
+            ];
+        }
 
         $doctors = App\Doctor::all();
+
+        foreach ($doctors as $doctor) {
+            $data['doctors'] [] = [
+                'id' => $doctor->id,
+                'avatar' => $doctor->avatar,
+                'name' => $doctor->name,
+                'grading' => $doctor->grading,
+                'hospital_id' => $doctor->hospital_id,
+                'is_certified' => $doctor->is_certified,
+                'is_recommended' => $doctor->is_recommended,
+                'hospital_name' => $doctor->hospital->name,
+            ];
+        }
 
         return collect([
             'status' => 1,
             'msg' => '加载成功',
             'data' =>[
-                'recommendDoctors' => $recommendDoctors,
-                'doctors' => $doctors
+                'recommended' => $data['recommended'],
+                'doctors' => $data['doctors']
             ]
         ])->toJson();
+
     }
 
 
@@ -61,17 +89,17 @@ class DoctorController extends Controller
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-    public function show($id)
+
+    public function detail(Request $request)
     {
-        $doctor = App\Doctor::findOrFail($id);
-
-        $hospital_id = $doctor->hospital->id;
-
-        return view('users.doctors.show',[
-            'doctor' => $doctor,
-            'doctor_id' => $id,
-            'hospital_id' => $hospital_id
-        ]);
+        $doctor = App\Doctor::findOrFail($request->doctor_id)->introduction;
+        return collect([
+            'status' => 1,
+            'msg' => '加载成功',
+            'data' =>[
+                'introduction' => $doctor
+            ]
+        ])->toJson();
     }
 
     /**

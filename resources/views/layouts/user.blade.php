@@ -45,6 +45,6 @@
 <script type="text/javascript" src="js/user/swiper-3.3.1.jquery.min.js"></script>
 <script type="text/javascript" src="js/user/index.js"></script>
 <script type="text/javascript" src="js/user/loadmore.js"></script>
-<script type="text/javascript" src =js/user/tabbarclick.js></script
+<script type="text/javascript" src =js/user/tabbarclick.js></script>
 </body>
 </html>

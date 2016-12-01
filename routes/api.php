@@ -19,20 +19,35 @@ use Illuminate\Http\Request;
 
 Route::group(['namespace' => 'api'], function(){
 
-// Index
- Route::get('/','api\WebController@index');
+ // Index
+ Route::get('/','WebController@index');
 
-// News lists
+ // News lists
  Route::resource('news','NewsController');
 
-// Recommend
+ // Recommend
  Route::get('recommends','WebController@recommend');
 
-// Find Doctors
- Route::resource('doctor','DoctorController');
+ // Find Doctors
+ Route::get('doctor','DoctorController@index');
+ Route::get('doctor/detail','DoctorController@detail');
 
-// Find hospitals
- Route::resource('hospital','HospitalController');
+ // Find hospitals
+ Route::get('hospital','HospitalController@index');
+ Route::get('hospital/detail','HospitalController@detail');
+
+ // Search
+ Route::get('search', 'HospitalController@search');
+
+  // Qa
+  Route::get('support/qa',function(){
+   return view('api.qa');
+  });
+
+ // About
+ Route::get('about',function(){
+  return view('api.about');
+ });
 
 });
 

@@ -16,7 +16,7 @@
             <div class="weui-media-box weui-media-box_small-appmsg">
                 <div class="weui-cells">
                     @foreach($orders as $order)
-                    <a href="/doctor/orders/condition_report/?order_id={{$order->id}}" class="weui-cell weui-cell_access">
+                    <a href="orders/condition_report/?order_id={{$order->id}}" class="weui-cell weui-cell_access">
                         <div class="weui-cell__bd weui-cell_primary">
                             <p>{{$order->patient_name}}</p>
                             <span class="my_mine_desc">

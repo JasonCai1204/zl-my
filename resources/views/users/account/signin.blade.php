@@ -4,10 +4,12 @@
 
 @section('content')
 
-@if (isset($message))
+@if (count($errors) > 0)
     <div class="my_form_warn" >
         <span>
-            {{$message}}
+            @foreach ($errors->all() as $error)
+                {{ $error }}
+            @endforeach
         </span>
     </div>
 @endif
@@ -22,21 +24,28 @@
             若已经有weui-cell__ft 块 则直接在该块中加  <i class="weui-icon-warn"></i> 如下注释,并显示  my_form_warn
         -->
         <div class="weui-cells weui-cells_form" style="margin-top: 30px;">
-            <div class="weui-cell">
-                <div class="weui-cell__hd">
+            <div class="weui-cell {{ $errors->has('phone_number') ? ' weui-cell_warn' : '' }}">
+                <div class="weui-cell__hd ">
                     <label class="weui-label">手机号码</label>
                 </div>
                 <div class="weui-cell__bd">
                     <input type="number" class="weui-input" placeholder="必填" name="phone_number" required />
                 </div>
-                <!--<div class="weui-cell__ft">-->
-                    <!--<i class="weui-icon-warn"></i>-->
-                <!--</div>-->
+                @if($errors->has('phone_number'))
+                <div class="weui-cell__ft">
+                    <i class="weui-icon-warn"></i>
+                </div>
+                @endif
             </div>
-            <div class="weui-cell">
+            <div class="weui-cell {{ $errors->has('password') ? ' weui-cell_warn' : '' }}">
                 <div class="weui-cell__hd">
                     <label class="weui-label">密码</label>
                 </div>
+                @if($errors->has('password'))
+                    <div class="weui-cell__ft">
+                        <i class="weui-icon-warn"></i>
+                    </div>
+                @endif
                 <div class="weui-cell__bd">
                     <input type="password" class="weui-input" placeholder="必填" name="password" required />
                 </div>

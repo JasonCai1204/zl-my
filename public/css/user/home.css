@@ -743,7 +743,7 @@ input,input:focus,input:active{
     text-align: center;
     margin-top: 10px;
     position: relative;
-    left: -15px;
+    left: -4%;
 }
 /*end*/
 
@@ -945,6 +945,14 @@ input,input:focus,input:active{
     height: 58px;
     margin-bottom: 6px;
     box-sizing: border-box
+}
+#container_order .weui-cell__ft{
+    max-width:72%;
+}
+#container_order .weui-cell__ft p{
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
 }
 /*end*/
 

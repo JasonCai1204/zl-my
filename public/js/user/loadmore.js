@@ -2,21 +2,18 @@
  * Created by xiaoguoquan on 2016/10/18.
  */
 $(function(){
-
         var counter = 1;
         var pageStart = 0,pageEnd = 10;
 
         // dropload
-        $('.content').dropload({
+        $('#container_news').dropload({
             scrollArea : window,
-
             domDown : {
                 domClass   : 'dropload-down',
-                domRefresh : "<div class='weui-loadmore'><span class='weui-loadmore__tips'>上拉加载更多</span></div>",
+                domRefresh : "<div class='weui-loadmore'><span class='weui-loadmore__tips'>加载更多</span></div>",
                 domLoad    : "<div class='weui-loadmore'><i class='weui-loading'></i><span class='weui-loadmore__tips'>正在加载</span></div>",
-                domNoData  : "<div class='weui-loadmore'><span class='weui-loadmore__tips'>正在加载</span></div>"
+                domNoData  : "<div class='weui-loadmore'><span class='weui-loadmore__tips'>上拉加载更多</span></div>"
             },
-
             loadDownFn : function(me){
                 $.getJSON( '/loadmore', { 'counter': counter }, function(data) {
                         var result = '';
@@ -35,7 +32,7 @@ $(function(){
                         setTimeout(function(){
                             $('.lists').append(result);
                             me.resetload();
-                            $(".weui-loadmore__tips").text("已无更多")
+                            $(".weui-loadmore__tips").text("看完啦")
                         },1000);
                     });
             },

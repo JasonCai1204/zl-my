@@ -16,17 +16,38 @@ class HospitalController extends Controller
     */
     public function index()
     {
-        $recommendHospitals = App\Hospital::where('is_recommended','1')
-                ->get();
+        $hospitals = App\Hospital::where('is_recommended',1)->get();
+
+        $data = [];
+
+        foreach($hospitals as $hospital){
+            $data['recommended'][] = [
+                'id' => $hospital->id,
+                'name' => $hospital->name,
+                'grading' => $hospital->grading,
+                'is_recommended' => $hospital->is_recommended,
+                'city_name' => $hospital->city->name
+            ];
+        }
 
         $hospitals = App\Hospital::all();
+
+        foreach($hospitals as $hospital){
+            $data['hospitals'][] = [
+                'id' => $hospital->id,
+                'name' => $hospital->name,
+                'grading' => $hospital->grading,
+                'is_recommended' => $hospital->is_recommended,
+                'city_name' => $hospital->city->name
+            ];
+        }
 
         return collect([
             'status' => 1,
             'msg' => '加载成功',
             'data' => [
-                'recommendHospitals' => $recommendHospitals,
-                'hospitals' => $hospitals
+                'recommended' => $data['recommended'],
+                'hospitals' => $data['hospitals']
             ]
         ])->toJson();
 
@@ -38,26 +59,30 @@ class HospitalController extends Controller
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-    public function show($id)
+
+    public function detail(Request $request)
     {
-        $hospital = App\Hospital::findOrFail($id);
-
-        $hospital->city = $hospital->city->name;
-
-        return view('users.hospitals.show',[
-            'hospital' => $hospital,
-            'hospital_id' => $id,
-        ]);
+        $hospital = App\Hospital::findOrFail($request->hospital_id)->introduction;
+        return collect([
+            'status' => 1,
+            'msg' => '加载成功',
+            'data' =>[
+                'introduction' => $hospital
+            ]
+        ])->toJson();
     }
+
+
 
     // Search hospitals and doctors
     public function search(Request $request)
     {
         // When search has not  keyword "q".
         if (!$request->has('q')) {
-            return view('users.search',[
-                'hospitals' => "",
-                'doctors' => ""
+            return collect([
+                'status' => 1,
+                'meg' => '加载成功',
+                'data'=>['']
             ]);
         }
 

@@ -18,17 +18,16 @@ class WebController extends Controller
 
     }
 
-    public function recommend(){
+    public function recommend()
+    {
+        $hospitals = app\Hospital::where('is_recommended',1)->get();
 
-        $hospitals = app\Hospital::all();
-
-        $doctors = app\Doctor::all();
+        $doctors = app\Doctor::where('is_recommended',1)->get();
 
         return view('users.recommend',[
             'hospitals' => $hospitals,
             'doctors' => $doctors,
         ]);
-
     }
 
 

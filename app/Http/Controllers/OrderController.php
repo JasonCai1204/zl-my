@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Models\Hospital;
 use App\Http\Models as App;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Validator;
+
 
 class OrderController extends Controller
 {
@@ -126,7 +128,7 @@ class OrderController extends Controller
         // Save image to storage and get path.
         if ($request->hasFile('file') && $request->file->isValid()) {
 
-             $path =  $request->file->storeAs('images/orders/photos/' . Carbon::now()->timestamp, $request->file->getClientOriginalName(), 'public');
+             $path =  $request->file->storeAs('images/order/photos/' . Carbon::now()->timestamp, $request->file->getClientOriginalName(), 'public');
 
             $fileName = $request->file->getClientOriginalName();
 
@@ -146,12 +148,13 @@ class OrderController extends Controller
     {
         if($input =$request->all() ){
             $rules = [
-                'patient_name' => 'required|',
+                'patient_name' => 'required|max:5',
                 'phone_number' => 'required|digits:11',
             ];
 
             $messages = [
                 'patient_name.required' => '请输入姓名',
+                'patient_name.max' => '患者姓名长度不能超过 5 位',
                 'phone_number.required' => '请输入电话号码',
                 'phone_number.digits' => '请输入 11 位数字'
             ];
@@ -196,10 +199,9 @@ class OrderController extends Controller
                     $order->detail = $request->detail;
 
                 if ($request->has('photos'))
-
-                $photos = explode(",", $request->photos);
-
-                $order->photos = json_encode($photos);
+                {
+                    $order->photos = explode(",", $request->photos);
+                }
 
                 $order->save();
 

@@ -15,9 +15,10 @@ class NewsController extends Controller
      */
     public function index(Request $request)
     {
-        $news = app\News::orderby('published_at','desc')
-            ->skip(15)
-            ->take(11)
+        $news = app\News::select('id','title','cover_image','published_at')
+            ->orderby('published_at','desc')
+            ->skip($request->skip)
+            ->take($request->count?$request->count+1:'11')
             ->get();
 
         return collect([
@@ -55,11 +56,13 @@ class NewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+
     public function show($id)
     {
         $news = app\News::findOrFail($id);
 
-        return view('users.news.show',[
+        return view('api.news.show',[
             'news' => $news
         ]);
     }

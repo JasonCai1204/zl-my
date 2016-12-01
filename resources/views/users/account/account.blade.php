@@ -1,16 +1,15 @@
 @extends('layouts.user')
 
-@section('title','我的-肿瘤名医')
+@section('title','我的 - 肿瘤名医')
 
 @section('content')
 <!--个人中心部分-->
 <div class="container" id="container_account">
     <div class="my_mine_list">
-
         <!--图片+姓名-->
         <div class="weui-cells">
             <div class="weui-panel weui-panel_access">
-                <a href="javascript:;" class="weui-media-box weui-media-box_appmsg">
+                <a href="{{isset($user)?'javascript:;':'/signin'}}" class="weui-media-box weui-media-box_appmsg">
                     <div class="weui-media-box__hd">
                         <img src="/storage/images/app/web/www/user-mobile-minepage-default-avatar.png" alt="" class="weui-media-box__thumb">
                     </div>
@@ -79,6 +78,7 @@
     </div>
 
     <!--actionSheet 未登录时不添加-->
+    @if(isset($user->id))
     <div id="actionSheet_wrap">
         <div class="weui-mask_transparent actionsheet__mask" id="mask" style="transform-origin: 0px 0px 0px; opacity: 1; transform: scale(1, 1); display: none;"></div>
         <div class="weui-actionsheet" id="weui-actionsheet">
@@ -91,6 +91,7 @@
             </div>
         </div>
     </div>
+    @endif
 </div>
 
 <script type="text/javascript" src="/js/user/jquery-1.11.3.min.js"></script>

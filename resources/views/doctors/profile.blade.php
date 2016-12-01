@@ -1,9 +1,19 @@
-@extends('layouts.doctor')
-
-@section('title','我的信息-肿瘤名医')
-
-@section('content')
-
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <title>我的信息 - 肿瘤名医</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" href="/css/doctor/weui.min.css">
+    <link rel="stylesheet" href="/css/doctor/home.css">
+</head>
+<body>
+<!--固定在屏幕顶部-->
+<div class="logo_part">
+    <div class="logo">
+        <a href="/" style="background-image: url('/storage/images/app/web/ys/mobile-titlebar-logo.png');"></a>
+    </div>
+</div>
 <!--主体部分-->
 <div class="container" id="my_info_container">
         <form action="">
@@ -42,17 +52,13 @@
             </div>
         </div>
             <div class="my_mine_logoff">
-                <a href="/doctor/signin" class="btnLogin">退出登录</a>
+                <a href="/signin" class="btnLogin">退出登录</a>
             </div>
-            <a href="/doctor/password/reset" class="btnLink">修改密码</a>
+            <a href="/password/reset" class="btnLink">修改密码</a>
     </form>
 </div>
-
-@endsection
-
-@section('script')
-
 <script type="text/javascript" src="/js/doctor/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="/js/doctor/my_submitdisable.js"></script>
 
-@endsection
+</body>
+</html>

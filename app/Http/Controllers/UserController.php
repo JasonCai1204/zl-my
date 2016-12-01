@@ -40,7 +40,7 @@ class UserController extends Controller
         {
             return view('users.account.signin',
                 [
-                    'message' => '请输入手机号码',
+                    'errors' => collect('请输入手机号码'),
                 ]
             );
         }
@@ -49,7 +49,7 @@ class UserController extends Controller
         {
             return view('users.account.signin',
                 [
-                    'message' => '请输入密码',
+                    'errors' => collect('请输入密码'),
                 ]
             );
         }
@@ -58,7 +58,7 @@ class UserController extends Controller
         {
             return view('users.account.signin',
                 [
-                    'message' => '请输入手机号码和密码',
+                    'errors' => collect('请输入手机号码和密码'),
                 ]
             );
         }
@@ -80,14 +80,14 @@ class UserController extends Controller
                 }else{
                     return view('users.account.signin',
                         [
-                            'message' => '请输入正确的密码',
+                            'errors' => collect('请输入正确的密码'),
                         ]
                     );
                 }
             }else{
                 return view('users.account.signin',
                     [
-                        'message' => '请输入正确的手机号码',
+                        'errors' => collect('请输入正确的手机号码'),
                     ]
                 );
             }
