@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Models\Hospital;
 use App as App;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -72,7 +71,7 @@ class OrderController extends Controller
             $hospital_id = App\Doctor::find($request->doctor_id)
                     ->hospital->id;
 
-            $hospitals = Hospital::where('id',$hospital_id)
+            $hospitals = App\Hospital::where('id',$hospital_id)
                     ->get();
 
             return view('users.orders.create', [
@@ -105,7 +104,7 @@ class OrderController extends Controller
 
                 $hospital_id =  $doctors->first()->hospital->id;
 
-                $hospitals = Hospital::where('id',$hospital_id)
+                $hospitals = App\Hospital::where('id',$hospital_id)
                         ->get();
 
                 return view('users.orders.create', [
