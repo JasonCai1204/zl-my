@@ -17,12 +17,12 @@ class ResetPasswordController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth:doctor');
     }
 
     public function showResetForm(Request $request)
     {
-        return view('web.auth.passwords.reset');
+        return view('web.auth.ys.passwords.reset');
     }
 
     public function reset(Request $request)
@@ -45,7 +45,7 @@ class ResetPasswordController extends Controller
 
             $user->save();
 
-            return redirect('account');
+            return redirect('/');
         } else {
             return redirect()->back()
                 ->withErrors([
