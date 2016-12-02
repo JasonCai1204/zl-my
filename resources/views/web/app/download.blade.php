@@ -7,14 +7,11 @@
     <link rel="stylesheet" href="css/user/home.css">
 </head>
 <body style="background-color: white">
-<!--固定在屏幕上部的logo-->
 <div class="logo_part">
     <div class="logo">
-        <a href="/" style="background-image: url('/storage/images/app/web/www/mobile-titlebar-logo.png');"></a>
+        <a href="/" style="background-image: url('/storage/images/app/M_32w.png');"></a>
     </div>
 </div>
-
-<!--主体部分-->
 <div class="container">
     <div class="my_app_coming">
         <span>Coming soon</span>

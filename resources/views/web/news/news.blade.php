@@ -4,7 +4,6 @@
 
 @section('content')
 
-<!--主体部分-->
 <div class="container" id="container_news">
     <div class="lists">
         @if(count('news') > 0)

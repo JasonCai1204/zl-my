@@ -36,15 +36,12 @@
     </style>
 </head>
 <body>
-<!--固定在屏幕上部的logo-->
 <div class="logo_part">
     <div class="logo">
-        <a href="http://zl-my.com" style="background-image: url('/storage/images/app/web/www/mobile-titlebar-logo.png');"></a>
+        <a href="http://zl-my.com" style="background-image: url('/storage/images/app/M_32w.png');"></a>
     </div>
 </div>
 
-
-<!--主体部分-->
 <div class="container" id="container_term">
     <div class="my_term_head">
         服务条款

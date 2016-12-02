@@ -19,17 +19,15 @@
 </head>
 <body style="background-color: white">
 
-<!--固定在屏幕上部的logo-->
 <div class="logo_part">
     <div class="logo">
-        <a href="/" style="background-image: url('/storage/images/app/web/www/mobile-titlebar-logo.png');"></a>
+        <a href="/" style="background-image: url('/storage/images/app/M_32w.png');"></a>
     </div>
 </div>
 
-<!--主体部分-->
 <div class="container" style="padding-bottom: 30px;">
     <div class="my_aboutus_head">
-        <img src="/storage/images/app/web/www/user-mobile-about-slogan.png" alt="">
+        <img src="/storage/images/app/find_famous_doctors_for_you.png" alt="">
     </div>
     <div class="my_aboutus_cell">
         <p class="my_aboutus_cellhd">我们做什么</p>

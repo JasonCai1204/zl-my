@@ -11,7 +11,7 @@
 <!--固定在屏幕顶部-->
 <div class="logo_part">
     <div class="logo">
-        <a href="/" style="background-image: url('/storage/images/app/web/ys/mobile-titlebar-logo.png');"></a>
+        <a href="/" style="background-image: url('/storage/images/app/M_32w.png');"></a>
     </div>
 </div>
 <!--主体部分-->

@@ -1,6 +1,9 @@
 /*主页部分css*/
 body{
-    background-color: rgb(252,249,254)
+    background-color: rgb(252,249,254);
+    max-width: 450px;
+    margin:0 auto;
+    position: relative;
 }
 input[type="button"], input[type="submit"], input[type="reset"]{
     -webkit-appearance: none;

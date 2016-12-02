@@ -26,9 +26,7 @@
                 <div class="weui-cell__bd">
                     <input type="text" class="weui-input" value="{{$user->name}}" name="name" required />
                 </div>
-                <!--<div class="weui-cell__ft">-->
-                    <!--<i class="weui-icon-warn"></i>-->
-                <!--</div>-->
+
             </div>
             <div class="weui-cell">
                 <div class="weui-cell__hd">

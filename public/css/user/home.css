@@ -1,6 +1,9 @@
 /*全局部分*/
 body{
-    background-color: rgb(252,249,254)
+    background-color: rgb(252,249,254);
+    max-width: 450px;
+    margin:0 auto;
+    position: relative;
 }
 input[type="button"], input[type="submit"], input[type="reset"]{
     -webkit-appearance: none;
@@ -124,9 +127,6 @@ input,input:focus,input:active{
 }
 
 /*主页部分css*/
-#container_home{
-    background-color: rgb(248,248,248);
-}
 #container_home .weui_extra_area_special p{
     font-size:11px;
 }
@@ -743,7 +743,6 @@ input,input:focus,input:active{
     text-align: center;
     margin-top: 10px;
     position: relative;
-    left: -4%;
 }
 /*end*/
 
@@ -811,16 +810,19 @@ input,input:focus,input:active{
     height:80px;
 }
 .btnPosition{
+    max-width: 450px;
     position: fixed;
     width:100%;
     bottom: 0;
     margin:0;
     background-color: rgb(252,249,254);
     padding:15px 4%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 .btnfixed{
     display: block;
-    width:92%;
     height:44px;
     line-height: 44px;
     border:1px solid rgb(39,163,117);

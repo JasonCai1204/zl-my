@@ -284,7 +284,7 @@
         </div>
         <!--病情描述按钮-->
         <div class="weui-cells__tips my_tips">
-            <a href="javascript:;" class="my_drop1"></a>
+            <a href="javascript:;" class="my_drop1" style="background-image: url('/storage/images/app/condition_tips_downwords_arrow.jpg')"></a>
                 现在症状，部位？<br>
                 什么时间发病，持续了多长时间，是逐渐加重？有缓解吗？<br>
                 饮食状况？有症状后有消瘦程度？<br>
@@ -317,7 +317,7 @@
         </div>
         <!--资料上传按钮-->
         <div class="weui-cells__tips my_tips">
-            <a href="javascript:;" class="my_drop2"></a>
+            <a href="javascript:;" class="my_drop2" style="background-image: url('/storage/images/app/material_tips_downwords_arrow.jpg')"></a>
                 基本资料（血生化，常规，电解质，肿瘤标志物）。<br>
                 同时补充：<br>
                 食道肿瘤：胃镜检查和病理检查，肝胆脾B超，肺部x检查；<br>
@@ -544,26 +544,24 @@
 
 //        按钮点击展示
         $(".my_drop1")
-                .css('background-image','url("/storage/images/app/web/www/user-mobile-diseasedetail-open.jpg")')
                 .on('click',function () {
             drop1 = !drop1;
             if(drop1){
-                $(this).css('background-image','url(/storage/images/app/web/www/user-mobile-diseasedetail-close.jpg)');
+                $(this).css('background-image','url(/storage/images/app/condition_tips_upwords_arrow.jpg)');
                 $(this).parent('.my_tips').css("height","initial");
             }else{
-                $(this).css('background-image','url(/storage/images/app/web/www/user-mobile-diseasedetail-open.jpg)');
+                $(this).css('background-image','url(/storage/images/app/condition_tips_downwords_arrow.jpg)');
                 $(this).parent('.my_tips').css("height","20px");
             }
         });
         $(".my_drop2")
-                .css('background-image','url("/storage/images/app/web/www/user-mobile-dataupload-open.jpg")')
                 .on('click',function () {
             drop2 = !drop2;
             if(drop2){
-                $(this).css('background-image','url(/storage/images/app/web/www/user-mobile-dataupload-close.jpg)');
+                $(this).css('background-image','url(/storage/images/app/material_tips_upwords_arrow.jpg)');
                 $(this).parent('.my_tips').css("height","initial");
             }else{
-                $(this).css('background-image','url(/storage/images/app/web/www/user-mobile-dataupload-open.jpg)');
+                $(this).css('background-image','url(/storage/images/app/material_tips_downwords_arrow.jpg)');
                 $(this).parent('.my_tips').css("height","20px");
             }
         });

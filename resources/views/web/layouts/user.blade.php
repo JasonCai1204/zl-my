@@ -10,32 +10,30 @@
     @yield('head')
 </head>
 <body>
-<!--固定在屏幕上部的logo-->
 <div class="logo_part">
     <div class="logo">
-        <a href="/" style="background-image: url('/storage/images/app/mobile-titlebar-logo.png');"></a>
+        <a href="/" style="background-image: url('/storage/images/app/M_32w.png');"></a>
     </div>
 </div>
 
 @yield('content')
 
-        <!--固定在屏幕下部的nav-->
-<div class="my_home_footer">
-    <div class="weui-tabbar" id="my_footer_tabber">
+<div class="my_home_footer" style="max-width: 450px;">
+    <div class="weui-tabbar" id="my_footer_tabber" style="max-width: 450px;">
         <a href="/" class="weui-tabbar__item my_tabbar_click">
-            <img src="/storage/images/app/user-mobile-item-index.png" alt="" class="weui-tabbar__icon">
+            <img src="/storage/images/app/house_building.png" alt="" class="weui-tabbar__icon">
             <p class="weui-tabbar__label">首页</p>
         </a>
         <a href="news" class="weui-tabbar__item">
-            <img src="/storage/images/app/user-mobile-item-advice.png" alt="" class="weui-tabbar__icon">
+            <img src="/storage/images/app/newspaper.png" alt="" class="weui-tabbar__icon">
             <p class="weui-tabbar__label">资讯</p>
         </a>
         <a href="recommends" class="weui-tabbar__item">
-            <img src="/storage/images/app/user-mobile-item-recommend.png" alt="" class="weui-tabbar__icon">
+            <img src="/storage/images/app/thumbs_up.png" alt="" class="weui-tabbar__icon">
             <p class="weui-tabbar__label">推荐</p>
         </a>
         <a href="account" class="weui-tabbar__item">
-            <img src="/storage/images/app/user-mobile-item-account.png" alt="" class="weui-tabbar__icon">
+            <img src="/storage/images/app/silhouette_of_person_outline.png" alt="" class="weui-tabbar__icon">
             <p class="weui-tabbar__label">个人中心</p>
         </a>
     </div>

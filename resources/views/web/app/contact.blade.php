@@ -18,10 +18,9 @@
 <body style="background-color: rgb(239,239,248)">
 <div class="logo_part">
     <div class="logo">
-        <a href="/" style="background-image: url('/storage/images/app/web/www/mobile-titlebar-logo.png');"></a>
+        <a href="/" style="background-image: url('/storage/images/app/M_32w.png');"></a>
     </div>
 </div>
-<!--主体部分-->
 <div class="container" id="container_contactus">
     <div>
         <p class="my_contactus_hd">客户服务中心</p>
@@ -53,7 +52,7 @@
         </div>
     </div>
     <div class="my_phone_qrcode">
-        <img src="/storage/images/app/web/www/mobile-contactus-qrcode.png" alt=""><p>关注微信公众号</p>
+        <img src="/storage/images/app/zl-my_com_two_dimensional_code.png" alt=""><p>关注微信公众号</p>
         <span>长按二维码 - 识别图中二维码</span>
     </div>
 </div>
