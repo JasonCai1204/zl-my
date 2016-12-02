@@ -18,7 +18,7 @@ class CreateNewsTable extends Migration
             $table->string('title',64);
             $table->string('cover_image',225);
             $table->text('content');
-            $table->timestamp('published_at');
+            $table->timestamp('published_at')->nullable();
             $table->softDeletes()->nullable();
             $table->timestamps();
         });
