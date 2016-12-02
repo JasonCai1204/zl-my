@@ -1,4 +1,4 @@
-@extends('layouts.user-basic')
+@extends('web.layouts.user-basic')
 
 @section('title','医院介绍 - 肿瘤名医')
 

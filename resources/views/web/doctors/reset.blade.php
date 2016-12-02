@@ -1,4 +1,4 @@
-@extends('layouts.doctor')
+@extends('web.layouts.doctor')
 
 @section('title','修改密码-肿瘤名医')
 

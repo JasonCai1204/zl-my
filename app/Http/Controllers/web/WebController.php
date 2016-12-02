@@ -13,7 +13,7 @@ class WebController extends Controller
         $news = App\News::orderBy('published_at','desc')
             ->take(3)
             ->get();
-        return view('users.index',[
+        return view('web.app.index',[
             'news' =>$news
         ]);
 

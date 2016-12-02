@@ -1,4 +1,4 @@
-@extends('layouts.doctor')
+@extends('web.layouts.doctor')
 
 @section('title','患者报告详情-肿瘤名医')
 

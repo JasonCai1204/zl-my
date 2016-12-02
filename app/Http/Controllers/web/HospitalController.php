@@ -21,7 +21,7 @@ class HospitalController extends Controller
 
         $hospitals = App\Hospital::all();
 
-        return view('users.hospitals.index',[
+        return view('web.hospitals.index',[
             'recommendHospitals' => $recommendHospitals,
             'hospitals' => $hospitals
         ]);
@@ -51,7 +51,7 @@ class HospitalController extends Controller
     {
         // When search has not  keyword "q".
         if (!$request->has('q')) {
-            return view('users.search',[
+            return view('web.app.search',[
                 'hospitals' => "",
                 'doctors' => ""
             ]);
@@ -64,7 +64,7 @@ class HospitalController extends Controller
         $doctors = App\Doctor::where('name', 'like', '%' . $request->q . '%')
         ->get();
 
-        return view('users.search', [
+        return view('web.app.search', [
             'hospitals' => $hospitals,
             'doctors' => $doctors,
             'q' => $request->q
