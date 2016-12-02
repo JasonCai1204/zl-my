@@ -12,11 +12,11 @@
 
 {{-- Body --}}
 <div class="container" id="my_info_container">
-    <form action="{{ Auth::guest() ? '/login' : Auth::doctor()->id}}" method="post">
+    <form action="{{ url('/login') }}" method="POST">
         {{ csrf_field() }}
 
         <div class="weui-cells weui-cells_form" style="margin-top: 30px;">
-            <div class="weui-cell {{ Auth::guest() ? 'weui-cell_warn' : Auth::doctor()->phone_number }}">
+            <div class="weui-cell{{ $errors->has('phone_number') ? ' weui-cell_warn' : '' }}">
                 <div class="weui-cell__hd ">
                     <label class="weui-label">手机号码</label>
                 </div>
@@ -25,14 +25,14 @@
                     <input type="number" class="weui-input" placeholder="必填" name="phone_number" value="{{ old('phone_number') }}" required/>
                 </div>
 
-                @if(Auth::guest())
+                @if($errors->has('phone_number'))
                     <div class="weui-cell__ft">
                         <i class="weui-icon-warn"></i>
                     </div>
                 @endif
             </div>
 
-            <div class="weui-cell {{ Auth::guest() ? 'weui-cell_warn' : Auth::doctor()->password }}">
+            <div class="weui-cell{{ $errors->has('password') ? ' weui-cell_warn' : '' }}">
                 <div class="weui-cell__hd">
                     <label class="weui-label">密码</label>
                 </div>
@@ -41,7 +41,7 @@
                     <input type="password" class="weui-input" placeholder="必填" name="password" required/>
                 </div>
 
-                @if(Auth::guest())
+                @if($errors->has('password'))
                     <div class="weui-cell__ft">
                         <i class="weui-icon-warn"></i>
                     </div>
