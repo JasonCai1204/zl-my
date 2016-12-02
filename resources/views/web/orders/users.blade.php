@@ -16,7 +16,7 @@
             <div class="weui-media-box weui-media-box_text">
                 <span class="my_mine_date">{{$order->created_at->format('Y-m-d')}}</span>
                 <h4 class="weui-media-box__title">
-                    {{$order->user->name or ''}}
+                    {{$order->patient_name or ''}}
                 </h4>
                 <p class="weui-media-box__desc">
                     预约医院:{{$order->hospital->name or ''}}

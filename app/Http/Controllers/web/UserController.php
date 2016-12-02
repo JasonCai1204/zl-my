@@ -80,7 +80,6 @@ class UserController extends Controller
     // User orders.
     public function getOrders(Request $request)
     {
-
         $orders = App\Order::where('user_id',$request->user_id)
             ->get();
 
