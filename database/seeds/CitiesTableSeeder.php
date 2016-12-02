@@ -12,18 +12,15 @@ class CitiesTableSeeder extends Seeder
     public function run()
     {
         DB::table('cities')->insert([
-//            'id' => 1,
+            'name' => '广州',
+        ]);
+
+        DB::table('cities')->insert([
             'name' => '北京',
         ]);
 
         DB::table('cities')->insert([
-//            'id' => 2,
             'name' => '上海',
-        ]);
-
-        DB::table('cities')->insert([
-//            'id' => 3,
-            'name' => '广州',
         ]);
     }
 }

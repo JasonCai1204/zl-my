@@ -13,14 +13,14 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(CitiesTableSeeder::class);
         $this->call(DepartmentsTableSeeder::class);
-        $this->call(Doctor_InstanceTableSeeder::class);
-        $this->call(DoctorsTableSeeder::class);
-        $this->call(HospitalsTableSeeder::class);
-        $this->call(InstancesTableSeeder::class);
+        // $this->call(Doctor_InstanceTableSeeder::class);
+        // $this->call(DoctorsTableSeeder::class);
+        // $this->call(HospitalsTableSeeder::class);
+        // $this->call(InstancesTableSeeder::class);
         $this->call(MastersTableSeeder::class);
-        $this->call(NewsTableSeeder::class);
+        // $this->call(NewsTableSeeder::class);
         $this->call(OrdersTableSeeder::class);
-        $this->call(TypesTableSeeder::class);
+        // $this->call(TypesTableSeeder::class);
         $this->call(UsersTableSeeder::class);
     }
 }

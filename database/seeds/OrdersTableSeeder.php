@@ -15,43 +15,18 @@ class OrdersTableSeeder extends Seeder
             [
                 'id' => 100001,
                 'user_id' => '1',
-                'patient_name' => '李一男',
-                'phone_number' => '18565700981',
+                'patient_name' => '郭去病',
+                'phone_number' => '18565700980',
                 'instance_id' => 1,
                 'doctor_id' => 1,
                 'hospital_id' => 1,
                 'gender' => 1,
-                'birthday' => \Carbon\Carbon::now(),
+                'birthday' => '1678-11-03 09:16:31',
                 'smoking' => 1,
-                'weight' => 50,
-                'wechat_id' => 'abcd',
-                'detail' => '情况良好',
-                'photos' => '["/images/2016/11/22/1479806070/640638953708825067.jpg", "/images/2016/11/22/1479806071/input_defaultbg.png"]',
-                'condition_report' => '情况良好',
-                'send_to_the_doctor_at' => \Carbon\Carbon::now(),
-                'created_at' => \Carbon\Carbon::now(),
-                'updated_at' => \Carbon\Carbon::now()
-            ]
-        );
-
-        DB::table('orders')->insert(
-            [
-                'id' => 100002,
-                'user_id' => '1',
-                'patient_name' => '李二男',
-                'phone_number' => '18565700982',
-                'instance_id' => 1,
-                'doctor_id' => 1,
-                'hospital_id' => 1,
-                'gender' => 1,
-                'birthday' => \Carbon\Carbon::now(),
-                'smoking' => 1,
-                'weight' => 50,
-                'wechat_id' => 'abcd',
-                'detail' => '情况良好',
-                'photos' => '["/images/2016/11/22/1479806070/640638953708825067.jpg", "/images/2016/11/22/1479806071/input_defaultbg.png"]',
-                'condition_report' => '情况良好',
-                'send_to_the_doctor_at' => \Carbon\Carbon::now(),
+                'weight' => 46-50,
+                'wechat_id' => 'loveforever',
+                'detail' => '体重直线下降，等死中😭',
+                'condition_report' => '患者已经放弃治疗，等死吧😄',
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ]
