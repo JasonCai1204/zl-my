@@ -40,7 +40,7 @@ class TypeController extends Controller
         $type->name = $request->name;
         // Save image to storage and get path.
         if ($request->hasFile('icon') && $request->icon->isValid()) {
-            $type->icon = $request->icon->storeAs('images/type/icon' . Carbon::now()->timestamp, $request->icon->getClientOriginalName(), 'public');
+            $type->icon = $request->icon->storeAs('images/type/icon/' . Carbon::now()->timestamp, $request->icon->getClientOriginalName(), 'public');
         }
         // Adjust sort.
         App\Type::where('sort', '>=', $request->sort)->increment('sort');
