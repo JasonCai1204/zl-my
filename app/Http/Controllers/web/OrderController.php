@@ -172,7 +172,7 @@ class OrderController extends Controller
                     [
                         'patient_name' => $request->patient_name,
                         'phone_number' => $request->phone_number,
-                        'user_id' => Auth::user()->name,
+                        'user_id' => Auth::user()->id,
                     ]
                 );
                 if ($request->has('hospital_id'))
@@ -209,7 +209,7 @@ class OrderController extends Controller
 
                 $order->save();
 
-                return view('users.orders.message');
+                return view('web.orders.message');
 
             }else{
                 return back()->withErrors($validator);

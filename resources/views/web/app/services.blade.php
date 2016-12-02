@@ -38,7 +38,7 @@
 <body>
 <div class="logo_part">
     <div class="logo">
-        <a href="http://zl-my.com" style="background-image: url('/storage/images/app/M_32w.png');"></a>
+        <a href="/" style="background-image: url('/storage/images/app/M_32w.png');"></a>
     </div>
 </div>
 
@@ -146,7 +146,7 @@
 </div>
 <div class="fixedbash" style="background-color: #fff">
     <div class="btnPosition" style="background-color: #fff">
-        <a href="/signup" class="btnfixed">返回</a>
+        <a href="/register" class="btnfixed">返回</a>
     </div>
 </div>
 </body>
