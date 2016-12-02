@@ -5,6 +5,7 @@ namespace App\Http\Controllers\web;
 use App;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Validator;
 use App\Http\Controllers\Controller;
 
@@ -30,7 +31,7 @@ class OrderController extends Controller
             $instances = App\Instance::where('id',$request->instance_id)
                     ->get();
 
-            return view('users.orders.create', [
+            return view('web.orders.create', [
                 'hospitals' => $hospitals,
                 'hospital_id' => $request->hospital_id,
                 'doctors' => $doctors,
@@ -48,7 +49,7 @@ class OrderController extends Controller
             $doctors = App\Doctor::where('id', $request->doctor_id)
                     ->get();
 
-            return view('users.orders.create', [
+            return view('web.orders.create', [
                 'hospitals' => $hospitals,
                 'hospital_id' => $request->hospital_id,
                 'doctors' => $doctors,
@@ -60,7 +61,7 @@ class OrderController extends Controller
             $hospitals = App\Hospital::where('id', $request->hospital_id)
                     ->get();
 
-            return view('users.orders.create', [
+            return view('web.orders.create', [
                 'hospitals' => $hospitals,
                 'hospital_id' => $request->hospital_id
             ]);
@@ -79,7 +80,7 @@ class OrderController extends Controller
             $hospitals = App\Hospital::where('id',$hospital_id)
                     ->get();
 
-            return view('users.orders.create', [
+            return view('web.orders.create', [
                 'hospitals' => $hospitals,
                 'hospital_id' => $hospital_id,
                 'doctors' => $doctors,
@@ -93,7 +94,7 @@ class OrderController extends Controller
                 $instances = App\Instance::where('id',$request->instance_id)
                         ->get();
 
-                return view('users.orders.create', [
+                return view('web.orders.create', [
                     'instances' => $instances,
                     'instance_id' => $request->instance_id
                 ]);
@@ -112,7 +113,7 @@ class OrderController extends Controller
                 $hospitals = App\Hospital::where('id',$hospital_id)
                         ->get();
 
-                return view('users.orders.create', [
+                return view('web.orders.create', [
                     'hospitals' => $hospitals,
                     'hospital_id' => $hospital_id,
                     'doctors' => $doctors,
@@ -123,7 +124,7 @@ class OrderController extends Controller
 
             }
 
-        return view('users.orders.create');
+        return view('web.orders.create');
     }
 
     // User post photos
@@ -171,8 +172,7 @@ class OrderController extends Controller
                     [
                         'patient_name' => $request->patient_name,
                         'phone_number' => $request->phone_number,
-//                        'user_id' => session('user.id'),
-                        'user_id' => 1,
+                        'user_id' => Auth::user()->name,
                     ]
                 );
                 if ($request->has('hospital_id'))

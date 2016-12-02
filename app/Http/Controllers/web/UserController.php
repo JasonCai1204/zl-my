@@ -22,11 +22,11 @@ class UserController extends Controller
 
             $user = App\User::find($user_id);
 
-            return view('users.account.account',[
+            return view('web.users.me',[
                 'user' => $user
             ]);
         }
-        return view('users.account.account');
+        return view('web.users.me');
     }
 
     // Get profile.
@@ -34,7 +34,7 @@ class UserController extends Controller
     {
         $user = App\User::find($request->user_id);
 
-        return view('users.account.profile',[
+        return view('web.users.profile',[
             'user'=>$user
         ]);
     }
@@ -45,14 +45,14 @@ class UserController extends Controller
 
         if(!$request->name)
         {
-            return view('users.account.profile',[
+            return view('web.users..profile',[
                 'error'=> '姓名不能为空'
             ]);
         }
 
         if(!$request->phone_number)
         {
-            return view('users.account.profile',[
+            return view('web.users..profile',[
                 'error'=> '手机号码不能为空'
             ]);
         }
@@ -68,7 +68,7 @@ class UserController extends Controller
 
             session(['user' => $user]);
 
-            return view('users.account.profile',[
+            return view('web.users..profile',[
                 'user'=> $user
             ]);
 
@@ -83,7 +83,7 @@ class UserController extends Controller
         $orders = App\Order::where('user_id',$request->user_id)
             ->get();
 
-        return view('users.account.order',[
+        return view('web.users..order',[
             'orders'=>$orders
         ]);
     }

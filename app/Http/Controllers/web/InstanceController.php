@@ -13,7 +13,7 @@ class InstanceController extends Controller
     {
         $instances = App\Instance::all();
 
-        return view('users.instances.select',[
+        return view('web.instances.select',[
             'instances' => $instances
         ]);
     }
@@ -27,7 +27,7 @@ class InstanceController extends Controller
 
         $doctorInstances = $doctor->instances;
 
-        return view('users.instances.select',[
+        return view('web.instances.select',[
             'hospital_id' => $request->hospital_id,
             'doctor_id' => $doctor_id,
             'doctorInstances' => $doctorInstances

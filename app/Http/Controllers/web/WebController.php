@@ -25,7 +25,7 @@ class WebController extends Controller
 
         $doctors = App\Doctor::where('is_recommended',1)->get();
 
-        return view('users.recommend',[
+        return view('web.app.recommend',[
             'hospitals' => $hospitals,
             'doctors' => $doctors,
         ]);

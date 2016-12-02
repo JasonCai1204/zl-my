@@ -23,7 +23,7 @@ class DoctorController extends Controller
 
         $doctors = App\Doctor::all();
 
-        return view('users.doctors.index',[
+        return view('web.doctors.index',[
             'recommendDoctors' => $recommendDoctors,
             'doctors' => $doctors
         ]);
@@ -63,7 +63,7 @@ class DoctorController extends Controller
 
         $hospital_id = $doctor->hospital->id;
 
-        return view('users.doctors.show',[
+        return view('web.doctors.show',[
             'doctor' => $doctor,
             'doctor_id' => $id,
             'hospital_id' => $hospital_id
@@ -117,7 +117,7 @@ class DoctorController extends Controller
         $doctors = App\Doctor::all();
 
 
-        return view('users.doctors.select',[
+        return view('web.doctors.select',[
             'recommendDoctors' => $recommendDoctors,
             'doctors' => $doctors
         ]);
@@ -131,7 +131,7 @@ class DoctorController extends Controller
         $hospitalDoctors = App\Doctor::where('hospital_id',$request->hospital_id)
         ->get();
 
-        return view('users.doctors.select',[
+        return view('web.doctors.select',[
             'hospitalDoctors' => $hospitalDoctors,
             'hospital_id' => $request->hospital_id
         ]);
@@ -151,7 +151,7 @@ class DoctorController extends Controller
         $instanceDoctor_id = $instanceDoctors
         ->first()->id;
 
-        return view('users.doctors.select',[
+        return view('web.doctors.select',[
             'instance_id' => $instance_id,
             'instanceDoctors'=> $instanceDoctors,
             'instanceDoctor_id' => $instanceDoctor_id
@@ -163,7 +163,7 @@ class DoctorController extends Controller
     {
         $doctor = App\Doctor::find(1);
 
-        return view('doctors.profile',[
+        return view('web.doctors.profile',[
             'doctor' => $doctor
         ]);
     }
@@ -171,12 +171,12 @@ class DoctorController extends Controller
     // Get orders.
     public function getOrders(Request $request){
 
-        $doctors = App\Doctor::find(session('doctor.id'))
+        $doctors = App\Doctor::find(1)
             ->first();
 
         $orders = $doctors->orders;
 
-        return view('doctors.order',[
+        return view('web.orders.doctors',[
             'orders' => $orders
         ]);
     }
@@ -186,7 +186,7 @@ class DoctorController extends Controller
     public function getCondition_report(Request $request){
         $order = App\Order::find($request->order_id);
 
-        return view('doctors.report',[
+        return view('web.doctors.report',[
             'order'=> $order
         ]);
     }

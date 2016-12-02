@@ -19,7 +19,7 @@ class NewsController extends Controller
                 ->take(15)
                 ->get();
 
-        return view('users.news.news',[
+        return view('web.news.news',[
               'news' =>$news
             ]);
     }
@@ -67,7 +67,7 @@ class NewsController extends Controller
     {
         $news = App\News::findOrFail($id);
 
-        return view('users.news.show',[
+        return view('web.news.show',[
             'news' => $news
         ]);
     }

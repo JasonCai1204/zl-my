@@ -40,7 +40,7 @@ class HospitalController extends Controller
 
         $hospital->city = $hospital->city->name;
 
-        return view('users.hospitals.show',[
+        return view('web.hospitals.show',[
             'hospital' => $hospital,
             'hospital_id' => $id,
         ]);
@@ -79,7 +79,7 @@ class HospitalController extends Controller
 
         $hospitals = App\Hospital::all();
 
-        return view('users.hospitals.select',[
+        return view('web.hospitals.select',[
             'recommendHospitals' => $recommendHospitals,
             'hospitals' => $hospitals,
         ]);
