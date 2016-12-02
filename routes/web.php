@@ -114,7 +114,7 @@ Route::group(['domain' => 'cms.zl-my.com', 'namespace' => 'cms'], function () {
 });
 
 
-Route::group(['namespace' => 'web'], function(){
+Route::group(['namespace' => 'web'], function() {
 
     // ys
     Route::group(['domain' => 'ys.zl-my.com'], function () {
