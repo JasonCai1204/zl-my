@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class NewsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:master');
+    }
+
     public function create()
     {
         return view('cms.news.create');
@@ -30,6 +35,8 @@ class NewsController extends Controller
         $news->published_at = $request->published_at ? Carbon::now() : null;
 
         $news->save();
+
+        return redirect('news');
     }
 
     public function index()
