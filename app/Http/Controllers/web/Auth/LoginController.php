@@ -46,7 +46,7 @@ class LoginController extends Controller
 
     public function showLoginForm()
     {
-        return view('auth.signin');
+        return view('web.auth.login');
     }
 
     protected function validateLogin(Request $request)

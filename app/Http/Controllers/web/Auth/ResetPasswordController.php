@@ -17,12 +17,12 @@ class ResetPasswordController extends Controller
      */
     public function __construct()
     {
-        // $this->middleware('auth');
+        $this->middleware('auth');
     }
 
     public function showResetForm(Request $request)
     {
-        return view('auth.passwords.reset');
+        return view('web.auth.passwords.reset');
     }
 
     public function reset(Request $request)

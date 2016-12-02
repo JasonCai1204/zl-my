@@ -82,7 +82,7 @@ class RegisterController extends Controller
 
     public function showRegistrationForm()
     {
-        return view('web.auth.signup');
+        return view('web.auth.register');
     }
 
 }

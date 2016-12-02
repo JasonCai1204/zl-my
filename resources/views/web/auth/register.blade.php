@@ -13,7 +13,7 @@
 
 {{-- Body --}}
 <div class="container" id="my_info_container">
-    <form action="/signup" method="post">
+    <form action="/login" method="post">
         {{ csrf_field() }}
 
         <div class="weui-cells weui-cells_form" style="margin-top: 30px;">

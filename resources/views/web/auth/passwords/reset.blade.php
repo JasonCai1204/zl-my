@@ -1,4 +1,4 @@
-@extends('layouts.user-basic')
+@extends('web.layouts.user-basic')
 
 @section('title','修改密码 - 肿瘤名医')
 
@@ -66,6 +66,7 @@
                 @endif
             </div>
         </div>
+
         <input type="submit" class="btnCommon" value="完成">
         <a href="/account" class="btnCommon btnCencel">取消</a>
     </form>

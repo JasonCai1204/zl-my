@@ -1,4 +1,4 @@
-@extends('layouts.user-basic')
+@extends('web.layouts.user-basic')
 
 @section('title','登录 - 肿瘤名医')
 
@@ -12,7 +12,7 @@
 
 <!--主体部分-->
 <div class="container" id="my_info_container">
-    <form action="/signin" method="post">
+    <form action="/login" method="post">
         {{ csrf_field() }}
 
         <div class="weui-cells weui-cells_form" style="margin-top: 30px;">
@@ -50,8 +50,8 @@
         </div>
 
         <input type="submit" class="btnCommon" value="登录">
-        
-        <a href="/signup" class="btnLink">注册</a>
+
+        <a href="/register" class="btnLink">注册</a>
     </form>
 </div>
 
