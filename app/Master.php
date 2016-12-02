@@ -3,8 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Master extends Model
+class Master extends Authenticatable
 {
     public $incrementing = false;
 
@@ -12,7 +13,7 @@ class Master extends Model
         'password', 'remember_token',
     ];
 
-    public function department(){
+    public function department() {
         return $this->belongsTo('App\Department');
     }
 }
