@@ -4,6 +4,7 @@ namespace App\Http\Controllers\web;
 
 use App;
 use Hash;
+use Illuminate\Support\Facades\Auth;
 use Validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -12,7 +13,8 @@ class DoctorController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:doctor', ['only' => 'getOrders']);
+        $this->middleware('auth:doctor', ['only' =>['getProfile','getOrders','getCondition_report']]);
+
     }
 
     /**
@@ -165,7 +167,7 @@ class DoctorController extends Controller
     // Doctor profile.
     public function getProfile(Request $request)
     {
-        $doctor = App\Doctor::find(1);
+        $doctor = App\Doctor::find(Auth::guard('doctor')->user()->id);
 
         return view('web.doctors.profile',[
             'doctor' => $doctor
@@ -173,9 +175,10 @@ class DoctorController extends Controller
     }
 
     // Get orders.
-    public function getOrders(Request $request){
+    public function getOrders(Request $request)
+    {
 
-        $doctors = App\Doctor::find(1)
+        $doctors = App\Doctor::find(Auth::guard('doctor')->user()->id)
             ->first();
 
         $orders = $doctors->orders;
@@ -188,7 +191,9 @@ class DoctorController extends Controller
     // Get condition_report.
 
     public function getCondition_report(Request $request){
-        $order = App\Order::find($request->order_id);
+
+
+        $order = App\Order::find($request->id);
 
         return view('web.doctors.report',[
             'order'=> $order
