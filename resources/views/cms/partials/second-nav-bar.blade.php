@@ -13,7 +13,11 @@
             ['id' => 'department', 'name' => '企业部门', 'uri' => '/departments'],
             ] as $menu)
             <li role="presentation" {{ isset($hero) && $hero == $menu['id'] ? 'class=active' : '' }}>
-                <a href="{{ $menu['uri'] }}">{{ $menu['name'] }}</a>
+                @if ($menu['id'] != 'master' && $menu['id'] != 'department')
+                    <a href="{{ $menu['uri'] }}">{{ $menu['name'] }}</a>
+                @elseif (Auth::user()->department_id == 8602)
+                    <a href="{{ $menu['uri'] }}">{{ $menu['name'] }}</a>
+                @endif
             </li>
         @endforeach
     </ul>
