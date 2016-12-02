@@ -28,7 +28,7 @@ $(function () {
         imageButton: 'upload',
         defaultImage: '/storage/images/helper/photo/default.png',
         upload : {
-            url : '/helper/upload-file',
+            url : 'http://zl-my.dev/helper/upload-file',
             params: {'_token': window.Laravel.csrfToken, 'path': $('#editor').data('path')},
             fileKey: 'upload_file',
             connectionCount: 3,
