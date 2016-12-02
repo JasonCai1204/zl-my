@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\web;
 
-use App as App;
+use App;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
+use App\Http\Controllers\Controller;
 
 class HospitalController extends Controller
 {

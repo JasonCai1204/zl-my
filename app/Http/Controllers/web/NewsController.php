@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\web;
 
-use App as app;
+use App;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class NewsController extends Controller
 {
@@ -14,7 +15,7 @@ class NewsController extends Controller
      */
     public function index(Request $request)
     {
-        $news = app\News::orderby('published_at','desc')
+        $news = App\News::orderby('published_at','desc')
                 ->take(15)
                 ->get();
 
@@ -25,7 +26,7 @@ class NewsController extends Controller
 
     public function loadMore(Request $request)
     {
-       $news = app\News::orderby('published_at','desc')
+       $news = App\News::orderby('published_at','desc')
            ->skip(15+($request->counter-1)*10)
            ->take(11)
            ->get();
@@ -64,7 +65,7 @@ class NewsController extends Controller
      */
     public function show($id)
     {
-        $news = app\News::findOrFail($id);
+        $news = App\News::findOrFail($id);
 
         return view('users.news.show',[
             'news' => $news

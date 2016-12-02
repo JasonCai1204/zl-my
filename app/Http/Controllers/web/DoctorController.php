@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\web;
 
-use App as App;
+use App;
 use Hash;
 use Validator;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class DoctorController extends Controller
 {
@@ -157,6 +158,37 @@ class DoctorController extends Controller
         ]);
     }
 
+    // Doctor profile.
+    public function getProfile(Request $request)
+    {
+        $doctor = App\Doctor::find(1);
 
+        return view('doctors.profile',[
+            'doctor' => $doctor
+        ]);
+    }
+
+    // Get orders.
+    public function getOrders(Request $request){
+
+        $doctors = App\Doctor::find(session('doctor.id'))
+            ->first();
+
+        $orders = $doctors->orders;
+
+        return view('doctors.order',[
+            'orders' => $orders
+        ]);
+    }
+
+    // Get condition_report.
+
+    public function getCondition_report(Request $request){
+        $order = App\Order::find($request->order_id);
+
+        return view('doctors.report',[
+            'order'=> $order
+        ]);
+    }
 
 }

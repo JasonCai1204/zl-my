@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\web;
 
-use App as App;
-use App\Http\Models\Instance;
+use App;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class InstanceController extends Controller
 {

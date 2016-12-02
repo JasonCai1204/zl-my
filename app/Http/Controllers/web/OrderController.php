@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\web;
 
-use App as App;
+use App;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Validator;
-
+use App\Http\Controllers\Controller;
 
 class OrderController extends Controller
 {
