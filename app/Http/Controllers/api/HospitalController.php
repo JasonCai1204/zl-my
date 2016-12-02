@@ -85,7 +85,6 @@ class HospitalController extends Controller
                 'data'=>[]
             ]);
         }
-
         // Search hospital or doctor.
         $hospitals = App\Hospital::where('name', 'like', '%' . $request->q . '%')
                 ->select('id','name','grading','is_recommended','city_id')

@@ -27,7 +27,7 @@
 </div>
 
 <!--主体部分-->
-<div class="container">
+<div class="container" style="padding-bottom: 30px;">
     <div class="my_aboutus_head">
         <img src="/storage/images/app/web/www/user-mobile-about-slogan.png" alt="">
     </div>
