@@ -109,7 +109,7 @@ Route::group(['namespace' => 'web'], function(){
     // ys
     Route::group(['domain' => 'ys.zl-my.com'], function () {
 
-        // User Authontication
+        // Doctor Authontication
         Route::group(['namespace' => 'Auth\ys'], function () {
             Route::get('login', 'LoginController@showLoginForm');
             Route::post('login', 'LoginController@login');
@@ -128,7 +128,7 @@ Route::group(['namespace' => 'web'], function(){
 
     });
 
-    User Authontication
+//    User Authontication
     Route::group(['namespace' => 'Auth'], function () {
         Route::get('login', 'LoginController@showLoginForm');
         Route::post('login', 'LoginController@login');
@@ -192,27 +192,27 @@ Route::group(['namespace' => 'web'], function(){
 
     // Contact
     Route::get('contact',function(){
-        return view('users.contact');
+        return view('web.app.contact');
     });
 
     // Qa
     Route::get('support/qa',function(){
-        return view('users.qa');
+        return view('web.app.qa');
     });
 
     // About
     Route::get('about',function(){
-        return view('users.about');
+        return view('web.app.about');
     });
 
     // Services
     Route::get('legal/terms',function(){
-        return view('users.services');
+        return view('web.app.services');
     });
 
     // Download
     Route::get('download',function(){
-        return view('users.download');
+        return view('web.app.download');
     });
 
     // helper
