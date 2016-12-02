@@ -12,6 +12,11 @@ use Validator;
 
 class OrderController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:master');
+    }
+
     public function index()
     {
         return view('cms.orders.index', ['data' => App\Order::all()]);
@@ -73,7 +78,7 @@ class OrderController extends Controller
 
                 $order->save();
 
-                return redirect('orders/' . $order->id);
+                return redirect('orders/');
             }
 
             public function showPhotos(App\Order $order)
@@ -96,7 +101,7 @@ class OrderController extends Controller
                     }
                 }
 
-                $order->photos = array_merge($order->photos, $photos);
+                $order->photos = array_merge($order->photos ?: [], $photos);
 
                 $order->save();
 
