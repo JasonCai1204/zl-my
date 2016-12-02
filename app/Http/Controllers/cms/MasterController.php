@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 
 class MasterController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:master');
+        $this->middleware('master');
+    }
+
     public function create()
     {
         return view('cms.masters.create', ['departments' => App\Department::orderBy('id')->get()]);

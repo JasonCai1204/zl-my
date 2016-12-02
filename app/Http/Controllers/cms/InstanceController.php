@@ -9,6 +9,11 @@ use Validator;
 
 class InstanceController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:master');
+    }
+
     public function create()
     {
         return view('cms.instances.create', ['types' => App\Type::orderBy('sort')->get()]);

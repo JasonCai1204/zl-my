@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Storage;
 
 class TypeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:master');
+    }
+
     public function create()
     {
         return view('cms.types.create', ['sort' => count(App\Type::all()) + 1]);

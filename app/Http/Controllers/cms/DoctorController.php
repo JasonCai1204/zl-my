@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Storage;
 
 class DoctorController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:master');
+    }
+
     public function create(Request $request)
     {
         return view('cms.doctors.create', [
@@ -25,7 +30,7 @@ class DoctorController extends Controller
             'name' => 'required|max:5',
             'avatar' => 'image|dimensions:min_width=100,min_height=100',
             'grading' => 'required|max:5',
-            'phone_number' => 'digits:11',
+            'phone_number' => 'unique:doctors|digits:11',
             'hospital_id' => 'required|exists:hospitals,id',
             'instance_id' => 'required',
             'instance_id.*' => 'exists:instances,id',

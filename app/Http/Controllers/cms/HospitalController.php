@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class HospitalController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:master');
+    }
+
     public function create()
     {
         return view('cms.hospitals.create', ['cities' => App\City::orderBy(DB::raw('CONVERT(name USING gbk)'))->get()]);

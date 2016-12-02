@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:master');
+    }
+
     public function index()
     {
         return view('cms.users.index', ['data' => App\User::orderBy(DB::raw('CONVERT(name USING gbk)'))->get()]);

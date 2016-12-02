@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class CityController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:master');
+    }
+
     public function index()
     {
         return view('cms.cities.index', ['data' => App\City::orderBy(DB::raw('CONVERT(name USING gbk)'))->get()]);
