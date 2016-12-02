@@ -9,7 +9,7 @@
                 <div class="panel-heading">{{ $data->patient_name }}的病例相关资料</div>
 
                 <div class="panel-body">
-                    @foreach ($data->photos as $photo)
+                    @foreach ($data->photos ?: [] as $photo)
                         <a href="{{ Storage::url($photo) }}" target="_blank">
                             <img src="{{ Storage::url($photo) }}" alt="{{ $data->patient_name }} 的病例相关资料" style="max-width: 200px; max-height: 200px" >
                         </a>
