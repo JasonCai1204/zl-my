@@ -83,7 +83,7 @@
 
         <label for="weuiAgree" class="weui-agree">
             <input type="checkbox" id="weuiAgree" class="weui-agree__checkbox" name="terms" checked>
-            <span class="weui-agree__text">已阅读并同意<a href="/legal/terms">《借款额度合同及相关授权》</a></span>
+            <span class="weui-agree__text">已阅读并同意<a href="/legal/terms">《服务条款》</a></span>
         </label>
 
         <input type="submit" class="btnCommon" value="注册">
