@@ -37,7 +37,7 @@ class ResetPasswordController extends Controller
             'password.confirmed' => '确认密码与新密码不一致。'
         ])->validate();
 
-        $user = Auth::user();
+        $user = $this->guard()->user();
 
         if (Hash::check($request->current_password, $user->password)) {
 
