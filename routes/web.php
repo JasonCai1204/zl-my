@@ -76,9 +76,6 @@ Route::group(['domain' => 'cms.zl-my.com', 'namespace' => 'cms'], function () {
     Route::get('orders/{order}/condition-report', 'OrderController@showConditionReport');
     Route::post('orders/{order}/condition-report', 'OrderController@storeConditionReport');
 
-    // helper
-    Route::post('helper/upload-file', 'HelperController@uploadFile');
-
     // news
     Route::get('news', 'NewsController@index');
     Route::get('news/create', 'NewsController@create');
@@ -106,18 +103,9 @@ Route::group(['domain' => 'cms.zl-my.com', 'namespace' => 'cms'], function () {
     Route::post('masters/{master}/password', 'MasterController@updatePassword');
 });
 
-// User Authontication
-Route::group(['namespace' => 'Auth'], function () {
-    Route::get('signin', 'LoginController@showLoginForm');
-    Route::post('signin', 'LoginController@login');
-    Route::get('signup', 'RegisterController@showRegistrationForm');
-    Route::post('signup', 'RegisterController@register');
-    Route::post('signout', 'LoginController@logout');
-    Route::get('account/password/reset', 'ResetPasswordController@showResetForm');
-    Route::post('account/password/reset', 'ResetPasswordController@reset');
-});
 
 Route::group(['namespace' => 'web'],function(){
+
     // ys
     Route::group(['domain' => 'ys.zl-my.com'], function () {
 
@@ -130,40 +118,51 @@ Route::group(['namespace' => 'web'],function(){
 
     });
 
+    // User Authontication
+    Route::group(['namespace' => 'Auth'], function () {
+        Route::get('signin', 'LoginController@showLoginForm');
+        Route::post('signin', 'LoginController@login');
+        Route::get('signup', 'RegisterController@showRegistrationForm');
+        Route::post('signup', 'RegisterController@register');
+        Route::post('signout', 'LoginController@logout');
+        Route::get('account/password/reset', 'ResetPasswordController@showResetForm');
+        Route::post('account/password/reset', 'ResetPasswordController@reset');
+    });
+
     // Index
     Route::get('/','WebController@index');
 
-// Search
+    // Search
     Route::get('search', 'HospitalController@search');
 
-// News
+    // News
     Route::resource('news','NewsController');
     Route::get('loadmore','NewsController@loadMore');
 
-// Recommend
+    // Recommend
     Route::get('recommends','WebController@recommend');
 
-// Hospital
+    // Hospital
     Route::get('hospital/select','HospitalController@getSelect');
     Route::post('hospital/select','HospitalController@postSelect');
     Route::resource('hospital','HospitalController');
 
-// Instance
+    // Instance
     Route::get('instance/select','InstanceController@getSelect');
     Route::post('instance/select','InstanceController@postSelect');
     Route::get('instance/doctor/select','InstanceController@getDoctorSelect');
     Route::resource('instance','InstanceController');
 
-// Doctor
+    // Doctor
     Route::get('doctor/select','DoctorController@getSelect');
     Route::post('doctor/select','DoctorController@postSelect');
-// Select doctor from hospital.
+    // Select doctor from hospital.
     Route::get('doctor/hospital/select','DoctorController@getHospitalSelect');
-// Select doctor from instance.
+    // Select doctor from instance.
     Route::get('doctor/instance/select','DoctorController@getInstanceSelect');
     Route::resource('doctor','DoctorController');
 
-// Order
+    // Order
     Route::post('order/postPhotos','OrderController@postPhotos');
     Route::get('orders/create','OrderController@getCreate');
     Route::post('orders/create','OrderController@postCreate');
@@ -171,38 +170,41 @@ Route::group(['namespace' => 'web'],function(){
     Route::get('order/msg','OrderController@getMsg');
     Route::resource('order','OrderController');
 
-// User account.
+    // User account.
     Route::resource('account','UserController@index');
 
-// Profile
+    // Profile
     Route::get('account/user/profile','UserController@getProfile');
     Route::post('account/user/profile','UserController@postProfile');
 
-//  User orders
+    //  User orders
     Route::get('account/user/orders','UserController@getOrders');
 
-// Contact
+    // Contact
     Route::get('contact',function(){
         return view('users.contact');
     });
 
-// Qa
+    // Qa
     Route::get('support/qa',function(){
         return view('users.qa');
     });
 
-// About
+    // About
     Route::get('about',function(){
         return view('users.about');
     });
 
-// Services
+    // Services
     Route::get('legal/terms',function(){
         return view('users.services');
     });
 
-// Download
+    // Download
     Route::get('download',function(){
         return view('users.download');
     });
+
+    // helper
+    Route::post('helper/upload-file', 'HelperController@uploadFile');
 });
