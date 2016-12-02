@@ -5,6 +5,7 @@ namespace App\Http\Controllers\web;
 use App;
 use Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 
@@ -32,7 +33,7 @@ class UserController extends Controller
     // Get profile.
     public function getProfile(Request $request)
     {
-        $user = App\User::find($request->user_id);
+        $user = App\User::find(Auth::user()->id);
 
         return view('web.users.profile',[
             'user'=>$user
@@ -83,7 +84,7 @@ class UserController extends Controller
         $orders = App\Order::where('user_id',$request->user_id)
             ->get();
 
-        return view('web.users..order',[
+        return view('web.orders.users',[
             'orders'=>$orders
         ]);
     }
