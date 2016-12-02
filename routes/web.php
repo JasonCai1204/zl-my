@@ -104,27 +104,37 @@ Route::group(['domain' => 'cms.zl-my.com', 'namespace' => 'cms'], function () {
 });
 
 
-Route::group(['namespace' => 'web'],function(){
+Route::group(['namespace' => 'web'], function(){
 
     // ys
     Route::group(['domain' => 'ys.zl-my.com'], function () {
 
+        // User Authontication
+        Route::group(['namespace' => 'Auth\ys'], function () {
+            Route::get('login', 'LoginController@showLoginForm');
+            Route::post('login', 'LoginController@login');
+            Route::get('account/password/reset', 'ResetPasswordController@showResetForm');
+            Route::post('account/password/reset', 'ResetPasswordController@reset');
+        });
+
         // Profile
         Route::get('profile','DoctorController@getProfile');
+
         // Order lists
         Route::get('/','DoctorController@getOrders');
+
         // Condition_report
         Route::get('orders/condition_report','DoctorController@getCondition_report');
 
     });
 
-    // User Authontication
+    User Authontication
     Route::group(['namespace' => 'Auth'], function () {
-        Route::get('signin', 'LoginController@showLoginForm');
-        Route::post('signin', 'LoginController@login');
-        Route::get('signup', 'RegisterController@showRegistrationForm');
-        Route::post('signup', 'RegisterController@register');
-        Route::post('signout', 'LoginController@logout');
+        Route::get('login', 'LoginController@showLoginForm');
+        Route::post('login', 'LoginController@login');
+        Route::get('register', 'RegisterController@showRegistrationForm');
+        Route::post('register', 'RegisterController@register');
+        Route::post('logout', 'LoginController@logout');
         Route::get('account/password/reset', 'ResetPasswordController@showResetForm');
         Route::post('account/password/reset', 'ResetPasswordController@reset');
     });
