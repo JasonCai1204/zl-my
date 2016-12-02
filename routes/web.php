@@ -16,6 +16,16 @@ Route::group(['domain' => 'cms.zl-my.com', 'namespace' => 'cms'], function () {
 
     Route::get('/', function () {
         return view('cms.home');
+    })->middleware('auth:master');
+
+    Route::group(['namespace' => 'Auth'], function () {
+
+        Route::get('login', 'LoginController@showLoginForm');
+        Route::post('login', 'LoginController@login');
+        Route::post('logout', 'LoginController@logout');
+        Route::get('password/reset', 'ResetPasswordController@showResetForm');
+        Route::post('password/reset', 'ResetPasswordController@reset');
+
     });
 
     // city
@@ -113,6 +123,7 @@ Route::group(['namespace' => 'web'], function(){
         Route::group(['namespace' => 'Auth\ys'], function () {
             Route::get('login', 'LoginController@showLoginForm');
             Route::post('login', 'LoginController@login');
+            Route::post('logout', 'LoginController@logout');
             Route::get('account/password/reset', 'ResetPasswordController@showResetForm');
             Route::post('account/password/reset', 'ResetPasswordController@reset');
         });
@@ -128,7 +139,7 @@ Route::group(['namespace' => 'web'], function(){
 
     });
 
-//    User Authontication
+    // User Authontication
     Route::group(['namespace' => 'Auth'], function () {
         Route::get('login', 'LoginController@showLoginForm');
         Route::post('login', 'LoginController@login');
