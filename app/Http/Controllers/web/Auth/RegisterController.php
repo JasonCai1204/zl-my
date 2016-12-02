@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\web\Auth;
 
 use App\User;
 use Validator;
@@ -82,7 +82,7 @@ class RegisterController extends Controller
 
     public function showRegistrationForm()
     {
-        return view('auth.signup');
+        return view('web.auth.signup');
     }
 
 }
