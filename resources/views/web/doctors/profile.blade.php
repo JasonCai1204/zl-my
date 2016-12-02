@@ -52,8 +52,15 @@
             </div>
         </div>
             <div class="my_mine_logoff">
-                <a href="/signin" class="btnLogin">退出登录</a>
+                <a href="{{ url('/logout') }}"
+                onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();" class="btnLogin">退出登录</a>
+
+                <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                    {{ csrf_field() }}
+                </form>
             </div>
+            
             <a href="/password/reset" class="btnLink">修改密码</a>
     </form>
 </div>
