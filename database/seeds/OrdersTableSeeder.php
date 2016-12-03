@@ -15,7 +15,7 @@ class OrdersTableSeeder extends Seeder
             [
                 'id' => 100001,
                 'user_id' => '1',
-                'patient_name' => '郭去病',
+                'patient_name' => '霍去病',
                 'phone_number' => '18565700980',
                 'instance_id' => 1,
                 'doctor_id' => 1,

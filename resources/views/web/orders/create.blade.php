@@ -45,7 +45,7 @@
                     <label class="weui-label">手机号码</label>
                 </div>
                 <div class="weui-cell__bd">
-                    <input name="phone_number" type="number" class="weui-input" pattern="[0-9]*" placeholder="必填" required />
+                    <input name="phone_number" type="tel" class="weui-input" pattern="[0-9]*" placeholder="必填" required />
                 </div>
                 @if(isset($errors))
                 <div class="weui-cell__ft">
