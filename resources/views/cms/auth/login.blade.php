@@ -16,7 +16,7 @@
                             <label for="phone_number" class="col-md-4 control-label">手机号码</label>
 
                             <div class="col-md-6">
-                                <input id="phone_number" type="tel" class="form-control" name="phone_number" value="{{ old('phone_number') }}" required autofocus>
+                                <input id="phone_number" type="tel" pattern="[0-9]*" class="form-control" name="phone_number" value="{{ old('phone_number') }}" required autofocus>
 
                                 @if ($errors->has('phone_number'))
                                     <span class="help-block">

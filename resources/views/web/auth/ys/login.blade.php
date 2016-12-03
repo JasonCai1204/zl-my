@@ -22,7 +22,7 @@
                 </div>
 
                 <div class="weui-cell__bd">
-                    <input type="number" class="weui-input" placeholder="必填" name="phone_number" value="{{ old('phone_number') }}" required/>
+                    <input type="tel" class="weui-input" pattern="[0-9]*" placeholder="必填" name="phone_number" value="{{ old('phone_number') }}" required/>
                 </div>
 
                 @if($errors->has('phone_number'))
