@@ -14,9 +14,7 @@
 // cms
 Route::group(['domain' => 'cms.zl-my.com', 'namespace' => 'cms'], function () {
 
-    Route::get('/', function () {
-        return view('cms.home');
-    })->middleware('auth:master');
+    Route::get('/', 'HomeController@index');
 
     Route::group(['namespace' => 'Auth'], function () {
 
@@ -117,7 +115,7 @@ Route::group(['domain' => 'cms.zl-my.com', 'namespace' => 'cms'], function () {
 Route::group(['namespace' => 'web'], function() {
 
     // ys
-    Route::group(['domain' => 'ys.zl-my.com'], function () {
+//    Route::group(['domain' => 'ys.zl-my.com'], function () {
 
         // Doctor Authontication
         Route::group(['namespace' => 'Auth\ys'], function () {
@@ -132,100 +130,98 @@ Route::group(['namespace' => 'web'], function() {
         Route::get('profile','DoctorController@getProfile');
 
         // Order lists
-        Route::get('/','DoctorController@getOrders');
+        Route::get('/','OrderController@getDoctorOrders');
 
         // Condition_report
         Route::get('orders/condition_report','DoctorController@getCondition_report');
 
-    });
+//    });
 
-    // User Authontication
-    Route::group(['namespace' => 'Auth'], function () {
-        Route::get('login', 'LoginController@showLoginForm');
-        Route::post('login', 'LoginController@login');
-        Route::get('register', 'RegisterController@showRegistrationForm');
-        Route::post('register', 'RegisterController@register');
-        Route::post('logout', 'LoginController@logout');
-        Route::get('account/password/reset', 'ResetPasswordController@showResetForm');
-        Route::post('account/password/reset', 'ResetPasswordController@reset');
-    });
-
-    // Index
-    Route::get('/','WebController@index');
-
-    // Search
-    Route::get('search', 'HospitalController@search');
-
-    // News
-    Route::resource('news','NewsController');
-    Route::get('loadmore','NewsController@loadMore');
-
-    // Recommend
-    Route::get('recommends','WebController@recommend');
-
-    // Hospital
-    Route::get('hospital/select','HospitalController@getSelect');
-    Route::post('hospital/select','HospitalController@postSelect');
-    Route::resource('hospital','HospitalController');
-
-    // Instance
-    Route::get('instance/select','InstanceController@getSelect');
-    Route::post('instance/select','InstanceController@postSelect');
-    Route::get('instance/doctor/select','InstanceController@getDoctorSelect');
-    Route::resource('instance','InstanceController');
-
-    // Doctor
-    Route::get('doctor/select','DoctorController@getSelect');
-    Route::post('doctor/select','DoctorController@postSelect');
-    // Select doctor from hospital.
-    Route::get('doctor/hospital/select','DoctorController@getHospitalSelect');
-    // Select doctor from instance.
-    Route::get('doctor/instance/select','DoctorController@getInstanceSelect');
-    Route::resource('doctor','DoctorController');
-
-    // Order
-    Route::post('order/postPhotos','OrderController@postPhotos');
-    Route::get('orders/create','OrderController@getCreate');
-    Route::post('orders/create','OrderController@postCreate');
-    Route::get('order/{order}/display','OrderController@display');
-    Route::get('order/msg','OrderController@getMsg');
-    Route::resource('order','OrderController');
-
-    // User account.
-    Route::resource('account','UserController@index');
-
-    // Profile
-    Route::get('account/user/profile','UserController@getProfile');
-    Route::post('account/user/profile','UserController@postProfile');
-
-    //  User orders
-    Route::get('account/user/orders','UserController@getOrders');
-
-    // Contact
-    Route::get('contact',function(){
-        return view('web.app.contact');
-    });
-
-    // Qa
-    Route::get('support/qa',function(){
-        return view('web.app.qa');
-    });
-
-    // About
-    Route::get('about',function(){
-        return view('web.app.about');
-    });
-
-    // Services
-    Route::get('legal/terms',function(){
-        return view('web.app.services');
-    });
-
-    // Download
-    Route::get('download',function(){
-        return view('web.app.download');
-    });
-
-    // helper
-    Route::post('helper/upload-file', 'HelperController@uploadFile');
+//    // User Authontication
+//    Route::group(['namespace' => 'Auth'], function () {
+//        Route::get('login', 'LoginController@showLoginForm');
+//        Route::post('login', 'LoginController@login');
+//        Route::get('register', 'RegisterController@showRegistrationForm');
+//        Route::post('register', 'RegisterController@register');
+//        Route::post('logout', 'LoginController@logout');
+//        Route::get('account/password/reset', 'ResetPasswordController@showResetForm');
+//        Route::post('account/password/reset', 'ResetPasswordController@reset');
+//    });
+//
+//    // Index
+//    Route::get('/','WebController@index');
+//
+//    // Search
+//    Route::get('search', 'HospitalController@search');
+//
+//    // News
+//    Route::resource('news','NewsController');
+//    Route::get('loadmore','NewsController@loadMore');
+//
+//    // Recommend
+//    Route::get('recommends','WebController@recommend');
+//
+//    // Hospital
+//    Route::get('hospital/select','HospitalController@getSelect');
+//    Route::post('hospital/select','HospitalController@postSelect');
+//    Route::resource('hospital','HospitalController');
+//
+//    // Instance
+//    Route::get('instance/select','InstanceController@getSelect');
+//    Route::post('instance/select','InstanceController@postSelect');
+//    Route::get('instance/doctor/select','InstanceController@getDoctorSelect');
+//    Route::resource('instance','InstanceController');
+//
+//    // Doctor
+//    Route::get('doctor/select','DoctorController@getSelect');
+//    Route::post('doctor/select','DoctorController@postSelect');
+//    // Select doctor from hospital.
+//    Route::get('doctor/hospital/select','DoctorController@getHospitalSelect');
+//    // Select doctor from instance.
+//    Route::get('doctor/instance/select','DoctorController@getInstanceSelect');
+//    Route::resource('doctor','DoctorController');
+//
+//    // Order
+//    Route::post('order/postPhotos','OrderController@postPhotos');
+//    Route::get('orders/create','OrderController@getCreate');
+//    Route::post('orders/create','OrderController@postCreate');
+//    Route::get('order/{order}/display','OrderController@display');
+//    Route::get('order/msg','OrderController@getMsg');
+//    Route::get('account/user/orders','OrderController@getHospitalOrders');
+//    Route::resource('order','OrderController');
+//
+//    // User account.
+//    Route::resource('account','UserController@index');
+//
+//    // Profile
+//    Route::get('account/user/profile','UserController@getProfile');
+//    Route::post('account/user/profile','UserController@postProfile');
+//
+//    // Contact
+//    Route::get('contact',function(){
+//        return view('web.app.contact');
+//    });
+//
+//    // Qa
+//    Route::get('support/qa',function(){
+//        return view('web.app.qa');
+//    });
+//
+//    // About
+//    Route::get('about',function(){
+//        return view('web.app.about');
+//    });
+//
+//    // Services
+//    Route::get('legal/terms',function(){
+//        return view('web.app.services');
+//    });
+//
+//    // Download
+//    Route::get('download',function(){
+//        return view('web.app.download');
+//    });
+//
+//    // helper
+//    Route::post('helper/upload-file', 'HelperController@uploadFile');
 });
