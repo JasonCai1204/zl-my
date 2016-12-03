@@ -9,7 +9,7 @@
         @if(count('news') > 0)
             @foreach( $news as $new )
                 <a href="/news/{{$new->id}}" class="my_advice_list">
-                    <img src="{{$new->cover_image}}" alt="">
+                    <img src="/storage/{{$new->cover_image}}" alt="">
                     <span>{{$new->title}}</span>
                 </a>
             @endforeach
