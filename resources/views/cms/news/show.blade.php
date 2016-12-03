@@ -36,7 +36,7 @@
 
                             <div class="col-md-10">
                                 <input id="cover_image" type="file" name="cover_image" accept="image/*">
-                                <span class="help-block">尺寸为 400x200px.</span>
+                                <span class="help-block">尺寸为 320x150px.</span>
                                 <img src="{{ Storage::url($data->cover_image) }}" alt="{{ $data->title }}的封面图片" style="max-width: 100%">
 
                                 @if ($errors->has('cover_image'))
