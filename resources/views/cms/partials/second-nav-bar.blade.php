@@ -12,13 +12,15 @@
             ['id' => 'master', 'name' => '德之天才', 'uri' => '/masters'],
             ['id' => 'department', 'name' => '企业部门', 'uri' => '/departments'],
             ] as $menu)
-            <li role="presentation" {{ isset($hero) && $hero == $menu['id'] ? 'class=active' : '' }}>
-                @if ($menu['id'] != 'master' && $menu['id'] != 'department')
+            @if ($menu['id'] != 'master' && $menu['id'] != 'department')
+                <li role="presentation" {{ isset($hero) && $hero == $menu['id'] ? 'class=active' : '' }}>
+                        <a href="{{ $menu['uri'] }}">{{ $menu['name'] }}</a>
+                </li>
+            @elseif (Auth::guard('master')->user()->department_id == 8602)
+                <li role="presentation" {{ isset($hero) && $hero == $menu['id'] ? 'class=active' : '' }}>
                     <a href="{{ $menu['uri'] }}">{{ $menu['name'] }}</a>
-                @elseif (Auth::user()->department_id == 8602)
-                    <a href="{{ $menu['uri'] }}">{{ $menu['name'] }}</a>
-                @endif
-            </li>
+                </li>
+            @endif
         @endforeach
     </ul>
 </div>
