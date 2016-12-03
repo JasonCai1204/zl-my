@@ -89,7 +89,7 @@
         <div class="weui-mask"></div>
         <div class="weui-dialog">
             <div class="weui-dialog__bd">
-                即将开放，敬请期待
+                即将开放，敬请期待。
             </div>
             <div class="weui-dialog__ft">
                 <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary">好的</a>

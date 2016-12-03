@@ -4,7 +4,6 @@
 
 @section('content')
 
-<!--不输入错误 不显示-->
 
 @if (count($errors) > 0)
         <div class="my_form_warn" >
@@ -29,29 +28,39 @@
         -->
         <!--必须填写-->
         <div class="weui-cells weui-cells_form" style="margin-top: 30px;">
-            <div class="weui-cell ">
+            <div class="weui-cell {{ $errors->has('patient_name') ? ' weui-cell_warn' : '' }} ">
+
                 <div class="weui-cell__hd">
                     <label class="weui-label">患者姓名</label>
                 </div>
+
                 <div class="weui-cell__bd">
                     <input name="patient_name" type="text" class="weui-input" placeholder="必填"  required />
                 </div>
-                <div class="weui-cell__ft">
-                    <i class="weui-icon-warn"></i>
-                </div>
-            </div>
-            <div class="weui-cell {{ $errors->has('phone_number') ? 'weui-cell_warn' :''}}">
-                <div class="weui-cell__hd">
-                    <label class="weui-label">手机号码</label>
-                </div>
-                <div class="weui-cell__bd">
-                    <input name="phone_number" type="tel" class="weui-input" pattern="[0-9]*" placeholder="必填" required />
-                </div>
-                @if(isset($errors))
+
+                @if($errors->has('patient_name'))
                 <div class="weui-cell__ft">
                     <i class="weui-icon-warn"></i>
                 </div>
                 @endif
+
+            </div>
+            <div class="weui-cell {{ $errors->has('phone_number') ? 'weui-cell_warn' :''}}">
+
+                <div class="weui-cell__hd">
+                    <label class="weui-label">手机号码</label>
+                </div>
+
+                <div class="weui-cell__bd">
+                    <input name="phone_number" type="tel" class="weui-input" pattern="[0-9]*" placeholder="必填" required />
+                </div>
+
+                @if( $errors->has('phone_number'))
+                <div class="weui-cell__ft">
+                    <i class="weui-icon-warn"></i>
+                </div>
+                @endif
+
             </div>
         </div>
 
@@ -129,8 +138,6 @@
                         <p></p>
                     </div>
                 </a>
-
-
 
                 @if(isset($instance_id))
 
