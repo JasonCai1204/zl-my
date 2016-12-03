@@ -127,7 +127,7 @@ Route::group(['namespace' => 'web'], function() {
         });
 
         // Profile
-        Route::get('profile','DoctorController@getProfile');
+        Route::get('account/profile','DoctorController@getProfile');
 
         // Order lists
         Route::get('/','OrderController@getDoctorOrders');
