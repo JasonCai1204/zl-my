@@ -225,11 +225,11 @@ class OrderController extends Controller
     // Get doctor orders.
     public function getDoctorOrders(Request $request)
     {
+        $orders = Auth::guard('doctor')->user()->orders()->where('send_to_the_doctor_at', '!=', null)->get();
 
-        $doctors = App\Doctor::find(Auth::guard('doctor')->user()->id)
-            ->first();
-
-        $orders = $doctors->orders;
+        if(count($orders)<0 ){
+            return view('web.orders.doctors');
+        }
 
         return view('web.orders.doctors',[
             'orders' => $orders

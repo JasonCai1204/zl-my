@@ -24,7 +24,7 @@
                             </span>
                         </div>
                         <span class="weui-cell__ft">
-                            <span class="doctor_order_date">{{$order->created_at->format('Y-m-d')}}</span>
+                            <span class="doctor_order_date">{{ $order->send_to_the_doctor_at->format('Y-m-d')? : ''}}</span>
                         </span>
                     </a>
                     @endforeach
