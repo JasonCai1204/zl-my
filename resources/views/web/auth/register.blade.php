@@ -13,7 +13,7 @@
 
 {{-- Body --}}
 <div class="container" id="my_info_container">
-    <form action="/login" method="post">
+    <form action="/register" method="POST">
         {{ csrf_field() }}
 
         <div class="weui-cells weui-cells_form" style="margin-top: 30px;">
@@ -23,7 +23,7 @@
                 </div>
 
                 <div class="weui-cell__bd">
-                    <input type="text" class="weui-input" placeholder="请填写真实姓名" name="name" value="{{old('name')}}" required />
+                    <input type="text" class="weui-input" placeholder="请填写真实姓名" name="name" value="{{ old('name') }}" required />
                 </div>
 
                 @if($errors->has('name'))
@@ -39,7 +39,7 @@
                 </div>
 
                 <div class="weui-cell__bd">
-                    <input type="number" class="weui-input" placeholder="必填" name="phone_number" value="{{old('phone_number')}}" required />
+                    <input type="number" class="weui-input" placeholder="必填" name="phone_number" value="{{ old('phone_number' )}}" required />
                 </div>
 
                 @if($errors->has('phone_number'))
