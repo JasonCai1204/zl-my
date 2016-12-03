@@ -11,6 +11,11 @@ use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => 'index']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -18,10 +23,9 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
+        if(isset(Auth::user()->id)){
 
-        if($user_id = session('user.id')){
-
-            $user = App\User::find($user_id);
+            $user = App\User::find(Auth::user()->id);
 
             return view('web.users.me',[
                 'user' => $user
@@ -65,13 +69,11 @@ class UserController extends Controller
 
             $user->name = $request->name;
 
+            $user->phone_number = $request->phone_number;
+
             $user->save();
 
-            session(['user' => $user]);
-
-            return view('web.users..profile',[
-                'user'=> $user
-            ]);
+            return redirect('/account');
 
         }
 
@@ -80,7 +82,7 @@ class UserController extends Controller
     // User orders.
     public function getOrders(Request $request)
     {
-        $orders = App\Order::where('user_id',$request->user_id)
+        $orders = App\Order::where('user_id',Auth::user()->id)
             ->get();
 
         return view('web.orders.users',[

@@ -22,7 +22,7 @@
 
         @if (!Auth::guest())
             <div class="weui-cells">
-                <a href="/account/user/orders/?user_id={{ Auth::user()->id or ''}}" class="weui-cell weui-cell_access">
+                <a href="/account/user/orders" class="weui-cell weui-cell_access">
                     <div class="weui-cell__bd">
                         <p>预约单</p>
                     </div>
@@ -79,8 +79,8 @@
             <div class="weui-mask_transparent actionsheet__mask" id="mask" style="transform-origin: 0px 0px 0px; opacity: 1; transform: scale(1, 1); display: none;"></div>
             <div class="weui-actionsheet" id="weui-actionsheet">
                 <div class="weui-actionsheet__menu">
-                    <a href="/account/user/profile/?id={{ Auth::user()->id or ''}}" class="weui-actionsheet__cell my_order_reuploader">查看我的信息</a>
-                    <a href="/account/password/reset/?id={{ Auth::user()->id or ''}}" class="weui-actionsheet__cell my_order_delimg" style="display: block;">修改密码</a>
+                    <a href="/account/user/profile" class="weui-actionsheet__cell my_order_reuploader">查看我的信息</a>
+                    <a href="/account/password/reset" class="weui-actionsheet__cell my_order_delimg" style="display: block;">修改密码</a>
                 </div>
                 <div class="weui-actionsheet__action">
                     <div class="weui-actionsheet__cell" id="actionsheet_cancel" style="color: red;">取消</div>

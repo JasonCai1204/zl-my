@@ -13,7 +13,7 @@ class DoctorController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:doctor', ['only' =>['getProfile','getOrders','getCondition_report']]);
+        $this->middleware('auth:doctor', ['only' =>['getProfile','getCondition_report']]);
 
     }
 
@@ -174,19 +174,7 @@ class DoctorController extends Controller
         ]);
     }
 
-    // Get orders.
-    public function getOrders(Request $request)
-    {
 
-        $doctors = App\Doctor::find(Auth::guard('doctor')->user()->id)
-            ->first();
-
-        $orders = $doctors->orders;
-
-        return view('web.orders.doctors',[
-            'orders' => $orders
-        ]);
-    }
 
     // Get condition_report.
 

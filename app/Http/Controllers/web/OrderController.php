@@ -13,8 +13,11 @@ class OrderController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth', ['only' => 'getCreate']);
+        $this->middleware('auth:doctor', ['only' =>'getDoctorOrders']);
+        $this->middleware('auth', ['only' =>['getCreate','getHospitalOrders']]);
+
     }
+
 
     //redirect order/create
     public function getCreate(Request $request)
@@ -217,6 +220,31 @@ class OrderController extends Controller
 
         }
 
+    }
+
+    // Get doctor orders.
+    public function getDoctorOrders(Request $request)
+    {
+
+        $doctors = App\Doctor::find(Auth::guard('doctor')->user()->id)
+            ->first();
+
+        $orders = $doctors->orders;
+
+        return view('web.orders.doctors',[
+            'orders' => $orders
+        ]);
+    }
+
+    // Get hospital orders.
+    public function getHospitalOrders(Request $request)
+    {
+        $orders = App\Order::where('user_id',Auth::user()->id)
+            ->get();
+
+        return view('web.orders.users',[
+            'orders'=>$orders
+        ]);
     }
 
 }

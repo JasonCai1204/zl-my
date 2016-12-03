@@ -11,7 +11,7 @@
 
 <!--主体部分-->
 <div class="container" id="my_info_container">
-        <form action="/account" method="post">
+        <form action="/account/user/profile" method="post">
             {{csrf_field()}}
             <!--
             当输入错误时,在weui_cell类名后面接上 weui-cell_warn 类,
