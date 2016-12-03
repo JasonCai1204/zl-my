@@ -63,7 +63,7 @@
             </form>
         </div>
 
-        <a href="account/password/reset" class="btnLink">修改密码</a>
+        <a href="/account/password/reset" class="btnLink">修改密码</a>
     </div>
 
     <script type="text/javascript" src="/js/doctor/jquery-1.11.3.min.js"></script>

@@ -48,24 +48,17 @@ class UserController extends Controller
     public function postProfile(Request $request)
     {
 
-        if(!$request->name)
-        {
-            return view('web.users..profile',[
-                'error'=> '姓名不能为空'
-            ]);
-        }
+        $this->validate($request, [
+            'name' => 'required|max:5',
+            'phone_number' => 'required|digits:11',
+        ], [
+            'name.required' => '姓名不能为空。',
+            'name.max' => '姓名不能超过 5 位。',
+            'phone_number.required' => '手机号码不能为空。',
+            'phone_number.digits' => '手机号码必需是 11 位数字。',
+        ]);
 
-        if(!$request->phone_number)
-        {
-            return view('web.users..profile',[
-                'error'=> '手机号码不能为空'
-            ]);
-        }
-
-        if($request->name && $request->phone_number)
-        {
-            $user = App\User::where('phone_number',$request->phone_number)
-                ->first();
+            $user= App\User::find(Auth::user()->id);
 
             $user->name = $request->name;
 
@@ -75,7 +68,6 @@ class UserController extends Controller
 
             return redirect('/account');
 
-        }
 
     }
 
