@@ -90,7 +90,7 @@ class OrderController extends Controller
             {
                 $this->validate($request, [
                     'photos' => 'required',
-                    'photos.*' => 'image|dimensions:min_width=50,min_height=50'
+                    'photos.*' => 'dimensions:min_width=50,min_height=50' // image|
                 ]);
 
                 $photos = [];

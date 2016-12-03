@@ -33,7 +33,7 @@ class TypeController extends Controller
 
         $this->validate($request, [
             'name' => $nameConstraint,
-            'icon' => 'image|dimensions:min_width=100,min_height=100',
+            'icon' => 'dimensions:min_width=100,min_height=100', // image|
             'sort' => 'required|numeric'
         ]);
 
@@ -66,7 +66,7 @@ class TypeController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|unique:types,name,' . $type->id . '|max:9',
-            'icon' => 'image|dimensions:min_width=100,min_height=100',
+            'icon' => 'dimensions:min_width=100,min_height=100', // image|
             'sort' => 'required|numeric'
         ]);
 

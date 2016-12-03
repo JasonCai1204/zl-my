@@ -23,14 +23,16 @@ class NewsController extends Controller
     {
         $this->validate($request, [
             'title' => 'required|max:64',
-            'cover_image' => 'required|image|dimensions:min_width=100,min_height=100',
+            'cover_image' => 'required|dimensions:min_width=400,min_height=200', // image|
             'content' => 'required'
         ]);
 
         $news = new App\News;
 
         $news->title = $request->title;
-        $news->cover_image = $request->cover_image->storeAs('images/news/cover/' . Carbon::now()->timestamp, $request->cover_image->getClientOriginalName(), 'public');
+        if ($request->hasFile('cover_image') && $request->cover_image->isValid()) {
+            $news->cover_image = $request->cover_image->storeAs('images/news/cover/' . Carbon::now()->timestamp, $request->cover_image->getClientOriginalName(), 'public');
+        }
         $news->content = $request->content;
         $news->published_at = $request->published_at ? Carbon::now() : null;
 
@@ -53,7 +55,7 @@ class NewsController extends Controller
     {
         $this->validate($request, [
             'title' => 'required|max:64',
-            'cover_image' => 'image|dimensions:min_width=100,min_height=100',
+            'cover_image' => 'dimensions:min_width=100,min_height=100', // image|
             'content' => 'required'
         ]);
 
