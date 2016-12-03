@@ -50,8 +50,8 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => 'required|max:70',
             'phone_number' => 'required|digits:11|unique:users',
-            'terms' => 'required',
-            'password' => 'required|min:6|confirmed'
+            'password' => 'required|min:6|confirmed',
+            'terms' => 'required'
         ], [
             'name.required' => '姓名不能为空。',
             'name.max' => '姓名不能超过 70 位。',
