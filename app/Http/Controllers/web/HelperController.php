@@ -13,7 +13,7 @@ class HelperController extends Controller
     public function uploadFile(Request $request)
     {
         $this->validate($request, [
-            'upload_file' => 'required|image',
+            'upload_file' => 'required', // |image
             'path' => 'required'
         ]);
 

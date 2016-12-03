@@ -28,7 +28,7 @@ class DoctorController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|max:5',
-            'avatar' => 'image|dimensions:min_width=100,min_height=100',
+            'avatar' => 'dimensions:min_width=100,min_height=100', // image|
             'grading' => 'required|max:5',
             'phone_number' => 'unique:doctors|digits:11',
             'hospital_id' => 'required|exists:hospitals,id',
@@ -79,7 +79,7 @@ class DoctorController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|max:5',
-            'avatar' => 'image|dimensions:min_width=100,min_height=100',
+            'avatar' => 'dimensions:min_width=100,min_height=100', // image|
             'grading' => 'required|max:5',
             'phone_number' => 'digits:11',
             'hospital_id' => 'required|exists:hospitals,id',
