@@ -18,8 +18,8 @@
 
 @yield('content')
 
-<div class="my_home_footer" style="max-width: 450px;">
-    <div class="weui-tabbar" id="my_footer_tabber" style="max-width: 450px;">
+<div class="my_home_footer">
+    <div class="weui-tabbar" id="my_footer_tabber">
         <a href="/" class="weui-tabbar__item my_tabbar_click">
             <img src="/storage/images/app/house_building.png" alt="" class="weui-tabbar__icon">
             <p class="weui-tabbar__label">首页</p>
@@ -42,6 +42,7 @@
 <script type="text/javascript" src="/js/user/dropload.min.js"></script>
 <script type="text/javascript" src="js/user/swiper-3.3.1.jquery.min.js"></script>
 <script type="text/javascript" src="js/user/index.js"></script>
+<script type="text/javascript" src="js/user/indexsearch.js"></script>
 <script type="text/javascript" src="js/user/loadmore.js"></script>
 <script type="text/javascript" src =js/user/tabbarclick.js></script>
 </body>

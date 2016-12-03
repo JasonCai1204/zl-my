@@ -1,9 +1,6 @@
 /*全局部分*/
 body{
     background-color: rgb(252,249,254);
-    max-width: 450px;
-    margin:0 auto;
-    position: relative;
 }
 input[type="button"], input[type="submit"], input[type="reset"]{
     -webkit-appearance: none;
@@ -1055,3 +1052,29 @@ input,input:focus,input:active{
     padding-bottom:0px;
 }
 /*end 2016-11-24*/
+
+/*index-search*/
+.testshearch{
+    background-color: transparent;
+    position: absolute;
+    bottom: -1px;
+    width:100%;
+}
+.testshearch:before{
+    content: '';
+    display: none;
+}
+.testshearch:after{
+    content: '';
+    display: none;
+}
+.testshearch form{
+    opacity: .9;
+}
+#searchbd{
+    background-color: rgb(252,249,254);
+    width: 100%;
+    position: absolute;
+    z-index: 99999;
+}
+/*end*/

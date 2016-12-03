@@ -15,7 +15,8 @@ class NewsController extends Controller
      */
     public function index(Request $request)
     {
-        $news = App\News::orderby('published_at','desc')
+        $news = App\News::where( 'published_at','!=' ,null )
+                ->orderby('published_at','desc')
                 ->take(15)
                 ->get();
 
@@ -26,10 +27,11 @@ class NewsController extends Controller
 
     public function loadMore(Request $request)
     {
-       $news = App\News::orderby('published_at','desc')
-           ->skip(15+($request->counter-1)*10)
-           ->take(11)
-           ->get();
+       $news = App\News::where( 'published_at','!=' ,null )
+               ->orderby('published_at','desc')
+               ->skip(15+($request->counter-1)*10)
+               ->take(11)
+               ->get();
 
        return collect([
             'data' => $news

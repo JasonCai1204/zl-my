@@ -6,6 +6,7 @@ use App;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class HospitalController extends Controller
 {
@@ -17,9 +18,10 @@ class HospitalController extends Controller
     public function index()
     {
         $recommendHospitals = App\Hospital::where('is_recommended','1')
-        ->get();
+                ->orderBy(DB::raw('CONVERT(name USING gbk)'))
+                ->get();
 
-        $hospitals = App\Hospital::all();
+        $hospitals = App\Hospital::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
 
         return view('web.hospitals.index',[
             'recommendHospitals' => $recommendHospitals,
@@ -59,10 +61,12 @@ class HospitalController extends Controller
 
         // Search hospital or doctor.
         $hospitals = App\Hospital::where('name', 'like', '%' . $request->q . '%')
-        ->get();
+                ->orderBy(DB::raw('CONVERT(name USING gbk)'))
+                ->get();
 
         $doctors = App\Doctor::where('name', 'like', '%' . $request->q . '%')
-        ->get();
+                ->orderBy(DB::raw('CONVERT(name USING gbk)'))
+                ->get();
 
         return view('web.app.search', [
             'hospitals' => $hospitals,
@@ -75,9 +79,10 @@ class HospitalController extends Controller
     public function getSelect()
     {
         $recommendHospitals = App\Hospital::where('is_recommended','1')
-        ->get();
+                ->orderBy(DB::raw('CONVERT(name USING gbk)'))
+                ->get();
 
-        $hospitals = App\Hospital::all();
+        $hospitals = App\Hospital::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
 
         return view('web.hospitals.select',[
             'recommendHospitals' => $recommendHospitals,

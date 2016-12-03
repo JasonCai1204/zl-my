@@ -50,12 +50,13 @@ class UserController extends Controller
 
         $this->validate($request, [
             'name' => 'required|max:5',
-            'phone_number' => 'required|digits:11',
+            'phone_number' => 'required|digits:11|unique:users',
         ], [
             'name.required' => '姓名不能为空。',
             'name.max' => '姓名不能超过 5 位。',
             'phone_number.required' => '手机号码不能为空。',
             'phone_number.digits' => '手机号码必需是 11 位数字。',
+            'phone_number.unique' => '此手机号码已注册',
         ]);
 
             $user= App\User::find(Auth::user()->id);

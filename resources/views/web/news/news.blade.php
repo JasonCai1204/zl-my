@@ -6,11 +6,11 @@
 
 <div class="container" id="container_news">
     <div class="lists">
-        @if(count('news') > 0)
+        @if ( count('news') > 0)
             @foreach( $news as $new )
-                <a href="/news/{{$new->id}}" class="my_advice_list">
-                    <img src="/storage/{{$new->cover_image}}" alt="">
-                    <span>{{$new->title}}</span>
+                <a href="/news/{{ $new->id }}" class="my_advice_list">
+                    <img src="/storage/{{ $new->cover_image }}" alt="">
+                    <span>{{ $new->title }}</span>
                 </a>
             @endforeach
         @endif

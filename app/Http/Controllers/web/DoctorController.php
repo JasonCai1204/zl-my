@@ -5,6 +5,7 @@ namespace App\Http\Controllers\web;
 use App;
 use Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -25,9 +26,10 @@ class DoctorController extends Controller
     public function index()
     {
         $recommendDoctors = App\Doctor::where('is_recommended','1')
-        ->get();
+                ->orderBy(DB::raw('CONVERT(name USING gbk)'))
+                ->get();
 
-        $doctors = App\Doctor::all();
+        $doctors = App\Doctor::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
 
         return view('web.doctors.index',[
             'recommendDoctors' => $recommendDoctors,
@@ -118,9 +120,10 @@ class DoctorController extends Controller
     {
 
         $recommendDoctors = App\Doctor::where('is_recommended','1')
-        ->get();
+                ->orderBy(DB::raw('CONVERT(name USING gbk)'))
+                ->get();
 
-        $doctors = App\Doctor::all();
+        $doctors = App\Doctor::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
 
 
         return view('web.doctors.select',[
