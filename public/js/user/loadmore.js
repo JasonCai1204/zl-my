@@ -19,7 +19,7 @@ $(function(){
                         var result = '';
                         counter++;
                         for(var i = pageStart; i < pageEnd; i++){
-                            result +=   '<a class="my_advice_list" href= http://127.0.0.1:8000/news/'+ data.data[i].id+'>'
+                            result +=   '<a class="my_advice_list" href= http://zl-my.com:8000//news/'+ data.data[i].id+'>'
                                 +'<img src='+ data.data[i].cover_image +' alt="">'
                                 +'<span>'+ data.data[i].title +'</span>'
                                 +'</ a>';
