@@ -18,9 +18,9 @@
 
                         <textarea id="editor" name="condition_report" data-path="order/condition-report" autofocus>{{ $data->condition_report }}</textarea>
 
-                        <div class="checkbox">
+                        <div class="checkbox{{ $data->doctor_id ? '' : ' disabled' }}">
                             <label>
-                                <input type="checkbox" id="send_to_the_doctor_at" name="send_to_the_doctor_at"{{ $data->send_to_the_doctor_at ? ' checked' : '' }}> 发送给医生
+                                <input type="checkbox" id="send_to_the_doctor_at" name="send_to_the_doctor_at"{{ $data->send_to_the_doctor_at ? ' checked' : '' }}{{ $data->doctor_id ? '' : ' disabled'}}> 发送给医生
                             </label>
                         </div>
 
