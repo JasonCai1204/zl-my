@@ -161,10 +161,10 @@ class OrderController extends Controller
             ];
 
             $messages = [
-                'patient_name.required' => '请输入姓名',
-                'patient_name.max' => '患者姓名长度不能超过 5 位',
-                'phone_number.required' => '请输入电话号码',
-                'phone_number.digits' => '请输入 11 位数字'
+                'patient_name.required' => '请输入姓名。',
+                'patient_name.max' => '患者姓名长度不能超过 5 位。',
+                'phone_number.required' => '请输入电话号码。',
+                'phone_number.digits' => '请输入 11 位手机号码。'
             ];
 
             $validator = Validator::make($input,$rules,$messages);

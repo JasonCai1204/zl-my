@@ -20,11 +20,11 @@
                         <div class="weui-cell__bd weui-cell_primary">
                             <p>{{ $order->patient_name }}</p>
                             <span class="my_mine_desc">
-                                {{ $order->instance->name ? : ''}}
+                                {{ isset($order->instance) ? $order->instance->name : ''}}
                             </span>
                         </div>
                         <span class="weui-cell__ft">
-                            <span class="doctor_order_date">{{ $order->send_to_the_doctor_at->format('Y-m-d') ? : ''}}</span>
+                            <span class="doctor_order_date">{{ $order->send_to_the_doctor_at->format('Y-m-d')? : ''}}</span>
                         </span>
                     </a>
                     @endforeach

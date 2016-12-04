@@ -8,10 +8,10 @@
     <div class="container" id="container_searchbar">
         <div class="bd">
             <div class="weui-search-bar" id="searchBar">
-                <form class="weui-search-bar__form">
+                <form action="/search"  class="weui-search-bar__form">
                     <div class="weui-search-bar__box">
                         <i class="weui-icon-search" style="top: 1px;"></i>
-                        <input name="q" type="search" class="weui-search-bar__input" id="searchInput" placeholder="搜索医院、医生" autofocus/>
+                        <input type="search" class="weui-search-bar__input" id="searchInput" placeholder="搜索医院、医生" name="q" value="{{ $q ? : ''}}"  autofocus/>
                         <a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
                     </div>
                     <label class="weui-search-bar__label" id="searchText">
@@ -66,10 +66,6 @@
 
                 <div class="bd">
                     <div class="weui-cells__title">暂无“{{ $q }}”的相关医院和医生，欢迎选择相近的医院或医生。</div>
-                </div>
-
-                <div class="bd spacing" style="margin-top: 30px;padding:15px;">
-                    <a href="search" class="weui-btn weui-btn_default">选择医院或医生</a>
                 </div>
 
             @endif

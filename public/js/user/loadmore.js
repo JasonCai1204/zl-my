@@ -18,22 +18,30 @@ $(function(){
                 $.getJSON( '/loadmore', { 'counter': counter }, function(data) {
                         var result = '';
                         counter++;
-                        for(var i = pageStart; i < pageEnd; i++){
-                            result +=   '<a class="my_advice_list" href= http://zl-my.com:8000//news/'+ data.data[i].id+'>'
-                                +'<img src='+ data.data[i].cover_image +' alt="">'
-                                +'<span>'+ data.data[i].title +'</span>'
-                                +'</ a>';
-                            if((i + 1) >= data.data.length){
-                                me.lock();
-                                me.noData();
-                                break;
+                        if(data.data[0]){
+                            for(var i = pageStart; i < pageEnd; i++){
+                                result +=   '<a class="my_advice_list" href= http://zl-my.com:8000/news/'+ data.data[i].id+'>'
+                                    +'<img src='+ data.data[i].cover_image +' alt="">'
+                                    +'<span>'+ data.data[i].title +'</span>'
+                                    +'</ a>';
+                                if((i + 1) >= data.data.length){
+                                    me.lock();
+                                    me.noData();
+                                    $(".weui-loadmore__tips").text("已展示全部资讯");
+                                    break;
+                                }
                             }
+                            setTimeout(function(){
+                                $('.lists').append(result);
+                                me.resetload();
+                            },1000);
+                        }else{
+                            me.lock();
+                            me.noData();
+                            $('.weui-loadmore').find('i').remove();
+                            $(".weui-loadmore__tips").text("已展示全部资讯")
                         }
-                        setTimeout(function(){
-                            $('.lists').append(result);
-                            me.resetload();
-                            $(".weui-loadmore__tips").text("看完啦")
-                        },1000);
+
                     });
             },
             threshold : 50

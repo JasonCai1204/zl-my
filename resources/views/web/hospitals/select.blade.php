@@ -18,7 +18,7 @@
                     <p>{{$recommendHospital->name}}</p>
                 </div>
                 <div class="weui-cell__ft">
-                    <input type="radio" class="weui-check" name="hospital_id" value="{{$recommendHospital->id}}">
+                    <input type="radio" class="weui-check" name="hospital_id" value="{{$recommendHospital->id}}" checked>
                     <span class="weui-icon-checked"></span>
                 </div>
             </label>

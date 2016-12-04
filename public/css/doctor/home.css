@@ -71,10 +71,8 @@ input[type="button"], input[type="submit"], input[type="reset"]{
 #news_container p >img{
     display: block;
     width:100%;
-    height:195px;
+    height:initial;
     margin:0 auto;
-    margin-bottom:13.5px;
-    /*border:1px solid rgb(151,151,151);*/
 }
 .doctor_order_date{
     height:24px;

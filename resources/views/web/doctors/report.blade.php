@@ -2,12 +2,12 @@
 <html lang="zh-cmn-Hans">
 <head>
     <meta charset="UTF-8">
-    <title>患者报告详情-肿瘤名医</title>
+    <title>患者报告详情 - 肿瘤名医</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
     <link rel="stylesheet" href="/css/doctor/weui.min.css">
     <link rel="stylesheet" href="/css/doctor/home.css">
 </head>
-<body>
+<body style="background: white;">
 
 <div class="logo_part">
     <div class="logo">

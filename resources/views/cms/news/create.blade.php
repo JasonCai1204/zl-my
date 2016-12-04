@@ -35,7 +35,7 @@
 
                             <div class="col-md-10">
                                 <input id="cover_image" type="file" name="cover_image" accept="image/*">
-                                <span class="help-block">尺寸为 400x200px.</span>
+                                <span class="help-block">尺寸为 320x150px.</span>
 
                                 @if ($errors->has('cover_image'))
                                     <span class="help-block">

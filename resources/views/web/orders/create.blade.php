@@ -508,7 +508,7 @@
 
             add:function (e, data) {
                 data.context = ($("<li class='weui-uploader__file weui-uploader__file_status'></li>")
-                        .css('background-image','url()')
+                        .css('background-image','url(/storage/images/order/photos/1480822892/th_2.jpg)')
                         .html("<div class='weui-uploader__file-content'>" + "<i class='weui-loading'></i>" + "</div>")
                         .appendTo($(".weui-uploader__files") ) );
                 data.submit();
@@ -518,10 +518,12 @@
             done: function (e, data) {
                 var url ='/storage/'+ data.result.file.url;
                 data.context
-                        .css("backgroundImage","url(" + url + ")")
+//                        .css("background-image","url(" + url + ")")
                         .removeClass('weui-uploader__file_status')
                         .attr("onclick","clickPhoto($(this))")
                         .children('div').remove();
+                console.log(url);
+                console.log(data.context.css('background-image'))
                 ImgUrlList.push(data.result.file.url);
                 $("[name='photos']").val(ImgUrlList.join(','));
                 setCookie('ImgUrlList',$("[name='photos']").val());
@@ -558,7 +560,7 @@
                 $(this).parent('.my_tips').css("height","initial");
             }else{
                 $(this).css('background-image','url(/storage/images/app/condition_tips_downwords_arrow.jpg)');
-                $(this).parent('.my_tips').css("height","20px");
+                $(this).parent('.my_tips').css("height","25px");
             }
         });
         $(".my_drop2")
@@ -569,7 +571,7 @@
                 $(this).parent('.my_tips').css("height","initial");
             }else{
                 $(this).css('background-image','url(/storage/images/app/material_tips_downwords_arrow.jpg)');
-                $(this).parent('.my_tips').css("height","20px");
+                $(this).parent('.my_tips').css("height","25px");
             }
         });
 </script>

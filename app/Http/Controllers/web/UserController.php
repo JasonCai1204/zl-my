@@ -55,8 +55,8 @@ class UserController extends Controller
             'name.required' => '姓名不能为空。',
             'name.max' => '姓名不能超过 5 位。',
             'phone_number.required' => '手机号码不能为空。',
-            'phone_number.digits' => '手机号码必需是 11 位数字。',
-            'phone_number.unique' => '此手机号码已注册',
+            'phone_number.digits' => '请输入 11 位手机号码。',
+            'phone_number.unique' => '此手机号码已注册。',
         ]);
 
             $user= App\User::find(Auth::user()->id);

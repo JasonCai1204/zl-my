@@ -8,19 +8,20 @@
     <div class="my_home_header" style=" background-image: url('/storage/images/app/4_doctors.jpeg');">
         <div class="bd">
             <div class="weui-search-bar testshearch" id="searchBar">
-                <form class="weui-search-bar__form" style="background-color: transparent">
+                <form action="/search" class="weui-search-bar__form" style="background-color: transparent">
                     <div class="weui-search-bar__box">
                         <i class="weui-icon-search" style="top: 1px;"></i>
-                        <input type="search" class="weui-search-bar__input" id="searchInput" placeholder="搜索医院、医生" autofocus/>
+                        <input type="search" class="weui-search-bar__input" id="searchInput" placeholder="搜索医院、医生"
+                               name="q" autofocus/>
                         <a href="javascript:;" class="weui-icon-clear" id="searchClear"></a>
+                    </div>
+                    <label class="weui-search-bar__label" id="searchText">
+                        <i class="weui-icon-search"></i>
+                        <span>搜索医院、医生</span>
+                    </label>
+                </form>
+                <a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
             </div>
-            <label class="weui-search-bar__label" id="searchText">
-                <i class="weui-icon-search"></i>
-                <span>搜索医院、医生</span>
-            </label>
-            </form>
-            <a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
-    </div>
         </div>
     </div>
     <div id="searchbd" style="display: none;"></div>
