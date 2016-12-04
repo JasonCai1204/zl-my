@@ -23,7 +23,7 @@ class NewsController extends Controller
     {
         $this->validate($request, [
             'title' => 'required|max:64',
-            'cover_image' => 'required|dimensions:min_width=400,min_height=200', // image|
+            'cover_image' => 'required|dimensions:min_width=320,min_height=150', // image|
             'content' => 'required'
         ]);
 
@@ -43,7 +43,7 @@ class NewsController extends Controller
 
     public function index()
     {
-        return view('cms.news.index', ['data' => App\News::all()]);
+        return view('cms.news.index', ['data' => App\News::latest()->get()]);
     }
 
     public function show(App\News $news)
@@ -55,7 +55,7 @@ class NewsController extends Controller
     {
         $this->validate($request, [
             'title' => 'required|max:64',
-            'cover_image' => 'dimensions:min_width=100,min_height=100', // image|
+            'cover_image' => 'dimensions:min_width=320,min_height=150', // image|
             'content' => 'required'
         ]);
 
