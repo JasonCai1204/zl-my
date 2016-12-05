@@ -47,9 +47,9 @@ $(function () {
             })
             .on('input', function(){
                 if(this.value.length) {
-                    $searchResult.show();
+                    $searchClear.show();
                 } else {
-                    $searchResult.hide();
+                    $searchClear.hide();
                 }
                 $(".weui-icon-search").css({
                 })
@@ -58,6 +58,7 @@ $(function () {
         $searchClear.on('click', function(){
             hideSearchResult();
             $searchInput.focus();
+            $searchClear.hide();
         });
         $searchCancel.on('click', function(){
             cancelSearch();

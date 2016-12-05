@@ -4,6 +4,14 @@
 $(function(){
         var counter = 1;
         var pageStart = 0,pageEnd = 10;
+        var winH = $(window).width();
+        var imgH = winH*0.46875;
+        $('.my_advice_list img').height(imgH);
+        $(window).resize(function(){
+            winH = $(window).width();
+            imgH = winH*0.46875;
+            $('.my_advice_list img').height(imgH);
+        });
 
         // dropload
         $('#container_news').dropload({

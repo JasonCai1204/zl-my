@@ -14,24 +14,24 @@ class DoctorController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:doctor', ['only' =>['getProfile','getCondition_report']]);
+        $this->middleware('auth:doctor', ['only' => ['getProfile', 'getCondition_report']]);
 
     }
 
     /**
-    * Display a listing of the resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-        $recommendDoctors = App\Doctor::where('is_recommended','1')
-                ->orderBy(DB::raw('CONVERT(name USING gbk)'))
-                ->get();
+        $recommendDoctors = App\Doctor::where('is_recommended', '1')
+            ->orderBy(DB::raw('CONVERT(name USING gbk)'))
+            ->get();
 
         $doctors = App\Doctor::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
 
-        return view('web.doctors.index',[
+        return view('web.doctors.index', [
             'recommendDoctors' => $recommendDoctors,
             'doctors' => $doctors
         ]);
@@ -39,39 +39,39 @@ class DoctorController extends Controller
 
 
     /**
-    * Show the form for creating a new resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
         //
     }
 
     /**
-    * Store a newly created resource in storage.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @return \Illuminate\Http\Response
-    */
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
         //
     }
 
     /**
-    * Display the specified resource.
-    *
-    * @param  int  $id
-    * @return \Illuminate\Http\Response
-    */
+     * Display the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
     public function show($id)
     {
         $doctor = App\Doctor::findOrFail($id);
 
         $hospital_id = $doctor->hospital->id;
 
-        return view('web.doctors.show',[
+        return view('web.doctors.show', [
             'doctor' => $doctor,
             'doctor_id' => $id,
             'hospital_id' => $hospital_id
@@ -79,71 +79,72 @@ class DoctorController extends Controller
     }
 
     /**
-    * Show the form for editing the specified resource.
-    *
-    * @param  int  $id
-    * @return \Illuminate\Http\Response
-    */
+     * Show the form for editing the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
     public function edit($id)
     {
         //
     }
 
     /**
-    * Update the specified resource in storage.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @param  int  $id
-    * @return \Illuminate\Http\Response
-    */
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
     public function update(Request $request, $id)
     {
         //
     }
 
     /**
-    * Remove the specified resource from storage.
-    *
-    * @param  int  $id
-    * @return \Illuminate\Http\Response
-    */
+     * Remove the specified resource from storage.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
     public function destroy($id)
     {
         //
     }
 
 
-
-
     //Select doctor
-    public function getSelect()
+    public function getSelect(Request $request)
     {
 
-        $recommendDoctors = App\Doctor::where('is_recommended','1')
-                ->orderBy(DB::raw('CONVERT(name USING gbk)'))
-                ->get();
+        $recommendDoctors = App\Doctor::where('is_recommended', '1')
+            ->orderBy(DB::raw('CONVERT(name USING gbk)'))
+            ->get();
 
         $doctors = App\Doctor::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
 
 
-        return view('web.doctors.select',[
+        return view('web.doctors.select', [
             'recommendDoctors' => $recommendDoctors,
-            'doctors' => $doctors
+            'doctors' => $doctors,
+            'check_doctor_id' => $request->check_doctor_id ?: ''
         ]);
     }
 
 
-    //    //Select doctor from hospital
+    //Select doctor from hospital
     public function getHospitalSelect(Request $request)
     {
 
-        $hospitalDoctors = App\Doctor::where('hospital_id',$request->hospital_id)
-        ->get();
+        $hospitalDoctors = App\Doctor::where('hospital_id', $request->hospital_id)
+            ->get();
 
-        return view('web.doctors.select',[
+        return view('web.doctors.select', [
             'hospitalDoctors' => $hospitalDoctors,
-            'hospital_id' => $request->hospital_id
+            'hospital_id' => $request->hospital_id,
+            'check_doctor_id' => $request->check_doctor_id ?: ''
         ]);
+
     }
 
     // Select doctor from instance
@@ -151,19 +152,20 @@ class DoctorController extends Controller
     {
         $instance_id = $request->instance_id;
 
-        $instance = App\Instance::where('id',$instance_id)
-        ->get();
+        $instance = App\Instance::where('id', $instance_id)
+            ->get();
 
         $instanceDoctors = $instance->first()
-        ->doctors;
+            ->doctors;
 
         $instanceDoctor_id = $instanceDoctors
-        ->first()->id;
+            ->first()->id;
 
-        return view('web.doctors.select',[
+        return view('web.doctors.select', [
             'instance_id' => $instance_id,
-            'instanceDoctors'=> $instanceDoctors,
-            'instanceDoctor_id' => $instanceDoctor_id
+            'instanceDoctors' => $instanceDoctors,
+            'instanceDoctor_id' => $instanceDoctor_id,
+            'check_doctor_id' => $request->check_doctor_id ?: ''
         ]);
     }
 
@@ -172,22 +174,22 @@ class DoctorController extends Controller
     {
         $doctor = App\Doctor::find(Auth::guard('doctor')->user()->id);
 
-        return view('web.doctors.profile',[
+        return view('web.doctors.profile', [
             'doctor' => $doctor
         ]);
     }
 
 
-
     // Get condition_report.
 
-    public function getCondition_report(Request $request){
+    public function getCondition_report(Request $request)
+    {
 
 
         $order = App\Order::find($request->id);
 
-        return view('web.doctors.report',[
-            'order'=> $order
+        return view('web.doctors.report', [
+            'order' => $order
         ]);
     }
 

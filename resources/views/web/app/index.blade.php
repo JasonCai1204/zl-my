@@ -61,7 +61,7 @@
                 <div class="swiper-wrapper">
                     @foreach($news as $new)
                         <div class="swiper-slide">
-                            <a href="news/{{$new->id}}" style="background-image:url('{{$new->cover_image}}')"></a>
+                            <a href="news/{{$new->id}}" style="background-image:url('/storage/{{$new->cover_image}}')"></a>
                         </div>
                     @endforeach
                 </div>

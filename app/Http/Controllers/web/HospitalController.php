@@ -11,19 +11,19 @@ use Illuminate\Support\Facades\DB;
 class HospitalController extends Controller
 {
     /**
-    * Display a listing of the resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-        $recommendHospitals = App\Hospital::where('is_recommended','1')
-                ->orderBy(DB::raw('CONVERT(name USING gbk)'))
-                ->get();
+        $recommendHospitals = App\Hospital::where('is_recommended', '1')
+            ->orderBy(DB::raw('CONVERT(name USING gbk)'))
+            ->get();
 
         $hospitals = App\Hospital::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
 
-        return view('web.hospitals.index',[
+        return view('web.hospitals.index', [
             'recommendHospitals' => $recommendHospitals,
             'hospitals' => $hospitals
         ]);
@@ -31,18 +31,18 @@ class HospitalController extends Controller
     }
 
     /**
-    * Display the specified resource.
-    *
-    * @param  int  $id
-    * @return \Illuminate\Http\Response
-    */
+     * Display the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
     public function show($id)
     {
         $hospital = App\Hospital::findOrFail($id);
 
         $hospital->city = $hospital->city->name;
 
-        return view('web.hospitals.show',[
+        return view('web.hospitals.show', [
             'hospital' => $hospital,
             'hospital_id' => $id,
         ]);
@@ -53,7 +53,7 @@ class HospitalController extends Controller
     {
         // When search has not  keyword "q".
         if (!$request->has('q')) {
-            return view('web.app.search',[
+            return view('web.app.search', [
                 'hospitals' => "",
                 'doctors' => ""
             ]);
@@ -61,12 +61,12 @@ class HospitalController extends Controller
 
         // Search hospital or doctor.
         $hospitals = App\Hospital::where('name', 'like', '%' . $request->q . '%')
-                ->orderBy(DB::raw('CONVERT(name USING gbk)'))
-                ->get();
+            ->orderBy(DB::raw('CONVERT(name USING gbk)'))
+            ->get();
 
         $doctors = App\Doctor::where('name', 'like', '%' . $request->q . '%')
-                ->orderBy(DB::raw('CONVERT(name USING gbk)'))
-                ->get();
+            ->orderBy(DB::raw('CONVERT(name USING gbk)'))
+            ->get();
 
         return view('web.app.search', [
             'hospitals' => $hospitals,
@@ -76,17 +76,18 @@ class HospitalController extends Controller
     }
 
     // Display hospitals
-    public function getSelect()
+    public function getSelect(Request $request)
     {
-        $recommendHospitals = App\Hospital::where('is_recommended','1')
-                ->orderBy(DB::raw('CONVERT(name USING gbk)'))
-                ->get();
+        $recommendHospitals = App\Hospital::where('is_recommended', '1')
+            ->orderBy(DB::raw('CONVERT(name USING gbk)'))
+            ->get();
 
         $hospitals = App\Hospital::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
 
-        return view('web.hospitals.select',[
+        return view('web.hospitals.select', [
             'recommendHospitals' => $recommendHospitals,
             'hospitals' => $hospitals,
+            'check_hospital_id' => $request->check_hospital_id ?: ''
         ]);
     }
 

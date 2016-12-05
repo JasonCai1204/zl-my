@@ -357,7 +357,7 @@ input,input:focus,input:active{
 .my_advice_list{
     display: inline-block;
     width:100%;
-    height: 100%;
+    overflow: hidden;
     position: relative;
     box-sizing: border-box;
     margin:0;
@@ -599,6 +599,17 @@ input,input:focus,input:active{
     height:initial;
     margin:0 auto;
 }
+#container_news .weui-loadmore{
+    margin-top:15px;
+}
+#container_news .weui-loadmore__tips{
+    font-size:13px;
+    color: #999999;
+}
+#container_news .weui-loading{
+    margin-top:-3px;
+    margin-right:5px;
+}
 /*end*/
 
 .my_mine_date{
@@ -806,7 +817,6 @@ input,input:focus,input:active{
     height:80px;
 }
 .btnPosition{
-    max-width: 450px;
     position: fixed;
     width:100%;
     bottom: 0;
