@@ -68,7 +68,7 @@
         </div>
 
         <input type="submit" class="btnCommon" value="完成">
-        <a href="/account" class="btnCommon btnCencel">取消</a>
+        <a href="/account/profile" class="btnCommon btnCencel">取消</a>
     </form>
 
 </div>

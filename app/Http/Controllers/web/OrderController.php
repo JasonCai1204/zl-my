@@ -23,113 +23,214 @@ class OrderController extends Controller
     public function getCreate(Request $request)
     {
 
-        if ($request->hospital_id && $request->doctor_id && $request->instance_id) {
+        if($request->has('hospital_id')) {
 
-            $hospitals = App\Hospital::where('id', $request->hospital_id)
-                ->get();
+            if($request->has('doctor_id')){
 
-            $doctors = App\Doctor::where('id', $request->doctor_id)
-                ->get();
+                $hospital_id = App\Doctor::find($request->doctor_id)->hospital->id;
 
-            $instances = App\Instance::where('id', $request->instance_id)
-                ->get();
+                if ($hospital_id == $request->hospital_id) {
 
-            return view('web.orders.create', [
-                'hospitals' => $hospitals,
-                'hospital_id' => $request->hospital_id,
-                'doctors' => $doctors,
-                'doctor_id' => $request->doctor_id,
-                'instances' => $instances,
-                'instance_id' => $request->instance_id
-            ]);
+                    if($request->has('instance_id')){
+
+                        $instance = App\Instance::find($request->instance_id);
+
+                        $doctors = $instance->doctors()->pluck('doctor_id')->toArray();
+
+                        $judge =  in_array($request->doctor_id, $doctors);
+
+                        if( $judge == true ){
+
+                            $doctor = App\Doctor::find($request->doctor_id);
+
+                            $hospital = $doctor->hospital;
+
+                            $instance = App\Instance::find($request->instance_id);
+
+                            return view('web.orders.create',[
+                                'doctor' => $doctor,
+                                'hospital' => $hospital,
+                                'instance' => $instance,
+                                'hospital_id' => $request->hospital_id ? : '',
+                                'doctor_id' => $request->doctor_id ? : '',
+                                'instance_id' => $request->instance_id ? : '',
+                            ]);
+
+                        }else{
+
+                            $doctor = App\Doctor::find($request->doctor_id);
+
+                            $hospital = $doctor->hospital;
+
+                            return view('web.orders.create',[
+                                'doctor' => $doctor,
+                                'hospital' => $hospital,
+                                'hospital_id' => $request->hospital_id ? : '',
+                                'doctor_id' => $request->doctor_id ? : '',
+                            ]);
+
+                        }
+
+                    }else{
+
+                        $hospital = App\Hospital::find($request->hospital_id);
+
+                        $doctor = App\Doctor::find($request->doctor_id);
+
+                        return view('web.orders.create', [
+                            'hospital' => $hospital,
+                            'doctor' => $doctor,
+                            'hospital_id' => $request->hospital_id ?: '',
+                            'doctor_id' => $request->doctor_id ?: ''
+                        ]);
+
+                    }
+
+                }elseif($request->has('instance_id')){
+
+                        $instance = App\Instance::find($request->instance_id);
+
+                        $doctors = $instance->doctors;
+
+                        $hospital = [];
+
+                        foreach ($doctors as $doctor) {
+
+                            $hospital[] = $doctor->hospital->id;
+
+                        }
+
+                        $judge =  in_array($request->hospital_id, $hospital);
+
+                        if ( $judge == true ) {
+
+                            $hospital = App\Hospital::find($request->hospital_id);
+
+                            $instance = App\Instance::find($request->instance_id);
+
+                            return view('web.orders.create', [
+                                'hospital' => $hospital,
+                                'instance' => $instance,
+                                'hospital_id' => $request->hospital_id ?: '',
+                                'instance_id' => $request->instance_id ?: '',
+                            ]);
+
+                        } else {
+
+                            $hospital = App\Hospital::find($request->hospital_id);
+
+                            return view('web.orders.create', [
+                                'hospital' => $hospital,
+                                'hospital_id' => $request->hospital_id
+                            ]);
+
+                        }
+                    }else{
+
+                    $hospital = App\Hospital::find($request->hospital_id);
+
+                    return view('web.orders.create', [
+                        'hospital' => $hospital,
+                        'hospital_id' => $request->hospital_id,
+                    ]);
+                }
+
+            }else{
+                $hospital = App\Hospital::find($request->hospital_id);
+
+                return view('web.orders.create', [
+                    'hospital' => $hospital,
+                    'hospital_id' => $request->hospital_id
+                ]);
+            }
+
         }
 
-        if ($request->hospital_id && $request->doctor_id) {
+//
+        if($request->has('doctor_id')){
 
-            $hospitals = App\Hospital::where('id', $request->hospital_id)
-                ->get();
 
-            $doctors = App\Doctor::where('id', $request->doctor_id)
-                ->get();
+            if($request->has('instance_id')){
 
-            return view('web.orders.create', [
-                'hospitals' => $hospitals,
-                'hospital_id' => $request->hospital_id,
-                'doctors' => $doctors,
-                'doctor_id' => $request->doctor_id
-            ]);
+                $instance = App\Instance::find($request->instance_id);
+
+                $doctors = $instance->doctors()->pluck('doctor_id')->toArray();
+
+                $judge =  in_array($request->doctor_id, $doctors);
+
+                if( $judge == true ){
+
+                    $doctor = App\Doctor::find($request->doctor_id);
+
+                    $hospital = $doctor->hospital;
+
+                    $instance = App\Instance::find($request->instance_id);
+
+                    return view('web.orders.create',[
+                        'doctor' => $doctor,
+                        'hospital' => $hospital,
+                        'instance' => $instance,
+                        'hospital_id' => $request->hospital_id ? : '',
+                        'doctor_id' => $request->doctor_id ? : '',
+                        'instance_id' => $request->instance_id ? : '',
+                    ]);
+
+                }else{
+
+                    $doctor = App\Doctor::find($request->doctor_id);
+
+                    $hospital = $doctor->hospital;
+
+                    return view('web.orders.create',[
+                        'doctor' => $doctor,
+                        'hospital' => $hospital,
+                        'hospital_id' => $request->hospital_id ? : '',
+                        'doctor_id' => $request->doctor_id ? : '',
+                    ]);
+
+                }
+
+
+            }else{
+
+                $doctor = App\Doctor::find($request->doctor_id);
+
+                $hospital = $doctor->hospital;
+
+                return view('web.orders.create',[
+                    'doctor' => $doctor,
+                    'hospital' => $hospital,
+                    'doctor_id' => $request->doctor_id,
+                    'hospital_id' => $hospital->id ? : ''
+                ]);
+
+            }
+
         }
 
-        if ($request->hospital_id) {
+        if($request->has('instance_id')){
 
-            $hospitals = App\Hospital::where('id', $request->hospital_id)
-                ->get();
+            if($request->has('doctor_id')){
 
-            return view('web.orders.create', [
-                'hospitals' => $hospitals,
-                'hospital_id' => $request->hospital_id
-            ]);
-        }
+            }elseif($request->has('doctor_id')){
 
-        // Select from doctor
+            }else{
 
-        if ($request->doctor_id && !$request->instance_id) {
+                $instance = App\Instance::find($request->instance_id);
 
-            $doctors = App\Doctor::where('id', $request->doctor_id)
-                ->get();
+                return view('web.orders.create',[
+                    'instance' => $instance,
+                    'instance_id' => $instance->id
+                ]);
 
-            $hospital_id = App\Doctor::find($request->doctor_id)
-                ->hospital->id;
-
-            $hospitals = App\Hospital::where('id', $hospital_id)
-                ->get();
-
-            return view('web.orders.create', [
-                'hospitals' => $hospitals,
-                'hospital_id' => $hospital_id,
-                'doctors' => $doctors,
-                'doctor_id' => $request->doctor_id,
-            ]);
-        }
-
-        // Select from instance
-        if ($request->instance_id && !$request->doctor_id) {
-
-            $instances = App\Instance::where('id', $request->instance_id)
-                ->get();
-
-            return view('web.orders.create', [
-                'instances' => $instances,
-                'instance_id' => $request->instance_id
-            ]);
-        }
-
-        if ($request->instance_id && $request->doctor_id) {
-
-            $instances = App\Instance::where('id', $request->instance_id)
-                ->get();
-
-            $doctors = App\Doctor::where('id', $request->doctor_id)
-                ->get();
-
-            $hospital_id = $doctors->first()->hospital->id;
-
-            $hospitals = App\Hospital::where('id', $hospital_id)
-                ->get();
-
-            return view('web.orders.create', [
-                'hospitals' => $hospitals,
-                'hospital_id' => $hospital_id,
-                'doctors' => $doctors,
-                'doctor_id' => $request->doctor_id,
-                'instances' => $instances,
-                'instance_id' => $request->instance_id
-            ]);
+            }
 
         }
 
         return view('web.orders.create');
+
     }
+
 
     // User post photos
     public function postPhotos(Request $request)
@@ -144,7 +245,7 @@ class OrderController extends Controller
             return collect([
                 'file' => [
                     "name" => $fileName,
-                    "url" => $path
+                    'url' => $path
                 ]
             ])->toJson();
 

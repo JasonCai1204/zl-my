@@ -78,6 +78,7 @@ class HospitalController extends Controller
     // Display hospitals
     public function getSelect(Request $request)
     {
+
         $recommendHospitals = App\Hospital::where('is_recommended', '1')
             ->orderBy(DB::raw('CONVERT(name USING gbk)'))
             ->get();
@@ -87,7 +88,9 @@ class HospitalController extends Controller
         return view('web.hospitals.select', [
             'recommendHospitals' => $recommendHospitals,
             'hospitals' => $hospitals,
-            'check_hospital_id' => $request->check_hospital_id ?: ''
+            'check_hospital_id' => $request->check_hospital_id ?: '',
+            'doctor_id' => $request->doctor_id ?: '',
+            'instance_id' => $request->instance_id ?: ''
         ]);
     }
 

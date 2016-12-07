@@ -8,6 +8,14 @@
 @if ( isset($instances) )
     <div class="container" id="order_choice_cancer">
         <form action="/orders/create" method="get">
+
+            @if( isset($hospital_id) || isset($doctor_id) )
+
+                <input type="hidden" name="hospital_id" value="{{ $hospital_id ? : '' }}"  />
+                <input type="hidden" name="doctor_id" value="{{ $doctor_id ? : '' }}"  />
+
+            @endif
+
             <div class="weui-cells__title">所有肿瘤</div>
             <div class="weui-cells weui-cells_radio">
                 @foreach ( $instances as $instance )

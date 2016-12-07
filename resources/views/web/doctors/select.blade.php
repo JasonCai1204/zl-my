@@ -8,6 +8,16 @@
 @if ( isset($recommendDoctors) || isset($doctors) )
     <div class="container" id="container_doctor">
         <form action="/orders/create" method="get">
+
+            @if( isset($check_doctor_id) || isset($hospital_id) || isset($instance_id) )
+
+                {{ $check_doctor_id }}
+                <input type="hidden" name="check_doctor_id" value="{{ $check_doctor_id ? : '' }}"  />
+                <input type="hidden" name="hospital_id" value="{{ isset($hospital_id) ? : '' }}"  />
+                <input type="hidden" name="instance_id" value="{{ isset($instance_id) ? : '' }}"  />
+
+            @endif
+
             @if ( count($recommendDoctors) > 0 )
                 <div class="weui-cells__title">推荐医生</div>
                 <div class="weui-cells weui-cells_radio">
@@ -59,6 +69,15 @@
                 <div class="container" id="container_doctor">
                     @if( count($hospitalDoctors) > 0 )
                         <form action="/orders/create" method="get">
+
+                            @if( isset($check_doctor_id) || isset($hospital_id) || isset($instance_id) )
+
+                                <input type="hidden" name="check_doctor_id" value="{{ $check_doctor_id ? : '' }}"  />
+                                <input type="hidden" name="hospital_id" value="{{ $hospital_id ? : '' }}"  />
+                                <input type="hidden" name="instance_id" value="{{ $instance_id ? : '' }}"  />
+
+                            @endif
+
                             <input type="hidden" name="hospital_id" value="{{ $hospital_id }}">
                             <div class="weui-cells weui-cells_radio">
                                 @foreach( $hospitalDoctors as $hospitalDoctor )
@@ -97,6 +116,15 @@
                 <div class="container" id="container_doctor">
                     @if ( count($instanceDoctors) > 0 )
                         <form action="/orders/create" method="get">
+
+                            @if( isset($check_doctor_id) || isset($hospital_id) || isset($instance_id) )
+
+                                <input type="hidden" name="check_doctor_id" value="{{ $check_doctor_id ? : '' }}"  />
+                                <input type="hidden" name="hospital_id" value="{{ isset($hospital_id) ? : '' }}"  />
+                                <input type="hidden" name="instance_id" value="{{ isset($instance_id) ? : '' }}"  />
+
+                            @endif
+
                             <input type="hidden" name="instance_id" value="{{ $instance_id }}">
                             <div class="weui-cells weui-cells_radio">
                                 @foreach ( $instanceDoctors as $instanceDoctor )

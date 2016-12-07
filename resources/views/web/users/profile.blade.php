@@ -25,13 +25,16 @@
                     <label class="weui-label">姓名</label>
                 </div>
 
-                <div class="weui-cell__bd">
-                    <input type="text" class="weui-input" value="{{$user->name}}" name="name" required />
-                </div>
-
-                @if($errors->has('name'))
+                @if ( $errors->has('name') )
+                    <div class="weui-cell__bd">
+                        <input type="text" class="weui-input" value="{{ old('name') }}" name="name" required />
+                    </div>
                     <div class="weui-cell__ft">
                         <i class="weui-icon-warn"></i>
+                    </div>
+                @else
+                    <div class="weui-cell__bd">
+                        <input type="text" class="weui-input" value="{{ old('name') ? : $user->name }}" name="name" required />
                     </div>
                 @endif
 
@@ -42,13 +45,16 @@
                     <label class="weui-label">手机号码</label>
                 </div>
 
-                <div class="weui-cell__bd">
-                    <input type="number" class="weui-input" value="{{$user->phone_number}}" name="phone_number" required />
-                </div>
-
-                @if($errors->has('phone_number'))
+                @if ( $errors->has('phone_number') )
+                    <div class="weui-cell__bd">
+                        <input type="number" class="weui-input" value="{{ old('phone_number') }}" name="phone_number" required />
+                    </div>
                     <div class="weui-cell__ft">
                         <i class="weui-icon-warn"></i>
+                    </div>
+                @else
+                    <div class="weui-cell__bd">
+                        <input type="number" class="weui-input" value="{{ old('phone_number')? : $user->phone_number }}" name="phone_number" required />
                     </div>
                 @endif
 

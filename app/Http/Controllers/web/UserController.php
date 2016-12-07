@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -47,19 +48,18 @@ class UserController extends Controller
     // Post modify profile.
     public function postProfile(Request $request)
     {
-
-        $this->validate($request, [
-            'name' => 'required|max:5',
-            'phone_number' => 'required|digits:11|unique:users',
-        ], [
-            'name.required' => '姓名不能为空。',
-            'name.max' => '姓名不能超过 5 位。',
-            'phone_number.required' => '手机号码不能为空。',
-            'phone_number.digits' => '请输入 11 位手机号码。',
-            'phone_number.unique' => '此手机号码已注册。',
-        ]);
-
             $user= App\User::find(Auth::user()->id);
+
+            $this->validate($request, [
+                'name' => 'required|max:5',
+                'phone_number' => 'required|digits:11|unique:users,phone_number,'.$user->id,
+            ], [
+                'name.required' => '姓名不能为空。',
+                'name.max' => '姓名不能超过 5 位。',
+                'phone_number.required' => '手机号码不能为空。',
+                'phone_number.digits' => '请输入 11 位手机号码。',
+                'phone_number.unique' => '此手机号码已注册。',
+            ]);
 
             $user->name = $request->name;
 

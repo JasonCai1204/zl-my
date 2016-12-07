@@ -7,10 +7,12 @@ $(function(){
         var winH = $(window).width();
         var imgH = winH*0.46875;
         $('.my_advice_list img').height(imgH);
+        $('.my_advice_list').height(imgH);
         $(window).resize(function(){
             winH = $(window).width();
             imgH = winH*0.46875;
             $('.my_advice_list img').height(imgH);
+            $('.my_advice_list').height(imgH);
         });
 
         // dropload

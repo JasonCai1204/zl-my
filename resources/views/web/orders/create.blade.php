@@ -44,7 +44,7 @@
                     </div>
 
                     <div class="weui-cell__bd">
-                        <input name="phone_number" type="tel" class="weui-input" pattern="[0-9]*" placeholder="必填"
+                        <input name="phone_number" type="number" class="weui-input" pattern="[0-9]*" placeholder="必填"
                                required/>
                     </div>
 
@@ -60,226 +60,112 @@
             <div class="weui-cells__title">可选填写</div>
             <div class="weui-cells">
 
-                @if ( isset($hospital_id) )
-                    <a href="/hospital/select?{{ $hospital_id ? 'check_hospital_id'. '='. $hospital_id : '' }}"
-                       class="weui-cell  weui-cell_access" id="order_hospital">
-                        <div class="weui-cell__bd">
-                            <p>预约医院</p>
-                        </div>
-                        @foreach ( $hospitals as $hospital )
-                            <div class="weui-cell__ft">
-                                <p>{{ $hospital->name }}</p>
-                            </div>
-                        @endforeach
-                    </a>
+                <a href="/hospital/select?{{ isset($hospital_id) ? 'check_hospital_id'. '='.$hospital_id : '' }}{{ isset($hospital_id) ? '&hospital_id'.'='.$hospital_id : '' }}{{ isset($doctor_id) ? '&doctor_id'.'='.$doctor_id : '' }}{{ isset($instance_id) ? '&instance_id'.'='.$instance_id : '' }}"
+                   class="weui-cell  weui-cell_access" id="order_hospital">
+                    <div class="weui-cell__bd">
+                        <p>预约医院</p>
+                    </div>
+                    <div class="weui-cell__ft">
+                        <p>{{ $hospital->name or ''}}</p>
+                    </div>
+                </a>
 
-                    <a href="/doctor/hospital/select?hospital_id={{ $hospital->id }}&{{ isset($doctor_id) ? 'check_doctor_id'. '='. $doctor_id : '' }}"
-                       class="weui-cell weui-cell_access" id="order_doctor">
-                        <div class="weui-cell__bd">
-                            <p>预约医生</p>
-                        </div>
-                        @if ( isset($doctor_id) )
-                            @foreach ( $doctors as $doctor )
-                                <div class="weui-cell__ft">
-                                    <p>{{ $doctor->name }}</p>
-                                </div>
-                            @endforeach
-                        @else
-                            <div class="weui-cell__ft">
-                                <p></p>
-                            </div>
-                        @endif
-                    </a>
+                <a href="/doctor/select?{{ isset($hospital_id) ? 'hospital_id'.'='.$hospital_id : '' }}{{ isset($doctor_id) ? '&doctor_id'.'='.$doctor_id : '' }}{{ isset($instance_id) ? '&instance_id'.'='.$instance_id : '' }}{{ isset($doctor_id) ? '&check_doctor_id'. '='. $doctor_id : '' }}"
+                   class="weui-cell weui-cell_access" id="order_doctor">
+                    <div class="weui-cell__bd">
+                        <p>预约医生</p>
+                    </div>
+                    <div class="weui-cell__ft">
+                        <p>{{ $doctor->name or '' }}</p>
+                    </div>
+                </a>
 
-                    @if ( isset($doctor->id) && isset($instance_id) )
-                        <a href="/instance/doctor/select?hospital_id={{ $hospital->id }}&doctor_id={{ $doctor->id }}&{{ isset($instance_id) ? 'check_instance_id'. '='. $instance_id : '' }}"
-                           class="weui-cell weui-cell_access" id="order_cancer">
-                            <div class="weui-cell__bd">
-                                <p>所患疾病</p>
-                            </div>
-                            @foreach ( $instances as $instance )
-                                <div class="weui-cell__ft">
-                                    <p>{{ $instance->name }}</p>
-                                </div>
-                            @endforeach
-                        </a>
-                    @elseif ( isset($doctor->id) )
-                        <a href="/instance/doctor/select?hospital_id={{ $hospital->id }}&doctor_id={{ $doctor->id }}&{{ isset($instance_id) ? 'check_instance_id'. '='. $instance_id : '' }}"
-                           class="weui-cell weui-cell_access" id="order_cancer">
-                            <div class="weui-cell__bd">
-                                <p>所患疾病</p>
-                            </div>
-                            <div class="weui-cell__ft">
-                                <p></p>
-                            </div>
-                        </a>
-                    @else
-                        <a href="/instance/select" class="weui-cell weui-cell_access" id="order_cancer">
-                            <div class="weui-cell__bd">
-                                <p>所患疾病</p>
-                            </div>
-                            <div class="weui-cell__ft">
-                                <p></p>
-                            </div>
-                        </a>
-                        @endif
+                <a href="/instance/select?{{ isset($hospital_id) ? 'hospital_id'.'='.$hospital_id : '' }}{{ isset($doctor_id) ? '&doctor_id'.'='.$doctor_id : '' }}{{ isset($instance_id) ? '&instance_id'.'='.$instance_id : '' }}{{ isset($instance_id) ? '&check_instance_id'. '='. $instance_id : '' }}"
+                   class="weui-cell weui-cell_access" id="order_cancer">
+                    <div class="weui-cell__bd">
+                        <p>所患疾病</p>
+                    </div>
+                    <div class="weui-cell__ft">
+                        <p>{{ $instance->name or '' }}</p>
+                    </div>
+                </a>
 
-                        @else
-                                <!--跳转 choice_hospital页面-->
-                        <a href="/hospital/select" class="weui-cell  weui-cell_access" id="order_hospital">
-                            <div class="weui-cell__bd">
-                                <p>预约医院</p>
-                            </div>
-                            <div class="weui-cell__ft">
-                                <p></p>
-                            </div>
-                        </a>
+                <!--选择性别-->
+                <div class="weui-cell weui-cell_select weui-cell_select-after">
+                    <div class="weui-cell__hd">
+                        <label for class="weui-label">性别</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <select name="gender" class="weui-select">
+                            <option value="" disabled selected></option>
+                            <option value="1">男</option>
+                            <-- 1 代表男 -->
+                            <option value="0">女</option>
+                            <-- 0 代表女 -->
+                        </select>
+                    </div>
+                </div>
 
-                        @if ( isset($instance_id) )
+                <!--选择出生年月-->
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">
+                            出生年月
+                        </label>
+                    </div>
+                    <div class="weui-cell__bd" style="color: #999999;">
+                        <input name="birthday" type="month" class="weui-input"
+                               style="display: block;text-align: right;float: right;">
+                    </div>
+                </div>
 
-                            @if ( isset($doctor_id) && isset($hospital_id) )
-                                <a href="/doctor/hospital/select?instance_id={{ $instance_id }}&{{ isset($instance_id) ? 'check_instance_id'. '='. $instance_id : '' }}"
-                                   class="weui-cell weui-cell_access" id="order_doctor">
-                                    <div class="weui-cell__bd">
-                                        <p>预约医生</p>
-                                    </div>
-                                    @if ( isset($doctor_id) )
-                                        @foreach ( $doctors as $doctor )
-                                            <div class="weui-cell__ft">
-                                                <p>{{ $doctor->name }}</p>
-                                            </div>
-                                        @endforeach
-                                    @else
-                                        <div class="weui-cell__ft">
-                                            <p></p>
-                                        </div>
-                                    @endif
-                                </a>
-                            @else
-                                <a href="/doctor/instance/select?instance_id={{ $instance_id }}&{{ isset($doctor_id) ? 'check_doctor_id'. '='. $doctor_id : '' }}"
-                                   class="weui-cell weui-cell_access" id="order_doctor">
-                                    <div class="weui-cell__bd">
-                                        <p>预约医生</p>
-                                    </div>
-                                    <div class="weui-cell__ft">
-                                        <p></p>
-                                    </div>
-                                </a>
+                <!--选择体重-->
+                <div class="weui-cell weui-cell_select weui-cell_select-after">
+                    <div class="weui-cell__hd">
+                        <label for class="weui-label">体重</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <select name="weight" class="weui-select">
+                            <option value="" disabled selected></option>
+                            <option value="31-36">31-36KG</option>
+                            <option value="36-41">36-41KG</option>
+                            <option value="41-46">41-46KG</option>
+                            <option value="46-51">46-51KG</option>
+                            <option value="51-56">51-56KG</option>
+                            <option value="56-61">56-61KG</option>
+                            <option value="61-66">61-66KG</option>
+                            <option value="66-71">66-71KG</option>
+                            <option value="71-76">71-76KG</option>
+                            <option value="76-81">71-76KG</option>
+                            <option value="81-86">81-86KG</option>
+                            <option value="86-91">86-91KG</option>
+                        </select>
+                    </div>
+                </div>
 
-                            @endif
+                <!--选择是否成抽烟-->
+                <div class="weui-cell weui-cell_select weui-cell_select-after">
+                    <div class="weui-cell__hd">
+                        <label for class="weui-label">是否抽烟</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <select name="smoking" class="weui-select">
+                            <option value="" disabled selected></option>
+                            <option value="1">是</option>
+                            <option value="0">否</option>
+                        </select>
+                    </div>
+                </div>
 
-                            <a href="/instance/select?{{ isset($instance_id) ? 'check_instance_id'. '='. $instance_id : '' }}"
-                               class="weui-cell weui-cell_access" id="order_cancer">
-                                <div class="weui-cell__bd">
-                                    <p>所患疾病</p>
-                                </div>
-                                @foreach ( $instances as $instance )
-                                    <div class="weui-cell__ft">
-                                        <p>{{ $instance->name }}</p>
-                                    </div>
-                                @endforeach
-                            </a>
-
-
-                            @else
-                                    <!--跳转 choice_doctor页面-->
-                            <a href="/doctor/select" class="weui-cell weui-cell_access" id="order_doctor">
-                                <div class="weui-cell__bd">
-                                    <p>预约医生</p>
-                                </div>
-                                <div class="weui-cell__ft">
-
-                                </div>
-                            </a>
-
-                            <!--跳转 choice_cancer页面-->
-                            <a href="/instance/select" class="weui-cell weui-cell_access" id="order_cancer">
-                                <div class="weui-cell__bd">
-                                    <p>所患疾病</p>
-                                </div>
-                                <div class="weui-cell__ft">
-
-                                </div>
-                            </a>
-                            @endif
-                            @endif
-
-                                    <!--选择性别-->
-                            <div class="weui-cell weui-cell_select weui-cell_select-after">
-                                <div class="weui-cell__hd">
-                                    <label for class="weui-label">性别</label>
-                                </div>
-                                <div class="weui-cell__bd">
-                                    <select name="gender" class="weui-select">
-                                        <option value="" disabled selected></option>
-                                        <option value="1">男</option>
-                                        <-- 1 代表男 -->
-                                        <option value="0">女</option>
-                                        <-- 0 代表女 -->
-                                    </select>
-                                </div>
-                            </div>
-
-                            <!--选择出生年月-->
-                            <div class="weui-cell">
-                                <div class="weui-cell__hd">
-                                    <label class="weui-label">
-                                        出生年月
-                                    </label>
-                                </div>
-                                <div class="weui-cell__bd" style="color: #999999;">
-                                    <input name="birthday" type="month" class="weui-input"
-                                           style="display: block;text-align: right;float: right;">
-                                </div>
-                            </div>
-
-                            <!--选择体重-->
-                            <div class="weui-cell weui-cell_select weui-cell_select-after">
-                                <div class="weui-cell__hd">
-                                    <label for class="weui-label">体重</label>
-                                </div>
-                                <div class="weui-cell__bd">
-                                    <select name="weight" class="weui-select">
-                                        <option value="" disabled selected></option>
-                                        <option value="31-36">31-36KG</option>
-                                        <option value="36-41">36-41KG</option>
-                                        <option value="41-46">41-46KG</option>
-                                        <option value="46-51">46-51KG</option>
-                                        <option value="51-56">51-56KG</option>
-                                        <option value="56-61">56-61KG</option>
-                                        <option value="61-66">61-66KG</option>
-                                        <option value="66-71">66-71KG</option>
-                                        <option value="71-76">71-76KG</option>
-                                        <option value="76-81">71-76KG</option>
-                                        <option value="81-86">81-86KG</option>
-                                        <option value="86-91">86-91KG</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <!--选择是否成抽烟-->
-                            <div class="weui-cell weui-cell_select weui-cell_select-after">
-                                <div class="weui-cell__hd">
-                                    <label for class="weui-label">是否抽烟</label>
-                                </div>
-                                <div class="weui-cell__bd">
-                                    <select name="smoking" class="weui-select">
-                                        <option value="" disabled selected></option>
-                                        <option value="1">是</option>
-                                        <option value="0">否</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <!--微信号码-->
-                            <div class="weui-cell">
-                                <div class="weui-cell__hd">
-                                    <label class="weui-label">微信号码</label>
-                                </div>
-                                <div class="weui-cell__bd">
-                                    <input name="wechat_id" type="text" class="weui-input" placeholder="方便我们与您联系">
-                                </div>
-                            </div>
+                <!--微信号码-->
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">微信号码</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input name="wechat_id" type="text" class="weui-input" placeholder="方便我们与您联系">
+                    </div>
+                </div>
             </div>
 
             <!--多文本输入病例-->
@@ -415,7 +301,9 @@
         $('#order_cancer').on('click', function () {
             writeCookie();
         });
-
+        $('[type = "submit"]').on('click', function () {
+            writeCookie();
+        })
 
         //        显示|隐藏ActionSheet
         function hideActionSheet(weuiActionsheet, mask) {
@@ -466,6 +354,7 @@
                 })
             }
         }
+        ;
 
         var mask = $('#mask');
         var weuiActionsheet = $('#weui-actionsheet');
@@ -524,9 +413,10 @@
                     },
 
                     done: function (e, data) {
-                        var url = '/storage/' + data.result.file.url;
+                        var url = '/storage/' + encodeURI(data.result.file.url);
+                        console.log(url);
                         data.context
-                                .css("background-image", "url(" + url + ")")
+                                .css("background-image", "url('" + url + "')")
                                 .removeClass('weui-uploader__file_status')
                                 .attr("onclick", "clickPhoto($(this))")
                                 .children('div').remove();
