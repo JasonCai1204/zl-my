@@ -10,11 +10,6 @@ use Illuminate\Support\Facades\DB;
 
 class HospitalController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $recommendHospitals = App\Hospital::where('is_recommended', '1')
@@ -30,12 +25,6 @@ class HospitalController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $hospital = App\Hospital::findOrFail($id);
@@ -78,20 +67,25 @@ class HospitalController extends Controller
     // Display hospitals
     public function getSelect(Request $request)
     {
-
-        $recommendHospitals = App\Hospital::where('is_recommended', '1')
+        $rec = App\Hospital::where('is_recommended', '1')
             ->orderBy(DB::raw('CONVERT(name USING gbk)'))
             ->get();
 
-        $hospitals = App\Hospital::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+        $all = App\Hospital::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
 
-        return view('web.hospitals.select', [
-            'recommendHospitals' => $recommendHospitals,
-            'hospitals' => $hospitals,
-            'check_hospital_id' => $request->check_hospital_id ?: '',
-            'doctor_id' => $request->doctor_id ?: '',
-            'instance_id' => $request->instance_id ?: ''
-        ]);
+        // package
+        $data = [
+            'rec' => $rec,
+            'all' => $all,
+        ];
+        if ($request->has('hospital_id'))
+            $data['hospital_id'] = $request->hospital_id;
+        if ($request->has('doctor_id'))
+            $data['doctor_id'] = $request->doctor_id;
+        if ($request->has('instance_id'))
+            $data['instance_id'] = $request->instance_id;
+
+        return view('web.hospitals.select', $data);
     }
 
 }
