@@ -18,11 +18,6 @@ class DoctorController extends Controller
 
     }
 
-    /**
-    * Display a listing of the resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
     public function index()
     {
         $recommendDoctors = App\Doctor::where('is_recommended','1')
@@ -37,34 +32,6 @@ class DoctorController extends Controller
         ]);
     }
 
-
-    /**
-    * Show the form for creating a new resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
-    public function create()
-    {
-        //
-    }
-
-    /**
-    * Store a newly created resource in storage.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @return \Illuminate\Http\Response
-    */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-    * Display the specified resource.
-    *
-    * @param  int  $id
-    * @return \Illuminate\Http\Response
-    */
     public function show($id)
     {
         $doctor = App\Doctor::findOrFail($id);
@@ -78,96 +45,51 @@ class DoctorController extends Controller
         ]);
     }
 
-    /**
-    * Show the form for editing the specified resource.
-    *
-    * @param  int  $id
-    * @return \Illuminate\Http\Response
-    */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-    * Update the specified resource in storage.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @param  int  $id
-    * @return \Illuminate\Http\Response
-    */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-    * Remove the specified resource from storage.
-    *
-    * @param  int  $id
-    * @return \Illuminate\Http\Response
-    */
-    public function destroy($id)
-    {
-        //
-    }
-
-
-
-
-    //Select doctor
     public function getSelect(Request $request)
     {
-
-           if($request->has('hospital_id')){
-
-               $hospitalDoctors = App\Doctor::where('hospital_id',$request->hospital_id)
-                   ->get();
-
-               return view('web.doctors.select',[
-                   'hospitalDoctors' => $hospitalDoctors,
-                   'hospital_id' => $request->hospital_id,
-                   'check_doctor_id' => $request->check_doctor_id ? : '',
-                   'instance_id' => $request->instance_id ? : ''
-               ]);
-
-           }elseif($request->has('instance_id')){
-
-               $instance_id = $request->instance_id;
-
-               $instance = App\Instance::where('id',$instance_id)
-                   ->get();
-
-               $instanceDoctors = $instance->first()
-                   ->doctors;
-
-               $instanceDoctor_id = $instanceDoctors
-                   ->first()->id;
-
-               return view('web.doctors.select',[
-                   'instance_id' => $instance_id,
-                   'instanceDoctors'=> $instanceDoctors,
-                   'instanceDoctor_id' => $instanceDoctor_id,
-                   'check_doctor_id' => $request->check_doctor_id ? : ''
-               ]);
-
-           }
-
-
-        $recommendDoctors = App\Doctor::where('is_recommended','1')
+        // hospital's doctors.
+        if ($request->has('hospital_id')) {
+            $rec = App\Doctor::where('is_recommended', '1')
+                ->where('hospital_id', $request->hospital_id)
                 ->orderBy(DB::raw('CONVERT(name USING gbk)'))
                 ->get();
+            $all = App\Doctor::orderBy(DB::raw('CONVERT(name USING gbk)'))
+                ->where('hospital_id', $request->hospital_id)
+                ->get();
+        }
 
-        $doctors = App\Doctor::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+        // instance's doctors.
+        if ($request->has('instance_id')) {
+            $rec2 = App\Instance::find($request->instance_id)
+                ->doctors()
+                ->where('is_recommended', 1)
+                ->get();
+            $all2 = App\Instance::find($request->instance_id)->doctors;
+        }
 
+        if (isset($rec) && isset($rec2)) {
+            $rec = $rec->intersect($rec2);
+            $all = $all->intersect($all2);
+        }
+        if (!isset($rec) && isset($rec2)) {
+            $rec = $rec2;
+            $all = $all2;
+        }
 
-        return view('web.doctors.select',[
-            'recommendDoctors' => $recommendDoctors,
-            'doctors' => $doctors,
-            'check_doctor_id' => $request->check_doctor_id ? : ''
-        ]);
+        // package
+        $data = [
+            'rec' => $rec,
+            'all' => $all,
+        ];
+        if ($request->has('hospital_id'))
+            $data['hospital_id'] = $request->hospital_id;
+        if ($request->has('doctor_id'))
+            $data['doctor_id'] = $request->doctor_id;
+        if ($request->has('instance_id'))
+            $data['instance_id'] = $request->instance_id;
+
+        return view('web.doctors.select', $data);
     }
-
 
     // Doctor profile.
     public function getProfile(Request $request)
@@ -179,10 +101,7 @@ class DoctorController extends Controller
         ]);
     }
 
-
-
     // Get condition_report.
-
     public function getCondition_report(Request $request){
 
 

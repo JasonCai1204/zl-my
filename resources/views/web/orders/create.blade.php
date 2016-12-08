@@ -1,6 +1,6 @@
 @extends('web.layouts.user-basic')
 
-@section('title','快速预约-肿瘤名医')
+@section('title','快速预约 - 肿瘤名医')
 
 @section('content')
 
@@ -11,11 +11,7 @@
     @endif
 
     <div class="container" id="container_order">
-        <form action="/orders/create" method="post" enctype="multipart/form-data">
-            <input type="hidden" name="hospital_id" value="{{ $hospital_id or '' }}"/>
-            <input type="hidden" name="doctor_id" value="{{ $doctor_id or '' }}"/>
-            <input type="hidden" name="instance_id" value="{{ $instance_id or '' }}"/>
-
+        <form action="/orders/create" method="post">
             {{ csrf_field() }}
 
             <div class="weui-cells weui-cells_form" style="margin-top: 30px;">
@@ -60,37 +56,45 @@
             <div class="weui-cells__title">可选填写</div>
             <div class="weui-cells">
 
-                <a href="/hospital/select?{{ isset($hospital_id) ? 'check_hospital_id'. '='.$hospital_id : '' }}{{ isset($hospital_id) ? '&hospital_id'.'='.$hospital_id : '' }}{{ isset($doctor_id) ? '&doctor_id'.'='.$doctor_id : '' }}{{ isset($instance_id) ? '&instance_id'.'='.$instance_id : '' }}"
+                <a href="/hospital/select?{{ isset($hospital) ? 'hospital_id=' . $hospital->id . '&' : ''}}{{ isset($doctor) ? 'doctor_id=' . $doctor->id . '&' : '' }}{{ isset($instance) ? 'instance_id=' . $instance->id : '' }}"
                    class="weui-cell  weui-cell_access" id="order_hospital">
                     <div class="weui-cell__bd">
                         <p>预约医院</p>
                     </div>
+
+                    <input type="hidden" name="hospital_id"{{ isset($hospital) ? ' value=' . $hospital->id : '' }} />
+
                     <div class="weui-cell__ft">
-                        <p>{{ $hospital->name or ''}}</p>
+                        <p>{{ isset($hospital) ? $hospital->name : '' }}</p>
                     </div>
                 </a>
 
-                <a href="/doctor/select?{{ isset($hospital_id) ? 'hospital_id'.'='.$hospital_id : '' }}{{ isset($doctor_id) ? '&doctor_id'.'='.$doctor_id : '' }}{{ isset($instance_id) ? '&instance_id'.'='.$instance_id : '' }}{{ isset($doctor_id) ? '&check_doctor_id'. '='. $doctor_id : '' }}"
+                <a href="/doctor/select?{{ isset($hospital) ? 'hospital_id=' . $hospital->id . '&' : ''}}{{ isset($doctor) ? 'doctor_id=' . $doctor->id . '&' : '' }}{{ isset($instance) ? 'instance_id=' . $instance->id : '' }}"
                    class="weui-cell weui-cell_access" id="order_doctor">
                     <div class="weui-cell__bd">
                         <p>预约医生</p>
                     </div>
+
+                    <input type="hidden" name="doctor_id"{{ isset($doctor) ? ' value=' . $doctor->id : '' }} />
+
                     <div class="weui-cell__ft">
-                        <p>{{ $doctor->name or '' }}</p>
+                        <p>{{ isset($doctor) ? $doctor->name : '' }}</p>
                     </div>
                 </a>
 
-                <a href="/instance/select?{{ isset($hospital_id) ? 'hospital_id'.'='.$hospital_id : '' }}{{ isset($doctor_id) ? '&doctor_id'.'='.$doctor_id : '' }}{{ isset($instance_id) ? '&instance_id'.'='.$instance_id : '' }}{{ isset($instance_id) ? '&check_instance_id'. '='. $instance_id : '' }}"
+                <a href="/instance/select?{{ isset($hospital) ? 'hospital_id=' . $hospital->id . '&' : ''}}{{ isset($doctor) ? 'doctor_id=' . $doctor->id . '&' : '' }}{{ isset($instance) ? 'instance_id=' . $instance->id : '' }}"
                    class="weui-cell weui-cell_access" id="order_cancer">
                     <div class="weui-cell__bd">
                         <p>所患疾病</p>
                     </div>
+
+                    <input type="hidden" name="instance_id"{{ isset($instance) ? ' value=' . $instance->id : '' }} />
+
                     <div class="weui-cell__ft">
-                        <p>{{ $instance->name or '' }}</p>
+                        <p>{{ isset($instance) ? $instance->name : '' }}</p>
                     </div>
                 </a>
 
-                <!--选择性别-->
                 <div class="weui-cell weui-cell_select weui-cell_select-after">
                     <div class="weui-cell__hd">
                         <label for class="weui-label">性别</label>
@@ -99,14 +103,11 @@
                         <select name="gender" class="weui-select">
                             <option value="" disabled selected></option>
                             <option value="1">男</option>
-                            <-- 1 代表男 -->
                             <option value="0">女</option>
-                            <-- 0 代表女 -->
                         </select>
                     </div>
                 </div>
 
-                <!--选择出生年月-->
                 <div class="weui-cell">
                     <div class="weui-cell__hd">
                         <label class="weui-label">
@@ -119,7 +120,6 @@
                     </div>
                 </div>
 
-                <!--选择体重-->
                 <div class="weui-cell weui-cell_select weui-cell_select-after">
                     <div class="weui-cell__hd">
                         <label for class="weui-label">体重</label>
@@ -143,7 +143,6 @@
                     </div>
                 </div>
 
-                <!--选择是否成抽烟-->
                 <div class="weui-cell weui-cell_select weui-cell_select-after">
                     <div class="weui-cell__hd">
                         <label for class="weui-label">是否抽烟</label>
@@ -157,7 +156,6 @@
                     </div>
                 </div>
 
-                <!--微信号码-->
                 <div class="weui-cell">
                     <div class="weui-cell__hd">
                         <label class="weui-label">微信号码</label>
@@ -168,7 +166,6 @@
                 </div>
             </div>
 
-            <!--多文本输入病例-->
             <div class="weui-cells__title" style="margin: 15px 0 6px 5px;">病情描述</div>
             <div class="weui-cells weui-cells_form">
                 <div class="weui-cell">
@@ -178,7 +175,7 @@
                     </div>
                 </div>
             </div>
-            <!--病情描述按钮-->
+
             <div class="weui-cells__tips my_tips">
                 <a href="javascript:;" class="my_drop1"
                    style="background-image: url('/storage/images/app/condition_tips_downwords_arrow.jpg')"></a>
@@ -213,7 +210,7 @@
                     </div>
                 </div>
             </div>
-            <!--资料上传按钮-->
+
             <div class="weui-cells__tips my_tips">
                 <a href="javascript:;" class="my_drop2"
                    style="background-image: url('/storage/images/app/material_tips_downwords_arrow.jpg')"></a>
@@ -236,7 +233,7 @@
 
         </form>
     </div>
-    <!--上传失败弹窗-->
+
     <div id="actionSheet_wrap">
         <div class="weui-mask_transparent actionsheet__mask" id="mask"
              style="text-decoration: none;transform-origin: 0px 0px 0px; opacity: 1; transform: scale(1, 1); display: none;"></div>
