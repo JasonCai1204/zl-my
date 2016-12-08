@@ -53,9 +53,11 @@ class HospitalController extends Controller
     {
         // When search has not  keyword "q".
         if (!$request->has('q')) {
+
             return view('web.app.search', [
                 'hospitals' => "",
-                'doctors' => ""
+                'doctors' => "",
+                'q' => ""
             ]);
         }
 
