@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\api;
 
-use App\Http\Models\Hospital;
-use App as App;
+use App\Http\Hospital;
+use App;
 use Illuminate\Http\Request;
 use Validator;
 use App\Http\Controllers\Controller;

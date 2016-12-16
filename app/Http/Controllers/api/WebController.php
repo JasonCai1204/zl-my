@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\api;
 
+use App;
 use Illuminate\Http\Request;
-use App as app;
 use App\Http\Controllers\Controller;
 
 class WebController extends Controller
 {
-    public function index(){
-
-        $news = app\News::orderBy('published_at','desc')
+    public function index()
+    {
+        $news = App\News::orderBy('published_at', 'desc')
             ->take(3)
             ->get();
 
@@ -24,11 +24,11 @@ class WebController extends Controller
 
     public function recommend()
     {
-        $hospitals = app\Hospital::where('is_recommended',1)->get();
+        $hospitals = App\Hospital::where('is_recommended', 1)->get();
 
         $data = [];
 
-        foreach($hospitals as $hospital){
+        foreach ($hospitals as $hospital) {
             $data['hospitals'][] = [
                 'id' => $hospital->id,
                 'name' => $hospital->name,
@@ -38,9 +38,9 @@ class WebController extends Controller
             ];
         }
 
-        $doctors = app\Doctor::where('is_recommended',1)->get();
+        $doctors = App\Doctor::where('is_recommended', 1)->get();
 
-        foreach($doctors as $doctor){
+        foreach ($doctors as $doctor) {
             $data['doctors'][] = [
                 'id' => $doctor->id,
                 'name' => $doctor->name,

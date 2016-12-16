@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\api;
 
-use App as App;
+use App;
 use Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -10,14 +10,8 @@ use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
-
         if($user_id = session('user.id')){
 
             $user = App\User::find($user_id);
@@ -29,126 +23,7 @@ class UserController extends Controller
         return view('users.account.account');
     }
 
-    // signIn
-    public function getSignIn()
-    {
-        return view('users.account.signin');
-    }
-
-    public function postSignIn(Request $request)
-    {
-        if(!$request->has('phone_number'))
-        {
-            return view('users.account.signin',
-                [
-                    'message' => '请输入手机号码',
-                ]
-            );
-        }
-
-        if(!$request->has('password'))
-        {
-            return view('users.account.signin',
-                [
-                    'message' => '请输入密码',
-                ]
-            );
-        }
-
-        if(!$request->has('phone_number') && !$request->has('password'))
-        {
-            return view('users.account.signin',
-                [
-                    'message' => '请输入手机号码和密码',
-                ]
-            );
-        }
-
-
-        if($request->has('phone_number') && $request->has('password'))
-        {
-
-            $user = App\User::where('phone_number',$request->phone_number)
-                ->first();
-
-            if(count($user)>0){
-                if (Hash::check($request->password, $user->password)) {
-
-                    session(['user' => $user]);
-
-                    return redirect('/');
-
-                }else{
-                    return view('users.account.signin',
-                        [
-                            'message' => '请输入正确的密码',
-                        ]
-                    );
-                }
-            }else{
-                return view('users.account.signin',
-                    [
-                        'message' => '请输入正确的手机号码',
-                    ]
-                );
-            }
-        }
-
-
-
-    }
-
-    // signUp
-    public function getSignUp()
-    {
-        return view('users.account.signup');
-    }
-
-    public function postSignUp(Request $request)
-    {
-
-        if($input = $request->all()){
-            $rules = [
-                'name' => 'required',
-                'phone_number' => 'required|digits:11',
-                'password' => 'required|min:6|confirmed',
-            ];
-
-            $messages = [
-                'name.required' => '请填写真实姓名',
-                'phone_number.required' => '请填写手机号码',
-                'phone_number.digits' => '请填写 11 位数字',
-                'password.required' => '请输入密码',
-                'password.min' => '请输入不少于 6 位的密码',
-                'password.confirmed' => '密码不一致',
-            ];
-
-            $validator = Validator::make($input,$rules,$messages);
-            if($validator->passes()){
-                $user = App\User::create(
-                    [
-                        'name' => $request->name,
-                        'phone_number' => $request->phone_number,
-                        'password' => bcrypt($request->password),
-                    ]
-                );
-                session(['user' => $user]);
-
-                // 判断是否主动注册还是被动注册
-                if(!$request->has('patient_name')){
-                    return redirect('/orders/create');
-                }
-
-                return redirect('/');
-
-            }else{
-                return back()->withErrors($validator);
-            }
-
-        }
-    }
-
-    // Get profile.
+        // Get profile.
     public function getProfile(Request $request)
     {
         $user = App\User::find($request->user_id);
@@ -266,14 +141,6 @@ class UserController extends Controller
                 return back()->withErrors($validator);
             }
         }
-    }
-
-    // Sign out.
-    public function signOut()
-    {
-        session(['user' => null]);
-
-        return redirect('/account');
     }
 
     // User orders.
