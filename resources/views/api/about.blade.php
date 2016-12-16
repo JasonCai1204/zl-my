@@ -7,13 +7,13 @@
     <link rel="stylesheet" href="/css/user/weui.min.css">
     <link rel="stylesheet" href="/css/user/home.css">
     <style type="text/css">
-        .special_cells_access .weui-cell__ft:after{
-            content:'+';
-            border:0;
-            -webkit-transform:rotate(0deg);
-            transform:rotate(0deg);
-            right:4px;
-            top:-8px;
+        .special_cells_access .weui-cell__ft:after {
+            content: '+';
+            border: 0;
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+            right: 4px;
+            top: -8px;
         }
     </style>
 </head>
@@ -22,7 +22,7 @@
 <!--主体部分-->
 <div class="container">
     <div class="my_aboutus_head">
-        <img src="/storage/images/app/web/www/user-mobile-about-slogan.png" alt="">
+        <img src="/storage/images/app/find_great_doctors_for_you.png" alt="">
     </div>
     <div class="my_aboutus_cell">
         <p class="my_aboutus_cellhd">我们做什么</p>
@@ -40,7 +40,8 @@
             <div class="weui-cell__ft"></div>
         </a>
     </div>
-    <div class="weui-cells__tips" style="font-size: 14px; color: rgb(53,53,53); margin-top: 15px; display: none;" id="ceo-address">
+    <div class="weui-cells__tips" style="font-size: 14px; color: rgb(53,53,53); margin-top: 15px; display: none;"
+         id="ceo-address">
         <p style="text-indent: 28px;">
             本人原就职于世界 500 强公司抗肿瘤事业部，两年前离开外企，和朋友创立了一家生物科技公司，可这两年，依然不停的接到电话，就是拜托我帮忙介绍医生看病，特别和肿瘤相关的越来越多。
         </p>
@@ -61,18 +62,18 @@
 <script src="../js/user/jquery-1.11.3.min.js"></script>
 <script type="text/javascript">
     var isHide = true;
-    $(".container").on('click','.special_cells_access',function () {
-        if(isHide){
+    $(".container").on('click', '.special_cells_access', function () {
+        if (isHide) {
             $('#ceo-address').slideDown();
             $('.special_cells_access .weui-cell__ft').after().css({
-                'transform':'rotate(45deg)',
-                'right':'-2px'
+                'transform': 'rotate(45deg)',
+                'right': '-2px'
             })
             isHide = false;
-        }else{
+        } else {
             $('#ceo-address').slideUp();
             $('.special_cells_access .weui-cell__ft').after().css({
-                'transform':'rotate(0deg)',
+                'transform': 'rotate(0deg)',
             })
             isHide = true;
         }

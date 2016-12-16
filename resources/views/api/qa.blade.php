@@ -13,7 +13,7 @@
 <!--主体部分-->
 <div class="container">
     <div class="my_aboutus_cell" style="padding: 0 0 25px;">
-        <img src="/storage/images/app/web/www/user-mobile-problem-photo-1.png" alt="">
+        <img src="/storage/images/app/pencil_question_mark.png" alt="">
     </div>
     <div class="my_aboutus_cell">
         <p class="my_aboutus_cellhd">我们做什么</p>

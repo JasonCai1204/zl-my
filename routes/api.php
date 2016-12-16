@@ -53,15 +53,12 @@ Route::group(['namespace' => 'api'], function(){
    Route::post('order/postPhotos','OrderController@postPhotos');
    Route::get('orders/create','OrderController@getCreate');
    Route::post('orders/create','OrderController@postCreate');
-   Route::get('order/{order}/display','OrderController@display');
    Route::get('order/msg','OrderController@getMsg');
    Route::resource('order','OrderController');
 
    // Instance
    Route::get('instance/select','InstanceController@getSelect');
-   Route::post('instance/select','InstanceController@postSelect');
    Route::get('instance/doctor/select','InstanceController@getDoctorSelect');
-
 
 
 });
