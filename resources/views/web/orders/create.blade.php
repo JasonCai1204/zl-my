@@ -56,7 +56,7 @@
             <div class="weui-cells__title">可选填写</div>
             <div class="weui-cells">
 
-                <a href="/hospital/select?{{ isset($hospital) ? 'hospital_id=' . $hospital->id . '&' : ''}}{{ isset($doctor) ? 'doctor_id=' . $doctor->id . '&' : '' }}{{ isset($instance) ? 'instance_id=' . $instance->id : '' }}"
+                <a href="/hospital/select?{{ isset($hospital) ? 'hospital_id=' . $hospital->id . '&' : ''}}{{ isset($doctor) ? 'doctor_id=' . $doctor->id . '&' : '' }}{{ isset($instance) ? 'instance_id=' . $instance->id . '&' : '' }}{{isset($city) ? 'city_id=' . $city_id : '' }}"
                    class="weui-cell  weui-cell_access" id="order_hospital">
                     <div class="weui-cell__bd">
                         <p>预约医院</p>
@@ -69,7 +69,7 @@
                     </div>
                 </a>
 
-                <a href="/doctor/select?{{ isset($hospital) ? 'hospital_id=' . $hospital->id . '&' : ''}}{{ isset($doctor) ? 'doctor_id=' . $doctor->id . '&' : '' }}{{ isset($instance) ? 'instance_id=' . $instance->id : '' }}"
+                <a href="/doctor/select?{{ isset($hospital) ? 'hospital_id=' . $hospital->id . '&' : ''}}{{ isset($doctor) ? 'doctor_id=' . $doctor->id . '&' : '' }}{{ isset($instance) ? 'instance_id=' . $instance->id : '' }}{{isset($city) ? 'city_id=' . $city_id : '' }}"
                    class="weui-cell weui-cell_access" id="order_doctor">
                     <div class="weui-cell__bd">
                         <p>预约医生</p>
@@ -82,7 +82,7 @@
                     </div>
                 </a>
 
-                <a href="/instance/select?{{ isset($hospital) ? 'hospital_id=' . $hospital->id . '&' : ''}}{{ isset($doctor) ? 'doctor_id=' . $doctor->id . '&' : '' }}{{ isset($instance) ? 'instance_id=' . $instance->id : '' }}"
+                <a href="/instance/select?{{ isset($hospital) ? 'hospital_id=' . $hospital->id . '&' : ''}}{{ isset($doctor) ? 'doctor_id=' . $doctor->id . '&' : '' }}{{ isset($instance) ? 'instance_id=' . $instance->id : '' }}{{isset($city) ? 'city_id=' . $city_id : '' }}"
                    class="weui-cell weui-cell_access" id="order_cancer">
                     <div class="weui-cell__bd">
                         <p>所患疾病</p>
@@ -258,11 +258,9 @@
     <script src="../js/user/jquery.fileupload.js"></script>
     <script type="text/javascript">
         var cookiearr = ['patient_name', 'phone_number', 'birthday', 'wechat_id', 'detail', 'gender', 'weight', 'smoking', 'ImgUrlList'];
-        //        写入cookie
         function setCookie(NameOfCookie, value) {
             document.cookie = NameOfCookie + " = " + escape(value) + "; expires= -1";
         }
-        //        获取cookie
         function getCookie(NameOfCookie) {
             if (document.cookie.length > 0) {
                 begin = document.cookie.indexOf(NameOfCookie + "=");
@@ -276,7 +274,6 @@
                 return null;
             }
         }
-        //        cookietoform
         function writeCookie() {
             setCookie('patient_name', $("[name='patient_name']").val());
             setCookie('phone_number', $("[name='phone_number']").val());
@@ -302,7 +299,6 @@
             writeCookie();
         })
 
-        //        显示|隐藏ActionSheet
         function hideActionSheet(weuiActionsheet, mask) {
             weuiActionsheet.removeClass('weui-actionsheet_toggle');
             mask.removeClass('actionsheet__mask_show');
@@ -318,7 +314,6 @@
                 });
             })
         }
-        //        预览图click
         function clickPhoto($obj) {
             thisfile = $obj;
             var fileindex = $obj.index();
@@ -442,7 +437,6 @@
             $("[name='photos']").val(ImgUrlList.join(','));
         });
 
-        //        按钮点击展示
         $(".my_drop1")
                 .on('click', function () {
                     drop1 = !drop1;

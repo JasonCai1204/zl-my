@@ -15,12 +15,18 @@ class OrderController extends Controller
     public function __construct()
     {
         $this->middleware('auth:doctor', ['only' => 'getDoctorOrders']);
-        $this->middleware('auth', ['only' => ['getCreate', 'getHospitalOrders']]);
+        $this->middleware('auth', ['only' => ['postCreate', 'getHospitalOrders']]);
 
     }
 
     public function getCreate(Request $request)
     {
+        try {
+            $c =App\City::findOrFail($request->city_id);
+        } catch (ModelNotFoundException $e) {
+
+        }
+
         try {
             $h = App\Hospital::findOrFail($request->hospital_id);
         } catch (ModelNotFoundException $e) {
@@ -41,6 +47,10 @@ class OrderController extends Controller
         // 1. h & d
         // 2. d & i
         // 3. h & i
+
+        if (isset($c) && isset($h) && $c->id != $h->city_id)
+            unset($h);
+
         if (isset($h) && isset($d) && $h->id != $d->hospital_id)
             unset($d);
 
@@ -61,12 +71,17 @@ class OrderController extends Controller
 
         // package
         $data = [];
+        if (isset($c))
+            $data['city'] = $c;
         if (isset($h))
             $data['hospital'] = $h;
         if (isset($d))
             $data['doctor'] = $d;
         if (isset($i))
             $data['instance'] = $i;
+        if (isset($request->city_id))
+            $data['city_id'] = $request->city_id;
+
 
         return view('web.orders.create', $data);
     }
@@ -75,8 +90,8 @@ class OrderController extends Controller
     public function postPhotos(Request $request)
     {
         // Save image to storage and get path.
-        if ($request->hasFile('file') && $request->file->isValid()) {
-
+        if ($request->hasFile('file') && $request->file->isValid())
+        {
             $path = $request->file->storeAs('images/order/photos/' . Carbon::now()->timestamp, $request->file->getClientOriginalName(), 'public');
 
             $fileName = $request->file->getClientOriginalName();
@@ -87,7 +102,6 @@ class OrderController extends Controller
                     'url' => $path
                 ]
             ])->toJson();
-
         }
 
     }
@@ -113,6 +127,7 @@ class OrderController extends Controller
                 'user_id' => Auth::user()->id,
             ]
         );
+
         if ($request->has('hospital_id'))
             $order->hospital_id = $request->hospital_id;
 
@@ -148,7 +163,6 @@ class OrderController extends Controller
 
         return view('web.orders.message');
 
-
     }
 
     // Get doctor orders.
@@ -163,6 +177,7 @@ class OrderController extends Controller
         return view('web.orders.doctors', [
             'orders' => $orders
         ]);
+
     }
 
     // Get hospital orders.
@@ -174,6 +189,7 @@ class OrderController extends Controller
         return view('web.orders.users', [
             'orders' => $orders
         ]);
+
     }
 
 }

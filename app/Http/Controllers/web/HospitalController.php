@@ -12,15 +12,13 @@ class HospitalController extends Controller
 {
     public function index()
     {
-        $recommendHospitals = App\Hospital::where('is_recommended', '1')
-            ->orderBy(DB::raw('CONVERT(name USING gbk)'))
-            ->get();
-
         $hospitals = App\Hospital::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
 
+        $cities = App\City::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+
         return view('web.hospitals.index', [
-            'recommendHospitals' => $recommendHospitals,
-            'hospitals' => $hospitals
+            'hospitals' => $hospitals,
+            'cities' => $cities
         ]);
 
     }
@@ -42,7 +40,6 @@ class HospitalController extends Controller
     {
         // When search has not  keyword "q".
         if (!$request->has('q')) {
-
             return view('web.app.search', [
                 'hospitals' => "",
                 'doctors' => "",
@@ -69,17 +66,28 @@ class HospitalController extends Controller
     // Display hospitals
     public function getSelect(Request $request)
     {
-        $rec = App\Hospital::where('is_recommended', '1')
-            ->orderBy(DB::raw('CONVERT(name USING gbk)'))
-            ->get();
+        if ($request->has('city_id'))
+        {
+            $hospitals = App\Hospital::orderBy(DB::raw('CONVERT(name USING gbk)'))
+                ->where('city_id',$request->city_id)
+                ->select('id','name','grading','introduction')
+                ->get();
 
-        $all = App\Hospital::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+            $data['hospitals'] = $hospitals;
+        } else {
+            $hospitals = App\Hospital::orderBy(DB::raw('CONVERT(name USING gbk)'))
+                ->select('id','name','grading','introduction')
+                ->get();
 
-        // package
-        $data = [
-            'rec' => $rec,
-            'all' => $all,
-        ];
+            $cities = App\City::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+
+            $data['hospitals'] = $hospitals;
+
+            $data['cities'] = $cities;
+        }
+
+        if ($request->has('city_id'))
+            $data['city_id'] = $request->city_id;
         if ($request->has('hospital_id'))
             $data['hospital_id'] = $request->hospital_id;
         if ($request->has('doctor_id'))
@@ -87,7 +95,42 @@ class HospitalController extends Controller
         if ($request->has('instance_id'))
             $data['instance_id'] = $request->instance_id;
 
+
         return view('web.hospitals.select', $data);
+
     }
+
+    public function getHospitals(Request $request)
+    {
+        if ($request->has('city_id'))
+        {
+            $city = App\City::find($request->city_id);
+
+            $hospitals = App\Hospital::where('city_id',$request->ci_id)
+                ->select('id','name','grading','city_id')
+                ->get();
+
+            return collect ([
+                'status' => 1,
+                'msg' => '加载成功',
+                'data'=>[
+                    'city' => $city,
+                    'hospitals' => $hospitals
+                ]
+            ])->toJson();
+        }
+
+        $hospitals = App\Hospital::select('id','name','grading','city_id')->get();
+
+        return collect ([
+            'status' => 1,
+            'msg' => '加载成功',
+            'data'=>[
+                'hospitals' => $hospitals
+            ]
+        ])->toJson();
+
+    }
+
 
 }

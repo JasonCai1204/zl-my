@@ -114,7 +114,7 @@ Route::group(['domain' => 'cms.zl-my.com', 'namespace' => 'cms'], function () {
 
 Route::group(['namespace' => 'web'], function() {
 
-    // ys
+//     ys
     Route::group(['domain' => 'ys.zl-my.com'], function () {
 
         // Doctor Authontication
@@ -163,22 +163,16 @@ Route::group(['namespace' => 'web'], function() {
 
     // Hospital
     Route::get('hospital/select','HospitalController@getSelect');
-    Route::post('hospital/select','HospitalController@postSelect');
+    Route::get('hospitals','HospitalController@getHospitals');
     Route::resource('hospital','HospitalController');
 
     // Instance
     Route::get('instance/select','InstanceController@getSelect');
-    Route::post('instance/select','InstanceController@postSelect');
-    Route::get('instance/doctor/select','InstanceController@getDoctorSelect');
     Route::resource('instance','InstanceController');
 
     // Doctor
     Route::get('doctor/select','DoctorController@getSelect');
-    Route::post('doctor/select','DoctorController@postSelect');
-    // Select doctor from hospital.
-    Route::get('doctor/hospital/select','DoctorController@getHospitalSelect');
-    // Select doctor from instance.
-    Route::get('doctor/instance/select','DoctorController@getInstanceSelect');
+    Route::get('doctors','DoctorController@getDoctors');
     Route::resource('doctor','DoctorController');
 
     // Order
