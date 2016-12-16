@@ -114,7 +114,7 @@ Route::group(['domain' => 'cms.zl-my.com', 'namespace' => 'cms'], function () {
 
 Route::group(['namespace' => 'web'], function() {
 
-//     ys
+    // ys
     Route::group(['domain' => 'ys.zl-my.com'], function () {
 
         // Doctor Authontication
