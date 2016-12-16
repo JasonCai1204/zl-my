@@ -9,16 +9,16 @@
 </head>
 
 <body>
-    <div class="logo_part">
-        <div class="logo">
-            <a href="/" style="background-image: url('/storage/images/app/M_32w.png');"></a>
-        </div>
+<div class="logo_part">
+    <div class="logo">
+        <a href="/" style="background-image: url('/storage/images/app/M_32w.png');"></a>
     </div>
+</div>
 
-    @yield('content')
+@yield('content')
 
-    <script src="/js/user/jquery-1.11.3.min.js"></script>
-    <script src="/js/user/searchbar.js"></script>
-    @yield('script')
+<script src="/js/user/jquery-1.11.3.min.js"></script>
+<script src="/js/user/searchbar.js"></script>
+@yield('script')
 </body>
 </html>

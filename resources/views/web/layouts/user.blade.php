@@ -44,6 +44,6 @@
 <script type="text/javascript" src="js/user/index.js"></script>
 <script type="text/javascript" src="js/user/indexsearch.js"></script>
 <script type="text/javascript" src="js/user/loadmore.js"></script>
-<script type="text/javascript" src =js/user/tabbarclick.js></script>
+<script type="text/javascript" src=js/user/tabbarclick.js></script>
 </body>
 </html>

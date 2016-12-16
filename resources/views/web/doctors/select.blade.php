@@ -3,48 +3,30 @@
 @section('title','选择医生 - 肿瘤名医')
 
 @section('content')
+
     <div class="container" id="order_choice_hospital">
 
         <form action="/orders/create" method="GET">
             @if (isset($hospital_id))
-                <input type="hidden" name="hospital_id" value="{{ $hospital_id }}" />
+                <input type="hidden" name="hospital_id" value="{{ $hospital_id }}"/>
             @endif
             @if (isset($instance_id))
-                <input type="hidden" name="instance_id" value="{{ $instance_id }}" />
+                <input type="hidden" name="instance_id" value="{{ $instance_id }}"/>
             @endif
 
-            @if (count($rec) > 0)
-                <div class="weui-cells__title">推荐医生</div>
+
+            @if (count($doctors) > 0 )
 
                 <div class="weui-cells weui-cells_radio">
-                    @foreach ($rec as $item)
+                    @foreach ($doctors as $doctor)
                         <label class="weui-cell weui-check__label">
                             <div class="weui-cell__bd">
-                                <p>{{ $item->name }}</p>
+                                <p>{{ $doctor->name }}</p>
                             </div>
 
                             <div class="weui-cell__ft">
-                                <input type="radio" class="weui-check" name="doctor_id" value="{{ $item->id }}" {{ isset($doctor_id) && $doctor_id == $item->id ? 'checked' : ''  }} />
-
-                                <span class="weui-icon-checked"></span>
-                            </div>
-                        </label>
-                    @endforeach
-                </div>
-            @endif
-
-            @if (count($all) > 0 )
-                <div class="weui-cells__title">所有医生</div>
-
-                <div class="weui-cells weui-cells_radio">
-                    @foreach ($all as $item)
-                        <label class="weui-cell weui-check__label">
-                            <div class="weui-cell__bd">
-                                <p>{{ $item->name }}</p>
-                            </div>
-
-                            <div class="weui-cell__ft">
-                                <input type="radio" class="weui-check" name="doctor_id" value="{{ $item->id }}" {{ isset($doctor_id) && $item->is_recommended != 1 && $item->id == $doctor_id ? 'checked' : ''  }} />
+                                <input type="radio" class="weui-check" name="doctor_id"
+                                       value="{{ $doctor->id }}" {{ isset($doctor_id) && $doctor->is_recommended != 1 && $doctor->id == $doctor_id ? 'checked' : ''  }} />
 
                                 <span class="weui-icon-checked"></span>
                             </div>

@@ -12,31 +12,32 @@
 <div class="logo_part">
     <div class="logo">
         <a href="/" style="background-image: url('/storage/images/app/M_32w.png');"></a>
-        <a href="/account/profile" class="doctor_logo" style="background-image: url('/storage/images/app/silhouette_of_person.png')"></a>
+        <a href="/account/profile" class="doctor_logo"
+           style="background-image: url('/storage/images/app/silhouette_of_person.png')"></a>
     </div>
 </div>
 
-<!--主体部分-->
 <div class="container" id="news_container" style="background-color: white;">
     <div class="article">
         <div class="bd">
 
-            @if ( isset($order) )
-            <div class="weui-article">
-                <h1 class="page__tittle">{{ $order->patient_name }}<span class="my_article_date">病情报告</span></h1>
-                <section>
-                    <h2 class="title">肿瘤名医<span class="my_article_date">{{ isset($order->send_to_the_doctor_at) ? $order->send_to_the_doctor_at->format('Y-m-d') : '' }}</span></h2>
+            @if (isset($order))
+                <div class="weui-article">
+
+                    <h1 class="page__tittle">{{ $order->patient_name }}<span class="my_article_date">病情报告</span></h1>
                     <section>
+                        <h2 class="title">肿瘤名医<span
+                                    class="my_article_date">{{ isset($order->send_to_the_doctor_at) ? $order->send_to_the_doctor_at->format('Y-m-d') : '' }}</span>
+                        </h2>
+                        <section>
 
-                        <p class="my_article_text">
-                            {!! $order->condition_report !!}
-                        </p>
-
+                            <p class="my_article_text">
+                                {!! $order->condition_report !!}
+                            </p>
+                        </section>
                     </section>
-                </section>
-            </div>
+                </div>
             @endif
-
         </div>
     </div>
 </div>
