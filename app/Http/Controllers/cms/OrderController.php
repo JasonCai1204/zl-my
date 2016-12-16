@@ -19,7 +19,7 @@ class OrderController extends Controller
 
     public function index()
     {
-        return view('cms.orders.index', ['data' => App\Order::all()]);
+        return view('cms.orders.index', ['data' => App\Order::latest()->get()]);
     }
 
     public function show(App\Order $order)
