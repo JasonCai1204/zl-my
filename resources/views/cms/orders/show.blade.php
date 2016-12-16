@@ -55,7 +55,7 @@
 
                             <div class="col-md-6">
                                 <select id="instance_id" name="instance_id" class="form-control">
-                                    <option value="">请选择</option>
+                                    <option value="" disabled>请选择</option>
                                     @foreach ($types as $type)
                                         <option disabled>{{ $type->name }}</option>
                                         @foreach ($type->instances as $instance)
