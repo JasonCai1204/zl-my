@@ -15,6 +15,10 @@
 <div class="container" id="my_info_container">
     <form action="/register" method="POST">
         {{ csrf_field() }}
+        
+        @if (isset($redirectTo))
+            <input type="hidden" name="redirectTo" value="{{ $redirectTo }}">
+        @endif
 
         <div class="weui-cells weui-cells_form" style="margin-top: 30px;">
             <div class="weui-cell {{ $errors->has('name') ? ' weui-cell_warn' : '' }}">

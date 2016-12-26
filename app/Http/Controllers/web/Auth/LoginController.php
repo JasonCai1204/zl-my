@@ -44,9 +44,14 @@ class LoginController extends Controller
         return 'phone_number';
     }
 
-    public function showLoginForm()
+    public function showLoginForm(Request $request)
     {
-        return view('web.auth.login');
+        $data = [];
+        if ($request->has('redirectTo')) {
+            $data['redirectTo'] = $request->redirectTo;
+        }
+
+        return view('web.auth.login', $data);
     }
 
     protected function validateLogin(Request $request)
@@ -58,5 +63,12 @@ class LoginController extends Controller
             $this->username() . '.required' => '手机号码不能为空。',
             'password.required' => '密码不能为空。'
         ])->validate();
+    }
+
+    protected function authenticated(Request $request, $user)
+    {
+        if ($request->has('redirectTo')) {
+            return redirect($request->redirectTo);
+        }
     }
 }

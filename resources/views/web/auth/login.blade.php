@@ -15,6 +15,10 @@
     <form action="/login" method="post">
         {{ csrf_field() }}
 
+        @if (isset($redirectTo))
+            <input type="hidden" name="redirectTo" value="{{ $redirectTo }}">
+        @endif
+
         <div class="weui-cells weui-cells_form" style="margin-top: 30px;">
             <div class="weui-cell {{ $errors->has('phone_number') ? ' weui-cell_warn' : '' }}">
                 <div class="weui-cell__hd ">
@@ -51,7 +55,7 @@
 
         <input type="submit" class="btnCommon" value="登录">
 
-        <a href="/register" class="btnLink">注册</a>
+        <a href="/register{{ isset($redirectTo) ? '?redirectTo=' . urlencode($redirectTo) : ''}}" class="btnLink">注册</a>
     </form>
 </div>
 

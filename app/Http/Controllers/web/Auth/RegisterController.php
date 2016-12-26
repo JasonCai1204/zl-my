@@ -6,6 +6,7 @@ use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -80,9 +81,21 @@ class RegisterController extends Controller
         ]);
     }
 
-    public function showRegistrationForm()
+    public function showRegistrationForm(Request $request)
     {
-        return view('web.auth.register');
+        $data = [];
+        if ($request->has('redirectTo')) {
+            $data['redirectTo'] = $request->redirectTo;
+        }
+
+        return view('web.auth.register', $data);
+    }
+
+    protected function registered(Request $request, $user)
+    {
+        if ($request->has('redirectTo')) {
+            return redirect($request->redirectTo);
+        }
     }
 
 }
