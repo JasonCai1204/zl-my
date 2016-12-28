@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 class Instance extends Model
 {
@@ -12,11 +13,11 @@ class Instance extends Model
 
     public function type()
     {
-        return $this->belongsto('App\Type');
+        return $this->belongsto('App\Type')->orderBy(DB::raw('CONVERT(name USING gbk)'));
     }
 
     public function doctors()
     {
-        return $this->belongsToMany('App\Doctor');
+        return $this->belongsToMany('App\Doctor')->orderBy(DB::raw('CONVERT(name USING gbk)'));
     }
 }
