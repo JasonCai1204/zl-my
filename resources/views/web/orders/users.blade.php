@@ -15,7 +15,7 @@
                     @foreach ($orders as $order)
                         <div class="weui-media-box weui-media-box_text">
 
-                            <span class="my_mine_date">{{ $order->created_at->format('Y-m-d') or '' }}</span>
+                            <span class="my_mine_date">{{ isset($order->created_at) ? $order->created_at->format('Y-m-d') : '' }}</span>
                             <h4 class="weui-media-box__title">
                                 {{ $order->patient_name or '' }}
                             </h4>

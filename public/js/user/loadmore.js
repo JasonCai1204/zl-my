@@ -31,9 +31,7 @@ $(function(){
                         if(data.data[0]){
                             for(var i = pageStart; i < pageEnd; i++){
                                 result +=   '<a class="my_advice_list" href= http://zl-my.com:8000/news/'+ data.data[i].id+'>'
-                                    +'<img src='+ data.data[i].cover_image +' alt="">'
-                                    +'<span>'+ data.data[i].title +'</span>'
-                                    +'</ a>';
+                                    +'<img src='+ data.data[i].cover_image +' alt=""></ a>';
                                 if((i + 1) >= data.data.length){
                                     me.lock();
                                     me.noData();

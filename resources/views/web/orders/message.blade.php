@@ -41,7 +41,7 @@
             }
         }
 
-        var cookiearr = ['patient_name', 'phone_number', 'birthday', 'wechat_id', 'detail', 'gender', 'weight', 'smoking', 'ImgUrlList'];
+        var cookiearr = ['patient_name', 'phone_number', 'birthday', 'wechat_id', 'detail', 'gender', 'weight', 'smoking', 'uploadStr','city_id','hospital_id','doctor_id','instance_id','hospital_name','doctor_name','instance_name'];
         for (var i = 0; i < cookiearr.length; i++) {
             if (getCookie(cookiearr[i])) {
                 setCookie(cookiearr[i], '');

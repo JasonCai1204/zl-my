@@ -20,7 +20,7 @@
         <div class="fixedbash">
             <div class="btnPosition">
 
-                <a href="/orders/create{{ isset($doctor_id) ?'?doctor_id='.$doctor_id : '' }}"
+                <a href="/orders/create?{{ isset($doctor) ? 'doctor_id=' . $doctor_id . '&' : '' }}{{ isset($hospital) ? 'hospital_id=' . $hospital_id . '&' : ''}}{{ isset($instance) ? 'instance_id=' . $instance_id : '' }}{{isset($city) ? 'city_id=' . $city_id : '' }}"
                    class="btnfixed">预约医生</a>
 
                 @if ($doctor->is_certified == 0)

@@ -27,10 +27,10 @@ input,input:focus,input:active{
 }
 .logo a{
     display:block;
-    width:32px;
-    height:32px;
+    width:27px;
+    height:23px;
     vertical-align: middle;
-    margin:8px auto;
+    margin:12.5px auto;
     background-size: cover;
 }
 .weui_tabbar{
@@ -40,9 +40,7 @@ input,input:focus,input:active{
     position: fixed;
 }
 #my_footer_tabber .weui-tabbar__icon{
-    width: 25px;
-    height: 25px;
-    border-radius:8px;
+    height: 27px;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -56,7 +54,6 @@ input,input:focus,input:active{
     font-size:10px;
     line-height:14px;
 }
-
 /*searchbar*/
 .weui-search-bar__box .weui-search-bar__input{
     padding:7px 0 5px;
@@ -67,7 +64,6 @@ input,input:focus,input:active{
     margin:2px 0 0 0;
 }
 /*end*/
-
 /*before/after*/
 .my_has_after:after,.my_has_before:before,.my_has_leftbefore:before{
     content: '';
@@ -103,9 +99,9 @@ input,input:focus,input:active{
     position: relative;
 }
 .my_has_leftbefore:before{
-    width:0;
+    width:1px;
     height:200%;
-    border-left:1px solid #d9d9d9;
+    background-color:#d9d9d9;
     left:0;
     top:0;
 }
@@ -122,16 +118,15 @@ input,input:focus,input:active{
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
 }
-
 /*主页部分css*/
 #container_home .weui_extra_area_special p{
     font-size:11px;
 }
 .my_home_header{
     position: relative;
-    height:131px;
+    height:200px;
     width:100%;
-    background-size: 100%;
+    background-size: cover;
 }
 .my_home_slogan{
     /*margin:65px auto 5px;*/
@@ -186,22 +181,25 @@ input,input:focus,input:active{
 }
 .my_home_footer{
     width:100%;
-    height:49px;
-}
+    height:51px;
+}.my_home_footer{
+     width:100%;
+     height:51px;
+ }
 .my_home_askorder{
     position: relative;
-    height:160px;
+    height:200px;
     background-color: white;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
 .my_home_msg{
-    margin-top:15px;
-    padding-bottom: 5px;
-}
-.my_home_msg .weui-footer__text a{
-    color:#888;
+    margin-top:30px;
+    margin-bottom:11px;
+}.my_has_leftbefore:before
+.my_home_msg .weui-footer__text {
+    color:#888888;
     font-size: 12px;
 }
 .my_home_quickorder{
@@ -209,9 +207,9 @@ input,input:focus,input:active{
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     display: inline-block;
-    width: 50%;
-    height: 160px;
-    padding:25px 0 15px;
+    width: 45%;
+    height: 200px;
+    padding:27px 0 13px;
     border-top:1px solid #d9d9d9;
     position: absolute;
     top:0;
@@ -223,22 +221,25 @@ input,input:focus,input:active{
     box-sizing: border-box;
     margin:0 auto;
     border-radius: 8px;
-    width: 65px;
-    height: 65px;
+    width: 96px;
+    height: 96px;
 }
 .my_quickorder_icon img{
-    width:inherit;
+    display: block;
+    width: 58px;
+    margin:2px auto;
 }
 .my_quickorder_label{
-    height:24px;
-    margin-top:13px;
+    height:30px;
+    line-height:30px;
     text-align: center;
     font-size:17px;
     color: rgb(0,0,0);
 }
 .my_home_quickorder>span{
     display: block;
-    height:18px;
+    height:17px;
+    margin-top:7px;
     font-size:13px;
     text-align: center;
     color: rgb(136,136,136);
@@ -248,7 +249,7 @@ input,input:focus,input:active{
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    width:50%;
+    width:55%;
     position: absolute;
     top:0;
     right:0;
@@ -259,13 +260,13 @@ input,input:focus,input:active{
     box-sizing: border-box;
     display: block;
     width:100%;
-    height: 80px;
+    height: 100px;
     border-top:1px solid #d9d9d9;
     position: relative;
 }
 .my_home_find{
     width:100%;
-    height:82px;
+    height:100px;
     position: relative;
     display: inline-block;
     background-color: white;
@@ -279,8 +280,9 @@ input,input:focus,input:active{
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    height:82px;
-    position: relative;
+    height:100px;
+    position: absolute;
+    top:0;
 }
 .my_home_finddoctor{
     position: absolute;
@@ -292,33 +294,39 @@ input,input:focus,input:active{
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     display: inline-block;
-    width: 32px;
-    height: 32px;
+    width: 40px;
+    height: 40px;
     border-radius: 8px;
-    margin: 24px 12px 24px 24px;
+    margin: 30px 20px 30px 30px;
+}
+.my_findbtn_icon{
+    margin-right:15px;
 }
 .my_ask_icon img ,.my_findbtn_icon img{
-    width:inherit;
+    width:40px;
+    height:40px;
 }
 .my_ask_label,.my_findbtn_label{
     display: inline-block;
-    padding-top:4px;
     text-align: left;
     color: rgb(0,0,0);
     vertical-align: middle;
     position: absolute;
-    top:16px;
+    top:27px;
 }
 .my_ask_label p,.my_findbtn_label p{
-    margin-top:16px;
-    line-height:20px;
     padding:0;
     margin:0;
-    font-size:17px;
+    font-size:16px;
+    height:22px;
+    line-height:22px;
 }
 .my_ask_label span,.my_findbtn_label span{
-    font-size:13px;
     color: rgb(136,136,136);
+    display: inline-block;
+    font-size:12px;
+    height: 17px;
+    line-height:17px;
 }
 .my_swiper .swiper-pagination-bullet{
     width:7px;
@@ -332,7 +340,7 @@ input,input:focus,input:active{
 }
 .swiper-container{
     width:100%;
-    height: 105px;
+    height: 150px;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -343,7 +351,7 @@ input,input:focus,input:active{
     height:100%;
     background-size: cover;
 }
-@media screen and (min-height: 633px){#container_home .my_home_msg{
+@media screen and (min-height: 770px){#container_home .my_home_msg{
     position:fixed;
     left:0;
     bottom:0;
@@ -352,7 +360,6 @@ input,input:focus,input:active{
     text-align:center
 }}
 /*end*/
-
 /*资讯部分css*/
 .my_advice_list{
     display: inline-block;
@@ -392,13 +399,11 @@ input,input:focus,input:active{
     text-overflow:ellipsis;
 }
 /*end*/
-
 /*推荐部分css*/
 #container_recommend .my_recommend_list{
     margin-top:15px;
 }
 /*end*/
-
 /*个人中心部分css*/
 .my_mine_list,#my_addorder{
     padding-top: 10px;
@@ -561,7 +566,6 @@ input,input:focus,input:active{
     color: rgb(136, 136, 136);
 }
 /*end*/
-
 /*快速预约部分css*/
 #container_order .weui-select,#container_order .weui-select option{
     color: #999999;
@@ -588,8 +592,6 @@ input,input:focus,input:active{
     color: #c7c7cc;
 }
 /*end*/
-
-
 /*资讯详情部分css*/
 #news_container p >img{
     display: block;
@@ -609,7 +611,6 @@ input,input:focus,input:active{
     margin-right:5px;
 }
 /*end*/
-
 .my_mine_date{
     position: absolute;
     top:7.5px;
@@ -636,7 +637,6 @@ input,input:focus,input:active{
 .weui-media-box_text .weui-media-box__title{
     margin-bottom:7.5px;
 }
-
 /*医院详情部分css*/
 .my_hospital_hd{
     width: 100%;
@@ -690,7 +690,6 @@ input,input:focus,input:active{
     white-space: pre-line;
 }
 /*end*/
-
 /*找医生部分css*/
 .my_cell_index{
     font-size: 12px;
@@ -699,7 +698,6 @@ input,input:focus,input:active{
     color: rgb(178,178,178);
 }
 /*end*/
-
 /*医生详情部分css*/
 .my_doctor_pt{
     display: block;
@@ -713,7 +711,6 @@ input,input:focus,input:active{
     background-size: 100%;
     background-repeat: no-repeat;
 }
-
 .my_doctor_name{
     display: block;
     text-align: center;
@@ -750,7 +747,6 @@ input,input:focus,input:active{
     position: relative;
 }
 /*end*/
-
 /*修改密码部分css*/
 #my_info_container .weui_cell{
     font-size:15px;
@@ -765,7 +761,6 @@ input,input:focus,input:active{
     margin-bottom:4px;
 }
 /*end*/
-
 /*按钮 10-13更改*/
 .weui-btn_default{
     color: #28a367;
@@ -900,7 +895,6 @@ input,input:focus,input:active{
     position: relative;
 }
 /*end*/
-
 /*cell 10-13更改*/
 .weui-cells__title{
     margin-top:14px;
@@ -962,7 +956,6 @@ input,input:focus,input:active{
     text-overflow:ellipsis;
 }
 /*end*/
-
 /*icon&msg 10-15*/
 .weui-msg__icon-area{
     margin-bottom:21px;
@@ -983,7 +976,6 @@ input,input:focus,input:active{
 
 }
 /*end*/
-
 /*article 10-15*/
 .weui-article{
     padding-top: 15px;
@@ -1007,7 +999,6 @@ input,input:focus,input:active{
     font-size:17px;
 }
 /*end*/
-
 /*输入错误 10-18*/
 .my_form_warn{
     position: relative;
@@ -1034,33 +1025,63 @@ input,input:focus,input:active{
     border-bottom:1px solid rgb(210,211,213);
 }
 /*end*/
-
 /*快速预约两个按钮*/
 .my_tips{
-    margin-top:5px;
-    font-size: 12px;
-    margin-bottom: 15px;
+    margin-top:3px;
+    margin-bottom: 13px;
     overflow: hidden;
-    height:25px;
 }
 .my_drop1,.my_drop2{
-    display: block;
-    height: 25px;
-    width: 107px;
-    background-size: contain;
-    background-position: 0 0;
-    background-repeat: no-repeat;
+    position: relative;
+    display: inline-block;
+    font-size: 14px;
+    color: rgb(39,163,117);
+    padding:1px 22px 2px 5px;
+    margin-left:-5px;
+    /*border:1px solid rgb(39,163,117);*/
+    /*border-radius: 4px;*/
+    text-decoration: underline;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.my_drop1 img,.my_drop2 img{
+    width:10px;
+    height:6px;
+    position: absolute;
+    right:5px;
+    top:11px;
+}
+.my_drop2{
+    border:none;
+    text-decoration: underline;
+    margin-left:-5px;
 }
 /*end*/
-
 /*电子协议*/
 .weui-agree{
     padding-top:15px;
     padding-bottom:0px;
 }
 /*end 2016-11-24*/
-
 /*index-search*/
+#container_home .weui-search-bar__box .weui-search-bar__input{
+    padding:7px 0 5px;
+    line-height: 16px;
+    height:25px;
+}
+#container_home .weui-search-bar__label span{
+    margin-top:6.5px;
+}
+#container_home .weui-search-bar__label .weui-icon-search{
+    margin-top:8.5px;
+}
+#container_home .weui-search-bar__cancel-btn{
+    line-height:37px;
+}
+#container_home #searchClear{
+    margin-top:4.5px;
+}
 .testshearch{
     background-color: transparent;
     position: absolute;
@@ -1076,7 +1097,7 @@ input,input:focus,input:active{
     display: none;
 }
 .testshearch form{
-    opacity: .9;
+    opacity: .97;
 }
 #searchbd{
     background-color: rgb(252,249,254);
@@ -1085,3 +1106,179 @@ input,input:focus,input:active{
     z-index: 99999;
 }
 /*end*/
+/*筛选栏*/
+#filter_base{
+    height:48px;
+    position: relative;
+}
+#filter_base .filter_fixed{
+    position: fixed;
+    top:0;
+}
+#filter{
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    position: absolute;
+    z-index: 500;
+    width: 100%;
+    height:48px;
+    padding:10px 10px 10px 15px;
+    background-color: white;
+}
+#filter:after{
+    content: '';
+    position: absolute;
+    box-sizing: border-box;
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    -webkit-transform: scale(.5);
+    transform: scale(.5);
+    width: 200%;
+    height: 1px;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    border-bottom: 1px solid #d9d9d9;
+}
+#filter>span{
+    font-size:20px;
+    height:28px;
+    line-height: 28px;
+}
+#filter_btn{
+    color: #333333;
+    text-align: center;
+    height:25px;
+    line-height:25px;
+    font-size:15px;
+    position: absolute;
+    right:11px;
+    top:11.5px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    padding-right:5px;
+}
+#filter_btn span{
+    height:21px;
+    line-height:21px;
+    margin:2px 5px 2px 3px;
+}
+#filter_btn select{
+    -webkit-appearance: none;
+    border: 0;
+    outline: 0;
+    background-color: transparent;
+    width: 100% ;
+    height:100% ;
+    color: transparent;
+    background-color: transparent;
+    position: absolute;
+    top:0;
+    left:0;
+}
+.chevron{
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-top:1px solid black;
+    border-left:1px solid black;
+    border-right:1px solid transparent;
+    border-bottom:1px solid transparent;
+    transform: rotate(225deg);
+    -moz-transition:all 0.6s cubic-bezier(0.23,1,0.32,1);
+    -webkit-transition:all 0.6s cubic-bezier(0.23,1,0.32,1);
+    transition:all 0.6s cubic-bezier(0.23,1,0.32,1);
+    outline: none;
+    margin-bottom:3px;
+}
+.panel_chevron,.panel_chevron_bg{
+    position: absolute;
+    right: 30.31px;
+    top:-17.6px;
+    width: 0px;
+    height: 0px;
+    border:9px solid transparent;
+    border-bottom-color: #d9d9d9;
+}
+.panel_chevron{
+    top:-16.6px;
+    border-bottom-color: white;
+    z-index: 600;
+}
+.filter_panel{
+    position: relative;
+    width:100%;
+    height: 142px;
+    background-color: white;
+    padding:5px 48px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.filter_panel_base{
+    position: absolute;
+    top:38px;
+    left:0;
+    padding-top:9px;
+    width:100%;
+    overflow: hidden;
+}
+.blocking{
+    position: fixed;
+    z-index: 98;
+    top:0;
+    left:0;
+    width: 100%;
+    height:100%;
+    background-color: rgba(0,0,0,.2);
+}
+.panel_list{
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 44px;
+    text-align: center;
+    font-size: 16px;
+    color: rgb(51, 51, 51);
+    line-height:44px;
+}
+.panel_list>span{
+    display: inline-block;
+    max-width: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.panel_list select{
+    -webkit-appearance: none;
+    border: 0;
+    outline: 0;
+    background-color: transparent;
+    width: 100% ;
+    height:100% ;
+    color: transparent;
+    background-color: transparent;
+    position: absolute;
+    top:0;
+    left:0;
+}
+.panel_list +.panel_list:before{
+    content: '';
+    position: absolute;
+    box-sizing: border-box;
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    -webkit-transform: scale(.5);
+    transform: scale(.5);
+    width: 200%;
+    height: 2px;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    border-bottom: 2px solid #D2D3D5;
+}
+/*endx*/
+

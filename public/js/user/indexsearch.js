@@ -4,14 +4,14 @@
 $(function () {
     var $searchBar = $('#searchBar'),
         $form = $('.weui-search-bar__form'),
-        $searchbd = $('#searchbd'),
         $searchhid = $('#searchhidden'),
+        $searchbd = $('#searchbd'),
         $searchResult = $('#searchResult'),
         $searchText = $('#searchText'),
         $searchInput = $('#searchInput'),
         $searchClear = $('#searchClear'),
         $searchCancel = $('#searchCancel');
-    var searchbdH = $(window).height() - 48 - 44 - 49 + 'px';
+    var searchbdH = $(window).height() - 48 -53  + 'px';
     function hideSearchResult(){
         $searchResult.hide();
         $searchInput.val('');
@@ -19,13 +19,10 @@ $(function () {
     function cancelSearch(){
         hideSearchResult();
         $searchBar.addClass('testshearch').removeClass('weui-search-bar_focusing');
-        $('.my_home_header').height('131px');
-        $form.css('background-color','transparen');
-        $searchhid.css('display','block');
-        $searchbd.css({
-            'display':'none',
-            'height':searchbdH
-        })
+        $('.my_home_header').height('200px');
+        $form.css('background-color','transparent');
+        $searchhid.show();
+        $searchbd.hide();
         $searchText.show();
     }
 
@@ -33,7 +30,7 @@ $(function () {
     $(function(){
         var u = navigator.userAgent;
         var ua = navigator.userAgent.toLowerCase();
-        var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+        var isAndroid = u.indexOf('Android') > -1 || ua.indexOf('Adr') > -1; //android终端
         var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
         if(isiOS){
             $(".weui-search-bar__box .weui-search-bar__input").css({
@@ -41,7 +38,7 @@ $(function () {
             })
         }else if(isAndroid){
             $(".weui-search-bar__box .weui-search-bar__input").css({
-                'padding':'8px 0 4px'
+                'padding':'9px 0 4px',
             })
         };
     });
@@ -49,14 +46,11 @@ $(function () {
     if($('#searchhidden').length > 0){
         $searchText.on('click', function(){
             $searchBar.addClass('weui-search-bar_focusing').removeClass('testshearch');
-            $('.my_home_header').height('44px');
+            $('.my_home_header').height('53px');
             $form.css('background-color','#efeff4');
             $searchInput.focus();
-            $searchhid.css('display','none');
-            $searchbd.css({
-                'display':'block',
-                'height':searchbdH
-            });
+            $searchhid.hide();
+            $searchbd.show().css('height',searchbdH);
             $searchClear.hide();
         });
         $searchInput

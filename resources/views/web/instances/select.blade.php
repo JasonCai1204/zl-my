@@ -7,6 +7,9 @@
     <div class="container" id="order_choice_hospital">
 
         <form action="/orders/create" method="GET">
+            @if (isset($city_id))
+                <input type="hidden" name="city_id" value="{{ $city_id }}"/>
+            @endif
             @if (isset($hospital_id))
                 <input type="hidden" name="hospital_id" value="{{ $hospital_id }}"/>
             @endif
@@ -48,6 +51,9 @@
     <div class="container" id="order_choice_hospital">
 
         <form action="/orders/create" method="GET">
+            @if (isset($city_id))
+                <input type="hidden" name="city_id" value="{{ $city_id }}"/>
+            @endif
             @if (isset($hospital_id))
                 <input type="hidden" name="hospital_id" value="{{ $hospital_id }}"/>
             @endif

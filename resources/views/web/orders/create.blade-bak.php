@@ -208,7 +208,8 @@
                                 <ul class="weui-uploader__files"></ul>
                                 <div class="weui-uploader__input-box">
                                     <input id="uploaderInput" type="file" class="weui-uploader__input"
-                                           accept="image/*" name="" multiple>
+                                           accept="image/*" name="photos" multiple>
+                                    <input class="my_hidden" type="hidden" name="photos" value="">
                                 </div>
                             </div>
                         </div>
@@ -261,18 +262,17 @@
 @endsection
 
 @section('script')
-    <script type="text/javascript">
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
 
-        var cookiearr = ['patient_name', 'phone_number', 'birthday', 'wechat_id', 'detail', 'gender', 'weight', 'smoking', 'uploadStr'];
+    <script src="../js/user/jquery.ui.widget.js"></script>
+    <script src="../js/user/jquery.iframe-transport.js"></script>
+    <script src="../js/user/jquery.fileupload.js"></script>
+    <script type="text/javascript">
+        var cookiearr = ['patient_name', 'phone_number', 'birthday', 'wechat_id', 'detail', 'gender', 'weight', 'smoking', 'ImgUrlList'];
         var cityId = $("[name = 'city_id']")?'':'city_id='+$("[name = 'city_id']").val();
         var hospitalId = $("[name = 'hospital_id']") ?'':'hospital_id='+$("[name = 'hospital_id']").val();
         var doctorId = $("[name = 'doctor_id']") ?'':'doctor_id='+$("[name = 'doctor_id']").val();
         var instanceId = $("[name = 'instance_id']") ?'':'instance_id='+$("[name = 'instance_id']").val();
+
         if(($("[name = 'city_id']").val() == '')&&($("[name = 'hospital_id']").val() == '')&&($("[name = 'doctor_id']").val() == '')&&($("[name = 'instance_id']").val() == '')){
             $("[name = 'city_id']").val(getCookie('city_id'));
             $("[name = 'hospital_id']").val(getCookie('hospital_id'));
@@ -287,34 +287,24 @@
             $("#order_cancer")
                     .attr('href','/instance/select?'+ cityId + hospitalId + doctorId + instanceId)
                     .find('.weui-cell__ft').text(getCookie('instance_name'));
-            delCookie('city_id');
-            delCookie('hospital_id');
-            delCookie('doctor_id');
-            delCookie('instance_id');
-            delCookie('hospital_name');
-            delCookie('doctor_name');
-            delCookie('instance_name');
+            setCookie('city_id','');
+            setCookie('hospital_id','');
+            setCookie('doctor_id','');
+            setCookie('instance_id','');
+            setCookie('hospital_name','');
+            setCookie('doctor_name','');
+            setCookie('instance_name','');
         }else{
-            delCookie('city_id');
-            delCookie('hospital_id');
-            delCookie('doctor_id');
-            delCookie('instance_id');
-            delCookie('hospital_name');
-            delCookie('doctor_name');
-            delCookie('instance_name');
+            setCookie('city_id','');
+            setCookie('hospital_id','');
+            setCookie('doctor_id','');
+            setCookie('instance_id','');
+            setCookie('hospital_name','');
+            setCookie('doctor_name','');
+            setCookie('instance_name','');
         }
         function setCookie(NameOfCookie, value) {
-            var Days = 30;
-            var exp = new Date();
-            exp.setTime(exp.getTime() + Days*24*60*60*1000);
-            document.cookie = NameOfCookie + " = " + escape(value) + ";expires=" + exp.toGMTString();
-        };
-        function delCookie(name) {
-            var exp = new Date();
-            exp.setTime(exp.getTime() - 1);
-            var cval=getCookie(name);
-            if(cval!=null)
-                document.cookie= name + "="+cval+";expires="+exp.toGMTString();
+            document.cookie = NameOfCookie + " = " + escape(value) + "; expires= -1";
         }
         function getCookie(NameOfCookie) {
             if (document.cookie.length > 0) {
@@ -338,7 +328,8 @@
             setCookie('gender', $("[name = 'gender']").get(0).selectedIndex);
             setCookie('weight', $("[name = 'weight']").get(0).selectedIndex);
             setCookie('smoking', $("[name = 'smoking']").get(0).selectedIndex);
-            setCookie('uploadStr',touploadStr(uploadArr));
+            setCookie('ImgUrlList', $("[name='photos']").val());
+
             setCookie('city_id',$("[name = 'city_id']").val());
             setCookie('hospital_id',$("[name = 'hospital_id']").val());
             setCookie('doctor_id',$("[name = 'doctor_id']").val());
@@ -359,6 +350,7 @@
         $('[type = "submit"]').on('click', function () {
             writeCookie();
         });
+
         function hideActionSheet(weuiActionsheet, mask) {
             weuiActionsheet.removeClass('weui-actionsheet_toggle');
             mask.removeClass('actionsheet__mask_show');
@@ -376,7 +368,8 @@
         }
         function clickPhoto($obj) {
             thisfile = $obj;
-            var fileindex = $(".weui-uploader__file").index(thisfile)
+            var fileindex = $obj.index();
+            var url = thisfile.css('background-image');
             if (thisfile.has($(".weui-icon-warn")).length >= 1) {
                 weuiActionsheet.addClass('weui-actionsheet_toggle');
                 mask.show().focus().addClass('actionsheet__mask_show').css('background-color', 'rgba(0,0,0,.6)').one('click', function () {
@@ -387,32 +380,38 @@
                 });
                 weuiActionsheet.unbind('transitionend').unbind('webkitTransitionEnd');
             } else {
-                clickphotoflag = true;
                 $("#gallery").show().css({
-                    'background-image': 'url("/storage/' + encodeURI(uploadArr[fileindex][1]) + '")',
+                    'background-image': url,
                     'background-size': '100%',
                     'background-repeat': 'no-repeat',
                     'background-position': 'center center',
                     'opacity': 1
                 }).on('click', function () {
-                    $("#gallery").hide().css('opacity', 0);
-                    clickphotoflag = false
+                    $("#gallery").hide().css('opacity', 0)
                 });
                 $('.weui-icon_gallery-delete').on('click', function () {
-                    if(clickphotoflag){
-                        $("#gallery").hide().css('opacity', 0);
-                        thisfile.remove();
-                        uploadArr.splice(fileindex,1);
-                        clickphotoflag = false;
-                    }
+                    $("#gallery").hide().css('opacity', 0);
+                    thisfile.remove();
+                    ImgUrlList.splice(fileindex, 1);
+                    $("[name='photos']").val(ImgUrlList.join(','));
+                    setCookie('ImgUrlList', $("[name='photos']").val());
                 })
             }
-        };
+        }
+        ;
+
         var mask = $('#mask');
         var weuiActionsheet = $('#weui-actionsheet');
-        var thisfile, clickphotoflag, uploadArr = [];
+        var ImgUrlLis, thisfile;
         var drop1 = false, drop2 = false;
-        clickphotoflag = false;
+        var checkedfilg = true;
+        var textflig = true;
+        if (getCookie('ImgUrlList')) {
+            ImgUrlList = getCookie('ImgUrlList').split(",");
+        } else {
+            ImgUrlList = [];
+        };
+
         if (document.cookie != "") {
             $("[name='patient_name']").val(getCookie('patient_name'));
             $("[name='phone_number']").val(getCookie('phone_number'));
@@ -422,115 +421,71 @@
             $("[name = 'weight']").get(0).selectedIndex = getCookie('weight');
             $("[name = 'smoking']").get(0).selectedIndex = getCookie('smoking');
             $("[name = 'gender']").get(0).selectedIndex = getCookie('gender');
-            if(getCookie('uploadStr')){
-                uploadArr = eval(getCookie('uploadStr'));
-                for (var i = 0; i < uploadArr.length; i++) {
+            if (getCookie('ImgUrlList')) {
+                $("[name = 'photos']").val(getCookie('ImgUrlList'));
+                var ImgUrlListArr = getCookie('ImgUrlList').split(",");
+                for (var i = 0; i < ImgUrlListArr.length; i++) {
                     ($("<li class='weui-uploader__file'></li>")
-                            .css('background-image', 'url("/storage/' + uploadArr[i][1] + '")')
+                            .css('background-image', 'url(/storage/' + ImgUrlListArr[i] + ')')
                             .attr("onclick", "clickPhoto($(this))")
-                            .html('<input name="photos[]" type="hidden" value="' + uploadArr[i][1] + '" />')
-                            .appendTo($(".weui-uploader__files")));
+                            .prependTo($(".weui-uploader__files")) );
                 }
-            }
+            };
 
             for (var i = 0; i < cookiearr.length; i++) {
-                delCookie(cookiearr[i]);
-            }
-        }
-        $(".weui-uploader__input").change(function () {
-            var Arrlength = uploadArr.length;
-            for (var i = 0; i < this.files.length; i++) {
-                var l_url = getObjectURL(this.files[i]);
-                uploadArr.push([this.files[i]]);
-                var uploadShow = $("<li class='weui-uploader__file weui-uploader__file_status'></li>")
-                        .css('background-image', 'url("' + l_url + '")')
-                        .html("<div class='weui-uploader__file-content'>" + "<i class='weui-loading'></i>" + "</div>")
-                        .appendTo($(".weui-uploader__files"));
-                var formData = new FormData();
-                formData.append('photos[]',this.files[i]);
-                upload(formData, uploadShow, uploadArr[Arrlength + i]);
-            }
-
-        });
-
-        function touploadStr(arr) {
-            var length = arr.length;
-            var str = "[";
-            for(var i =0; i<length; i++){
-                str += "[";
-                str += "'" + arr[i][0] +"',";
-                str += "'" + arr[i][1] +"'";
-                str += "]";
-                if(i<length-1){
-                    str += ",";
+                if (getCookie(cookiearr[i])) {
+                    setCookie(cookiearr[i], '');
                 }
             }
-            str += "]";
-            return str;
         }
-        function getObjectURL(file) {
-            var url = null ;
-            if (window.createObjectURL!=undefined) {
-                url = window.createObjectURL(file) ;
-            } else if (window.URL!=undefined) {
-                url = window.URL.createObjectURL(file) ;
-            } else if (window.webkitURL!=undefined) {
-                url = window.webkitURL.createObjectURL(file) ;
-            }
-            return url ;
-        };
-        function upload(formData, dom, arr) {
-            $.ajax({
-                url: '/order/postPhotos',
-                data: formData,
-                processData: false,
-                contentType: false,
-                type: 'POST',
-                dataType:'json',
-                success: function(data){
-                    console.log(data)
-                    dom.removeClass('weui-uploader__file_status').attr("onclick", "clickPhoto($(this))").html('<input name="photos[]" type="hidden" value="' + data.file.paths[0] + '" />');
-                    arr.push(data.file.paths[0])
-                },
-                false:function () {
-                    dom.attr({'data_flag': 'false', 'onclick': 'clickPhoto($(this))'}).html("<div class='weui-uploader__file-content'>" + "<i class='weui-icon-warn'></i>" + "</div>");
-                    arr.push('')
-                    console.log(arr)
-                }
-            }).fail(function () {
-                dom.attr({'data_flag': 'false', 'onclick': 'clickPhoto($(this))'}).html("<div class='weui-uploader__file-content'>" + "<i class='weui-icon-warn'></i>" + "</div>");
-                arr.push('')
-            });
-        }
+
+        $(".weui-uploader__input")
+                .fileupload({
+                    dataType: 'json',
+                    url: '/order/postPhotos',
+                    formData: {
+                        _token: '{{ csrf_token() }}'
+                    },
+
+                    add: function (e, data) {
+                        data.context = ($("<li class='weui-uploader__file weui-uploader__file_status'></li>")
+                                .css('background-image', 'url()')
+                                .html("<div class='weui-uploader__file-content'>" + "<i class='weui-loading'></i>" + "</div>")
+                                .appendTo($(".weui-uploader__files")) );
+                        data.submit();
+                    },
+                    done: function (e, data) {
+                        console.log('ajax');
+                        var url = '/storage/' + encodeURI(data.result.file.url);
+                        console.log(url);
+                        data.context
+                                .css("background-image", "url('" + url + "')")
+                                .removeClass('weui-uploader__file_status')
+                                .attr("onclick", "clickPhoto($(this))")
+                                .children('div').remove();
+                        ImgUrlList.push(data.result.file.url);
+                        $("[name='photos']").val(ImgUrlList.join(','));
+                    },
+                    fail: function (e, data) {
+                        data.context
+                                .attr({
+                                    'data_flag': 'false',
+                                    'onclick': 'clickPhoto($(this))'
+                                })
+                                .html("<div class='weui-uploader__file-content'>" + "<i class='weui-icon-warn'></i>" + "</div>");
+                    }
+
+                });
         $(".my_order_reuploader").on('click', function () {
-            var fileindex = $(".weui-uploader__file").index(thisfile);
-            var formData = new FormData();
-            hideActionSheet(weuiActionsheet, mask);
-            thisfile.html("<div class='weui-uploader__file-content'>" + "<i class='weui-loading'></i>" + "</div>");
-            formData.append('photos[]',uploadArr[fileindex][0]);
-            $.ajax({
-                url: '/order/postPhotos',
-                data: formData,
-                processData: false,
-                contentType: false,
-                type: 'POST',
-                dataType:'json',
-                success: function(data){
-                    thisfile.removeClass('weui-uploader__file_status').attr("onclick", "clickPhoto($(this))").html('<input name="photos[]" type="hidden" value="' + data.file.paths[0] + '" />');
-                    uploadArr[fileindex][1] = data.file.paths[0];
-                },
-                false:function () {
-                    thisfile.attr({'data_flag': 'false', 'onclick': 'clickPhoto($(this))'}).html("<div class='weui-uploader__file-content'>" + "<i class='weui-icon-warn'></i>" + "</div>");
-                    uploadArr[fileindex][1] = '';
-                }
-            });
-            console.log(uploadArr)
-        });
-        $(".my_order_delimg").on('click', function () {
-            var fileindex =$(".weui-uploader__file_status").index(thisfile);
             hideActionSheet(weuiActionsheet, mask);
             thisfile.remove();
-            uploadArr.splice(fileindex,1);
+            $(".weui-uploader__input").click();
+        });
+        $(".my_order_delimg").on('click', function () {
+            hideActionSheet(weuiActionsheet, mask);
+            thisfile.remove();
+            ImgUrlList.splice(fileindex, 1);
+            $("[name='photos']").val(ImgUrlList.join(','));
         });
         $(".my_drop1").on('click',function () {
             drop1 = !drop1;

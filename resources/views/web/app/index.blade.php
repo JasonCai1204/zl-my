@@ -3,15 +3,14 @@
 @section('title','肿瘤名医')
 
 @section('content')
-
 <div class="container" id="container_home">
-    <div class="my_home_header" style=" background-image: url('/storage/images/app/4_doctors.jpeg');">
+    <div class="my_home_header" style=" background-image: url('/storage/images/app/4_doctors.png');">
         <div class="bd">
             <div class="weui-search-bar testshearch" id="searchBar">
                 <form action="/search" class="weui-search-bar__form" style="background-color: transparent">
 
                     <div class="weui-search-bar__box">
-                        <i class="weui-icon-search" style="top: 1px;"></i>
+                        <i class="weui-icon-search" style="top: 5.5px;"></i>
                         <input type="search" class="weui-search-bar__input" id="searchInput" placeholder="搜索医院、医生"
                                name="q" autofocus/>
                         <a href="javascript:;" class="weui-icon-clear" id="searchClear"></a>

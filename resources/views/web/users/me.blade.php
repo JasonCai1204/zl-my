@@ -18,7 +18,7 @@
                         <div class="weui-media-box__bd">
 
                             <h4 class="weui-media-box__title">{{ Auth::guest() ? '未登录用户' : Auth::user()->name }}</h4>
-                            <p class="weui-media-box__desc">{{ Auth::guest() ? '请登陆' : '' }}</p>
+                            <p class="weui-media-box__desc">{{ Auth::guest() ? '请登录' : '' }}</p>
                         </div>
                         <div class="weui-cell__ft"></div>
                     </a>

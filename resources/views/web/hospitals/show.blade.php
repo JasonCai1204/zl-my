@@ -23,7 +23,7 @@
         <div class="fixedbash">
             <div class="btnPosition">
 
-                <a href="/orders/create{{ isset($hospital_id) ? '?hospital_id='.$hospital_id :'' }}" class="btnfixed">预约医院</a>
+                <a href="/orders/create{{ isset($hospital_id) ? '?hospital_id='.$hospital_id :'' }}{{ isset($city_id) ? '&city_id='.$city_id :'' }}" class="btnfixed">预约医院</a>
             </div>
         </div>
     </div>
