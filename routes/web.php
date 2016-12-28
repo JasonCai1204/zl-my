@@ -219,3 +219,14 @@ Route::group(['namespace' => 'web'], function() {
     // helper
     Route::post('helper/upload-file', 'HelperController@uploadFile');
 });
+
+
+
+    // Update Database
+    Route::get('modify/orders','TestController@modifyOrders');
+
+    Route::get('modify/doctors','TestController@modifyDoctors');
+
+    Route::get('update/orders','TestController@updateOrders');
+
+    Route::get('move/files','TestController@moveFiles');
