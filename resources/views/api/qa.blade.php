@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <title>常见问题</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
-    <link rel="stylesheet" href="/css/user/weui.min.css">
-    <link rel="stylesheet" href="/css/user/home.css">
+    <link rel="stylesheet" href="../css/user/weui.min.css">
+    <link rel="stylesheet" href="../css/user/home.css">
 </head>
 <body style="background-color: white">
 
