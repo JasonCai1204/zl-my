@@ -181,7 +181,7 @@ Route::group(['namespace' => 'web'], function() {
     Route::post('orders/create','OrderController@postCreate');
     Route::get('order/{order}/display','OrderController@display');
     Route::get('order/msg','OrderController@getMsg');
-    Route::get('account/user/orders','OrderController@getHospitalOrders');
+    Route::get('account/user/orders','OrderController@getUserOrders');
     Route::resource('order','OrderController');
 
     // User account.
