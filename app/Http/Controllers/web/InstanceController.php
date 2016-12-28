@@ -11,7 +11,6 @@ class InstanceController extends Controller
     //Select instance.
     public function getSelect(Request $request)
     {
-
         $data = [];
 
         $types = App\Type::all();
@@ -35,6 +34,9 @@ class InstanceController extends Controller
 
         if ($request->has('instance_id'))
             $data['instance_id'] = $request->instance_id;
+
+        if ($request->has('city_id'))
+            $data['city_id'] = $request->city_id;
 
         if (isset($ins)) {
             $data['instances'] = $ins;

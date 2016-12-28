@@ -19,8 +19,9 @@ class DoctorController extends Controller
 
     }
 
-    public function index()
+    public function index(Request $request)
     {
+
         $cities = App\City::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
 
         $hospitals = App\Hospital::orderBy(DB::raw('CONVERT(name USING gbk)'))
@@ -31,13 +32,13 @@ class DoctorController extends Controller
             ->select('id','name','grading','hospital_id')
             ->get();
 
-        $instances = App\Instance::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+        $types = App\Type::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
 
         return view('web.doctors.index',[
             'doctors' => $doctors,
             'cities' => $cities,
             'hospitals' => $hospitals,
-            'instances' => $instances
+            'types' => $types
         ]);
 
     }
@@ -58,6 +59,7 @@ class DoctorController extends Controller
 
     public function getSelect(Request $request)
     {
+//        dd($request->all());
         try {
             $city =App\City::find($request->city_id);
         } catch (ModelNotFoundException $e) {
@@ -76,22 +78,11 @@ class DoctorController extends Controller
 
         }
 
-        $d1 = App\Doctor::orderBy(DB::raw('CONVERT(name USING gbk)'))
-//            ->where('hospital_id',$request->hospital_id)
-            ->get();
-
-//        $doctors[] = [];
-
-        foreach ($d1 as $key=>$value) {
-            $doctors[] = $value;
-//            $doctors[][]['name'] = $value;
+        try {
+            $doctor = App\Doctor::find($request->doctor_id);
+        } catch (ModelNotFoundException $e) {
 
         }
-
-
-
-        dd($doctors);
-
 
 
         if (isset($city) && isset($hospital))
@@ -101,6 +92,7 @@ class DoctorController extends Controller
             } else {
                 $d1 = App\Doctor::orderBy(DB::raw('CONVERT(name USING gbk)'))
                     ->where('hospital_id',$request->hospital_id)
+                    ->select('id','avatar','name','grading','hospital_id')
                     ->get();
             }
 
@@ -139,26 +131,256 @@ class DoctorController extends Controller
 
         }
 
+        if (!isset($city) && isset($hospital) && !isset($instance)) {
+            $d1 = App\Doctor::orderBy(DB::raw('CONVERT(name USING gbk)'))
+                ->where('hospital_id',$request->hospital_id)
+                ->select('id','avatar','name','grading','hospital_id')
+                ->get();
+        }
+
+        if (!isset($city) && !isset($hospital) && isset($instance)) {
+
+            $doctors = App\Doctor::orderBy(DB::raw('CONVERT(name USING gbk)'))
+                ->select('id','avatar','name','grading','hospital_id')
+                ->get();
+
+            $i_doctors = $instance->doctors;
+
+            $doctors = $doctors->intersect(collect($i_doctors));
+
+            $data = [];
+
+            $data['doctors'] = $doctors;
+
+            if (isset($request->instance_id))
+                $data['instance_id'] = $request->instance_id;
+
+            $cities = App\City::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+
+            $data['cities'] = $cities;
+
+            $hospitals = App\Hospital::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+
+            $data['hospitals'] = $hospitals;
+
+            $types = App\Type::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+
+            $data['types'] = $types;
+
+            return view('web.doctors.select',$data);
+
+        }
+
+
+
+        if (!isset($city) && !isset($hospital) && !isset($instance) && isset($doctor)) {
+
+            $doctors = App\Doctor::orderBy(DB::raw('CONVERT(name USING gbk)'))
+                ->select('id','avatar','name','grading','hospital_id')
+                ->get();
+
+            $data = [];
+
+            $data['doctors'] = $doctors;
+
+            if (isset($request->doctor_id))
+                $data['doctor_id'] = $request->doctor_id;
+
+            $cities = App\City::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+
+            $data['cities'] = $cities;
+
+            $hospitals = App\Hospital::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+
+            $data['hospitals'] = $hospitals;
+
+            $types = App\Type::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+
+            $data['types'] = $types;
+
+            return view('web.doctors.select',$data);
+
+        }
+
+
         if (isset($d1) && isset($d2) && isset($d3))
         {
-            dd($doctors = $d2);
+            $doctors = $d2;
+
+            $data = [];
+
+            $data['doctors'] = $doctors;
+
+            if($request->has('city_id'))
+                $data['city_id'] = $request->city_id;
+
+            if($request->has('hospital_id'))
+                $data['hospital_id'] = $request->hospital_id;
+
+            if($request->has('instance_id'))
+                $data['instance_id'] = $request->instance_id;
+
+            if($request->has('doctor_id'))
+                $data['doctor_id'] = $request->doctor_id;
+
+            $cities = App\City::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+
+            $data['cities'] = $cities;
+
+            $hospitals = App\Hospital::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+
+            $data['hospitals'] = $hospitals;
+
+            $types = App\Type::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+
+            $data['types'] = $types;
+
+            return view('web.doctors.select',$data);
+
         }
 
         if (isset($d1) && isset($d2) && !isset($d3))
         {
-            dd($doctors = $d2);
+            $doctors = $d2;
+
+            $data = [];
+
+            $data['doctors'] = $doctors;
+
+            if($request->has('city_id'))
+                $data['city_id'] = $request->city_id;
+
+            if($request->has('hospital_id'))
+                $data['hospital_id'] = $request->hospital_id;
+
+            if($request->has('instance_id'))
+                $data['instance_id'] = $request->instance_id;
+
+            if($request->has('doctor_id'))
+                $data['doctor_id'] = $request->doctor_id;
+
+            $cities = App\City::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+
+            $data['cities'] = $cities;
+
+            $hospitals = App\Hospital::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+
+            $data['hospitals'] = $hospitals;
+
+            $types = App\Type::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+
+            $data['types'] = $types;
+
+            return view('web.doctors.select',$data);
+
         }
 
-        if (!isset($d1) && isset($d2) && !isset($d3)) {
-            dd($doctors = $d2);
+        if (!isset($d1) && isset($d2) && !isset($d3))
+        {
+            $doctors = $d2;
+
+            $data = [];
+
+            $data['doctors'] = $doctors;
+
+            if($request->has('city_id'))
+                $data['city_id'] = $request->city_id;
+
+            if($request->has('hospital_id'))
+                $data['hospital_id'] = $request->hospital_id;
+
+            if($request->has('instance_id'))
+                $data['instance_id'] = $request->instance_id;
+
+            if($request->has('doctor_id'))
+                $data['doctor_id'] = $request->doctor_id;
+
+            $cities = App\City::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+
+            $data['cities'] = $cities;
+
+            $hospitals = App\Hospital::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+
+            $data['hospitals'] = $hospitals;
+
+            $types = App\Type::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+
+            $data['types'] = $types;
+
+            return view('web.doctors.select',$data);
+
         }
 
-        if (isset($d1) && !isset($d2) && !isset($d3)) {
-            dd($doctors = $d1);
+        if (isset($d1) && !isset($d2) && !isset($d3))
+        {
+            $doctors = $d1;
+
+            $data = [];
+
+            $data['doctors'] = $doctors;
+
+            if($request->has('city_id'))
+                $data['city_id'] = $request->city_id;
+
+            if($request->has('hospital_id'))
+                $data['hospital_id'] = $request->hospital_id;
+
+            if($request->has('instance_id'))
+                $data['instance_id'] = $request->instance_id;
+
+            if($request->has('doctor_id'))
+                $data['doctor_id'] = $request->doctor_id;
+
+            $cities = App\City::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+
+            $data['cities'] = $cities;
+
+            $hospitals = App\Hospital::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+
+            $data['hospitals'] = $hospitals;
+
+            $types = App\Type::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+
+            $data['types'] = $types;
+
+            return view('web.doctors.select',$data);
+
         }
 
-        if (!isset($d1) && !isset($d2) && isset($d3)) {
-            dd($doctors = $d3);
+        if (!isset($d1) && !isset($d2) && isset($d3))
+        {
+            $doctors = $d3;
+
+            $data = [];
+
+            $data['doctors'] = $doctors;
+
+            if($request->has('city_id'))
+                $data['city_id'] = $request->city_id;
+
+            if($request->has('hospital_id'))
+                $data['hospital_id'] = $request->hospital_id;
+
+            if($request->has('instance_id'))
+                $data['instance_id'] = $request->instance_id;
+
+            if($request->has('doctor_id'))
+                $data['doctor_id'] = $request->doctor_id;
+
+            $cities = App\City::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+
+            $data['cities'] = $cities;
+
+            $hospitals = App\Hospital::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+
+            $data['hospitals'] = $hospitals;
+
+            $types = App\Type::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+
+            $data['types'] = $types;
+
+            return view('web.doctors.select',$data);
+
         }
 
         if (isset($d1) && !isset($d2) && isset($d3)) {
@@ -168,7 +390,36 @@ class DoctorController extends Controller
             } else {
                 $doctors = $d1->intersect($d3);
 
-                dd($doctors);
+                $data = [];
+
+                $data['doctors'] = $doctors;
+
+                if($request->has('city_id'))
+                    $data['city_id'] = $request->city_id;
+
+                if($request->has('hospital_id'))
+                    $data['hospital_id'] = $request->hospital_id;
+
+                if($request->has('instance_id'))
+                    $data['instance_id'] = $request->instance_id;
+
+                if($request->has('doctor_id'))
+                    $data['doctor_id'] = $request->doctor_id;
+
+                $cities = App\City::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+
+                $data['cities'] = $cities;
+
+                $hospitals = App\Hospital::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+
+                $data['hospitals'] = $hospitals;
+
+                $types = App\Type::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+
+                $data['types'] = $types;
+
+                return view('web.doctors.select',$data);
+
             }
 
         }
@@ -180,57 +431,428 @@ class DoctorController extends Controller
             } else {
                 $doctors = $d2->intersect($d3);
 
-                dd($doctors);
+                $data = [];
+
+                $data['doctors'] = $doctors;
+
+                if($request->has('city_id'))
+                    $data['city_id'] = $request->city_id;
+
+                if($request->has('hospital_id'))
+                    $data['hospital_id'] = $request->hospital_id;
+
+                if($request->has('instance_id'))
+                    $data['instance_id'] = $request->instance_id;
+
+                if($request->has('doctor_id'))
+                    $data['doctor_id'] = $request->doctor_id;
+
+                $cities = App\City::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+
+                $data['cities'] = $cities;
+
+                $hospitals = App\Hospital::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+
+                $data['hospitals'] = $hospitals;
+
+                $types = App\Type::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+
+                $data['types'] = $types;
+
+                return view('web.doctors.select',$data);
             }
         }
 
 
+        if (!isset($d1) && !isset($d2) && !isset($d3))
+        {
+            $doctors = App\Doctor::orderBy(DB::raw('CONVERT(name USING gbk)'))
+                ->select('id','avatar','name','grading','hospital_id')
+                ->get();
 
-        // hospital's doctors.
-//        if ($request->has('hospital_id')) {
-//            $doctors1 = App\Doctor::orderBy(DB::raw('CONVERT(name USING gbk)'))
-//                ->where('hospital_id', $request->hospital_id)
-//                ->get();
-//        }
-//
-//        // instance's doctors.
-//        if ($request->has('instance_id')) {
-//            $doctors2 = App\Instance::find($request->instance_id)->doctors;
-//        }
-//
-//        if (isset($doctors1) && isset($doctors2)) {
-//            $doctors = $doctors1->intersect($doctors2);
-//        }
-//
-//        if (isset($doctors1) && !isset($doctors2)) {
-//            $doctors = $doctors1;
-//        }
-//
-//        if (!isset($doctors1) && isset($doctors2)) {
-//            $doctors = $doctors2;
-//        }
-//
-//        if (!isset($doctors1) && !isset($doctors2)) {
-//            $doctors = App\Doctor::orderBy(DB::raw('CONVERT(name USING gbk)'))
-//                ->get();
-//        }
-//
-//        // package
-//        $data = [
-//            'doctors' => $doctors,
-//        ];
-//
-//        if ($request->has('hospital_id'))
-//            $data['hospital_id'] = $request->hospital_id;
-//        if ($request->has('doctor_id'))
-//            $data['doctor_id'] = $request->doctor_id;
-//        if ($request->has('instance_id'))
-//            $data['instance_id'] = $request->instance_id;
-//
-//        return view('web.doctors.select', $data);
+            $data = [];
+
+            foreach ($doctors as $doctor) {
+                $data['doctors'][] = [
+                    'id' => $doctor->id,
+                    'name' => $doctor->name,
+                    'grading' => $doctor->grading,
+                    'hospital_id' => $doctor->hospital_id,
+                    'hospital_name' => $doctor->hospital->name
+                ];
+            }
+
+            $cities = App\City::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+
+            $hospitals = App\Hospital::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+
+            $types = App\Type::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+
+
+            return view('web.doctors.select',[
+                'doctors' => $doctors,
+                'cities' => $cities,
+                'hospitals' => $hospitals,
+                'types' => $types
+            ]);
+        }
+
+    }
+
+
+    public function getdoctors(Request $request)
+    {
+//        dd($request->all());
+        try {
+            $c = App\City::findOrfail($request->city_id);
+        } catch (ModelNotFoundException $e) {
+
+        };
+
+        try {
+            $h = App\Hospital::findOrfail($request->hospital_id);
+        } catch (ModelNotFoundException $e) {
+
+        };
+
+
+        try {
+            $i = App\Instance::findOrfail($request->instance_id);
+        } catch (ModelNotFoundException $e) {
+
+        };
+
+        if (!isset($c) && !isset($h) && !isset($i))
+        {
+
+            $doctors = App\Doctor::orderBy(DB::raw('CONVERT(name USING gbk)'))
+                ->select('id','avatar','name','grading','hospital_id')
+                ->get();
+
+            $data = [];
+
+            foreach ($doctors as $doctor) {
+                $data['doctors'][] = [
+                    'id' => $doctor->id,
+                    'name' => $doctor->name,
+                    'grading' => $doctor->grading,
+                    'hospital_id' => $doctor->hospital_id,
+                    'hospital_name' => $doctor->hospital->name
+                ];
+            }
+
+            $cities = App\City::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+
+            $hospitals = App\Hospital::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+
+            $types = App\Type::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+
+            return collect([
+                'status' => 1,
+                'msg' => '加载成功',
+                'data' => [
+                    'doctors' => $data['doctors'],
+                    'cities' => $cities,
+                    'hospitals' => $hospitals,
+                    'types' => $types
+                ]
+            ])->toJson();
+        }
+
+        if (isset($c)) {
+
+            if (isset($h) && $c->hospitals->contains($h)) {
+
+                if (isset($i)) {
+
+                    $doctors = $h->doctors;
+
+                    foreach ($doctors as $doctor) {
+
+                        foreach ($doctor->instances as $instance) {
+                            $ids[] = $instance->id;
+                        }
+
+                    }
+
+                    if (in_array($request->instance_id, $ids)) {
+
+                        $ins = App\Instance::find($request->instance_id)->doctors;
+
+                        $hos = App\Hospital::find($request->hospital_id)->doctors;
+
+                        $doctors = $ins->intersect($hos);
+
+                        $data = [];
+
+                        foreach ($doctors as $doctor) {
+                            $data['doctors'][] = [
+                                'id' => $doctor->id,
+                                'name' => $doctor->name,
+                                'grading' => $doctor->grading,
+                                'hospital_id' => $doctor->hospital_id,
+                                'hospital_name' => $doctor->hospital->name
+                            ];
+                        }
+
+                        return collect([
+                            'status' => 1,
+                            'msg' => '加载成功',
+                            'data' => [
+                                'city_id' => $request->city_id,
+                                'hospital_id' => $request->hospital_id,
+                                'doctors' => $data['doctors']
+                            ]
+                        ])->toJson();
+
+                    }
+
+                    return collect([
+                        'status' => 1,
+                        'msg' => '加载成功',
+                        'data' => '暂无符合条件的医生。'
+                    ])->toJson();
+                }
+
+                $doctors = $h->doctors;
+
+                $data = [];
+
+                foreach ($doctors as $doctor) {
+                    $data['doctors'][] = [
+                        'id' => $doctor->id,
+                        'name' => $doctor->name,
+                        'grading' => $doctor->grading,
+                        'hospital_id' => $doctor->hospital_id,
+                        'hospital_name' => $doctor->hospital->name
+                    ];
+                }
+
+                return collect([
+                    'status' => 1,
+                    'msg' => '加载成功',
+                    'data' => [
+                        'city_id' => $request->city_id,
+                        'hospital_id' => $request->hospital_id,
+                        'doctors' => $data['doctors']
+                    ]
+                ])->toJson();
+
+            } elseif (isset($h) && !$c->hospitals->contains($h)) {
+                return collect([
+                    'status' => 1,
+                    'msg' => '加载成功',
+                    'data' => '暂无符合条件的医生。'
+                ])->toJson();
+
+            }
+
+
+            if (isset($i)) {
+
+                $hospitals = $c->hospitals;
+
+                foreach ($hospitals as $hospital) {
+
+                    foreach ($hospital->doctors as $doctor) {
+
+                        foreach ($doctor->instances as $instance) {
+                            $ids[] = $instance->id;
+                        }
+
+                    }
+                }
+
+                if (in_array($request->instance_id, $ids)) {
+
+                    $ins = App\Instance::find($request->instance_id)->doctors;
+
+
+                    foreach ($c->hospitals as $hospital) {
+                        foreach ($hospital->doctors as $doctor) {
+
+                            $hos[] = $doctor;
+                        }
+                    }
+
+                    $doctors = $ins->intersect(collect($hos));
+
+                    $data = [];
+
+                    foreach ($doctors as $doctor) {
+                        $data['doctors'][] = [
+                            'id' => $doctor->id,
+                            'name' => $doctor->name,
+                            'grading' => $doctor->grading,
+                            'hospital_id' => $doctor->hospital_id,
+                            'hospital_name' => $doctor->hospital->name
+                        ];
+                    }
+
+                    return collect([
+                        'status' => 1,
+                        'msg' => '加载成功',
+                        'data' => [
+                            'doctors' => $data['doctors']
+                        ]
+                    ])->toJson();
+
+                }
+
+                return collect([
+                    'status' => 1,
+                    'msg' => '加载成功',
+                    'data' => '暂无符合条件的医生。'
+                ])->toJson();
+
+            }
+
+
+            $hospitals = $c->hospitals;
+
+            $data = [];
+
+            foreach ($hospitals as $hospital) {
+
+                    foreach ($hospital->doctors as $doctor) {
+                        $data['doctors'][] = [
+                            'id' => $doctor->id,
+                            'name' => $doctor->name,
+                            'grading' => $doctor->grading,
+                            'hospital_id' => $doctor->hospital_id,
+                            'hospital_name' => $doctor->hospital->name
+                        ];
+                    }
+            }
+
+            return collect([
+                'status' => 1,
+                'msg' => '加载成功',
+                'data' => [
+                    'city_id' => $request->city_id,
+                    'doctors' => $data['doctors']
+                ]
+            ])->toJson();
+
+        }
+
+        if (isset($h)) {
+
+            if (isset($i)) {
+
+                $doctors = $h->doctors;
+
+                foreach ($doctors as $doctor) {
+
+                    if (!$doctor->instances) {
+                        return collect([
+                            'status' => 1,
+                            'msg' => '加载成功',
+                            'data' => '暂无符合条件的医生。'
+                        ])->toJson();
+                    }
+
+                    foreach ($doctor->instances as $instance) {
+
+                        $ids[] = $instance->id;
+
+                    }
+
+                }
+
+                if (in_array($request->instance_id, $ids)) {
+
+                    $ins = App\Instance::find($request->instance_id)->doctors;
+
+                    $hos = App\Hospital::find($request->hospital_id)->doctors;
+
+                    $doctors = $ins->intersect($hos);
+
+                    $data = [];
+
+                    foreach ($doctors as $doctor) {
+                        $data['doctors'][] = [
+                            'id' => $doctor->id,
+                            'name' => $doctor->name,
+                            'grading' => $doctor->grading,
+                            'hospital_id' => $doctor->hospital_id,
+                            'hospital_name' => $doctor->hospital->name
+                        ];
+                    }
+
+                    return collect([
+                        'status' => 1,
+                        'msg' => '加载成功',
+                        'data' => [
+                            'doctors' => $data['doctors']
+                        ]
+                    ])->toJson();
+
+                }
+
+                return collect([
+                    'status' => 1,
+                    'msg' => '加载成功',
+                    'data' => '暂无符合条件的医生。'
+                ])->toJson();
+            }
+
+            $doctors = $h->doctors;
+
+            $data = [];
+
+            foreach ($doctors as $doctor) {
+                $data['doctors'][] = [
+                    'id' => $doctor->id,
+                    'name' => $doctor->name,
+                    'grading' => $doctor->grading,
+                    'hospital_id' => $doctor->hospital_id,
+                    'hospital_name' => $doctor->hospital->name
+                ];
+            }
+
+            return collect([
+                'status' => 1,
+                'msg' => '加载成功',
+                'data' => [
+                    'doctors' => $data['doctors']
+                ]
+            ])->toJson();
+
+        }
+
+        if (isset($i)) {
+
+
+
+            $doctors = $i->doctors;
+
+            $data = [];
+
+            foreach ($doctors as $doctor) {
+                $data['doctors'][] = [
+                    'id' => $doctor->id,
+                    'name' => $doctor->name,
+                    'grading' => $doctor->grading,
+                    'hospital_id' => $doctor->hospital_id,
+                    'hospital_name' => $doctor->hospital->name
+                ];
+            }
+
+            return collect([
+                'status' => 1,
+                'msg' => '加载成功',
+                'data' => [
+                    'doctors' => $data['doctors']
+                ]
+            ])->toJson();
+
+        }
 
 
     }
+
+
 
     // Doctor profile.
     public function getProfile(Request $request)

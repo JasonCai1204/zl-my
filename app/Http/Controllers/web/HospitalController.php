@@ -23,16 +23,23 @@ class HospitalController extends Controller
 
     }
 
-    public function show($id)
+    public function show(Request $request,$id)
     {
         $hospital = App\Hospital::findOrFail($id);
 
         $hospital->city = $hospital->city->name;
 
-        return view('web.hospitals.show', [
-            'hospital' => $hospital,
-            'hospital_id' => $id,
-        ]);
+        $data = [];
+
+        if ($request->has('city_id')) {
+            $data['city_id'] = $request->city_id;
+        }
+
+        $data['hospital'] = $hospital;
+
+        $data['hospital_id'] = $id;
+
+        return view('web.hospitals.show',$data);
     }
 
     // Search hospitals and doctors
@@ -41,26 +48,52 @@ class HospitalController extends Controller
         // When search has not  keyword "q".
         if (!$request->has('q')) {
             return view('web.app.search', [
-                'hospitals' => "",
-                'doctors' => "",
-                'q' => ""
+                'q' => null
             ]);
         }
+
+        $data = [];
 
         // Search hospital or doctor.
         $hospitals = App\Hospital::where('name', 'like', '%' . $request->q . '%')
             ->orderBy(DB::raw('CONVERT(name USING gbk)'))
             ->get();
 
+        foreach ($hospitals as $hospital) {
+            $data['hospitals'][] = [
+                'id' => $hospital->id,
+                'name' => $hospital->name,
+                'grading' => $hospital->grading,
+                'introduction' => $hospital->introduction,
+                'city' => $hospital->city->name,
+                'city_id' => $hospital->city->id,
+            ];
+        }
+
+
         $doctors = App\Doctor::where('name', 'like', '%' . $request->q . '%')
             ->orderBy(DB::raw('CONVERT(name USING gbk)'))
+            ->select('id','name','avatar','grading','introduction','hospital_id')
             ->get();
 
-        return view('web.app.search', [
-            'hospitals' => $hospitals,
-            'doctors' => $doctors,
-            'q' => $request->q
-        ]);
+        foreach ($doctors as $doctor) {
+            $data['doctors'][] = [
+                'id' => $doctor->id,
+                'name' => $doctor->name,
+                'avatar' => $doctor->avatar,
+                'grading' => $doctor->grading,
+                'introduction' => $doctor->introduction,
+                'hospital_name' => $doctor->hospital->name
+            ];
+
+        }
+
+        if ($request->has('q')) {
+            $data['q'] = $request->q;
+        }
+
+        return view('web.app.search', $data);
+
     }
 
     // Display hospitals
@@ -74,6 +107,10 @@ class HospitalController extends Controller
                 ->get();
 
             $data['hospitals'] = $hospitals;
+
+            $data['cities'] = App\City::orderBy(DB::raw('CONVERT(name USING gbk)'))
+                ->get();
+
         } else {
             $hospitals = App\Hospital::orderBy(DB::raw('CONVERT(name USING gbk)'))
                 ->select('id','name','grading','introduction')
@@ -104,9 +141,8 @@ class HospitalController extends Controller
     {
         if ($request->has('city_id'))
         {
-            $city = App\City::find($request->city_id);
-
-            $hospitals = App\Hospital::where('city_id',$request->ci_id)
+            $hospitals = App\Hospital::where('city_id',$request->city_id)
+                ->orderBy(DB::raw('CONVERT(name USING gbk)'))
                 ->select('id','name','grading','city_id')
                 ->get();
 
@@ -114,13 +150,14 @@ class HospitalController extends Controller
                 'status' => 1,
                 'msg' => '加载成功',
                 'data'=>[
-                    'city' => $city,
                     'hospitals' => $hospitals
                 ]
             ])->toJson();
         }
 
-        $hospitals = App\Hospital::select('id','name','grading','city_id')->get();
+        $hospitals = App\Hospital::select('id','name','grading','city_id')
+                ->orderBy(DB::raw('CONVERT(name USING gbk)'))
+                ->get();
 
         return collect ([
             'status' => 1,

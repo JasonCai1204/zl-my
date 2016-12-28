@@ -82,26 +82,25 @@ class OrderController extends Controller
         if (isset($request->city_id))
             $data['city_id'] = $request->city_id;
 
-
         return view('web.orders.create', $data);
     }
 
     // User post photos
     public function postPhotos(Request $request)
     {
-        // Save image to storage and get path.
-        if ($request->hasFile('file') && $request->file->isValid())
-        {
-            $path = $request->file->storeAs('images/order/photos/' . Carbon::now()->timestamp, $request->file->getClientOriginalName(), 'public');
+        if ($request->hasFile('photos')) {
 
-            $fileName = $request->file->getClientOriginalName();
+            $paths = [];
+            foreach ($request->photos as $photo) {
+                $paths[] = $photo->storeAs('images/order/photos/' . Carbon::now()->timestamp, $photo->getClientOriginalName(), 'public');
+            }
 
             return collect([
                 'file' => [
-                    "name" => $fileName,
-                    'url' => $path
+                    "paths" => $paths
                 ]
             ])->toJson();
+
         }
 
     }
@@ -156,7 +155,7 @@ class OrderController extends Controller
             $order->detail = $request->detail;
 
         if ($request->has('photos')) {
-            $order->photos = explode(",", $request->photos);
+            $order->photos = $request->photos;
         }
 
         $order->save();
@@ -168,6 +167,7 @@ class OrderController extends Controller
     // Get doctor orders.
     public function getDoctorOrders(Request $request)
     {
+        dd('ok');
         $orders = Auth::guard('doctor')->user()->orders()->where('send_to_the_doctor_at', '!=', null)->get();
 
         if (count($orders) < 0) {
@@ -190,6 +190,10 @@ class OrderController extends Controller
             'orders' => $orders
         ]);
 
+    }
+
+    public function get(){
+        dd('12345');
     }
 
 }
