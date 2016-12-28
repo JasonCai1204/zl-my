@@ -165,9 +165,12 @@ class OrderController extends Controller
     }
 
     // Get doctor orders.
-    public function getDoctorOrders(Request $request)
+    public function getDoctorOrders()
     {
-        $orders = Auth::guard('doctor')->user()->orders()->where('send_to_the_doctor_at', '!=', null)->get();
+        $orders = App\Order::where('doctor_id',Auth::guard('doctor')->user()->id)
+                ->where('send_to_the_doctor_at', '!=', null)
+                ->orderBy('send_to_the_doctor_at','desc')
+                ->get();
 
         if (count($orders) < 0) {
             return view('web.orders.doctors');
@@ -179,10 +182,11 @@ class OrderController extends Controller
 
     }
 
-    // Get hospital orders.
-    public function getHospitalOrders(Request $request)
+    // Get User orders.
+    public function getUserOrders(Request $request)
     {
         $orders = App\Order::where('user_id', Auth::user()->id)
+            ->orderBy('created_at','desc')
             ->get();
 
         return view('web.orders.users', [
