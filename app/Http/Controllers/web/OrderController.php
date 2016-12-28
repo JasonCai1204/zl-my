@@ -167,7 +167,6 @@ class OrderController extends Controller
     // Get doctor orders.
     public function getDoctorOrders(Request $request)
     {
-        dd('ok');
         $orders = Auth::guard('doctor')->user()->orders()->where('send_to_the_doctor_at', '!=', null)->get();
 
         if (count($orders) < 0) {
@@ -190,10 +189,6 @@ class OrderController extends Controller
             'orders' => $orders
         ]);
 
-    }
-
-    public function get(){
-        dd('12345');
     }
 
 }
