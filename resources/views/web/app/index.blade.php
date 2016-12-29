@@ -81,7 +81,7 @@
             <a href="/hospital" class="my_home_findhospital">
 
                 <div class="my_findbtn_icon">
-                    <img src="/storage/images/app/green_hospital.png" alt="">
+                    <img src="/storage/images/app/green_hospital_building.png" alt="">
                 </div>
                 <div class="my_findbtn_label">
                     <p>找医院</p>
