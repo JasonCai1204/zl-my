@@ -7,7 +7,7 @@
     <div class="container">
         <div class="my_doctor_hd">
             <div class="my_doctor_pt"
-                 style="background-image: url('{{ Storage::url($doctor->avatar ?: '/images/app/doctor_avatar.png') }}');"></div>
+                 style="background-image: url('{{ Storage::url($doctor->avatar ?: 'images/doctor/avatar/default.png') }}');"></div>
 
             <p class="my_doctor_name">
                 {{ $doctor->name }}<span>{{ $doctor->grading }}</span>

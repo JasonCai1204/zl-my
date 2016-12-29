@@ -13,7 +13,7 @@
                        class="weui-media-box weui-media-box_appmsg" style="padding-top: 15px;">
                         <div class="weui-media-box__hd">
 
-                            <img src="/storage/images/app/user_avatar.png" alt="" class="weui-media-box__thumb">
+                            <img src="/storage/images/user/avatar/default.png" class="weui-media-box__thumb">
                         </div>
                         <div class="weui-media-box__bd">
 
