@@ -55,7 +55,7 @@
 
                             <div class="col-md-6">
                                 <select id="instance_id" name="instance_id" class="form-control">
-                                    <option value="" disabled>请选择</option>
+                                    <option value="" disabled selected>请选择</option>
                                     @foreach ($types as $type)
                                         <option disabled>{{ $type->name }}</option>
                                         @foreach ($type->instances as $instance)
@@ -223,6 +223,7 @@
                             </div>
                         </div>
 
+                        @if ($data->user_id != null)
                         <div class="form-group">
                             <label for="user_id" class="col-md-4 control-label">预约单所属用户</label>
 
@@ -230,6 +231,7 @@
                                 <a href="{{ url('users/' . $data->user_id) }}" class="btn btn-link">{{ $data->user->name }}</a>
                             </div>
                         </div>
+                        @endif
 
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
