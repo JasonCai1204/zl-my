@@ -612,18 +612,27 @@ class DoctorController extends Controller
                     ])->toJson();
                 }
 
-                $doctors = $h->doctors;
+                if ($h->doctors != null)
+                {
+                    $doctors = $h->doctors;
 
-                $data = [];
+                    $data = [];
 
-                foreach ($doctors as $doctor) {
-                    $data['doctors'][] = [
-                        'id' => $doctor->id,
-                        'name' => $doctor->name,
-                        'grading' => $doctor->grading,
-                        'hospital_id' => $doctor->hospital_id,
-                        'hospital_name' => $doctor->hospital->name
-                    ];
+                    foreach ($doctors as $doctor) {
+                        $data['doctors'][] = [
+                            'id' => $doctor->id,
+                            'name' => $doctor->name,
+                            'grading' => $doctor->grading,
+                            'hospital_id' => $doctor->hospital_id,
+                            'hospital_name' => $doctor->hospital->name
+                        ];
+                    }
+                } else {
+                    return collect([
+                        'status' => 1,
+                        'msg' => '加载成功',
+                        'data' => '暂无符合条件的医生。'
+                    ])->toJson();
                 }
 
                 return collect([
@@ -712,6 +721,8 @@ class DoctorController extends Controller
 
             foreach ($hospitals as $hospital) {
 
+                if ($hospital->doctors != null) {
+
                     foreach ($hospital->doctors as $doctor) {
                         $data['doctors'][] = [
                             'id' => $doctor->id,
@@ -721,6 +732,16 @@ class DoctorController extends Controller
                             'hospital_name' => $doctor->hospital->name
                         ];
                     }
+
+                } else {
+                    return collect([
+                        'status' => 1,
+                        'msg' => '加载成功',
+                        'data' => '暂无符合条件的医生。'
+                    ])->toJson();
+
+                }
+
             }
 
             return collect([
