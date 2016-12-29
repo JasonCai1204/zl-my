@@ -16,6 +16,7 @@ class HospitalController extends Controller
 
     public function create()
     {
+        // TODO: consider soft delete condition.
         return view('cms.hospitals.create', ['cities' => App\City::orderBy(DB::raw('CONVERT(name USING gbk)'))->get()]);
     }
 
