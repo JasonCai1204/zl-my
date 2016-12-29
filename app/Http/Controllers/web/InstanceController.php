@@ -13,7 +13,7 @@ class InstanceController extends Controller
     {
         $data = [];
 
-        $types = App\Type::all();
+        $types = App\Type::orderBy('sort')->get();
 
         if ($request->has('hospital_id')) {
             $ins = collect([]);

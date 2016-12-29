@@ -13,7 +13,7 @@ class Type extends Model
     protected $dates = ['deleted_at'];
 
     public function instances() {
-        return $this->hasMany('App\Instance')->orderBy(DB::raw('CONVERT(name USING gbk)'));
+        return $this->hasMany('App\Instance');
     }
 
 }

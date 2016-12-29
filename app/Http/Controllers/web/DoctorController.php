@@ -32,7 +32,7 @@ class DoctorController extends Controller
             ->select('id','name','grading','hospital_id')
             ->get();
 
-        $types = App\Type::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+        $types = App\Type::orderBy('sort')->get();
 
         return view('web.doctors.index',[
             'doctors' => $doctors,
@@ -59,7 +59,6 @@ class DoctorController extends Controller
 
     public function getSelect(Request $request)
     {
-//        dd($request->all());
         try {
             $city =App\City::find($request->city_id);
         } catch (ModelNotFoundException $e) {
@@ -163,7 +162,7 @@ class DoctorController extends Controller
 
             $data['hospitals'] = $hospitals;
 
-            $types = App\Type::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+            $types = App\Type::orderBy('sort')->get();
 
             $data['types'] = $types;
 
@@ -194,7 +193,7 @@ class DoctorController extends Controller
 
             $data['hospitals'] = $hospitals;
 
-            $types = App\Type::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+            $types = App\Type::orderBy('sort')->get();
 
             $data['types'] = $types;
 
@@ -231,7 +230,7 @@ class DoctorController extends Controller
 
             $data['hospitals'] = $hospitals;
 
-            $types = App\Type::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+            $types = App\Type::orderBy('sort')->get();
 
             $data['types'] = $types;
 
@@ -267,7 +266,7 @@ class DoctorController extends Controller
 
             $data['hospitals'] = $hospitals;
 
-            $types = App\Type::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+            $types = App\Type::orderBy('sort')->get();
 
             $data['types'] = $types;
 
@@ -303,7 +302,7 @@ class DoctorController extends Controller
 
             $data['hospitals'] = $hospitals;
 
-            $types = App\Type::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+            $types = App\Type::orderBy('sort')->get();
 
             $data['types'] = $types;
 
@@ -339,7 +338,7 @@ class DoctorController extends Controller
 
             $data['hospitals'] = $hospitals;
 
-            $types = App\Type::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+            $types = App\Type::orderBy('sort')->get();
 
             $data['types'] = $types;
 
@@ -375,7 +374,7 @@ class DoctorController extends Controller
 
             $data['hospitals'] = $hospitals;
 
-            $types = App\Type::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+            $types = App\Type::orderBy('sort')->get();
 
             $data['types'] = $types;
 
@@ -414,7 +413,7 @@ class DoctorController extends Controller
 
                 $data['hospitals'] = $hospitals;
 
-                $types = App\Type::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+                $types = App\Type::orderBy('sort')->get();
 
                 $data['types'] = $types;
 
@@ -455,7 +454,7 @@ class DoctorController extends Controller
 
                 $data['hospitals'] = $hospitals;
 
-                $types = App\Type::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+                $types = App\Type::orderBy('sort')->get();
 
                 $data['types'] = $types;
 
@@ -486,7 +485,7 @@ class DoctorController extends Controller
 
             $hospitals = App\Hospital::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
 
-            $types = App\Type::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+            $types = App\Type::orderBy('sort')->get();
 
 
             return view('web.doctors.select',[
@@ -502,7 +501,6 @@ class DoctorController extends Controller
 
     public function getdoctors(Request $request)
     {
-//        dd($request->all());
         try {
             $c = App\City::findOrfail($request->city_id);
         } catch (ModelNotFoundException $e) {
@@ -545,7 +543,7 @@ class DoctorController extends Controller
 
             $hospitals = App\Hospital::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
 
-            $types = App\Type::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+            $types = App\Type::orderBy('sort')->get();
 
             return collect([
                 'status' => 1,
@@ -822,9 +820,6 @@ class DoctorController extends Controller
         }
 
         if (isset($i)) {
-
-
-
             $doctors = $i->doctors;
 
             $data = [];

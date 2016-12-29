@@ -42,10 +42,10 @@
                             <option value="">不筛选</option>
                             @if (isset($types))
                                 @foreach ($types as $type)
-                            <option value="" disabled>{{ $type->name }}</option>
-                                    @foreach ($type->instances as $instance)
-                                <option value="{{ $instance->id }}">{{ $instance->name }}</option>
-                                    @endforeach
+                                    <option value="" disabled>{{ $type->name }}</option>
+                                        @foreach ($type->instances()->orderBy('sort')->get() as $instance)
+                                        <option value="{{ $instance->id }}">{{ $instance->name }}</option>
+                                        @endforeach
                                 @endforeach
                             @endif
                         </select>
