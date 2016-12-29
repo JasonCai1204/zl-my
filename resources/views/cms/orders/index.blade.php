@@ -30,7 +30,7 @@
                                         <td>{{ $item->patient_name }}</td>
                                         <td>{{ $item->phone_number }}</td>
                                         <td>{{ $item->instance ? $item->instance->name : '' }}</td>
-                                        <td>{{ $item->hospital ? $item->hospital->name : '' }}</td>
+                                        <td>{{ $item->hospital ? $item->hospital->name : ($item->doctor ? $item->doctor->hospital->name : '') }}</td>
                                         <td>{{ $item->doctor ? $item->doctor->name : '' }}</td>
                                         <td>{{ $item->created_at }}</td>
                                         <td><a href="/orders/{{ $item->id }}">详情 &gt;</a></td>
