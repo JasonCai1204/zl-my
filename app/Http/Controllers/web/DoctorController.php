@@ -498,374 +498,85 @@ class DoctorController extends Controller
 
     }
 
+    protected function noData()
+    {
+        return collect([
+            'status' => 1,
+            'msg' => '加载成功',
+            'data' => '暂无符合条件的医生。'
+        ])->toJson();
+    }
 
     public function getdoctors(Request $request)
     {
+        // Try try try...
         try {
             $c = App\City::findOrfail($request->city_id);
         } catch (ModelNotFoundException $e) {
-
+            if ($request->has('city_id')) {
+                return $this->noData();
+            }
         };
 
         try {
             $h = App\Hospital::findOrfail($request->hospital_id);
         } catch (ModelNotFoundException $e) {
-
+            if ($request->has('hospital_id')) {
+                return $this->noData();
+            }
         };
-
 
         try {
             $i = App\Instance::findOrfail($request->instance_id);
         } catch (ModelNotFoundException $e) {
-
+            if ($request->has('instance_id')) {
+                return $this->noData();
+            }
         };
 
-        if (!isset($c) && !isset($h) && !isset($i))
-        {
-
-            $doctors = App\Doctor::orderBy(DB::raw('CONVERT(name USING gbk)'))
-                ->select('id','avatar','name','grading','hospital_id')
-                ->get();
-
-            $data = [];
-
-            foreach ($doctors as $doctor) {
-                $data['doctors'][] = [
-                    'id' => $doctor->id,
-                    'name' => $doctor->name,
-                    'grading' => $doctor->grading,
-                    'hospital_id' => $doctor->hospital_id,
-                    'hospital_name' => $doctor->hospital->name
-                ];
-            }
-
-            $cities = App\City::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
-
-            $hospitals = App\Hospital::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
-
-            $types = App\Type::orderBy('sort')->get();
-
-            return collect([
-                'status' => 1,
-                'msg' => '加载成功',
-                'data' => [
-                    'doctors' => $data['doctors'],
-                    'cities' => $cities,
-                    'hospitals' => $hospitals,
-                    'types' => $types
-                ]
-            ])->toJson();
-        }
+        // Get doctors via city_id, hospital_id, instance_id.
+        $d = App\Doctor::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+        $data = [];
 
         if (isset($c)) {
-
-            if (isset($h) && $c->hospitals->contains($h)) {
-
-                if (isset($i)) {
-
-                    $doctors = $h->doctors;
-
-                    foreach ($doctors as $doctor) {
-
-                        foreach ($doctor->instances as $instance) {
-                            $ids[] = $instance->id;
-                        }
-
-                    }
-
-                    if (in_array($request->instance_id, $ids)) {
-
-                        $ins = App\Instance::find($request->instance_id)->doctors;
-
-                        $hos = App\Hospital::find($request->hospital_id)->doctors;
-
-                        $doctors = $ins->intersect($hos);
-
-                        $data = [];
-
-                        foreach ($doctors as $doctor) {
-                            $data['doctors'][] = [
-                                'id' => $doctor->id,
-                                'name' => $doctor->name,
-                                'grading' => $doctor->grading,
-                                'hospital_id' => $doctor->hospital_id,
-                                'hospital_name' => $doctor->hospital->name
-                            ];
-                        }
-
-                        return collect([
-                            'status' => 1,
-                            'msg' => '加载成功',
-                            'data' => [
-                                'city_id' => $request->city_id,
-                                'hospital_id' => $request->hospital_id,
-                                'doctors' => $data['doctors']
-                            ]
-                        ])->toJson();
-
-                    }
-
-                    return collect([
-                        'status' => 1,
-                        'msg' => '加载成功',
-                        'data' => '暂无符合条件的医生。'
-                    ])->toJson();
-                }
-
-                if ($h->doctors != null)
-                {
-                    $doctors = $h->doctors;
-
-                    $data = [];
-
-                    foreach ($doctors as $doctor) {
-                        $data['doctors'][] = [
-                            'id' => $doctor->id,
-                            'name' => $doctor->name,
-                            'grading' => $doctor->grading,
-                            'hospital_id' => $doctor->hospital_id,
-                            'hospital_name' => $doctor->hospital->name
-                        ];
-                    }
-                } else {
-                    return collect([
-                        'status' => 1,
-                        'msg' => '加载成功',
-                        'data' => '暂无符合条件的医生。'
-                    ])->toJson();
-                }
-
-                return collect([
-                    'status' => 1,
-                    'msg' => '加载成功',
-                    'data' => [
-                        'city_id' => $request->city_id,
-                        'hospital_id' => $request->hospital_id,
-                        'doctors' => $data['doctors']
-                    ]
-                ])->toJson();
-
-            } elseif (isset($h) && !$c->hospitals->contains($h)) {
-                return collect([
-                    'status' => 1,
-                    'msg' => '加载成功',
-                    'data' => '暂无符合条件的医生。'
-                ])->toJson();
-
+            $temp = collect([]);
+            foreach ($c->hospitals as $hospital) {
+                $temp = $temp->merge($hospital->doctors);
             }
+            $d = $d->intersect($temp);
 
-
-            if (isset($i)) {
-
-                $hospitals = $c->hospitals;
-
-                foreach ($hospitals as $hospital) {
-
-                    foreach ($hospital->doctors as $doctor) {
-
-                        foreach ($doctor->instances as $instance) {
-                            $ids[] = $instance->id;
-                        }
-
-                    }
-                }
-
-                if (in_array($request->instance_id, $ids)) {
-
-                    $ins = App\Instance::find($request->instance_id)->doctors;
-
-
-                    foreach ($c->hospitals as $hospital) {
-                        foreach ($hospital->doctors as $doctor) {
-
-                            $hos[] = $doctor;
-                        }
-                    }
-
-                    $doctors = $ins->intersect(collect($hos));
-
-                    $data = [];
-
-                    foreach ($doctors as $doctor) {
-                        $data['doctors'][] = [
-                            'id' => $doctor->id,
-                            'name' => $doctor->name,
-                            'grading' => $doctor->grading,
-                            'hospital_id' => $doctor->hospital_id,
-                            'hospital_name' => $doctor->hospital->name
-                        ];
-                    }
-
-                    return collect([
-                        'status' => 1,
-                        'msg' => '加载成功',
-                        'data' => [
-                            'doctors' => $data['doctors']
-                        ]
-                    ])->toJson();
-
-                }
-
-                return collect([
-                    'status' => 1,
-                    'msg' => '加载成功',
-                    'data' => '暂无符合条件的医生。'
-                ])->toJson();
-
-            }
-
-
-            $hospitals = $c->hospitals;
-
-            $data = [];
-
-            foreach ($hospitals as $hospital) {
-
-                if ($hospital->doctors != null) {
-
-                    foreach ($hospital->doctors as $doctor) {
-                        $data['doctors'][] = [
-                            'id' => $doctor->id,
-                            'name' => $doctor->name,
-                            'grading' => $doctor->grading,
-                            'hospital_id' => $doctor->hospital_id,
-                            'hospital_name' => $doctor->hospital->name
-                        ];
-                    }
-
-                } else {
-                    return collect([
-                        'status' => 1,
-                        'msg' => '加载成功',
-                        'data' => '暂无符合条件的医生。'
-                    ])->toJson();
-
-                }
-
-            }
-
-            return collect([
-                'status' => 1,
-                'msg' => '加载成功',
-                'data' => [
-                    'city_id' => $request->city_id,
-                    'doctors' => $data['doctors']
-                ]
-            ])->toJson();
-
+            $data['city_id'] = $request->city_id;
         }
 
         if (isset($h)) {
-
-            if (isset($i)) {
-
-                $doctors = $h->doctors;
-
-                foreach ($doctors as $doctor) {
-
-                    if (!$doctor->instances) {
-                        return collect([
-                            'status' => 1,
-                            'msg' => '加载成功',
-                            'data' => '暂无符合条件的医生。'
-                        ])->toJson();
-                    }
-
-                    foreach ($doctor->instances as $instance) {
-
-                        $ids[] = $instance->id;
-
-                    }
-
-                }
-
-                if (in_array($request->instance_id, $ids)) {
-
-                    $ins = App\Instance::find($request->instance_id)->doctors;
-
-                    $hos = App\Hospital::find($request->hospital_id)->doctors;
-
-                    $doctors = $ins->intersect($hos);
-
-                    $data = [];
-
-                    foreach ($doctors as $doctor) {
-                        $data['doctors'][] = [
-                            'id' => $doctor->id,
-                            'name' => $doctor->name,
-                            'grading' => $doctor->grading,
-                            'hospital_id' => $doctor->hospital_id,
-                            'hospital_name' => $doctor->hospital->name
-                        ];
-                    }
-
-                    return collect([
-                        'status' => 1,
-                        'msg' => '加载成功',
-                        'data' => [
-                            'doctors' => $data['doctors']
-                        ]
-                    ])->toJson();
-
-                }
-
-                return collect([
-                    'status' => 1,
-                    'msg' => '加载成功',
-                    'data' => '暂无符合条件的医生。'
-                ])->toJson();
-            }
-
-            $doctors = $h->doctors;
-
-            $data = [];
-
-            foreach ($doctors as $doctor) {
-                $data['doctors'][] = [
-                    'id' => $doctor->id,
-                    'name' => $doctor->name,
-                    'grading' => $doctor->grading,
-                    'hospital_id' => $doctor->hospital_id,
-                    'hospital_name' => $doctor->hospital->name
-                ];
-            }
-
-            return collect([
-                'status' => 1,
-                'msg' => '加载成功',
-                'data' => [
-                    'doctors' => $data['doctors']
-                ]
-            ])->toJson();
-
+            $d = $d->intersect($h->doctors);
+            $data['hospital_id'] = $request->hospital_id;
         }
 
         if (isset($i)) {
-            $doctors = $i->doctors;
-
-            $data = [];
-
-            foreach ($doctors as $doctor) {
-                $data['doctors'][] = [
-                    'id' => $doctor->id,
-                    'name' => $doctor->name,
-                    'grading' => $doctor->grading,
-                    'hospital_id' => $doctor->hospital_id,
-                    'hospital_name' => $doctor->hospital->name
-                ];
-            }
-
-            return collect([
-                'status' => 1,
-                'msg' => '加载成功',
-                'data' => [
-                    'doctors' => $data['doctors']
-                ]
-            ])->toJson();
-
+            $d = $d->intersect($i->doctors);
+            $data['instance_id'] = $request->instance_id;
         }
 
+        if (count($d) == 0) {
+            return $this->noData();
+        }
 
+        foreach ($d as $key => $doctor) {
+            $d->put($key, [
+                'id' => $doctor->id,
+                'name' => $doctor->name,
+                'grading' => $doctor->grading,
+                'hospital_id' => $doctor->hospital_id,
+                'hospital_name' => $doctor->hospital->name
+            ]);
+        }
+        $data['doctors'] = $d;
+        return collect([
+            'status' => 1,
+            'msg' => '加载成功',
+            'data' => $data
+        ]);
     }
 
 
