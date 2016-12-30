@@ -1188,6 +1188,12 @@ input,input:focus,input:active{
     top:0;
     left:0;
 }
+#filter_btn select>option:disabled{
+    color: transparent;
+}
+#filter_btn select>option{
+    color: black;
+}
 .chevron{
     display: inline-block;
     width: 6px;
@@ -1270,6 +1276,12 @@ input,input:focus,input:active{
     position: absolute;
     top:0;
     left:0;
+}
+.panel_list select>option:disabled{
+    color: transparent;
+}
+.panel_list select>option{
+    color: black;
 }
 .panel_list +.panel_list:before{
     content: '';
