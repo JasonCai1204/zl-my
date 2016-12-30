@@ -16,7 +16,6 @@ class DoctorController extends Controller
     public function __construct()
     {
         $this->middleware('auth:doctor', ['only' =>['getProfile','getCondition_report']]);
-
     }
 
     public function index(Request $request)
