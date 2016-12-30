@@ -40,20 +40,17 @@ input,input:focus,input:active{
     position: fixed;
 }
 #my_footer_tabber .weui-tabbar__icon{
-    height: 27px;
+    width:inherit;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
-#my_footer_tabber .weui-tabbar__item{
-    padding-top:5px;
-}
-#my_footer_tabber .weui-tabbar__label{
-    margin:2.5px 0;
-    height:14px;
-    font-size:10px;
-    line-height:14px;
-}
+/*#my_footer_tabber .weui-tabbar__label{*/
+    /*margin:2.5px 0;*/
+    /*height:14px;*/
+    /*font-size:10px;*/
+    /*line-height:14px;*/
+/*}*/
 /*searchbar*/
 .weui-search-bar__box .weui-search-bar__input{
     padding:7px 0 5px;
@@ -180,11 +177,8 @@ input,input:focus,input:active{
     margin-bottom: 0.8px;
 }
 .my_home_footer{
-    width:100%;
-    height:51px;
-}.my_home_footer{
      width:100%;
-     height:51px;
+     height:53px;
  }
 .my_home_askorder{
     position: relative;
@@ -197,10 +191,13 @@ input,input:focus,input:active{
 .my_home_msg{
     margin-top:30px;
     margin-bottom:11px;
-}.my_has_leftbefore:before
-.my_home_msg .weui-footer__text {
+}
+.my_home_msg .weui-footer .weui-footer__text{
     color:#888888;
     font-size: 12px;
+}
+.my_home_msg .weui-footer .weui-footer__text a{
+    color:#888888;
 }
 .my_home_quickorder{
     -webkit-box-sizing: border-box;
@@ -424,6 +421,9 @@ input,input:focus,input:active{
 .my_tabbar_click .weui-tabbar__label{
     color: rgb(39,163,117);
 }
+.weui-tabbar__item .weui-tabbar__label{
+    line-height:initial;
+}
 .my_aboutus_head{
     width:100%;
     height:150px;
@@ -464,6 +464,7 @@ input,input:focus,input:active{
     padding:0 15px;
     font-size:14px;
     color: rgb(53, 53, 53);
+    white-space: pre-line;
 }
 .my_aboutus_cell img{
     width:100%;
@@ -806,8 +807,8 @@ input,input:focus,input:active{
     margin-top:0;
 }
 .fixedbash{
-    width:100%;
-    height:80px;
+    width: 100%;
+    height: 91px;
 }
 .btnPosition{
     position: fixed;
@@ -815,7 +816,15 @@ input,input:focus,input:active{
     bottom: 0;
     margin:0;
     background-color: rgb(252,249,254);
-    padding:15px 15px;
+    padding:17px 15px 30px 15px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.btnPosition_change{
+    width:100%;
+    background-color: rgb(252,249,254);
+    padding:17px 15px 30px 15px;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -1188,9 +1197,6 @@ input,input:focus,input:active{
     border-right:1px solid transparent;
     border-bottom:1px solid transparent;
     transform: rotate(225deg);
-    -moz-transition:all 0.6s cubic-bezier(0.23,1,0.32,1);
-    -webkit-transition:all 0.6s cubic-bezier(0.23,1,0.32,1);
-    transition:all 0.6s cubic-bezier(0.23,1,0.32,1);
     outline: none;
     margin-bottom:3px;
 }
@@ -1280,5 +1286,18 @@ input,input:focus,input:active{
     z-index: 2;
     border-bottom: 2px solid #D2D3D5;
 }
+#nodata span{
+    color: #686868;
+    font-size:12px;
+}
 /*endx*/
-
+#gallery_hide{
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    font-size: 22px;
+    color: white;
+    z-index: 1001;
+    padding: 2px 7px ;
+    line-height: initial;
+}
