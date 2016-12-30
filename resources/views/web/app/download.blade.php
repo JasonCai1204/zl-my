@@ -14,6 +14,7 @@
             padding:12px 15px 15px;
             font-weight: 300;
             box-sizing: border-box;
+            margin:0;
         }
         .app_bd{
             width:100%;
@@ -22,6 +23,8 @@
             padding:30px 0;
             text-align: center;
             box-sizing: border-box;
+            margin:0;
+            line-height: 21px;
         }
         p{
             background-color: white;
