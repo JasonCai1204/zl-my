@@ -1,6 +1,11 @@
 /*全局部分*/
 body{
     background-color: rgb(252,249,254);
+    max-width: 667px;
+    margin:0 auto;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 input[type="button"], input[type="submit"], input[type="reset"]{
     -webkit-appearance: none;
@@ -14,6 +19,9 @@ input,input:focus,input:active{
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+    position: relative;
+    max-width: 667px;
+    margin:0 auto;
 }
 .logo{
     width:100%;
@@ -24,6 +32,8 @@ input,input:focus,input:active{
     left: 0;
     background-color: rgb(39,163,117);
     z-index: 99;
+    max-width: 667px;
+    margin:0 auto;
 }
 .logo a{
     display:block;
@@ -38,6 +48,7 @@ input,input:focus,input:active{
 }
 #my_footer_tabber{
     position: fixed;
+    max-width:667px;
 }
 #my_footer_tabber .weui-tabbar__icon{
     width:inherit;
@@ -45,12 +56,6 @@ input,input:focus,input:active{
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
-/*#my_footer_tabber .weui-tabbar__label{*/
-    /*margin:2.5px 0;*/
-    /*height:14px;*/
-    /*font-size:10px;*/
-    /*line-height:14px;*/
-/*}*/
 /*searchbar*/
 .weui-search-bar__box .weui-search-bar__input{
     padding:7px 0 5px;
@@ -241,90 +246,101 @@ input,input:focus,input:active{
     text-align: center;
     color: rgb(136,136,136);
 }
-.my_home_askpart{
+
+.askpart{
     display: inline-block;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     width:55%;
+    height: 200px;
     position: absolute;
     top:0;
     right:0;
 }
-.my_home_ask{
+.askbtn{
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    display: block;
-    width:100%;
+    display: inline-block;
     height: 100px;
-    border-top:1px solid #d9d9d9;
+    width: 100%;
+    margin:0 auto;
     position: relative;
 }
-.my_home_find{
-    width:100%;
-    height:100px;
+.askbtn_inner{
     position: relative;
-    display: inline-block;
-    background-color: white;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
+    width: 124px;
+    height: 100px;
+    margin:0 auto;
 }
-.my_home_findhospital,.my_home_finddoctor{
-    width:50%;
-    display: inline-block;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    height:100px;
-    position: absolute;
-    top:0;
-}
-.my_home_finddoctor{
-    position: absolute;
-    top: 0;
-    right: 0;
-}
-.my_home_ask .my_ask_icon,.my_findbtn_icon{
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    display: inline-block;
+.askbtn_icon{
     width: 40px;
     height: 40px;
-    border-radius: 8px;
-    margin: 30px 20px 30px 30px;
-}
-.my_findbtn_icon{
-    margin-right:15px;
-}
-.my_ask_icon img ,.my_findbtn_icon img{
-    width:40px;
-    height:40px;
-}
-.my_ask_label,.my_findbtn_label{
-    display: inline-block;
-    text-align: left;
-    color: rgb(0,0,0);
-    vertical-align: middle;
     position: absolute;
-    top:27px;
+    top: 30px;
 }
-.my_ask_label p,.my_findbtn_label p{
-    padding:0;
-    margin:0;
-    font-size:16px;
-    height:22px;
-    line-height:22px;
+.askbtn_tittle{
+    font-size: 16px;
+    height: 22px;
+    line-height: 22px;
+    position: absolute;
+    right: 2px;
+    top: 30px;
+    color: black;
+    line-height:initial;
 }
-.my_ask_label span,.my_findbtn_label span{
-    color: rgb(136,136,136);
-    display: inline-block;
-    font-size:12px;
+.askbtn_tips{
+    font-size: 12px;
     height: 17px;
-    line-height:17px;
+    position: absolute;
+    right: 2px;
+    bottom: 26px;
+    color: #888888;
+    line-height:initial;
 }
+.findbar{
+    width:100%;
+    height:100px;
+    display: inline-block;
+    background-color: white;
+}
+.findbtn{
+    width:50%;
+    display: inline-block;
+}
+.findbtn_inner{
+    width: 105px;
+    height: 100px;
+    margin: 0 auto;
+    position: relative;
+}
+.findbtn_icon{
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 30px;
+}
+.findbtn_title{
+    font-size: 16px;
+    height: 22px;
+    line-height: 22px;
+    position: absolute;
+    right: 2px;
+    top: 30px;
+    color: black;
+    line-height:initial;
+}
+.findbtn_tips{
+    font-size: 12px;
+    height: 17px;
+    position: absolute;
+    right: 2px;
+    bottom: 26px;
+    color: #888888;
+    line-height:initial;
+}
+
 .my_swiper .swiper-pagination-bullet{
     width:7px;
     height:7px;
@@ -820,6 +836,7 @@ input,input:focus,input:active{
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+    max-width:667px;
 }
 .btnPosition_change{
     width:100%;
@@ -1078,6 +1095,9 @@ input,input:focus,input:active{
     padding:7px 0 5px;
     line-height: 16px;
     height:25px;
+    appearance:button;
+    -moz-appearance:button;
+    -webkit-appearance:button;
 }
 #container_home .weui-search-bar__label span{
     margin-top:6.5px;
@@ -1134,6 +1154,7 @@ input,input:focus,input:active{
     height:48px;
     padding:10px 10px 10px 15px;
     background-color: white;
+    max-width:667px;
 }
 #filter:after{
     content: '';

@@ -37,27 +37,24 @@
                 <span>医院、医生</span>
             </a>
 
-            <div class="my_home_askpart my_has_leftbefore">
-                <a href="javascript:;" class="my_home_ask" id="askonline">
+            <div class="askpart my_has_leftbefore">
 
-                    <div class="my_ask_icon">
-                        <img src="/storage/images/app/seerscker_qusetion_mark.png" alt="">
-                    </div>
-                    <div class="my_ask_label">
-                        <p>在线咨询</p>
-                        <span>立即聊天</span>
+                <a href="javascript:;" class="askbtn" id="askonline" style="border-top: 1px solid #d9d9d9;">
+                    <div class="askbtn_inner" style="width: 137px;">
+                        <img src="/storage/images/app/seerscker_qusetion_mark.png" alt="" class="askbtn_icon">
+                        <p class="askbtn_tittle" style="width: 77px;">在线咨询</p>
+                        <p class="askbtn_tips" style="width: 77px;">立即聊天</p>
                     </div>
                 </a>
-                <a href="tel:400-8120533" class="my_home_ask my_has_before" style="border: 0;">
-                    <div class="my_ask_icon">
-                        <img src="/storage/images/app/ring_phone.png" alt="">
-                    </div>
 
-                    <div class="my_ask_label">
-                        <p>电话咨询</p>
-                        <span>4008-120-533</span>
+                <a href="tel:400-8120533" class="askbtn my_has_before" style="top: -7px;">
+                    <div class="askbtn_inner" style="width: 137px;">
+                        <img src="/storage/images/app/ring_phone.png" alt="" class="askbtn_icon" style="margin-right: 20px;">
+                        <p class="askbtn_tittle" style="width: 77px;">电话咨询</p>
+                        <p class="askbtn_tips" style="width: 77px;">4008-120-533</p>
                     </div>
                 </a>
+
             </div>
         </div>
 
@@ -77,28 +74,23 @@
             </div>
         </div>
 
-        <div class="my_home_find my_has_after">
-            <a href="/hospital" class="my_home_findhospital">
-
-                <div class="my_findbtn_icon">
-                    <img src="/storage/images/app/green_hospital_building.png" alt="">
-                </div>
-                <div class="my_findbtn_label">
-                    <p>找医院</p>
-                    <span>顶级医院</span>
+        <div class="findbar my_has_after">
+            <a href="/hospital" class="findbtn">
+                <div class="findbtn_inner">
+                    <img src="/storage/images/app/green_hospital_building.png" alt="" class="findbtn_icon" style="padding-top: 2px;">
+                    <p class="findbtn_title">找医院</p>
+                    <p class="findbtn_tips">精选医院</p>
                 </div>
             </a>
-            <a href="/doctor" class="my_home_finddoctor my_has_leftbefore">
-
-                <div class="my_findbtn_icon">
-                    <img src="/storage/images/app/green_doctor_magnifying_glass.png" alt="">
-                </div>
-                <div class="my_findbtn_label">
-                    <p>找医生</p>
-                    <span>精选名医</span>
+            <a href="/doctor" class="findbtn my_has_leftbefore" style="position: absolute;top: 0; right: 0;">
+                <div class="findbtn_inner">
+                    <img src="/storage/images/app/green_doctor_magnifying_glass.png" alt="" class="findbtn_icon">
+                    <p class="findbtn_title">找医生</p>
+                    <p class="findbtn_tips">顶级名医</p>
                 </div>
             </a>
         </div>
+
 
         <div class="my_home_msg">
             <div class="weui-footer">

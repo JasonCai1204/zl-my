@@ -1,6 +1,11 @@
 /*主页部分css*/
 body{
     background-color: rgb(252,249,254);
+    max-width: 667px;
+    margin:0 auto;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 input[type="button"], input[type="submit"], input[type="reset"]{
     -webkit-appearance: none;
@@ -11,6 +16,9 @@ input[type="button"], input[type="submit"], input[type="reset"]{
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+    position: relative;
+    max-width: 667px;
+    margin:0 auto;
 }
 .logo{
     width:100%;
@@ -21,6 +29,8 @@ input[type="button"], input[type="submit"], input[type="reset"]{
     left: 0;
     background-color: rgb(39,163,117);
     z-index: 99;
+    max-width: 667px;
+    margin:0 auto;
 }
 .logo a{
     display:block;
