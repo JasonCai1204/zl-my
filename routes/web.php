@@ -212,7 +212,7 @@ Route::group(['namespace' => 'web'], function() {
     });
 
     // Download
-    Route::get('download',function(){
+    Route::get('downloads',function(){
         return view('web.app.download');
     });
 
