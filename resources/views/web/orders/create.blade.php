@@ -128,18 +128,9 @@
                     <div class="weui-cell__bd">
                         <select name="weight" class="weui-select">
                             <option value="" disabled selected></option>
-                            <option value="31-36">31-36KG</option>
-                            <option value="36-41">36-41KG</option>
-                            <option value="41-46">41-46KG</option>
-                            <option value="46-51">46-51KG</option>
-                            <option value="51-56">51-56KG</option>
-                            <option value="56-61">56-61KG</option>
-                            <option value="61-66">61-66KG</option>
-                            <option value="66-71">66-71KG</option>
-                            <option value="71-76">71-76KG</option>
-                            <option value="76-81">71-76KG</option>
-                            <option value="81-86">81-86KG</option>
-                            <option value="86-91">86-91KG</option>
+                            @for ($i = 30; $i < 95; $i = $i + 5)
+                                <option value="{{ ($i + 1) . '-' . ($i + 5) }}">{{ ($i + 1) . '-' . ($i + 5) }}kg</option>
+                            @endfor
                         </select>
                     </div>
                 </div>
@@ -197,6 +188,7 @@
                 <div class="weui-cell" style="padding: 14px 15px;">
                     <div class="weui-cell__bd">
                         <div class="weui-gallery" id="gallery" style="opacity: 0;display: none;">
+                            <a href="javascript:;" id="gallery_hide">X</a>
                             <span class="weui-gallery__img" id="gallertImg"></span>
                             <div class="weui-gallery__opr">
                                 <a href="javascript:" class="weui-gallery__del"></a>
@@ -235,7 +227,7 @@
             </div>
 
             <div class="fixedbash">
-                <div class="btnPosition">
+                <div class="btnPosition_change">
                     <input type="submit" value="预约" class="btnfixed">
                 </div>
             </div>
@@ -389,7 +381,7 @@
             } else {
                 clickphotoflag = true;
                 $("#gallery").show().css({
-                    'background-image': 'url("/storage/' + encodeURI(uploadArr[fileindex][1]) + '")',
+                    'background-image': thisfile.css('background-image'),
                     'background-size': '100%',
                     'background-repeat': 'no-repeat',
                     'background-position': 'center center',
@@ -397,6 +389,9 @@
                 }).on('click', function () {
                     $("#gallery").hide().css('opacity', 0);
                     clickphotoflag = false
+                });
+                $("#gallery_hide").click(function () {
+                    $("#gallery").hide().css('opacity',0)
                 });
                 $('.weui-icon_gallery-delete').on('click', function () {
                     if(clickphotoflag){

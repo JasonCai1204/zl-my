@@ -34,7 +34,7 @@
         </a>
         <a href="account" class="weui-tabbar__item">
             <img src="/storage/images/app/silhouette_of_person_outline.png" alt="" class="weui-tabbar__icon">
-            <p class="weui-tabbar__label">个人中心</p>
+            <p class="weui-tabbar__label">我的</p>
         </a>
     </div>
 </div>

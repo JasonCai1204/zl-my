@@ -24,7 +24,7 @@
                 <label class="weui-label">姓名</label>
             </div>
             <div class="weui-cell__bd">
-                <input type="text" class="weui-input" value="{{ $doctor->name }}" readonly/>
+                <p>{{ $doctor->name }}</p>
             </div>
         </div>
         <div class="weui-cell">
@@ -33,7 +33,7 @@
                 <label class="weui-label">所在医院</label>
             </div>
             <div class="weui-cell__bd">
-                <input type="text" class="weui-input" value="{{ $doctor->hospital->name }}" readonly/>
+                <p>{{ $doctor->hospital->name }}</p>
             </div>
         </div>
         <div class="weui-cell">
@@ -42,7 +42,7 @@
                 <label class="weui-label">职称</label>
             </div>
             <div class="weui-cell__bd">
-                <input type="text" class="weui-input" value="{{ $doctor->grading }}" readonly/>
+                <p>{{ $doctor->grading }}</p>
             </div>
         </div>
         <div class="weui-cell">
@@ -51,7 +51,7 @@
                 <label class="weui-label">手机号码</label>
             </div>
             <div class="weui-cell__bd">
-                <input type="number" class="weui-input" value="{{ $doctor->phone_number }}" readonly/>
+                <p>{{ $doctor->phone_number }}</p>
             </div>
         </div>
     </div>

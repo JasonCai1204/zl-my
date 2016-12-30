@@ -17,7 +17,7 @@
             <p class="my_doctor_explain">{{ $doctor->introduction }}</p>
         </div>
 
-        <div class="fixedbash">
+        <div class="fixedbash" style="{{ $doctor->is_certified == 0 ? 'height: 123px' : '' }}">
             <div class="btnPosition">
 
                 <a href="/orders/create?{{ isset($doctor) ? 'doctor_id=' . $doctor_id . '&' : '' }}{{ isset($hospital) ? 'hospital_id=' . $hospital_id . '&' : ''}}{{ isset($instance) ? 'instance_id=' . $instance_id : '' }}{{isset($city) ? 'city_id=' . $city_id : '' }}"

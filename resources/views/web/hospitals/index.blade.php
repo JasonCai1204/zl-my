@@ -40,6 +40,17 @@
         </div>
     @endif
 </div>
+
+<div class="my_app_coming" id="loading" style="display: none;">
+    <div class="weui-loadmore">
+        <i class="weui-loading"></i>
+    </div>
+</div>
+
+<div class="my_app_coming" id="nodata" style="display: none;">
+    <span>暂无满足条件的医院。</span>
+</div>
+
 <script src="/js/user/jquery-1.11.3.min.js"></script>
 <script type="text/javascript">
     $(function () {
@@ -50,13 +61,14 @@
                 $("[for = 'city_id'] span").text("筛选");
             }
             var c_id = $(this).val();
+            $("#nodata").hide();
             $(".container").hide();
             $("#loading").show();
             $.getJSON('hospitals',{city_id:c_id})
                     .done(function (data) {
                         var hospitals = '';
                         var cityId = $("#city_id").val() == "" ? '' : '?city_id='+$("#city_id").val();
-                        if(data.data.hospitals.length > 0){
+                        if(data.data.hospitals != undefined){
                             for(var i=0 ; i<data.data.hospitals.length ; i++){
                                 hospitals += '<a href="hospital/' +
                                         data.data.hospitals[i].id + cityId

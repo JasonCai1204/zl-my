@@ -7,9 +7,10 @@
     <div class="container" id="container_news">
         <div class="lists">
             @if (count('news') > 0)
-                @foreach ($news as $new)
-                    <a href="/news/{{ $new->id }}" class="my_advice_list">
-                        <img src="/storage/{{ $new->cover_image }}" alt="">
+                @foreach ($news as $item)
+                    <a href="/news/{{ $item->id }}" class="my_advice_list">
+                        <img src="/storage/{{ $item->cover_image }}">
+                        <span>{{ $item->title }}</span>
                     </a>
                 @endforeach
             @endif
@@ -21,4 +22,3 @@
 @section('script')
     <script src="../js/user/dropload.min.js"></script>
 @endsection
-

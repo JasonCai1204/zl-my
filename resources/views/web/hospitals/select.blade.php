@@ -60,6 +60,14 @@
             </div>
         </form>
     </div>
+    <div class="my_app_coming" id="loading" style="display: none;">
+        <div class="weui-loadmore">
+            <i class="weui-loading"></i>
+        </div>
+    </div>
+    <div class="my_app_coming" id="nodata" style="display: none;">
+        <span>暂无满足条件的医院。</span>
+    </div>
     <script src="/js/user/jquery-1.11.3.min.js"></script>
     <script type="text/javascript">
         $(function () {
@@ -73,7 +81,7 @@
                 $("#loading").show();
                 $.getJSON('/hospitals',{city_id:c_id})
                         .done(function (data) {
-                            if(data.data.hospitals.length > 0){
+                            if(data.data.hospitals.length != undefined) {
                                 var hospitals = '';
                                 for(var i=0 ; i<data.data.hospitals.length ; i++){
                                     hospitals += '<label class="weui-cell weui-check__label"><div class="weui-cell__bd"><p>'+

@@ -3,9 +3,7 @@
 @section('title','选择所患疾病 - 肿瘤名医')
 
 @section('content')
-
     <div class="container" id="order_choice_hospital">
-
         <form action="/orders/create" method="GET">
             @if (isset($city_id))
                 <input type="hidden" name="city_id" value="{{ $city_id }}"/>
@@ -17,75 +15,27 @@
                 <input type="hidden" name="doctor_id" value="{{ $doctor_id }}"/>
             @endif
 
-                @if(isset($instances))
-            @if (count($instances) > 0)
-                <div class="weui-cells__title">选择所患疾病</div>
-                <div class="weui-cells weui-cells_radio">
+            @if(isset($t_i))
+                @foreach($t_i as $t => $ins)
+                    <div class="weui-cells__title">{{ App\Type::find($t)->name }}</div>
 
-                    @foreach ( $instances as $instance )
-                        <label class="weui-cell weui-check__label">
-                            <div class="weui-cell__bd">
-                                <p>{{ $instance->name }}</p>
-                            </div>
+                    <div class="weui-cells weui-cells_radio">
+                        @foreach($ins as $i)
+                            <label class="weui-cell weui-check__label">
+                                <div class="weui-cell__bd">
+                                    <p>{{ App\Instance::find($i)->name }}</p>
+                                </div>
 
-                            <div class="weui-cell__ft">
-
-                                <input type="radio" class="weui-check" name="instance_id"
-                                       value="{{ $instance->id }}" {{ isset($instance_id) && $instance->id == $instance_id ? 'checked' : ''  }} />
-                                <span class="weui-icon-checked"></span>
-                            </div>
-                        </label>
-                    @endforeach
-                </div>
-                @endif
-                <div class="fixedbash">
-                    <div class="btnPosition">
-                        <input type="submit" value="完成" class="btnfixed">
-                    </div>
-                </div>
-            @endif
-        </form>
-    </div>
-
-
-    <div class="container" id="order_choice_hospital">
-
-        <form action="/orders/create" method="GET">
-            @if (isset($city_id))
-                <input type="hidden" name="city_id" value="{{ $city_id }}"/>
-            @endif
-            @if (isset($hospital_id))
-                <input type="hidden" name="hospital_id" value="{{ $hospital_id }}"/>
-            @endif
-            @if (isset($doctor_id))
-                <input type="hidden" name="doctor_id" value="{{ $doctor_id }}"/>
-            @endif
-
-            @if(isset($types))
-            @if (count($types) > 0)
-                @foreach($types as $type)
-                <div class="weui-cells__title">{{ $type->name }}</div>
-                <div class="weui-cells weui-cells_radio">
-
-
-                        @foreach($type->instances as $instance)
-                        <label class="weui-cell weui-check__label">
-                            <div class="weui-cell__bd">
-                                <p>{{ $instance->name }}</p>
-                            </div>
-
-                            <div class="weui-cell__ft">
-
-                                <input type="radio" class="weui-check" name="instance_id"
-                                       value="{{ $instance->id }}" {{ isset($instance_id) && $instance->id == $instance_id ? 'checked' : ''  }} />
-                                <span class="weui-icon-checked"></span>
-                            </div>
-                        </label>
+                                <div class="weui-cell__ft">
+                                    <input type="radio" class="weui-check" name="instance_id"
+                                           value="{{ App\Instance::find($i)->id }}" {{ isset($instance_id) && App\Instance::find($i)->id == $instance_id ? 'checked' : ''  }} />
+                                    <span class="weui-icon-checked"></span>
+                                </div>
+                            </label>
                         @endforeach
-
-                </div>
+                    </div>
                 @endforeach
-                    @endif
+
                 <div class="fixedbash">
                     <div class="btnPosition">
                         <input type="submit" value="完成" class="btnfixed">
@@ -94,9 +44,6 @@
             @endif
         </form>
     </div>
-
-
-
 @endsection
 
 @section('script')
