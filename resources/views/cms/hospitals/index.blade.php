@@ -29,7 +29,7 @@
                                     <tr>
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->grading }}</td>
-                                        <td>{{ $item->city->name }}</td>
+                                        <td>{{ $item->city != null ? $item->city->name : '' }}</td>
                                         <td>{{ $item->is_recommended ? '👍' : '' }}</td>
                                         <td><a href="/hospitals/{{ $item->id }}">详情 &gt;</a></td>
                                     </tr>
