@@ -139,35 +139,29 @@ class HospitalController extends Controller
 
     public function getHospitals(Request $request)
     {
-        if ($request->has('city_id'))
-        {
-            $hospitals = App\Hospital::where('city_id',$request->city_id)
-                ->orderBy(DB::raw('CONVERT(name USING gbk)'))
-                ->select('id','name','grading','city_id')
-                ->get();
+        $hospitals = App\Hospital::select('id', 'name', 'grading', 'city_id')
+                ->orderBy(DB::raw('CONVERT(name USING gbk)'));
 
-            return collect ([
-                'status' => 1,
-                'msg' => '加载成功',
-                'data'=>[
-                    'hospitals' => $hospitals
-                ]
-            ])->toJson();
+        if ($request->has('city_id')) {
+            $hospitals = $hospitals->where('city_id', $request->city_id);
         }
 
-        $hospitals = App\Hospital::select('id','name','grading','city_id')
-                ->orderBy(DB::raw('CONVERT(name USING gbk)'))
-                ->get();
+        $hospitals = $hospitals->get()->toArray();
 
-        return collect ([
+        if (count($hospitals) > 0) {
+            return collect([
+                'status' => 1,
+                'msg' => '加载成功',
+                'data' => [
+                    'hospitals' => $hospitals
+                ]
+            ]);
+        }
+
+        return collect([
             'status' => 1,
             'msg' => '加载成功',
-            'data'=>[
-                'hospitals' => $hospitals
-            ]
-        ])->toJson();
-
+            'data' => '暂无符合条件的医院。'
+        ]);
     }
-
-
 }
