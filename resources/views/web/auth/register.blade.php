@@ -15,7 +15,7 @@
 <div class="container" id="my_info_container">
     <form action="/register" method="POST">
         {{ csrf_field() }}
-        
+
         @if (isset($redirectTo))
             <input type="hidden" name="redirectTo" value="{{ $redirectTo }}">
         @endif
@@ -43,7 +43,7 @@
                 </div>
 
                 <div class="weui-cell__bd">
-                    <input type="tel" class="weui-input" pattern="[0-9]*" placeholder="必填" name="phone_number" value="{{ old('phone_number' )}}" required />
+                    <input type="tel" class="weui-input" pattern="[0-9]*" placeholder="必填" name="phone_number" value="{{ old('phone_number' )}}" required/>
                 </div>
 
                 @if($errors->has('phone_number'))
