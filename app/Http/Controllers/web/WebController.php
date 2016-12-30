@@ -33,7 +33,6 @@ class WebController extends Controller
                 'grading' => $hospital->grading,
                 'introduction' => $hospital->introduction,
                 'city' => $hospital->city->name,
-                'city_id' => $hospital->city->id,
             ];
         }
 

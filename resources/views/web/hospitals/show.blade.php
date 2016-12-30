@@ -11,7 +11,7 @@
                 {{ $hospital->name }}
             </p>
             <p class="my_hospital_explain">
-                <span>{{ $hospital->city }}</span>&nbsp;|&nbsp;<span>{{ $hospital->grading }}</span>
+                <span>{{ $hospital->city->name }}</span>&nbsp;|&nbsp;<span>{{ $hospital->grading }}</span>
             </p>
         </div>
         <div class="my_hospital_bd">
@@ -23,7 +23,7 @@
         <div class="fixedbash">
             <div class="btnPosition">
 
-                <a href="/orders/create{{ isset($hospital_id) ? '?hospital_id='.$hospital_id :'' }}{{ isset($city_id) ? '&city_id='.$city_id :'' }}" class="btnfixed">预约医院</a>
+                <a href="/orders/create{{ isset($hospital) ? '?hospital_id='.$hospital->id :'' }}{{ isset($hospital) ? '&city_id='.$hospital->city->id :'' }}" class="btnfixed">预约医院</a>
             </div>
         </div>
     </div>

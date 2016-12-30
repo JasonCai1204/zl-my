@@ -11,7 +11,7 @@
                 <div class="weui-cells">
                     @foreach ($hospitals as $hospital)
 
-                        <a href="/hospital/{{ $hospital['city_id'] }}{{ isset($hospital) ? '&city_id='.$hospital['city_id'] : ''}}"
+                        <a href="/hospital/{{ $hospital['id'] }}"
                            class="weui-cell weui-cell_access">
                             <div class="weui-cell__bd">
                                 <p>{{ $hospital['name'] }}</p>

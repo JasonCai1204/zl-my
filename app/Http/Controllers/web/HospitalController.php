@@ -23,23 +23,13 @@ class HospitalController extends Controller
 
     }
 
-    public function show(Request $request,$id)
+    public function show($id)
     {
         $hospital = App\Hospital::findOrFail($id);
 
-        $hospital->city = $hospital->city->name;
-
-        $data = [];
-
-        if ($request->has('city_id')) {
-            $data['city_id'] = $request->city_id;
-        }
-
-        $data['hospital'] = $hospital;
-
-        $data['hospital_id'] = $id;
-
-        return view('web.hospitals.show',$data);
+        return view('web.hospitals.show',[
+            'hospital' => $hospital
+        ]);
     }
 
     // Search hospitals and doctors
