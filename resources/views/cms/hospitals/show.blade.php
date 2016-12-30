@@ -46,6 +46,7 @@
 
                             <div class="col-md-6">
                                 <select class="form-control" name="city_id">
+                                    <option disabled selected>请选择</option>
                                     @foreach ($cities as $city)
                                         <option value="{{ $city->id }}" {{ old('city_id') == $city->id || $data->city_id == $city->id ? 'selected' : '' }}>{{ $city->name }}</option>
                                     @endforeach
@@ -99,7 +100,7 @@
                                 </a>
                             </div>
                         </div>
-                        
+
                     </form>
 
                     <form id="deleteForm" method="POST" action="{{ url('/hospitals/' . $data->id) }}">
