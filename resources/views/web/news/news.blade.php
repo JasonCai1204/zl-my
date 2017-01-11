@@ -10,7 +10,6 @@
                 @foreach ($news as $item)
                     <a href="/news/{{ $item->id }}" class="my_advice_list">
                         <img src="/storage/{{ $item->cover_image }}">
-                        <span>{{ $item->title }}</span>
                     </a>
                 @endforeach
             @endif
