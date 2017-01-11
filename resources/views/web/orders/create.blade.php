@@ -54,7 +54,7 @@
                 </div>
             </div>
 
-            <div class="weui-cells__title">可选填写</div>
+            <div class="weui-cells__title">非必填部分</div>
             <div class="weui-cells">
 
                 <a href="/hospital/select?{{ isset($hospital) ? 'hospital_id=' . $hospital->id . '&' : ''}}{{ isset($doctor) ? 'doctor_id=' . $doctor->id . '&' : '' }}{{ isset($instance) ? 'instance_id=' . $instance->id . '&' : '' }}{{isset($city) ? 'city_id=' . $city_id : '' }}"
