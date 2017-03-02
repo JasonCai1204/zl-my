@@ -9,7 +9,7 @@
 
             <div class="col-sm-10">
                 <div id="tool-bar">
-                    <a type="button" class="btn btn-default" href="/news/create">添加咨讯</a>
+                    <a type="button" class="btn btn-default" href="/news/create">添加资讯</a>
                 </div>
 
                 <div class="panel panel-default">

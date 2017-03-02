@@ -10,7 +10,7 @@
     <div class="container">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">添加咨讯</div>
+                <div class="panel-heading">添加资讯</div>
 
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/news') }}" enctype="multipart/form-data">

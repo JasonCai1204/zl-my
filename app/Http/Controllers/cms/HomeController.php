@@ -16,4 +16,18 @@ class HomeController extends Controller
     {
         return view('cms.home');
     }
+
+    public function uploads()
+    {
+        return view('cms.demo.uploads');
+    }
+
+    public function postUpload(Request $request)
+    {
+        $paths = [];
+        // foreach ($request->photos as $photo) {
+        //     $paths[] = $photo->storeAs('images/demo', $photo->getClientOriginalName(), 'public');
+        // }
+        return ['paths' => $paths, 'attach' => $request->attach];
+    }
 }
