@@ -3,6 +3,15 @@
 @section('title','找医生 - 肿瘤名医')
 
 @section('content')
+
+    <input type="hidden" name="city_id" value="{{ $city_id or '' }}"/>
+
+    <input type="hidden" name="hospital_id" value="{{ $hospital_id or '' }}"/>
+
+    <input type="hidden" name="doctor_id" value="{{ $doctor_id or '' }}"/>
+
+    <input type="hidden" name="instance_id" value="{{ $instance_id or '' }}"/>
+
     <div id="filter_base">
         <div id="filter">
             <span>找医生</span>
@@ -20,18 +29,22 @@
                             <option value="">不筛选</option>
                             @if (isset($cities))
                                 @foreach($cities as $city )
-                                <option value="{{ $city->id }}">{{ $city->name }}</option>
+                                    <option value="{{ $city->id }}"{{isset( $city_id ) && $city->id == $city_id ?'selected' : ''}}>{{ $city->name }}</option>
                                 @endforeach
                             @endif
+
                         </select>
                     </label>
                     <label for="hospital_id" class="panel_list">
                         <span>按 医院 筛选</span>
                         <select id="hospital_id">
+                            @if (isset($hospital_id) && isset($hospital))
+                                <option value="{{ $hospital_id }}" selected="" disabled=""> {{ $hospital }} </option>
+                            @endif
                             <option value="">不筛选</option>
                             @if (isset($hospitals))
                                 @foreach ($hospitals as $hospital)
-                                <option value="{{ $hospital->id }}">{{ $hospital->name }}</option>
+                                    <option value="{{ $hospital->id }}"{{isset( $hospital_id ) && $hospital->id == $hospital_id ?'selected' : ''}}>{{ $hospital->name }}</option>
                                 @endforeach
                             @endif
                         </select>
@@ -43,9 +56,9 @@
                             @if (isset($types))
                                 @foreach ($types as $type)
                                     <option value="" disabled>{{ $type->name }}</option>
-                                        @foreach ($type->instances()->orderBy('sort')->get() as $instance)
-                                        <option value="{{ $instance->id }}">{{ $instance->name }}</option>
-                                        @endforeach
+                                    @foreach ($type->instances as $instance)
+                                        <option value="{{ $instance->id }}"{{isset( $instance_id ) && $instance->id == $instance_id ?'selected' : ''}}>{{ $instance->name }}</option>
+                                    @endforeach
                                 @endforeach
                             @endif
                         </select>
@@ -60,17 +73,20 @@
             <i class="weui-loading"></i>
         </div>
     </div>
-    <div class="my_app_coming" id="nodata" style="display: none;">
+
+    {{--@if(isset($data))--}}
+    <div class="my_app_coming" id="nodata" @if(!isset($data)) style="display: none; @endif">
         <span>暂无满足条件的医生。</span>
     </div>
-
+    {{--@else--}}
+    @if(isset($doctors))
     <div class="container" id="container_doctor">
 
         @if (count($doctors) > 0)
             <div class="weui-cells" style="margin-top: 30px">
                 @foreach ($doctors as $doctor)
 
-                    <a href="doctor/{{ $doctor->id }}" class="weui-cell weui-cell_access my_doctor_cell">
+                    <a href="doctor/{{ $doctor->id }} .'?'. {{ isset($hospital) ? 'hospital_id=' . $hospital->id . '&' : ''}}{{ isset($instance) ? 'instance_id=' . $instance->id . '&' : '' }}{{isset($city) ? 'city_id=' . $city->id : '' }}" class="weui-cell weui-cell_access my_doctor_cell">
                         <div class="weui-cell__bd">
 
                             <p>{{ $doctor->name }}</p>
@@ -84,14 +100,46 @@
             </div>
         @endif
     </div>
+    @endif
+    {{--@endif--}}
     <script src="/js/user/jquery-1.11.3.min.js"></script>
     <script>
     $(function () {
-        var filter_panel = false, c_id = '', h_id = '', i_id = '';
+
+        $("#city_id").find('option:selected').val() != ''?$("[for = 'city_id'] span").text("按城市筛选："+$("#city_id").find('option:selected').text()):$("[for = 'city_id'] span").text('按 城市 筛选');
+        $("#hospital_id").find('option:selected').val() != ''?$("[for = 'hospital_id'] span").text("按医院筛选："+$("#hospital_id").find('option:selected').text()):$("[for = 'hospital_id'] span").text('按 医院 筛选');
+        $("#instance_id").find('option:selected').val() != ''?$("[for = 'instance_id'] span").text("按疾病筛选："+$("#instance_id").find('option:selected').text()):$("[for = 'instance_id'] span").text('按 疾病 筛选');
+
+        var filter_panel = false,
+            c_id = $("#city_id").val(),
+            h_id = $("#hospital_id").find('option:selected').val(),
+            i_id = $("#instance_id").val();
         function getdoctors(c_id, h_id, i_id) {
             $(".container").hide();
             $("#nodata").hide();
             $("#loading").show();
+
+
+            var parameterArr = [] , parameterStr = '' , hrefArr , href;
+            $("#city_id").val() == ''? '' : parameterArr.push("city_id=" + $("#city_id").val());
+            $("#hospital_id").val() == ''? '' : parameterArr.push("hospital_id=" + $("#hospital_id").find('option:selected').val());
+            $("#instance_id").val() == ''? '' : parameterArr.push("instance_id=" + $("#instance_id").val());
+            for(var i=0; i<parameterArr.length; i++){
+                parameterStr += parameterArr[i];
+                if(i+1 < parameterArr.length){
+                    parameterStr += '&'
+                }
+            }
+            hrefArr = location.href.toString().split('?');
+            if(parameterStr == ''){
+                history.pushState({}, document.title, hrefArr[0]);
+            }else{
+                hrefArr[1] = parameterStr;
+                href = hrefArr.join('?');
+                history.pushState({}, document.title, href);
+            }
+
+
             $.getJSON("doctors", { "city_id":c_id, "hospital_id":h_id, "instance_id":i_id })
                     .done(function (data) {
                         var alldoctor = '';
@@ -140,19 +188,35 @@
         };
         function gethospital(c_id) {
             $.getJSON('hospitals',{city_id:c_id})
-                    .done(function (data) {
-                        if(data.data.hospitals.length > 0){
-                            var hospitals = '';
-                            for(var i=0 ; i<data.data.hospitals.length ; i++){
+                .done(function (data) {
+                    var flag = false;
+                    if(data.data.hospitals.length > 0){
+                        var hospitals = '';
+                        for(var i=0 ; i<data.data.hospitals.length ; i++){
+                            if($("#hospital_id").find('option:selected').val() == data.data.hospitals[i].id){
+                                hospitals += "<option value='" + data.data.hospitals[i].id + "' selected>" + data.data.hospitals[i].name + "</option>"
+                                flag = true;
+                            }else{
                                 hospitals += "<option value='" + data.data.hospitals[i].id + "'>" + data.data.hospitals[i].name + "</option>"
                             }
-                            if($("#hospital_id").val() == ''){
+                        }
+                        if($("#hospital_id").val() == ''){
+                            $("#hospital_id").html("<option value=''>不筛选</option>" + hospitals);
+                        }else{
+                            if(flag){
                                 $("#hospital_id").html("<option value=''>不筛选</option>" + hospitals);
                             }else{
-                                $("#hospital_id").html("<option value='"+ $("#hospital_id").val() +"' selected disabled> " + $("#hospital_id").find('option:selected').text() + " </option><option value=''>不筛选</option>" + hospitals);
+                                $("#hospital_id").html(
+                                    "<option value='"+
+                                    $("#hospital_id").find('option:selected').val() +
+                                    "' selected disabled> " +
+                                    $("#hospital_id").find('option:selected').text() +
+                                    " </option><option value=''>不筛选</option>" +
+                                    hospitals);
                             }
                         }
-                    })
+                    }
+                })
         }
         $("#filter_btn").on('click',function () {
             filter_panel = !filter_panel;

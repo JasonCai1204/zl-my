@@ -8,7 +8,8 @@
             ['id' => 'type', 'name' => '病种', 'uri' => '/types'],
             ['id' => 'instance', 'name' => '病例', 'uri' => '/instances'],
             ['id' => 'city', 'name' => '城市', 'uri' => '/cities'],
-            ['id' => 'news', 'name' => '资讯', 'uri' => '/news'],
+            ['id' => 'news_class', 'name' => '文章类别', 'uri' => '/news_class'],
+            ['id' => 'news', 'name' => '文章', 'uri' => '/news'],
             ['id' => 'master', 'name' => '德之天才', 'uri' => '/masters'],
             ['id' => 'department', 'name' => '企业部门', 'uri' => '/departments'],
             ] as $menu)

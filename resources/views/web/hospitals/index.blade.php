@@ -10,12 +10,13 @@
                 <label for="city_id">
                     <span>筛选</span>
                     <select id="city_id">
-                        <!--前两个option保留，以下循环插入城市数据（ city_id & city_name ）-->
                         <option value="" disabled>按城市筛选：</option>
                         <option value="" selected>不筛选</option>
-                        @foreach ($cities as $city)
-                        <option value="{{ $city->id }}">{{ $city->name }}</option>
-                        @endforeach
+                        @if (isset($cities))
+                            @foreach($cities as $city )
+                                <option value="{{ $city->id }}"{{isset( $city_id ) && $city->id == $city_id ?'selected' : ''}}>{{ $city->name }}</option>
+                            @endforeach
+                        @endif
                     </select>
                 </label>
                 <div class="chevron"></div>
@@ -28,7 +29,7 @@
         <div class="weui-cells" style="margin-top: 30px">
             @foreach ($hospitals as $hospital)
 
-                <a href="hospital/{{ $hospital->id }}" class="weui-cell weui-cell_access">
+                <a href="hospital/{{ $hospital->id }}.'?'.{{isset($city) ? 'city_id=' . $city->id : '' }}" class="weui-cell weui-cell_access">
                     <div class="weui-cell__bd">
                         <p>{{ $hospital->name }}</p>
                     </div>
@@ -54,6 +55,11 @@
 <script src="/js/user/jquery-1.11.3.min.js"></script>
 <script type="text/javascript">
     $(function () {
+        if($(this).find('option:selected').val() != ''){
+            $("[for = 'city_id'] span").text($(this).find('option:selected').text());
+        }else{
+            $("[for = 'city_id'] span").text("筛选");
+        }
         $("#city_id").on('change',function () {
             if($(this).find('option:selected').val() != ''){
                 $("[for = 'city_id'] span").text($(this).find('option:selected').text());
@@ -64,6 +70,18 @@
             $("#nodata").hide();
             $(".container").hide();
             $("#loading").show();
+
+
+            var hrefArr , href;
+            hrefArr = location.href.toString().split('?');
+            if($("#city_id").val() == ''){
+                history.pushState({}, document.title, hrefArr[0]);
+            }else{
+                hrefArr[1] = "city_id=" + $("#city_id").val();
+                href = hrefArr.join('?');
+                history.pushState({}, document.title, href);
+            }
+
             $.getJSON('hospitals',{city_id:c_id})
                     .done(function (data) {
                         var hospitals = '';

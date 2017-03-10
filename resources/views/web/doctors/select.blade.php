@@ -154,21 +154,53 @@
                         }
                     })
         }
+//        function gethospital() {
+//            $.getJSON('/hospitals',{city_id:c_id})
+//                .done(function (data) {
+//                    if(data.data.hospitals.length > 0){
+//                        var hospitals = '';
+//                        for(var i=0 ; i<data.data.hospitals.length ; i++){
+//                            hospitals += "<option value='" + data.data.hospitals[i].id + "'>" + data.data.hospitals[i].name + "</option>"
+//                        }
+//                        if($("#hospital_id").val() == ''){
+//                            $("#hospital_id").html("<option value=''>不筛选</option>" + hospitals);
+//                        }else{
+//                            $("#hospital_id").html("<option value='"+ $("#hospital_id").val() +"' selected disabled> " + $("#hospital_id").find('option:selected').text() + " </option><option value=''>不筛选</option>" + hospitals);
+//                        }
+//                    }
+//                })
+//        }
         function gethospital() {
             $.getJSON('/hospitals',{city_id:c_id})
-                    .done(function (data) {
-                        if(data.data.hospitals.length > 0){
-                            var hospitals = '';
-                            for(var i=0 ; i<data.data.hospitals.length ; i++){
+                .done(function (data) {
+                    var flag = false;
+                    if(data.data.hospitals.length > 0){
+                        var hospitals = '';
+                        for(var i=0 ; i<data.data.hospitals.length ; i++){
+                            if($("#hospital_id").find('option:selected').val() == data.data.hospitals[i].id){
+                                hospitals += "<option value='" + data.data.hospitals[i].id + "' selected>" + data.data.hospitals[i].name + "</option>"
+                                flag = true;
+                            }else{
                                 hospitals += "<option value='" + data.data.hospitals[i].id + "'>" + data.data.hospitals[i].name + "</option>"
                             }
-                            if($("#hospital_id").val() == ''){
+                        }
+                        if($("#hospital_id").val() == ''){
+                            $("#hospital_id").html("<option value=''>不筛选</option>" + hospitals);
+                        }else{
+                            if(flag){
                                 $("#hospital_id").html("<option value=''>不筛选</option>" + hospitals);
                             }else{
-                                $("#hospital_id").html("<option value='"+ $("#hospital_id").val() +"' selected disabled> " + $("#hospital_id").find('option:selected').text() + " </option><option value=''>不筛选</option>" + hospitals);
+                                $("#hospital_id").html(
+                                    "<option value='"+
+                                    $("#hospital_id").find('option:selected').val() +
+                                    "' selected disabled> " +
+                                    $("#hospital_id").find('option:selected').text() +
+                                    " </option><option value=''>不筛选</option>" +
+                                    hospitals);
                             }
                         }
-                    })
+                    }
+                })
         }
         $("#filter_btn").on('click',function () {
             filter_panel = !filter_panel;

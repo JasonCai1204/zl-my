@@ -51,7 +51,7 @@
         }
     </style>
 </head>
-<body style="background-color: rgb(239,239,248);margin: 0">
+<body style="background-color: rgb(239,239,248);margin: auto">
 
 <!--固定在屏幕上部的logo-->
 <div class="logo_part">

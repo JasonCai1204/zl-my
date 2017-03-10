@@ -92,6 +92,14 @@ Route::group(['domain' => 'cms.zl-my.com', 'namespace' => 'cms'], function () {
     Route::put('news/{news}', 'NewsController@update');
     Route::delete('news/{news}', 'NewsController@destroy');
 
+    // news_class
+    Route::get('news_class','News_classController@index');
+    Route::get('news_class/create','News_classController@create');
+    Route::post('news_class','News_classController@store');
+    Route::get('news_class/{news_class}','News_classController@show');
+    Route::put('news_class/{news_class}','News_classController@update');
+    Route::delete('news_class/{news_class}','News_classController@destroy');
+
     // department
     Route::get('departments', 'DepartmentController@index');
     Route::get('departments/create', 'DepartmentController@create');
@@ -156,6 +164,9 @@ Route::group(['namespace' => 'web'], function() {
 
     // News
     Route::resource('news','NewsController');
+
+    // Guide
+    Route::get('guide','NewsController@guide');
     Route::get('loadmore','NewsController@loadMore');
 
     // Recommend

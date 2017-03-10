@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
     <link rel="stylesheet" href="css/user/home.css">
     <style>
+        body{
+            font-family: -apple-system-font, 'Helvetica Neue', sans-serif;
+        }
         * {
             margin: 0;
             padding: 0;
@@ -53,7 +56,7 @@
         </div>
     </div>
     <div class="my_phone_qrcode">
-        <img src="/storage/images/app/zl-my_com_two_dimensional_code.png" alt="">
+        <img src="/storage/images/app/my_com_two_dimensional_code.png" alt="">
         <p>关注微信公众号</p>
         <span>长按二维码 - 识别图中二维码</span>
     </div>

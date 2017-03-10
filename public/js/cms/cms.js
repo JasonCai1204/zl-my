@@ -8,6 +8,14 @@ function confirmDelete() {
     }
 }
 
+function recommendCheck() {
+    if($("#is_recommended").is(':checked') || $("#is_recommended_1").is(':checked')){
+        $("#recommendImage").show()
+    }else{
+        $("#recommendImage").hide()
+    }
+}
+
 $(function () {
     var eidtor = new Simditor({
         textarea: $('#editor'),
@@ -34,6 +42,12 @@ $(function () {
             connectionCount: 3,
             leaveConfirm: '文件上传中，您要离开页面吗？'
         },
-    })
+    });
+
+    if($("#is_recommended").is(':checked') || $("#is_recommended_1").is(':checked')){
+        $("#recommendImage").show()
+    }else{
+        $("#recommendImage").hide()
+    };
 
 });

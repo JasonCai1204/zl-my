@@ -18,8 +18,98 @@ class DoctorController extends Controller
         $this->middleware('auth:doctor', ['only' =>['getProfile','getCondition_report']]);
     }
 
+
     public function index(Request $request)
     {
+//        dd('ok');
+        // Try try try...
+        try {
+            $c = App\City::findOrfail($request->city_id);
+        } catch (ModelNotFoundException $e) {
+            if ($request->has('city_id')) {
+                return view('web.doctors.index',[ 'data' => 0 ]);
+            }
+        };
+
+        try {
+            $h = App\Hospital::findOrfail($request->hospital_id);
+        } catch (ModelNotFoundException $e) {
+            if ($request->has('hospital_id')) {
+                return view('web.doctors.index',[ 'data' => 0 ]);
+            }
+        };
+
+        try {
+            $i = App\Instance::findOrfail($request->instance_id);
+        } catch (ModelNotFoundException $e) {
+            if ($request->has('instance_id')) {
+                return view('web.doctors.index',[ 'data' => 0 ]);
+            }
+        };
+
+
+        if (isset($c) || isset($h) || isset($i) )
+        {
+            // Get doctors via city_id, hospital_id, instance_id.
+            $d = App\Doctor::orderBy(DB::raw('CONVERT(name USING gbk)'))
+                ->select('id','name','grading','hospital_id')
+                ->get();
+
+            $hospitals = App\Hospital::orderBy(DB::raw('CONVERT(name USING gbk)'))
+                ->select('id','name','grading')
+                ->get();
+
+            if (isset($c)) {
+                $temp = collect([]);
+                foreach ($c->hospitals as $hospital) {
+                    $temp = $temp->merge($hospital->doctors);
+                }
+                $d = $d->intersect($temp);
+
+                $hospitals = $hospitals->intersect($c->hospitals);
+            }
+
+            if (isset($h)) {
+                $d = $d->intersect($h->doctors);
+            }
+
+            if (isset($i)) {
+                $d = $d->intersect($i->doctors);
+            }
+
+            if (count($d) == 0) {
+
+                return view('web.doctors.index',[
+                    'data' => 0 ,
+                    'cities' => App\City::orderBy(DB::raw('CONVERT(name USING gbk)'))->get(),
+                    'city_id' => $request->city_id,
+                    'hospitals' => App\Hospital::where('city_id',$request->city_id)->orderBy(DB::raw('CONVERT(name USING gbk)'))->select('id','name','grading')->get(),
+                    'hospital' => App\Hospital::where('id',$request->hospital_id)->value('name'),
+                    'hospital_id' => $request->hospital_id
+                ]);
+            }
+
+
+            $cities = App\City::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+
+
+
+            $types = App\Type::orderBy('sort')->get();
+
+
+            return view('web.doctors.index',[
+                'doctors' => $d,
+                'cities' => $cities,
+                'city_id' => isset($c) ? $request->city_id : '',
+                'hospitals' => $hospitals,
+                'hospital_id' => isset($h) ? $request->hospital_id : '',
+                'types' => $types,
+                'type_id' => isset($t) ? $request->type_id : ''
+            ]);
+
+        }
+
+
 
         $cities = App\City::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
 
@@ -58,6 +148,7 @@ class DoctorController extends Controller
 
     public function getSelect(Request $request)
     {
+
         try {
             $city =App\City::find($request->city_id);
         } catch (ModelNotFoundException $e) {
@@ -500,11 +591,12 @@ class DoctorController extends Controller
     protected function noData()
     {
         return collect([
-            'status' => 1,
+            'status' => 3,
             'msg' => '加载成功',
             'data' => '暂无符合条件的医生。'
         ])->toJson();
     }
+
 
     public function getdoctors(Request $request)
     {
@@ -513,7 +605,7 @@ class DoctorController extends Controller
             $c = App\City::findOrfail($request->city_id);
         } catch (ModelNotFoundException $e) {
             if ($request->has('city_id')) {
-                return $this->noData();
+//                return $this->noData();
             }
         };
 
@@ -521,7 +613,7 @@ class DoctorController extends Controller
             $h = App\Hospital::findOrfail($request->hospital_id);
         } catch (ModelNotFoundException $e) {
             if ($request->has('hospital_id')) {
-                return $this->noData();
+//                return $this->noData();
             }
         };
 
@@ -529,7 +621,7 @@ class DoctorController extends Controller
             $i = App\Instance::findOrfail($request->instance_id);
         } catch (ModelNotFoundException $e) {
             if ($request->has('instance_id')) {
-                return $this->noData();
+//                return $this->noData();
             }
         };
 
@@ -583,7 +675,7 @@ class DoctorController extends Controller
     // Doctor profile.
     public function getProfile(Request $request)
     {
-        $doctor = App\Doctor::find(Auth::guard('doctor')->user()->id);
+        $doctor = App\Doctor::find(Auth::guard('doctor')->user()->role_id);
 
         return view('web.doctors.profile',[
             'doctor' => $doctor

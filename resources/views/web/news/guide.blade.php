@@ -35,7 +35,7 @@
 
     <div class="classifyInformation my_has_after">
 
-        @if(isset($news[0][0]) && count($news[0][0]) >0)
+        @if(isset($news[0][0]) && count($news[0][0]) > 0)
         <a name="news_class_id" href="javascript:;" class="classifyItem itemclick">{{ isset($news[0][0]) ? $news[0][0]->News_class->name : '' }}</a>
         @endif
 
@@ -43,25 +43,24 @@
         <a name="news_class_id" href="javascript:;" class="classifyItem">{{ isset($news[1][0]) ? $news[1][0]->News_class->name : '' }}</a>
         @endif
 
-        @if(isset($news[2][0]) && count($news[2][0]) >0)
+        @if(isset($news[2][0]) && count($news[2][0])>0)
         <a name="news_class_id" href="javascript:;" class="classifyItem">{{ isset($news[2][0]) ? $news[2][0]->News_class->name : '' }}</a>
         @endif
 
     </div>
 
-    <div id="container_news" class="container my_has_before my_has_after">
+    <div id="container_guide" class="container my_has_before my_has_after">
 
         @if(isset($news[0]))
             <div class="infomation-cells">
 
                 @foreach($news[0] as $item)
-                    <a href="/news/{{ $item->id }}" class="information-cell">
-                        <img src="{{Storage::url($item->cover_image)}}" alt="" class="information-cell__hd">
-                        <div class="information-cell__bd">
-                            <p>{{ $item->title }}</p>
-                            <span>{{ isset($item->published_at) ? $item->published_at->format('Y-m-d') : ''  }}</span>
-                        </div>
-                    </a>
+                <a href="/news/{{ $item->id }}" class="information-cell">
+                    <img src="{{Storage::url($item->cover_image)}}" alt="" class="information-cell__hd">
+                    <div class="information-cell__bd">
+                        <p>{{ $item->title }}</p>
+                    </div>
+                </a>
                 @endforeach
 
             </div>
@@ -72,13 +71,12 @@
 
 
                 @foreach($news[1] as $item)
-                    <a href="/news/{{ $item->id }}" class="information-cell">
-                        <img src="{{Storage::url($item->cover_image)}}" alt="" class="information-cell__hd">
-                        <div class="information-cell__bd">
-                            <p>{{ $item->title }}</p>
-                            <span>{{ isset($item->published_at) ? $item->published_at->format('Y-m-d') : ''  }}</span>
-                        </div>
-                    </a>
+                <a href="/news/{{ $item->id }}" class="information-cell">
+                    <img src="{{Storage::url($item->cover_image)}}" alt="" class="information-cell__hd">
+                    <div class="information-cell__bd">
+                        <p>{{ $item->title }}</p>
+                    </div>
+                </a>
                 @endforeach
 
             </div>
@@ -88,13 +86,12 @@
             <div class="infomation-cells" style="display: none;">
 
                 @foreach($news[2] as $item)
-                    <a href="/news/{{ $item->id }}" class="information-cell">
-                        <img src="{{Storage::url($item->cover_image)}}" alt="" class="information-cell__hd">
-                        <div class="information-cell__bd">
-                            <p>{{ $item->title }}</p>
-                            <span>{{ isset($item->published_at) ? $item->published_at->format('Y-m-d') : ''  }}</span>
-                        </div>
-                    </a>
+                <a href="/news/{{ $item->id }}" class="information-cell">
+                    <img src="{{Storage::url($item->cover_image)}}" alt="" class="information-cell__hd">
+                    <div class="information-cell__bd">
+                        <p>{{ $item->title }}</p>
+                    </div>
+                </a>
                 @endforeach
 
             </div>

@@ -51,13 +51,11 @@
                     </div>
                     <div class="weui-cell__ft"></div>
                 </a>
-                <a href="tel:400-8120533" class="weui-cell weui-cell_access">
+                <a href="/contact" class="weui-cell weui-cell_access">
                     <div class="weui-cell__bd">
                         <p>联系我们</p>
                     </div>
-                    <div class="weui-cell__ft">
-                        4008-120-533
-                    </div>
+                    <div class="weui-cell__ft"></div>
                 </a>
             </div>
 

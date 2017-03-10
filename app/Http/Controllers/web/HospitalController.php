@@ -10,9 +10,20 @@ use Illuminate\Support\Facades\DB;
 
 class HospitalController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $hospitals = App\Hospital::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+
+        if ($request->has('city_id')) {
+            $hospitals = App\Hospital::where('city_id', $request->city_id)->orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+            $cities = App\City::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
+
+            return view('web.hospitals.index', [
+                'hospitals' => $hospitals,
+                'cities' => $cities,
+                'city_id' => $request->city_id
+            ]);
+        }
 
         $cities = App\City::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
 

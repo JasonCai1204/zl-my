@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/user/swiper-3.3.1.min.css">
     @yield('head')
 </head>
-<body>
+<body style="background-color:@yield('backgroundColor')">
 <div class="logo_part">
     <div class="logo">
         <a href="/" style="background-image: url('/storage/images/app/M_27w.png');"></a>
@@ -28,6 +28,10 @@
             <img src="/storage/images/app/newspaper.png" alt="" class="weui-tabbar__icon">
             <p class="weui-tabbar__label">资讯</p>
         </a>
+        <a href="guide" class="weui-tabbar__item">
+            <img src="/storage/images/app/guide.png" alt="" class="weui-tabbar__icon">
+            <p class="weui-tabbar__label">指南</p>
+        </a>
         <a href="recommends" class="weui-tabbar__item">
             <img src="/storage/images/app/thumbs_up.png" alt="" class="weui-tabbar__icon">
             <p class="weui-tabbar__label">推荐</p>
@@ -42,8 +46,7 @@
 <script type="text/javascript" src="/js/user/dropload.min.js"></script>
 <script type="text/javascript" src="js/user/swiper-3.3.1.jquery.min.js"></script>
 <script type="text/javascript" src="js/user/index.js"></script>
-<script type="text/javascript" src="js/user/indexsearch.js"></script>
-<script type="text/javascript" src="js/user/loadmore.js"></script>
 <script type="text/javascript" src=js/user/tabbarclick.js></script>
+<script src="/js/user/loadInformation.js"></script>
 </body>
 </html>

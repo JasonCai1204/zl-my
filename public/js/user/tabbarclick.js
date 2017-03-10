@@ -2,9 +2,9 @@
  * Created by xiaoguoquan on 2016/11/9.
  */
 ;$(function () {
-    if($(".weui-tabbar__item").length == 4){
+    if($(".weui-tabbar__item").length == 5){
         $(".weui-tabbar__item").siblings().removeClass('my_tabbar_click');
-        var itemarr = ['container_home','container_news','container_recommend','container_account'];
+        var itemarr = ['container_home','container_news','container_guide','container_recommend','container_account'];
         var itemid = $(".container").attr("id");
         var index = itemarr.indexOf(itemid);
         if(index > -1){

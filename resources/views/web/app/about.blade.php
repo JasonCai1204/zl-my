@@ -67,6 +67,9 @@
 <script src="js/user/jquery-1.11.3.min.js"></script>
 <script type="text/javascript">
     var isHide = true;
+    var winW = $(window).width() >= 667 ? 667 : $(window).width(),
+            imgH = winW * 150 / 375;
+    $(".my_aboutus_head").height(imgH);
     $(".container").on('click', '.special_cells_access', function () {
         if (isHide) {
             $('#ceo-address').slideDown();
@@ -82,6 +85,11 @@
             })
             isHide = true;
         }
+    })
+    $(window).resize(function () {
+        winW = $(window).width() >= 667 ? 667 : $(window).width();
+        imgH = winW * 150 / 375;
+        $(".my_aboutus_head").height(imgH);
     })
 </script>
 </body>

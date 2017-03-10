@@ -364,14 +364,6 @@ input,input:focus,input:active{
     height:100%;
     background-size: cover;
 }
-@media screen and (min-height: 770px){#container_home .my_home_msg{
-    position:fixed;
-    left:0;
-    bottom:0;
-    width:100%;
-    margin-bottom:49px;
-    text-align:center
-}}
 /*end*/
 /*资讯部分css*/
 .my_advice_list{
@@ -380,6 +372,7 @@ input,input:focus,input:active{
     position: relative;
     box-sizing: border-box;
     margin:0;
+    margin-bottom:10px;
     padding:0;
 }
 .my_advice_list img{
@@ -615,6 +608,9 @@ input,input:focus,input:active{
     width:100%;
     height:initial;
     margin:0 auto;
+}
+.weui-article img{
+    height: initial;
 }
 #container_news .weui-loadmore{
     margin-top:15px;
@@ -1333,4 +1329,192 @@ input,input:focus,input:active{
     z-index: 1001;
     padding: 2px 7px ;
     line-height: initial;
+}
+
+.code{
+    display: block;
+    height: 107px;
+    background-color: white;
+    position: relative;
+    top:-7px;
+    margin-top:15px;
+    line-height:initial;
+}
+.arrow{
+    width: 26px;
+    height: 26px;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left:-26px;
+    right:0;
+    bottom:0;
+    margin:auto;
+    transform: rotate(-45deg);
+    border-right: 1px solid #E6E6E6;
+    border-bottom: 1px solid #E6E6E6;
+    border-radius: 1px;
+}
+.codeText{
+    width: 50%;
+    height:100%;
+    position: absolute;
+    left:0;
+    top:0;
+}
+.codeImg{
+    width: 50%;
+    height:100%;
+    position: absolute;
+    right: 0;
+    top:0;
+}
+.codeTextInner{
+    width: 76px;
+    height: 40px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
+.codeTextInner p{
+    margin:0;
+    padding:0;
+    font-family: PingFangSC-Regular;
+    color: #000000;
+    font-size:14px;
+    line-height:20px;
+}
+.codeImg img{
+    display: block;
+    width: 70px;
+    height: 70px;
+    margin:10px auto 0;
+    padding:0;
+
+}
+.codeImg p{
+    display: block;
+    text-align: center;
+    color: #888888;
+    font-size:12px;
+    line-height:17px;
+    margin:0 0 10px 0;
+    padding:0;
+}
+
+.classifyInformation{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    width: 100%;
+    height: 48px;
+    background: white;
+    z-index: 500;
+    max-width: 667px;
+}
+.filter_fixed{
+    position: fixed;
+    top:0;
+}
+.classifyItem{
+    display: block;
+    position: relative;
+    color: black;
+    text-align: center;
+    height: 47px;
+    font-size: 16px;
+    line-height:47px;
+    text-align: center;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
+    cursor: pointer;
+    z-index: 3;
+}
+.itemclick{
+    color: #27A375;
+    border-bottom: 2px solid #27A375;
+}
+#container_news, #container_guide{
+    margin-top:30px;
+}
+.information-cell{
+    display: block;
+    width: 100%;
+    height: 102px;
+    overflow: hidden;
+    position: relative;
+}
+.information-cell + .information-cell:before{
+    content: '';
+    position: absolute;
+    box-sizing: border-box;
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    -webkit-transform: scale(.5);
+    transform: scale(.5);
+    width: 200%;
+    height: 2px;
+    background-color: #E6E6E6;
+    top:0;
+    left: 103px;
+    z-index: 2;
+}
+.information-cell__hd{
+    width: 70px;
+    height: 70px;
+    float: left;
+    margin: 16px;
+    margin-right: 17px;
+}
+#container_guide .information-cell__bd{
+    display: block;
+    margin-top:40px;
+}
+.information-cell__bd{
+    display: block;
+    margin-top:23px;
+}
+.information-cell__bd p{
+    height: 22px;
+    padding-right: 15px;
+    color: #000000;
+    font-size:16px;
+    line-height:22px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.information-cell__bd span{
+    display: inline-block;
+    height: 17px;
+    line-height:17px;
+    font-size:12px;
+    color: #888888;
+    margin-top:10px;
+}
+.loadBtnOuter{
+    display: block;
+    margin: 21px auto 30.5px;
+    text-align: center;
+    height:24px;
+    line-height: 24px;
+    font-size: 14px;
+    color: #27A375;
+}
+#loadInformation{
+    display: inline-block;
+    width: 66px;
+    color: #27A375;
+}
+.msgfiexd{
+    position :fixed;
+    left:0;
+    bottom: 0;
+    width: 100%;
+    margin-bottom: 64px;
+    text-align: center;
 }

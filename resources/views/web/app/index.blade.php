@@ -12,7 +12,7 @@
                     <div class="weui-search-bar__box">
                         <i class="weui-icon-search" style="top: 5.5px;"></i>
                         <input type="search" class="weui-search-bar__input" id="searchInput" placeholder="搜索医院、医生"
-                               name="q" autofocus/>
+                               name="q"/>
                         <a href="javascript:;" class="weui-icon-clear" id="searchClear"></a>
                     </div>
 
@@ -63,10 +63,12 @@
                 <div class="swiper-wrapper">
 
                     @foreach ($news as $new)
-                        <div class="swiper-slide">
-                            <a href="news/{{ $new->id }}"
-                               style="background-image:url('/storage/{{$new->cover_image}}')"></a>
-                        </div>
+                        @if($new->is_recommended ==1)
+                            <div class="swiper-slide">
+                                <a href="news/{{ $new->id }}"
+                                   style="background-image:url('/storage/{{$new->banner_image}}')"></a>
+                            </div>
+                        @endif
                     @endforeach
 
                 </div>
@@ -90,6 +92,23 @@
                 </div>
             </a>
         </div>
+
+
+        <!--二维码-->
+        <div class="code my_has_before my_has_after">
+            <div class="arrow"></div>
+            <div class="codeText">
+                <div class="codeTextInner">
+                    <p style="letter-spacing: 5px;">了解更多</p>
+                    <p>请扫码关注</p>
+                </div>
+            </div>
+            <div class="codeImg">
+                <img src="/storage/images/app/qr_code_zl-my_com.png" alt="">
+                <p>"德之医"公众号</p>
+            </div>
+        </div>
+
 
 
         <div class="my_home_msg">
