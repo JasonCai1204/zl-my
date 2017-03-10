@@ -10,11 +10,7 @@
     <div class="container">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-<<<<<<< HEAD
                 <div class="panel-heading">文章详情</div>
-=======
-                <div class="panel-heading">资讯详情</div>
->>>>>>> origin/develop
 
                 <div class="panel-body">
                     <form id="news-show" class="form-horizontal" role="form" method="POST" action="{{ url('/news/' . $data->id) }}" enctype="multipart/form-data">

@@ -9,11 +9,7 @@
 
             <div class="col-sm-10">
                 <div id="tool-bar">
-<<<<<<< HEAD
                     <a type="button" class="btn btn-default" href="/news/create">添加文章</a>
-=======
-                    <a type="button" class="btn btn-default" href="/news/create">添加资讯</a>
->>>>>>> origin/develop
                 </div>
 
                 <div class="panel panel-default">
