@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddSortToNewsTable extends Migration
+class CreateNewsClassedTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,13 @@ class AddSortToNewsTable extends Migration
      */
     public function up()
     {
-        Schema::table('news', function (Blueprint $table) {
+        Schema::create('news_classed', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->integer('type');
             $table->integer('sort');
         });
-    } 
+    }
 
     /**
      * Reverse the migrations.
@@ -25,8 +28,6 @@ class AddSortToNewsTable extends Migration
      */
     public function down()
     {
-        Schema::table('news', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('news_classed');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddSortToNewsTable extends Migration
+class AddIsRecommended1ToNewsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,9 +14,9 @@ class AddSortToNewsTable extends Migration
     public function up()
     {
         Schema::table('news', function (Blueprint $table) {
-            $table->integer('sort');
+            $table->boolean('is_recommended_1')->after('is_recommended');
         });
-    } 
+    }
 
     /**
      * Reverse the migrations.
