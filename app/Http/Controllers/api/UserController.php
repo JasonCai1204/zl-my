@@ -2,157 +2,166 @@
 
 namespace App\Http\Controllers\api;
 
-use App;
+use App\Code;
+use App\Patient;
+use Carbon\Carbon;
 use Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
-    public function index(Request $request)
+    public function __construct()
     {
-        if($user_id = session('user.id')){
-
-            $user = App\User::find($user_id);
-
-            return view('users.account.account',[
-                'user' => $user
-            ]);
-        }
-        return view('users.account.account');
+        $this->middleware('auth:api');
     }
 
         // Get profile.
     public function getProfile(Request $request)
     {
-        $user = App\User::find($request->user_id);
+        $user = Auth::user()->toArray();
 
-        return view('users.account.profile',[
-            'user'=>$user
+        $data = array_only($user,['id','name','phone_number']);
+
+        return collect([
+            'status' => 1,
+            'msg' => '用户信息获取成功',
+            'data' => $data
         ]);
     }
 
     // Post modify profile.
-    public function postProfile(Request $request)
+    public function modifyProfile(Request $request)
     {
+        $user = Auth::user();
 
-        if(!$request->name)
-        {
-            return view('users.account.profile',[
-                'error'=> '姓名不能为空'
-            ]);
-        }
-
-        if(!$request->phone_number)
-        {
-            return view('users.account.profile',[
-                'error'=> '手机号码不能为空'
-            ]);
-        }
-
-        if($request->name && $request->phone_number)
-        {
-            $user = App\User::where('phone_number',$request->phone_number)
-                ->first();
-
-            $user->name = $request->name;
-
-            $user->save();
-
-            session(['user' => $user]);
-
-            return view('users.account.profile',[
-                'user'=> $user
+        if ($request->current_password && count($request->current_password)>0){
+            $validator = Validator::make($request->all(), [
+                'current_password' => 'required',
+            ], [
+                'current_password.required' => '当前密码不能为空。',
             ]);
 
-        }
+            if ($validator->fails()){
 
-    }
+                $errors = $validator->errors()->all();
 
-    // Modify password.
-    public function getReset()
-    {
-        return view('users.account.reset');
-    }
-
-    public function postReset(Request $request)
-    {
-        if(!$request->has('password'))
-        {
-            return view('users.account.reset',[
-                'errors' => collect('请输入当前密码'),
-            ]);
-        }
-
-        if(!$request->has('newPassword'))
-        {
-            return view('users.account.reset',[
-                'errors' => collect('请输入新密码'),
-            ]);
-        }
-
-        if(!$request->has('newPassword_confirmation'))
-        {
-            return view('users.account.reset',[
-                'errors' => collect('请确认新密码'),
-            ]);
-        }
-
-        if($input = $request->all())
-        {
-            $rules = [
-                'password' => 'required|',
-                'newPassword' => 'required|min:6|confirmed',
-            ];
-
-            $messages =[
-                'password.required' => '请输入当前密码',
-                'newPassword.required' => '请输入新密码',
-                'newPassword.min' => '请输入不少于 6 位的新密码',
-                'newPassword.confirmed' => '两次密码不一致'
-            ];
-
-            $validator = Validator::make($input,$rules,$messages);
-
-            if($validator->passes())
-            {
-                $user = App\User::find(session('user.id'));
-
-                $password = $user->password;
-
-
-                if(Hash::check($request->password,$password)){
-
-                    $user->password = bcrypt($request->newPassword);
-
-                    $user->save();
-
-                    session(['user'=>$user]);
-
-                    return redirect('/account');
-
-                }else{
-                    return view('users.account.reset',[
-                        'errors' => collect('当前密码不正确！'),
-                    ]);
+                foreach ($errors as $error){
+                    $error;
                 }
-            }else{
-                return back()->withErrors($validator);
+
+                return collect([
+                    'status' => -1,
+                    'msg' => $error
+                ])->toJson();
+
+            }
+
+            if (Hash::check($request->current_password, $user->password)) {
+
+                return collect([
+                    'status' => 1,
+                    'msg' => '密码正确'
+                ])->toJson();
+            } else {
+                return collect([
+                    'status' => -1,
+                    'msg' => '当前密码错误'
+                ])->toJson();
             }
         }
-    }
 
-    // User orders.
-    public function getOrders(Request $request)
-    {
 
-        $orders = App\Order::where('user_id',$request->user_id)
-            ->get();
+        if ($request->has('phone_number')){
+            $validator = Validator::make($request->all(), [
+                'phone_number' => 'required|digits:11|unique:users,phone_number,' . $user->id,
+            ], [
+                'phone_number.required' => '手机号码不能为空。',
+                'phone_number.digits' => '请输入 11 位手机号码。',
+                'phone_number.unique' => '此手机号码已注册。',
+            ]);
 
-        return view('users.account.order',[
-            'orders'=>$orders
-        ]);
+            if ($validator->fails()){
+
+                $errors = $validator->errors()->all();
+
+                foreach ($errors as $error){
+                    $error;
+                }
+
+                return collect([
+                    'status' => -1,
+                    'msg' => $error
+                ])->toJson();
+
+            }
+
+            if ($request->code == Code::where('phone_number',$request->phone_number)->value('code')){
+                $time2 = Code::where('phone_number',$request->phone_number)->value('updated_at');
+                $time1= Carbon::now();
+
+                if ($time1->diffInSeconds($time2) > 120){
+
+                    return collect([
+                        'status' => -1,
+                        'msg' => '验证码已过期，请再次尝试。'
+                    ])->toJson();
+
+                }
+            }else {
+                return collect([
+                    'status' => -1,
+                    'msg' => '验证码不正确，请再试一次。'
+                ])->toJson();
+
+            }
+
+
+            $user->phone_number = $request->phone_number;
+            $user->save();
+
+            return collect([
+                'status' => 1,
+                'msg' => '手机号码已更改。',
+            ]);
+
+        }
+
+        if ($request->has('name')){
+            $validator = Validator::make($request->all(), [
+                'name' => 'required|max:5',
+            ], [
+                'name.required' => '姓名不能为空。',
+                'name.max' => '姓名不能超过 5 位。',
+            ]);
+
+            if ($validator->fails()){
+
+                $errors = $validator->errors()->all();
+
+                foreach ($errors as $error){
+                    $error;
+                }
+
+                return collect([
+                    'status' => -1,
+                    'msg' => $error
+                ])->toJson();
+
+            }
+
+            $user->name = $request->name;
+            $user->save();
+
+            Patient::find($user->role_id)->update(['name' => $request->name]);
+
+            return collect([
+                'status' => 1,
+                'msg' => '姓名已更改。',
+            ]);
+        }
     }
 
 }

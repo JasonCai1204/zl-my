@@ -17,7 +17,7 @@
                 <li role="presentation" {{ isset($hero) && $hero == $menu['id'] ? 'class=active' : '' }}>
                         <a href="{{ $menu['uri'] }}">{{ $menu['name'] }}</a>
                 </li>
-            @elseif (Auth::guard('master')->user()->department_id == 8602)
+            @elseif (\App\Master::find(Auth::guard()->user()->role_id)->department_id == 2)
                 <li role="presentation" {{ isset($hero) && $hero == $menu['id'] ? 'class=active' : '' }}>
                     <a href="{{ $menu['uri'] }}">{{ $menu['name'] }}</a>
                 </li>

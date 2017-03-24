@@ -51,7 +51,7 @@
                 <label class="weui-label">手机号码</label>
             </div>
             <div class="weui-cell__bd">
-                <p>{{ $doctor->phone_number }}</p>
+                <p>{{ \App\User::where([['role_id',$doctor->id],['role_type','App\Doctor']])->first()->phone_number }}</p>
             </div>
         </div>
     </div>

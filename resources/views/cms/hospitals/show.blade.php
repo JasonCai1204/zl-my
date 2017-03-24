@@ -9,7 +9,7 @@
                 <div class="panel-heading">医院详情</div>
 
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/hospitals/' . $data->id) }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/hospitals/' . $data->id) }}" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         {{ method_field('PUT') }}
 
@@ -22,6 +22,22 @@
                                 @if ($errors->has('name'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('avatar') ? 'has-error' : '' }}">
+                            <label class="col-md-4 control-label" for="avatar">院徽</label>
+
+                            <div class="col-md-6">
+                                <input id="avatar" type="file" accept="image/*" name="avatar">
+
+                                <img src="{{ Storage::url($data->avatar ?: 'images/hospital/avatar/default.png') }}" alt="{{ $data->name }}的照片" style="max-width: 50px; max-height: 50px" />
+
+                                @if ($errors->has('avatar'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('avatar') }}</strong>
                                     </span>
                                 @endif
                             </div>

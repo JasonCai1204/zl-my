@@ -2,13 +2,20 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Master extends Authenticatable
 {
+    use Notifiable;
+
     public $incrementing = false;
+
     public $timestamps = false;
+
+    protected $fillable = [
+        'name',
+    ];
 
     protected $hidden = [
         'password', 'remember_token',
@@ -16,5 +23,10 @@ class Master extends Authenticatable
 
     public function department() {
         return $this->belongsTo('App\Department');
+    }
+
+    public function users()
+    {
+        return $this->morphMany('App\User', 'role');
     }
 }

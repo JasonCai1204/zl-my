@@ -14,8 +14,8 @@ class OrderController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:doctor', ['only' => 'getDoctorOrders']);
-        $this->middleware('auth', ['only' => ['postCreate', 'getHospitalOrders']]);
+        $this->middleware('doctor', ['only' => 'getDoctorOrders']);
+        $this->middleware('auth', ['only' => ['getDoctorOrders','postCreate', 'getUserOrders']]);
 
     }
 
@@ -113,7 +113,7 @@ class OrderController extends Controller
             'phone_number' => 'required|digits:11',
         ], [
             'patient_name.required' => '姓名不能为空。',
-            'patient_name.max' => '患者姓名长度不能超过 5 位。',
+            'patient_name.max' => '患者姓名不能多于 5 个字。',
             'phone_number.required' => '手机号码不能为空。',
             'phone_number.digits' => '请输入 11 位手机号码。',
         ]);
@@ -167,7 +167,7 @@ class OrderController extends Controller
     // Get doctor orders.
     public function getDoctorOrders()
     {
-        $orders = App\Order::where('doctor_id',Auth::guard('doctor')->user()->id)
+        $orders = App\Order::where('doctor_id',Auth::user()->id)
                 ->where('send_to_the_doctor_at', '!=', null)
                 ->orderBy('send_to_the_doctor_at','desc')
                 ->get();

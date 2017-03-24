@@ -37,7 +37,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest:doctor', ['except' => 'logout']);
+        $this->middleware('guest', ['except' => 'logout']);
     }
 
     public function username()
@@ -63,6 +63,6 @@ class LoginController extends Controller
 
     protected function guard()
     {
-        return Auth::guard('doctor');
+        return Auth::guard();
     }
 }

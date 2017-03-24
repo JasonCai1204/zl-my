@@ -15,13 +15,13 @@ class DoctorController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:doctor', ['only' =>['getProfile','getCondition_report']]);
+        $this->middleware('auth', ['only' =>['getProfile','getCondition_report']]);
+        $this->middleware('doctor', ['only' =>['getProfile','getCondition_report']]);
     }
 
 
     public function index(Request $request)
     {
-//        dd('ok');
         // Try try try...
         try {
             $c = App\City::findOrfail($request->city_id);
@@ -675,7 +675,8 @@ class DoctorController extends Controller
     // Doctor profile.
     public function getProfile(Request $request)
     {
-        $doctor = App\Doctor::find(Auth::guard('doctor')->user()->role_id);
+        $doctor = App\Doctor::find(Auth::user()->role_id);
+//        $doctor = App\Doctor::find(Auth::user()->id);
 
         return view('web.doctors.profile',[
             'doctor' => $doctor

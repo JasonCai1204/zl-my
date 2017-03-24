@@ -62,7 +62,7 @@
                             <label class="col-md-4 control-label" for="phone_number">手机号码</label>
 
                             <div class="col-md-6">
-                                <input type="number" pattern="[0-9]11" class="form-control" id="phone_number" name="phone_number" value="{{ old('phone_number') ?: $data->phone_number }}">
+                                <input type="number" pattern="[0-9]11" class="form-control" id="phone_number" name="phone_number" value="{{ $data->users->first()->phone_number or '' }}">
 
                                 @if ($errors->has('phone_number'))
                                     <span class="help-block">

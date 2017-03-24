@@ -11,7 +11,8 @@ class News_classController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:master');
+        $this->middleware('auth');
+        $this->middleware('master');
     }
 
     public function create()

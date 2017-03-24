@@ -13,15 +13,17 @@
                         {{ csrf_field() }}
                         {{ method_field('PUT') }}
 
-                        <div class="form-group{{ $errors->has('id') ? ' has-error' : '' }}">
+                        <input type="hidden" name="id" value="{{$data->id}}">
+
+                        <div class="form-group{{ $errors->has('m_id') ? ' has-error' : '' }}">
                             <label for="id" class="col-md-4 control-label">编号*</label>
 
                             <div class="col-md-6">
-                                <input type="number" id="id" class="form-control" name="id" placeholder="6 位数字" value="{{ old('id') ?: $data->id }}" required>
+                                <input type="number" id="m_id" class="form-control" name="m_id" placeholder="6 位数字" value="{{ old('m_id') ?: $data->m_id }}" required>
 
-                                @if ($errors->has('id'))
+                                @if ($errors->has('m_id'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('id') }}</strong>
+                                        <strong>{{ $errors->first('m_id') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -45,7 +47,7 @@
                             <label for="id" class="col-md-4 control-label">手机号码*</label>
 
                             <div class="col-md-6">
-                                <input type="number" id="phone_number" class="form-control" name="phone_number" value="{{ old('phone_number') ?: $data->phone_number }}" required>
+                                <input type="number" id="phone_number" class="form-control" name="phone_number" value="{{ old('phone_number') ?: $data->users->first()->phone_number }}" required>
 
                                 @if ($errors->has('phone_number'))
                                     <span class="help-block">

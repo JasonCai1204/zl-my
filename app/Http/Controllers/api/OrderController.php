@@ -6,12 +6,20 @@ use App\Http\Hospital;
 use App;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class OrderController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api')->only(['getDoctorOrders','postCreate','getUserOrders','updateOrders']);
+
+        $this->middleware('apiDoctor')->only(['getDoctorOrders']);
+    }
+
     //redirect order/create
     public function getCreate(Request $request)
     {
@@ -73,8 +81,6 @@ class OrderController extends Controller
             $data['doctor'] = $d;
         if (isset($i))
             $data['instance'] = $i;
-//        if (isset($request->city_id))
-//            $data['city_id'] = $request->city_id;
 
         return collect([
             'status' => 1,
@@ -110,7 +116,7 @@ class OrderController extends Controller
             'patient_name' => 'required|max:5',
         ], [
             'patient_name.required' => '姓名不能为空。',
-            'patient_name.max' => '患者姓名长度不能超过 5 位。'
+            'patient_name.max' => '患者姓名不能多于 5 个字。'
         ]);
 
         if ($validator->fails()){
@@ -122,7 +128,7 @@ class OrderController extends Controller
             }
 
             return collect([
-                'status' => -1,
+                'status' => 1,
                 'msg' => $error
             ])->toJson();
 
@@ -145,7 +151,7 @@ class OrderController extends Controller
             }
 
             return collect([
-                'status' => -1,
+                'status' => 1,
                 'msg' => $error
             ])->toJson();
 
@@ -157,8 +163,8 @@ class OrderController extends Controller
             [
                 'patient_name' => $request->patient_name,
                 'phone_number' => $request->phone_number,
-//                'user_id' => Auth::user()->id,
-                'user_id' => 1,
+                'user_id' => Auth::user()->id,
+//                'user_id' => 1,
             ]
         );
 
@@ -206,8 +212,7 @@ class OrderController extends Controller
     // Get User orders.
     public function getUserOrders(Request $request)
     {
-//        $orders = App\Order::where('user_id', Auth::user()->id)
-        $orders = App\Order::where('user_id', 1)
+        $orders = App\Order::where('user_id', Auth::user()->id)
             ->orderBy('created_at','desc')
             ->get();
 
@@ -220,8 +225,10 @@ class OrderController extends Controller
                 'phone_number' => $order->phone_number,
                 'hospital_id' => $order->hospital_id,
                 'hospital_name' => $order->hospital_id ? App\Hospital::find($order->hospital_id)->name : null,
+                'hospital_avatar' => $order->hospital_id && count(App\Hospital::find($order->hospital_id)->avatar) > 0 ? App\Hospital::find($order->hospital_id)->avatar :'images/hospital/avatar/default.png',
                 'doctor_id' => $order->doctor_id,
                 'doctor_name' => $order->doctor_id ? App\Doctor::find($order->doctor_id)->name : null,
+                'doctor_avatar' => $order->doctor_id && count(App\Doctor::find($order->doctor_id)->avatar) > 0 ? App\Doctor::find($order->doctor_id)->avatar :'images/doctor/avatar/default.png',
                 'instance_id' => $order->instance_id,
                 'instance_name' => $order->instance_id ? App\Instance::find($order->instance_id)->name : null,
                 'gender' => $order->gender,
@@ -238,7 +245,7 @@ class OrderController extends Controller
         return collect([
             'status' => 1,
             'msg' => '加载成功',
-            'data' => $data
+            'data' => count($data) > 0 ? $data : null
         ])->toJson();
 
     }
@@ -267,7 +274,7 @@ class OrderController extends Controller
             $order->phone_number = $request->phone_number;
 
         if ($request->has('user_id'))
-            $order->user_id = $request->user_id;
+            $order->user_id = Auth::user()->id;
 
         if ($request->has('hospital_id'))
             $order->hospital_id = $request->hospital_id;
@@ -307,6 +314,50 @@ class OrderController extends Controller
             'msg' => '订单提交成功',
         ])->toJson();
     }
+
+
+    // Get Doctor orders.
+    public function getDoctorOrders(Request $request)
+    {
+        $orders = App\Order::where('doctor_id',Auth::user()->role_id)
+            ->where('send_to_the_doctor_at', '!=', null)
+            ->orderBy('send_to_the_doctor_at','desc')
+            ->get();
+
+        $data = [];
+
+        foreach ($orders as $order){
+            $data['orders'][] = [
+                'id' => $order->id,
+                'patient_name' => $order->patient_name,
+                'phone_number' => $order->phone_number,
+                'hospital_id' => $order->hospital_id,
+                'hospital_name' => $order->hospital_id ? App\Hospital::find($order->hospital_id)->name : null,
+                'doctor_id' => $order->doctor_id,
+                'doctor_name' => $order->doctor_id ? App\Doctor::find($order->doctor_id)->name : null,
+                'instance_id' => $order->instance_id == 0 ? null : $order->instance_id,
+                'instance_name' => $order->instance_id ? App\Instance::find($order->instance_id)->name : null,
+                'gender' => $order->gender,
+                'birthday' => $order->birthday,
+                'smoking' => $order->smoking,
+                'weight' => $order->weight,
+                'wechat_id' => $order->wechat_id,
+                'detail' => $order->detail,
+                'photos' => $order->photos,
+                'created_at' => $order->created_at->format('Y-m-d'),
+                'condition_report' => $order->condition_report ? $order->condition_report : null
+            ];
+        }
+
+
+        return collect([
+            'status' => 1,
+            'msg' => '加载成功',
+            'data' => count($data) > 0 ? $data : null
+        ]);
+
+    }
+
 
     public function judge(Request $request)
     {

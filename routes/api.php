@@ -13,54 +13,104 @@ use Illuminate\Http\Request;
 |
 */
 
-//Route::get('/user', function (Request $request) {
-//    return $request->user();
-//})->middleware('auth:api');
+Route::get('/user', function (Request $request) {
+    return $request->user();
+})->middleware('auth:api');
+
 
 Route::group(['namespace' => 'api'], function(){
 
-   // Index
-   Route::get('/','WebController@index');
+    Route::group(['domain' => 'ys.zl-my.com'], function () {
 
-   // Search
-   Route::get('search', 'HospitalController@search');
+        Route::get('/doctor', function (Request $request) {
+            return collect([
+                'status' => 1,
+                'msg' => '验证通过。'
+            ]);
+        })->middleware('auth:api','apiDoctor');
 
-   // News lists
-   Route::resource('news','NewsController');
+        // Doctor Authontication
+        Route::group(['namespace' => 'Auth\ys'], function () {
+            Route::post('logout', 'LogoutController@logout');
+            Route::post('account/password/reset', 'ResetPasswordController@reset');
+            Route::post('account/password/forget', 'ForgetPasswordController@forget');
+        });
 
-   // Recommend
-   Route::get('recommends','WebController@recommend');
+        // Profile
+        Route::post('account/getProfile','DoctorController@getProfile');
+        Route::post('account/modifyProfile','DoctorController@modifyProfile');
 
-   // Find Doctors
-   Route::get('doctor','DoctorController@index');
-   Route::get('doctor/detail','DoctorController@detail');
+        // Order lists
+        Route::post('/orders','OrderController@getDoctorOrders');
 
-   // Find hospitals
-   Route::get('hospital','HospitalController@index');
-   Route::get('hospital/detail','HospitalController@detail');
+
+    });
+
+    // User Authontication
+    Route::group(['namespace' => 'Auth'], function () {
+        Route::post('register', 'RegisterController@register');
+        Route::post('logout', 'LogoutController@logout');
+        Route::post('account/password/reset', 'ResetPasswordController@reset');
+        Route::post('account/password/forget', 'ForgetPasswordController@forget');
+        Route::post('test','testController@test');
+    });
+
+    // Profile
+    Route::post('account/user/getProfile','UserController@getProfile');
+    Route::post('account/user/modifyProfile','UserController@modifyProfile');
+
+    // Index
+    Route::get('/','WebController@index');
+
+    // Search
+    Route::get('search', 'HospitalController@search');
+
+    // News
+    Route::resource('news','NewsController');
+
+    // Guide
+    Route::get('guide','NewsController@guide');
+    Route::get('loadmore','NewsController@loadMore');
+
+    // Recommend
+    Route::get('recommends','WebController@recommend');
+
+    // Find Doctors
+    Route::get('doctor/select','DoctorController@getSelect');
+    Route::get('doctor','DoctorController@index');
+    Route::get('doctor/detail','DoctorController@detail');
+
+    // Find hospitals
+    Route::get('hospital','HospitalController@index');
+    Route::get('hospital/detail','HospitalController@detail');
 
     // Qa
     Route::get('support/qa',function(){
-     return view('api.qa');
+        return view('api.qa');
     });
 
-   // About
-   Route::get('about',function(){
-    return view('api.about');
-   });
+    // About
+    Route::get('about',function(){
+        return view('api.about');
+    });
 
-   // Order
-   Route::post('order/postPhotos','OrderController@postPhotos');
-   Route::get('orders/create','OrderController@getCreate');
-   Route::post('orders/create','OrderController@postCreate');
-   Route::get('order/msg','OrderController@getMsg');
-   Route::resource('order','OrderController');
+    // Services
+    Route::get('legal/terms',function(){
+        return view('api.services');
+    });
 
-   // Instance
-   Route::get('instance/select','InstanceController@getSelect');
-   Route::get('instance/doctor/select','InstanceController@getDoctorSelect');
+    // Order
+    Route::post('order/postPhotos','OrderController@postPhotos');
+    Route::post('orders/create','OrderController@postCreate');
+    Route::resource('order','OrderController');
+    Route::get('user/orders','OrderController@getUserOrders');
+    Route::get('orders/judge','OrderController@judge');
+    Route::put('orders/update','OrderController@updateOrders');
 
+    // Instance
+    Route::resource('instance','InstanceController');
 
+    Route::get('service/validate/send','ValidateController@sendSMS');
 });
 
 

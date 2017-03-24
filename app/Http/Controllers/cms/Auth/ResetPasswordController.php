@@ -38,7 +38,7 @@ class ResetPasswordController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:master');
+        $this->middleware('auth');
     }
 
     public function showResetForm()
@@ -73,7 +73,7 @@ class ResetPasswordController extends Controller
 
     protected function guard()
     {
-        return Auth::guard('master');
+        return Auth::guard();
     }
 
 }

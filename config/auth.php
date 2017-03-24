@@ -41,18 +41,8 @@ return [
             'provider' => 'users',
         ],
 
-        'doctor' => [
-            'driver' => 'session',
-            'provider' => 'doctors',
-        ],
-
-        'master' => [
-            'driver' => 'session',
-            'provider' => 'masters',
-        ],
-
         'api' => [
-            'driver' => 'token',
+            'driver' => 'passport',
             'provider' => 'users',
         ],
     ],
@@ -79,21 +69,6 @@ return [
             'driver' => 'eloquent',
             'model' => App\User::class,
         ],
-
-        'doctors' => [
-            'driver' => 'eloquent',
-            'model' => App\Doctor::class,
-        ],
-
-        'masters' => [
-            'driver' => 'eloquent',
-            'model' => App\Master::class,
-        ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
     ],
 
     /*

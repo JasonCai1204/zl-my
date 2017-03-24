@@ -9,7 +9,7 @@
                 <div class="panel-heading">添加医院</div>
 
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="post" action="{{ url('/hospitals') }}">
+                    <form class="form-horizontal" role="form" method="post" action="{{ url('/hospitals') }}" enctype="multipart/form-data">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -21,6 +21,20 @@
                                 @if ($errors->has('name'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('avatar') ? ' has-error' : '' }}">
+                            <label class="col-md-4 control-label" for="avatar">院徽</label>
+
+                            <div class="col-md-6">
+                                <input id="avatar" type="file" accept="image/*" name="avatar">
+
+                                @if ($errors->has('avatar'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('avatar') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -39,6 +53,7 @@
                                 @endif
                             </div>
                         </div>
+
 
                         <div class="form-group{{ $errors->has('city_id') ? ' has-error' : '' }}">
                             <label for="city_id" class="col-md-4 control-label">所在城市*</label>

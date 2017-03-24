@@ -27,9 +27,9 @@
                             <tbody>
                                 @foreach ($data as $item)
                                     <tr>
-                                        <td>{{ $item->id }}</td>
+                                        <td>{{ $item->m_id }}</td>
                                         <td>{{ $item->name }}</td>
-                                        <td>{{ $item->phone_number }}</td>
+                                        <td>{{ $item->users->first()->phone_number or ''}}</td>
                                         <td>{{ $item->department->name }}</td>
                                         <td><a href="/masters/{{ $item->id }}">详情 &gt;</a></td>
                                     </tr>

@@ -12,6 +12,7 @@
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/masters/' . $data->id . '/password') }}">
                         {{ csrf_field() }}
 
+                        <input type="hidden" name="id" value="{{$data->id}}">
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="password" class="col-md-4 control-label">新密码*</label>
 

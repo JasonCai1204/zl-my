@@ -2,12 +2,13 @@
 
 namespace App;
 
+use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use HasApiTokens, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -15,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'phone_number', 'password',
+        'name','phone_number', 'password','role_id','role_type',
     ];
 
     /**
@@ -30,4 +31,10 @@ class User extends Authenticatable
     public function orders(){
         return $this->hasMany('App\Order');
     }
+
+    public function role()
+    {
+        return $this->morphTo();
+    }
+
 }

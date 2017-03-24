@@ -1,33 +1,16 @@
 <!DOCTYPE html>
-<html lang="zh-cmn-Hans">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>资讯内容 - 肿瘤名医</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
-    <link rel="stylesheet" href="../css/user/weui.min.css">
-    <link rel="stylesheet" href="../css/user/home.css">
+    <title>{!! $news->news_class->name !!}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+    <link rel="stylesheet" href="/css/api/app.css">
 </head>
-<body style="background-color: white">
+<body>
+    <p class="webViewTitle">{!! $news->title !!}</p>
 
-@if ($news)
-    <div class="container" id="news_container" style="background-color: white;">
-        <div class="article">
-            <div class="bd">
-                <div class="weui-article">
-
-                    <h1 class="page__tittle">{{ $news->title }}</h1>
-                    <section>
-                        <h2 class="title">肿瘤名医 <span
-                                    class="my_article_date">{{ isset($news->published_at) ?$news->published_at->format('Y-m-d') : ''}}</span></h2>
-                        <section>
-                            <p class="my_article_text">{!! $news->content !!}</p>
-                        </section>
-                    </section>
-                </div>
-            </div>
-        </div>
+    <div class="container">
+        {!! $news->content !!}
     </div>
-@endif
-
 </body>
 </html>

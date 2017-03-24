@@ -30,7 +30,7 @@ class WebController extends Controller
             $data['hospitals'][] = [
                 'id' => $hospital->id,
                 'name' => $hospital->name,
-//                'avatar' => $hospital->avatar,
+                'avatar' => count($hospital->avatar) > 0 ? $hospital->avatar :'images/hospital/avatar/default.png',
                 'grading' => $hospital->grading,
                 'is_recommended' => $hospital->is_recommended,
                 'city_id' => $hospital->city->id,
@@ -43,7 +43,7 @@ class WebController extends Controller
         foreach ($doctors as $doctor) {
             $info1 = [
                 'id' => $doctor->id,
-                'avatar' => $doctor->avatar,
+                'avatar' => count($doctor->avatar) > 0 ? $doctor->avatar :'images/doctor/avatar/default.png',
                 'name' => $doctor->name,
                 'grading' => $doctor->grading,
                 'hospital_id' => $doctor->hospital_id,
@@ -84,7 +84,7 @@ class WebController extends Controller
             $data['hospitals'][] = [
                 'id' => $hospital->id,
                 'name' => $hospital->name,
-//                'avatar' => $hospital->avatar,
+                'avatar' => count($hospital->avatar) > 0 ? $hospital->avatar :'images/hospital/avatar/default.png',
                 'grading' => $hospital->grading,
                 'is_recommended' => $hospital->is_recommended,
                 'city_id' => $hospital->city->id,
@@ -97,7 +97,7 @@ class WebController extends Controller
         foreach ($doctors as $doctor) {
             $info1 = [
                 'id' => $doctor->id,
-                'avatar' => $doctor->avatar,
+                'avatar' => count($doctor->avatar) > 0 ? $doctor->avatar :'images/doctor/avatar/default.png',
                 'name' => $doctor->name,
                 'grading' => $doctor->grading,
                 'hospital_id' => $doctor->hospital_id,

@@ -31,7 +31,8 @@
                                     <tr>
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->grading }}</td>
-                                        <td>{{ $item->phone_number }}</td>
+                                        {{--<td>{{$item->users}}</td>--}}
+                                        <td>{{$item->users->first()->phone_number or ''}}</td>
                                         <td>{{ $item->hospital->name }}</td>
                                         <td>{{ $item->is_certified ? '✓' : '' }}</td>
                                         <td>{{ $item->is_recommended ? '👍' : '' }}</td>

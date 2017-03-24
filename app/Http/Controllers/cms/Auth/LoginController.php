@@ -35,7 +35,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest:master', ['except' => 'logout']);
+        $this->middleware('guest', ['except' => 'logout']);
     }
 
     public function showLoginForm()
@@ -50,6 +50,6 @@ class LoginController extends Controller
 
     protected function guard()
     {
-        return Auth::guard('master');
+        return Auth::guard();
     }
 }

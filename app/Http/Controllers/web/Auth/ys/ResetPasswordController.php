@@ -17,7 +17,7 @@ class ResetPasswordController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:doctor');
+        $this->middleware('auth');
     }
 
     public function showResetForm(Request $request)
@@ -33,7 +33,7 @@ class ResetPasswordController extends Controller
         ], [
             'current_password.required' => '当前密码不能为空。',
             'password.required' => '新密码不能为空。',
-            'password.min' => '新密码不能小于 6 位',
+            'password.min' => '新密码不能小于 8 位',
             'password.confirmed' => '确认密码与新密码不一致。'
         ])->validate();
 
@@ -56,6 +56,6 @@ class ResetPasswordController extends Controller
 
     protected function guard()
     {
-        return Auth::guard('doctor');
+        return Auth::guard();
     }
 }

@@ -40,7 +40,7 @@
                 </div>
 
                 <div class="weui-cell__bd">
-                    <input type="password" class="weui-input" placeholder="不少于 6 位" name="password" required />
+                    <input type="password" class="weui-input" placeholder="不少于 8 位" name="password" required />
                 </div>
 
                 @if($errors->has('password'))

@@ -54,6 +54,9 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
 
         // Custom
-        'master' => \App\Http\Middleware\CheckDepartment::class,
+        'master' => \App\Http\Middleware\CheckMaster::class,
+//        'department' => \App\Http\Middleware\CheckDepartment::class,
+        'doctor' => \App\Http\Middleware\CheckDoctor::class,
+        'apiDoctor' => \App\Http\Middleware\ApiCheckDoctor::class,
     ];
 }

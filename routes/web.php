@@ -26,6 +26,10 @@ Route::group(['domain' => 'cms.zl-my.com', 'namespace' => 'cms'], function () {
 
     });
 
+    Route::get('cms.notice',function(){
+        return view('cms.notice');
+    });
+
     // city
     Route::get('cities', 'CityController@index');
     Route::get('cities/create', 'CityController@create');
@@ -123,7 +127,7 @@ Route::group(['domain' => 'cms.zl-my.com', 'namespace' => 'cms'], function () {
 Route::group(['namespace' => 'web'], function() {
 
     // ys
-    Route::group(['domain' => 'ys.zl-my.com'], function () {
+//    Route::group(['domain' => 'ys.zl-my.com'], function () {
 
         // Doctor Authontication
         Route::group(['namespace' => 'Auth\ys'], function () {
@@ -132,6 +136,11 @@ Route::group(['namespace' => 'web'], function() {
             Route::post('logout', 'LoginController@logout');
             Route::get('account/password/reset', 'ResetPasswordController@showResetForm');
             Route::post('account/password/reset', 'ResetPasswordController@reset');
+        });
+
+        // Redirect notice
+        Route::get('doctors.notice',function (){
+            return view('web.doctors.notice');
         });
 
         // Profile
@@ -143,7 +152,7 @@ Route::group(['namespace' => 'web'], function() {
         // Condition_report
         Route::get('orders/condition_report','DoctorController@getCondition_report');
 
-    });
+//    });
 
     // User Authontication
     Route::group(['namespace' => 'Auth'], function () {
@@ -230,3 +239,4 @@ Route::group(['namespace' => 'web'], function() {
     // helper
     Route::post('helper/upload-file', 'HelperController@uploadFile');
 });
+

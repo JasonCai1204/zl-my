@@ -4,6 +4,7 @@ namespace App\Http\Controllers\cms;
 
 use App\Http\Controllers\Controller;
 use App;
+use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
 
@@ -11,7 +12,8 @@ class HospitalController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:master');
+        $this->middleware('auth');
+        $this->middleware('master');
     }
 
     public function create()
@@ -39,6 +41,10 @@ class HospitalController extends Controller
         ]);
 
         $hospital->name = $request->name;
+        if ($request->hasFile('avatar') && $request->avatar->isValid()) {
+            $hospital->avatar = $request->avatar->storeAs('images/hospital/avatar/' . Carbon::now()->timestamp, $request->avatar->getClientOriginalName(), 'public');
+        }
+
         $hospital->grading = $request->grading;
         $hospital->city_id = $request->city_id;
         $hospital->introduction = $request->introduction;
@@ -71,8 +77,13 @@ class HospitalController extends Controller
             'city_id' => 'required|exists:cities,id',
             'introduction' => 'required'
         ]);
-
         $hospital->name = $request->name;
+
+        // Save image to storage and get path.
+        if ($request->hasFile('avatar') && $request->avatar->isValid()) {
+            $hospital->avatar = $request->avatar->storeAs('images/hospital/avatar/' . Carbon::now()->timestamp, $request->avatar->getClientOriginalName(), 'public');
+        }
+
         $hospital->grading = $request->grading;
         $hospital->city_id = $request->city_id;
         $hospital->introduction = $request->introduction;

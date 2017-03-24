@@ -12,15 +12,15 @@
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/masters') }}">
                         {{ csrf_field() }}
 
-                        <div class="form-group{{ $errors->has('id') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('m_id') ? ' has-error' : '' }}">
                             <label for="id" class="col-md-4 control-label">编号*</label>
 
                             <div class="col-md-6">
-                                <input type="number" id="id" class="form-control" name="id" placeholder="6 位数字" value="{{ old('id') }}" required autofocus>
+                                <input type="number" id="m_id" class="form-control" name="m_id" placeholder="6 位数字" value="{{ old('m_id') }}" required autofocus>
 
-                                @if ($errors->has('id'))
+                                @if ($errors->has('m_id'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('id') }}</strong>
+                                        <strong>{{ $errors->first('m_id') }}</strong>
                                     </span>
                                 @endif
                             </div>
