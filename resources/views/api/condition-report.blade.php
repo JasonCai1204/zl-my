@@ -8,8 +8,15 @@
 </head>
 <body>
     <div class="container">
-        {!! $report !!}
+        <div class="container">
+            <!-- 内容 -->
+            {!! $report !!}
 
+            <!-- 内容为空时展示“暂无病情报告。” -->
+            <div class="no-content">
+                <p>暂无病情报告。</p>
+            </div>
+        </div>
     </div>
 </body>
 </html>
