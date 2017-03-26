@@ -8,7 +8,8 @@
 </head>
 <body>
     <div class="container">
-        <!-- 内容 -->
+        {!! $report !!}
+
     </div>
 </body>
 </html>

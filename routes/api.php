@@ -43,6 +43,9 @@ Route::group(['namespace' => 'api'], function(){
         // Order lists
         Route::post('/orders','OrderController@getDoctorOrders');
 
+        // condition_report
+        Route::get('/report','OrderController@report');
+
 
     });
 
@@ -110,7 +113,13 @@ Route::group(['namespace' => 'api'], function(){
     // Instance
     Route::resource('instance','InstanceController');
 
+    // SendSMS
     Route::get('service/validate/send','ValidateController@sendSMS');
+
+    Route::get('test','WebController@test');
+
+
+
 });
 
 

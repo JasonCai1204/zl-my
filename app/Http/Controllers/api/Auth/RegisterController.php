@@ -19,7 +19,7 @@ class RegisterController extends Controller
             $time2 = Code::where('phone_number',$request->phone_number)->value('updated_at');
             $time1= Carbon::now();
 
-            if ($time1->diffInSeconds($time2) > 120000000000){
+            if ($time1->diffInSeconds($time2) > 120){
 
                 return collect([
                     'status' => -1,

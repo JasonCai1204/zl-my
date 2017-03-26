@@ -11,10 +11,10 @@ class SendTemplateSMS
   private $accountSid='8aaf07085a3c0ea1015a4b4d6e7e073e';
 
   //主帐号Token
-  private $accountToken='675f20771aea4ecf9e634200c1961292';
+  private $accountToken='095eed06fa33c54cf78042fa42d00bdd';
 
   //应用Id
-  private $appId='8aaf07085a3c0ea1015a4b4d70480744';
+  private $appId='8aaf07085aabcbbd015ac569b050074b';
 
   //请求地址，格式如下，不需要写https://
   private $serverIP='app.cloopen.com';

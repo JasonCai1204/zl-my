@@ -22,7 +22,7 @@ class ForgetPasswordController extends Controller
 
                 $time1= Carbon::now();
 
-                if ($time1->diffInSeconds($time2) > 120000){
+                if ($time1->diffInSeconds($time2) > 120){
                     return collect([
                         'status' => -1,
                         'msg' => '验证码已过期，请再次尝试。'

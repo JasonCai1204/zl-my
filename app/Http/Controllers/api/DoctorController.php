@@ -265,11 +265,11 @@ class DoctorController extends Controller
         if ($request->has('phone_number')){
 
             $validator = Validator::make($request->all(), [
-                'phone_number' => 'required|digits:11|unique:users,phone_number,' . $user->id,
+                'phone_number' => 'required|digits:11|unique:users,phone_number,'
             ], [
                 'phone_number.required' => '手机号码不能为空。',
                 'phone_number.digits' => '请输入 11 位手机号码。',
-                'phone_number.unique' => '此手机号码已注册。',
+                'phone_number.unique' => '此号码已注册，请更换其他号码或用此号码来登录。',
             ]);
 
             if ($validator->fails()){

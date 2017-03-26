@@ -127,5 +127,14 @@ class WebController extends Controller
         ])->toJson();
     }
 
+    public function test(Request $request){
+        if ($request->version == 1 ){
+            return collect([
+                'status'
+            ]);
+        }
+
+    }
+
 
 }

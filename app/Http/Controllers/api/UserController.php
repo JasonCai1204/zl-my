@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\api;
 
 use App\Code;
+use App\Doctor;
+use App\Master;
 use App\Patient;
 use Carbon\Carbon;
 use Hash;
@@ -76,11 +78,11 @@ class UserController extends Controller
 
         if ($request->has('phone_number')){
             $validator = Validator::make($request->all(), [
-                'phone_number' => 'required|digits:11|unique:users,phone_number,' . $user->id,
+                'phone_number' => 'required|digits:11|unique:users,phone_number,'
             ], [
                 'phone_number.required' => '手机号码不能为空。',
                 'phone_number.digits' => '请输入 11 位手机号码。',
-                'phone_number.unique' => '此手机号码已注册。',
+                'phone_number.unique' => '此号码已注册，请更换其他号码或用此号码来登录。',
             ]);
 
             if ($validator->fails()){
@@ -152,15 +154,34 @@ class UserController extends Controller
 
             }
 
+            if ($user->role_type == 'App\Doctor'){
+
+                return collect([
+                    'status' => -1,
+                    'msg' => '医生暂不能更改姓名。如需更改，请联系客服：4008-120-533。',
+                ]);
+            }
+
+
             $user->name = $request->name;
             $user->save();
 
-            Patient::find($user->role_id)->update(['name' => $request->name]);
+            if ($user->role_type == 'App\Patient'){
+                Patient::find($user->role_id)->update(['name' => $request->name]);
+
+            }
+
+
+            if ($user->role_type == 'App\Patient'){
+                Master::find($user->role_id)->update(['name' => $request->name]);
+
+            }
 
             return collect([
                 'status' => 1,
                 'msg' => '姓名已更改。',
             ]);
+
         }
     }
 

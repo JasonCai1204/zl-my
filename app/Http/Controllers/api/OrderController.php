@@ -15,9 +15,9 @@ class OrderController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api')->only(['getDoctorOrders','postCreate','getUserOrders','updateOrders']);
+        $this->middleware('auth:api')->only(['getDoctorOrders','report','postCreate','getUserOrders','updateOrders']);
 
-        $this->middleware('apiDoctor')->only(['getDoctorOrders']);
+        $this->middleware('apiDoctor')->only(['getDoctorOrders','report']);
     }
 
     //redirect order/create
@@ -164,7 +164,6 @@ class OrderController extends Controller
                 'patient_name' => $request->patient_name,
                 'phone_number' => $request->phone_number,
                 'user_id' => Auth::user()->id,
-//                'user_id' => 1,
             ]
         );
 
@@ -181,7 +180,7 @@ class OrderController extends Controller
             $order->gender = $request->gender;
 
         if ($request->has('birthday'))
-            $order->birthday = $request->birthday;
+            $order->birthday = $request->birthday . '-01';
 
         if ($request->has('smoking'))
             $order->smoking = $request->smoking;
@@ -212,10 +211,10 @@ class OrderController extends Controller
     // Get User orders.
     public function getUserOrders(Request $request)
     {
+
         $orders = App\Order::where('user_id', Auth::user()->id)
             ->orderBy('created_at','desc')
             ->get();
-
         $data = [];
 
         foreach ($orders as $order){
@@ -232,7 +231,7 @@ class OrderController extends Controller
                 'instance_id' => $order->instance_id,
                 'instance_name' => $order->instance_id ? App\Instance::find($order->instance_id)->name : null,
                 'gender' => $order->gender,
-                'birthday' => $order->birthday,
+                'birthday' => isset($order->birthday) && count($order->birthday) >0 ? substr($order->birthday,0,-3) : $order->birthday,
                 'smoking' => $order->smoking,
                 'weight' => $order->weight,
                 'wechat_id' => $order->wechat_id,
@@ -289,7 +288,7 @@ class OrderController extends Controller
             $order->gender = $request->gender;
 
         if ($request->has('birthday'))
-            $order->birthday = $request->birthday;
+            $order->birthday = $request->birthday . '-01';
 
         if ($request->has('smoking'))
             $order->smoking = $request->smoking;
@@ -338,7 +337,7 @@ class OrderController extends Controller
                 'instance_id' => $order->instance_id == 0 ? null : $order->instance_id,
                 'instance_name' => $order->instance_id ? App\Instance::find($order->instance_id)->name : null,
                 'gender' => $order->gender,
-                'birthday' => $order->birthday,
+                'birthday' => isset($order->birthday) && count($order->birthday) >0 ? substr($order->birthday,0,-3) : $order->birthday,
                 'smoking' => $order->smoking,
                 'weight' => $order->weight,
                 'wechat_id' => $order->wechat_id,
@@ -357,6 +356,20 @@ class OrderController extends Controller
         ]);
 
     }
+
+
+    public function report(Request $request){
+
+        $report = App\Order::find($request->order_id)->condition_report;
+
+        if ($report && count($report) > 0){
+            return view('api/condition-report',['report' => $report]);
+        }
+
+        return view('api/condition-report',['report' => '暂无病情报告。']);
+
+    }
+
 
 
     public function judge(Request $request)
