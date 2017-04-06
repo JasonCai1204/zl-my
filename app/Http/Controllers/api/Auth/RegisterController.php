@@ -15,6 +15,38 @@ class RegisterController extends Controller
     protected function register(Request $request)
     {
 
+        if (!$request->code){
+            $validator = Validator::make($request->all(), [
+                'phone_number' => 'required|digits:11|unique:users',
+            ], [
+                'phone_number.required' => '手机号码不能为空。',
+                'phone_number.digits' => '请输入 11 位手机号码。',
+                'phone_number.unique' => '此号码已注册，您可直接登录。',
+            ]);
+
+            if ($validator->fails()){
+
+                $errors = $validator->errors()->all();
+
+                foreach ($errors as $error){
+                    $error;
+                }
+
+                return collect([
+                    'status' => -3,
+                    'msg' => $error
+                ])->toJson();
+
+            }
+
+            return collect([
+                'status' => 1,
+                'msg' => '验证通过。'
+            ])->toJson();
+
+        }
+
+
         if ($request->code == Code::where('phone_number',$request->phone_number)->value('code')){
             $time2 = Code::where('phone_number',$request->phone_number)->value('updated_at');
             $time1= Carbon::now();
@@ -138,7 +170,7 @@ class RegisterController extends Controller
 
         return collect([
             'status' => 1,
-            'msg' => '注册成功'
+            'msg' => '注册成功。'
         ])->toJson();
 
     }

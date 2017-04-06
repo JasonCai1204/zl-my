@@ -127,12 +127,43 @@ class WebController extends Controller
         ])->toJson();
     }
 
-    public function test(Request $request){
-        if ($request->version == 1 ){
-            return collect([
-                'status'
-            ]);
+    public function checkVersion(Request $request){
+
+        if ($request->client == 'user'){
+            if ($request->version < '1'){
+                return collect([
+                    'status' => 1,
+                    'msg' => '肿瘤名医新版已上线，推荐您更新。',
+                    'data' => [
+                        'url' => 'http://zl-my.com:8000/storage/apps/android/user/com.zl-my_1.0.0_101.apk'
+                    ]
+                ]);
+            }else{
+                return collect([
+                    'status' => -1,
+                    'msg' => '已是最新版本。'
+                ]);
+            }
         }
+
+        if ($request->client == 'ys'){
+            if ($request->version < '1'){
+                return collect([
+                    'status' => 1,
+                    'msg' => '肿瘤名医医生版新版已上线，推荐您更新。',
+                    'data' => [
+                        'url' => 'http://zl-my.com:8000/storage/apps/android/ys/com.zl-my.ys_1.0.0_101.apk'
+                    ]
+                ]);
+            }else{
+                return collect([
+                    'status' => -1,
+                    'msg' => '已是最新版本。'
+                ]);
+            }
+        }
+
+
 
     }
 

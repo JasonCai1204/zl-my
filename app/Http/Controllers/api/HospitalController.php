@@ -120,7 +120,7 @@ class HospitalController extends Controller
 
         // Search hospital or doctor.
         $hospitals = App\Hospital::where('name', 'like', '%' . $request->q . '%')
-            ->select('id', 'name', 'grading', 'is_recommended', 'city_id')
+            ->select('id', 'avatar','name', 'grading', 'is_recommended', 'city_id')
             ->get();
 
         if (isset($hospitals) && count($hospitals)>0) {

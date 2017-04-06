@@ -55,7 +55,7 @@ class ResetPasswordController extends Controller
             } else {
                 return collect([
                     'status' => -1,
-                    'msg' => '当前密码错误'
+                    'msg' => '密码不正确，请再试一次。'
                 ])->toJson();
             }
         }else {
@@ -88,7 +88,7 @@ class ResetPasswordController extends Controller
 
             return collect([
                 'status' => 1,
-                'msg' => '密码已重设'
+                'msg' => '密码已重设。'
             ])->toJson();
         }
 

@@ -72,7 +72,7 @@ class ForgetPasswordController extends Controller
             if (count($user)==0){
                 return collect([
                     'status' => -1,
-                    'msg' => '你的号码输入不正确或尚未注册。'
+                    'msg' => '找不到您输入的手机号码，或者您的输入不正确。请再试一次。'
                 ])->toJson();
             }
 

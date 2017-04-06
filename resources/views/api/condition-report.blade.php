@@ -6,17 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
     <link rel="stylesheet" href="/css/api/app.css">
 </head>
-<body>
+<body style="min-height: 100vh;">
     <div class="container">
-        <div class="container">
-            <!-- 内容 -->
-            {!! $report !!}
-
-            <!-- 内容为空时展示“暂无病情报告。” -->
+        @if ( $report == null || $report == '')
             <div class="no-content">
                 <p>暂无病情报告。</p>
             </div>
-        </div>
+
+        @else
+            {!! $report !!}
+
+        @endif
     </div>
 </body>
 </html>

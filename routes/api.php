@@ -116,9 +116,8 @@ Route::group(['namespace' => 'api'], function(){
     // SendSMS
     Route::get('service/validate/send','ValidateController@sendSMS');
 
-    Route::get('test','WebController@test');
-
-
+    // CheckVersion
+    Route::get('checkVersion','WebController@checkVersion');
 
 });
 

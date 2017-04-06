@@ -127,7 +127,7 @@ Route::group(['domain' => 'cms.zl-my.com', 'namespace' => 'cms'], function () {
 Route::group(['namespace' => 'web'], function() {
 
     // ys
-//    Route::group(['domain' => 'ys.zl-my.com'], function () {
+    Route::group(['domain' => 'ys.zl-my.com'], function () {
 
         // Doctor Authontication
         Route::group(['namespace' => 'Auth\ys'], function () {
@@ -152,7 +152,7 @@ Route::group(['namespace' => 'web'], function() {
         // Condition_report
         Route::get('orders/condition_report','DoctorController@getCondition_report');
 
-//    });
+    });
 
     // User Authontication
     Route::group(['namespace' => 'Auth'], function () {

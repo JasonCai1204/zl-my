@@ -38,7 +38,7 @@ class ValidateController extends Controller
             $code .= $charset[mt_rand(0, $_len)];
         }
 
-        $m3_result = $sendTemplateSMS->sendTemplateSMS($phone, array($code, 2), 1);
+        $m3_result = $sendTemplateSMS->sendTemplateSMS($phone, array($code, 2), 162978);
 
         if ($m3_result->status == 0){
 

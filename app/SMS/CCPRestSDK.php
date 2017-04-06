@@ -259,7 +259,7 @@ class CCPRestSDK {
     * @param datas 内容数据
     * @param $tempId 模板Id
     */
-    function sendTemplateSMS($to,$datas,$tempId)
+    function sendTemplateSMS($phone,$datas,$tempId)
     {
         //主帐号鉴权信息验证，对必选参数进行判空。
         $auth=$this->accAuth();
@@ -272,14 +272,14 @@ class CCPRestSDK {
            for($i=0;$i<count($datas);$i++){
               $data = $data. "'".$datas[$i]."',";
            }
-           $body= "{'to':'$to','templateId':'$tempId','appId':'$this->AppId','datas':[".$data."]}";
+           $body= "{'to':'$phone','templateId':'$tempId','appId':'$this->AppId','datas':[".$data."]}";
         }else{
            $data="";
            for($i=0;$i<count($datas);$i++){
               $data = $data. "<data>".$datas[$i]."</data>";
            }
            $body="<TemplateSMS>
-                    <to>$to</to>
+                    <to>$phone</to>
                     <appId>$this->AppId</appId>
                     <templateId>$tempId</templateId>
                     <datas>".$data."</datas>

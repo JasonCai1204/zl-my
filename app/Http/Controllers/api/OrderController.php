@@ -128,7 +128,7 @@ class OrderController extends Controller
             }
 
             return collect([
-                'status' => 1,
+                'status' => -1,
                 'msg' => $error
             ])->toJson();
 
@@ -151,7 +151,7 @@ class OrderController extends Controller
             }
 
             return collect([
-                'status' => 1,
+                'status' => -1,
                 'msg' => $error
             ])->toJson();
 
@@ -203,7 +203,7 @@ class OrderController extends Controller
 
         return collect([
             'status' => 1,
-            'msg' => '订单提交成功',
+            'msg' => '订单提交成功。',
         ])->toJson();
 
     }
@@ -230,9 +230,9 @@ class OrderController extends Controller
                 'doctor_avatar' => $order->doctor_id && count(App\Doctor::find($order->doctor_id)->avatar) > 0 ? App\Doctor::find($order->doctor_id)->avatar :'images/doctor/avatar/default.png',
                 'instance_id' => $order->instance_id,
                 'instance_name' => $order->instance_id ? App\Instance::find($order->instance_id)->name : null,
-                'gender' => $order->gender,
+                'gender' => $order->gender === null  ? $order->gender = -1 : $order->gender,
                 'birthday' => isset($order->birthday) && count($order->birthday) >0 ? substr($order->birthday,0,-3) : $order->birthday,
-                'smoking' => $order->smoking,
+                'smoking' => $order->smoking === null  ? $order->smoking = -1 : $order->smoking,
                 'weight' => $order->weight,
                 'wechat_id' => $order->wechat_id,
                 'detail' => $order->detail,
@@ -310,7 +310,7 @@ class OrderController extends Controller
 
         return collect([
             'status' => 1,
-            'msg' => '订单提交成功',
+            'msg' => '订单已保存。',
         ])->toJson();
     }
 
@@ -336,9 +336,9 @@ class OrderController extends Controller
                 'doctor_name' => $order->doctor_id ? App\Doctor::find($order->doctor_id)->name : null,
                 'instance_id' => $order->instance_id == 0 ? null : $order->instance_id,
                 'instance_name' => $order->instance_id ? App\Instance::find($order->instance_id)->name : null,
-                'gender' => $order->gender,
+                'gender' => $order->gender === null  ? $order->gender = -1 : $order->gender,
                 'birthday' => isset($order->birthday) && count($order->birthday) >0 ? substr($order->birthday,0,-3) : $order->birthday,
-                'smoking' => $order->smoking,
+                'smoking' => $order->smoking === null  ? $order->smoking = -1 : $order->smoking,
                 'weight' => $order->weight,
                 'wechat_id' => $order->wechat_id,
                 'detail' => $order->detail,
@@ -362,11 +362,7 @@ class OrderController extends Controller
 
         $report = App\Order::find($request->order_id)->condition_report;
 
-        if ($report && count($report) > 0){
-            return view('api/condition-report',['report' => $report]);
-        }
-
-        return view('api/condition-report',['report' => '暂无病情报告。']);
+        return view('api/condition-report',['report' => $report]);
 
     }
 

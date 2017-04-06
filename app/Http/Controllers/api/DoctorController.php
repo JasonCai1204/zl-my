@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App;
+use App\Code;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Hash;
@@ -27,7 +28,6 @@ class DoctorController extends Controller
         $doctors = App\Doctor::orderBy(DB::raw('CONVERT(name USING gbk)'))->get();
 
         if ($request->has('city_id') || $request->has('hospital_id') || $request->has('instance_id')){
-
             try {
                 $c = App\City::findOrfail($request->city_id);
             } catch (ModelNotFoundException $e) {
@@ -257,13 +257,12 @@ class DoctorController extends Controller
             } else {
                 return collect([
                     'status' => -1,
-                    'msg' => '当前密码错误'
+                    'msg' => '密码不正确，请再试一次。'
                 ])->toJson();
             }
         }
 
-        if ($request->has('phone_number')){
-
+        if ($request->has('phone_number') && !$request->has('code')){
             $validator = Validator::make($request->all(), [
                 'phone_number' => 'required|digits:11|unique:users,phone_number,'
             ], [
@@ -287,8 +286,18 @@ class DoctorController extends Controller
 
             }
 
-            if ($request->code == App\Code::where('phone_number',$request->phone_number)->value('code')){
-                $time2 = App\Code::where('phone_number',$request->phone_number)->value('updated_at');
+            return collect([
+                'status' => 1,
+                'msg' => '验证通过。',
+            ]);
+
+        }
+
+
+        if ($request->has('phone_number') && $request->has('code')){
+
+            if ($request->code == Code::where('phone_number',$request->phone_number)->value('code')){
+                $time2 = Code::where('phone_number',$request->phone_number)->value('updated_at');
                 $time1= Carbon::now();
 
                 if ($time1->diffInSeconds($time2) > 120){
@@ -299,6 +308,14 @@ class DoctorController extends Controller
                     ])->toJson();
 
                 }
+
+                $user->phone_number = $request->phone_number;
+                $user->save();
+
+                return collect([
+                    'status' => 1,
+                    'msg' => '手机号码已更改。',
+                ]);
             }else {
                 return collect([
                     'status' => -1,
@@ -306,15 +323,6 @@ class DoctorController extends Controller
                 ])->toJson();
 
             }
-
-
-            $user->phone_number = $request->phone_number;
-            $user->save();
-
-            return collect([
-                'status' => 1,
-                'msg' => '手机号码已更改。',
-            ]);
 
         }
 

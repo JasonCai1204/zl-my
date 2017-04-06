@@ -11,7 +11,7 @@ class SendTemplateSMS
   private $accountSid='8aaf07085a3c0ea1015a4b4d6e7e073e';
 
   //主帐号Token
-  private $accountToken='095eed06fa33c54cf78042fa42d00bdd';
+  private $accountToken='675f20771aea4ecf9e634200c1961292';
 
   //应用Id
   private $appId='8aaf07085aabcbbd015ac569b050074b';
@@ -25,13 +25,15 @@ class SendTemplateSMS
   //REST版本号
   private $softVersion='2013-12-26';
 
+
+
   /**
     * 发送模板短信
     * @param to 手机号码集合,用英文逗号分开
     * @param datas 内容数据 格式为数组 例如：array('Marry','Alon')，如不需替换请填 null
     * @param $tempId 模板Id
     */
-  public function sendTemplateSMS($to,$datas,$tempId)
+  public function sendTemplateSMS($phone,$datas,$tempId)
   {
        $m3_result = new M3Result;
 
@@ -42,7 +44,7 @@ class SendTemplateSMS
 
        // 发送模板短信
       //  echo "Sending TemplateSMS to $to <br/>";
-       $result = $rest->sendTemplateSMS($to,$datas,$tempId);
+       $result = $rest->sendTemplateSMS($phone,$datas,$tempId);
        if($result == NULL ) {
            $m3_result->status = 3;
            $m3_result->msg = 'result error!';
@@ -52,7 +54,8 @@ class SendTemplateSMS
            $m3_result->msg = $result->statusMsg;
        }else{
            $m3_result->status = 0;
-           $m3_result->msg = '短信发送成功';
+           $m3_result->msg = '我们已向 '.  $phone  . ' 发送了一条验证短信，请留意查收。';
+
        }
 
        return $m3_result;

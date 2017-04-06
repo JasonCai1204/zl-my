@@ -70,13 +70,13 @@ class UserController extends Controller
             } else {
                 return collect([
                     'status' => -1,
-                    'msg' => '当前密码错误'
+                    'msg' => '密码不正确，请再试一次。'
                 ])->toJson();
             }
         }
 
 
-        if ($request->has('phone_number')){
+        if ($request->has('phone_number') && !$request->has('code')){
             $validator = Validator::make($request->all(), [
                 'phone_number' => 'required|digits:11|unique:users,phone_number,'
             ], [
@@ -100,6 +100,16 @@ class UserController extends Controller
 
             }
 
+            return collect([
+                'status' => 1,
+                'msg' => '验证通过。',
+            ]);
+
+        }
+
+
+        if ($request->has('phone_number') && $request->has('code')){
+
             if ($request->code == Code::where('phone_number',$request->phone_number)->value('code')){
                 $time2 = Code::where('phone_number',$request->phone_number)->value('updated_at');
                 $time1= Carbon::now();
@@ -112,6 +122,14 @@ class UserController extends Controller
                     ])->toJson();
 
                 }
+
+                $user->phone_number = $request->phone_number;
+                $user->save();
+
+                return collect([
+                    'status' => 1,
+                    'msg' => '手机号码已更改。',
+                ]);
             }else {
                 return collect([
                     'status' => -1,
@@ -120,16 +138,8 @@ class UserController extends Controller
 
             }
 
-
-            $user->phone_number = $request->phone_number;
-            $user->save();
-
-            return collect([
-                'status' => 1,
-                'msg' => '手机号码已更改。',
-            ]);
-
         }
+
 
         if ($request->has('name')){
             $validator = Validator::make($request->all(), [
@@ -172,7 +182,7 @@ class UserController extends Controller
             }
 
 
-            if ($user->role_type == 'App\Patient'){
+            if ($user->role_type == 'App\Master'){
                 Master::find($user->role_id)->update(['name' => $request->name]);
 
             }
