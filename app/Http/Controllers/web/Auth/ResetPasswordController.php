@@ -29,11 +29,11 @@ class ResetPasswordController extends Controller
     {
         Validator::make($request->all(), [
             'current_password' => 'required',
-            'password' => 'required|min:6|confirmed'
+            'password' => 'required|min:8|confirmed'
         ], [
             'current_password.required' => '当前密码不能为空。',
             'password.required' => '新密码不能为空。',
-            'password.min' => '新密码不能小于 6 位',
+            'password.min' => '新密码不能小于 8 位',
             'password.confirmed' => '确认密码与新密码不一致。'
         ])->validate();
 
