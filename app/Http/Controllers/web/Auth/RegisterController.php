@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\web\Auth;
 
+use App\Patient;
 use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
@@ -51,7 +52,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => 'required|max:70',
             'phone_number' => 'required|digits:11|unique:users',
-            'password' => 'required|min:6|confirmed',
+            'password' => 'required|min:8|confirmed',
             'terms' => 'required'
         ], [
             'name.required' => '姓名不能为空。',
@@ -61,7 +62,7 @@ class RegisterController extends Controller
             'phone_number.unique' => '此手机号码已注册',
             'terms.required' => '同意《服务条款》后方可注册。',
             'password.required' => '密码不能为空。',
-            'password.min' => '密码不能少于 6 位。',
+            'password.min' => '密码不能少于 8 位。',
             'password.confirmed' => '确认密码与密码不相同。'
         ]);
     }
@@ -74,11 +75,19 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
+        $patient = Patient::create([
+            'name' => $data['name'],
+        ]);
+
         return User::create([
             'name' => $data['name'],
             'phone_number' => $data['phone_number'],
             'password' => bcrypt($data['password']),
+            'role_id' => $patient->id,
+            'role_type' => 'App\Patient'
         ]);
+
     }
 
     public function showRegistrationForm(Request $request)
