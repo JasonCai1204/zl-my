@@ -57,13 +57,15 @@ class DoctorController extends Controller
             $doctor->instances()->attach($instance_id);
         }
 
-        $user = new App\User;
-        $user->name = $request->name;
-        $user->phone_number = $request->phone_number;
-        $user->password = bcrypt($request->password);
-        $user->role_id = $doctor->id;
-        $user->role_type = 'App\Doctor';
-        $user->save();
+        if ($request->phone_number !='' && count($request->phone_number) >0 ) {
+            $user = new App\User;
+            $user->name = $request->name;
+            $user->phone_number = $request->phone_number;
+            $user->password = bcrypt($request->password);
+            $user->role_id = $doctor->id;
+            $user->role_type = 'App\Doctor';
+            $user->save();
+        }
 
         return redirect('doctors');
     }
