@@ -343,7 +343,7 @@ class OrderController extends Controller
                 'wechat_id' => $order->wechat_id,
                 'detail' => $order->detail,
                 'photos' => $order->photos,
-                'created_at' => $order->created_at->format('Y-m-d'),
+                'created_at' => $order->send_to_the_doctor_at->format('Y-m-d'),
                 'condition_report' => $order->condition_report ? $order->condition_report : null
             ];
         }
