@@ -42,11 +42,11 @@
         </a>
     </div>
 </div>
-<script type="text/javascript" src="js/user/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/js/user/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="/js/user/dropload.min.js"></script>
-<script type="text/javascript" src="js/user/swiper-3.3.1.jquery.min.js"></script>
-<script type="text/javascript" src="js/user/index.js"></script>
-<script type="text/javascript" src=js/user/tabbarclick.js></script>
-<script src="/js/user/loadInformation.js"></script>
+<script type="text/javascript" src="/js/user/swiper-3.3.1.jquery.min.js"></script>
+<script type="text/javascript" src="/js/user/index.js"></script>
+<script type="text/javascript" src=/js/user/tabbarclick.js></script>
+@yield('scripts')
 </body>
 </html>

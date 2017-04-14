@@ -65,11 +65,16 @@ class NewsController extends Controller
                ->take(10)
                ->get();
 
+        foreach ($news as $index => $item) {
+            $item->date = $item->published_at->format('Y-m-d');
+            $news->put($index, $item);
+        }
+
         $count = $count-($request->skip+count($news));
 
        return collect([
             'data' => $news,
-           'count' => isset($count) && $count > 0 ? true : false
+            'count' => isset($count) && $count > 0 ? true : false
         ])->toJson();
 
     }

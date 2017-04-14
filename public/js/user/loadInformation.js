@@ -37,7 +37,11 @@ $(function () {
                             data.data[i].cover_image
                             + "' alt='' class='information-cell__hd'><div class='information-cell__bd'><p>" +
                             data.data[i].title
-                            + "</p></div></a>"
+                            +"</p>";
+                        if (showDate) {
+                            informations += "<span>" + data.data[i].date + "</span>";
+                        }
+                        informations += "</div></a>";
                     }
                     if(data.count){
                         $(".weui-loading").remove();

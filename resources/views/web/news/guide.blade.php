@@ -104,9 +104,11 @@
 
 @endsection
 
-@section('script')
-    <script src="../js/user/loadInformation.js"></script>
-    <script src="../js/user/swiper-3.3.1.jquery.min.js"></script>
+@section('scripts')
+    <script>
+        showDate = false;
+    </script>
+    <script src="/js/user/loadInformation.js"></script>
     <script>
         $(function(){
             var mySwiper = new Swiper('.swiper-container', {
