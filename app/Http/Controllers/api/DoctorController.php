@@ -84,7 +84,7 @@ class DoctorController extends Controller
 
                 $instances = [];
 
-                foreach ($doctor->instances()->orderBy('sort')->get() as $instance) {
+                foreach ($doctor->instances()->orderBy('type_id')->orderBy('sort')->get() as $instance) {
                     $instances[] = [
                         'id' => $instance->id,
                         'name' => $instance->name
@@ -116,7 +116,7 @@ class DoctorController extends Controller
 
             $instances = [];
 
-            foreach ($doctor->instances()->orderBy('sort')->get() as $instance) {
+            foreach ($doctor->instances()->orderBy('type_id')->orderBy('sort')->get() as $instance) {
                 $instances[] = [
                     'id' => $instance->id,
                     'name' => $instance->name

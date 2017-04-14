@@ -24,7 +24,7 @@ class Doctor extends Authenticatable
     }
 
     public function instances(){
-        return $this->belongsToMany('App\Instance')->orderBy(DB::raw('CONVERT(name USING gbk)'));
+        return $this->belongsToMany('App\Instance');
     }
 
     public function orders(){
