@@ -8,11 +8,11 @@ class Review extends Model
 {
     public function patient()
     {
-        return $this->belongsTo('App\User', 'patient_id');
+        return $this->belongsTo('App\Patient');
     }
 
     public function doctor()
     {
-        return $this->belongsTo('App\Doctor', 'doctor_id');
+        return $this->belongsTo('App\Doctor');
     }
 }
