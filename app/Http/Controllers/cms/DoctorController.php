@@ -168,4 +168,9 @@ class DoctorController extends Controller
 
         return redirect('doctors/' . $doctor->id);
     }
+
+    public function reviews (App\Doctor $doctor)
+    {
+        return view('',['reviews',$doctor->reviews()->where('status',1)->orderBy('created_at','desc')->simplePaginate(15)]);
+    }
 }
