@@ -17,4 +17,9 @@ class Patient extends Authenticatable
     {
         return $this->morphMany('App\User', 'role');
     }
+
+    public function reviews(){
+        return $this->hasMany('App\Review');
+    }
+
 }
