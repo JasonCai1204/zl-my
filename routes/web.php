@@ -55,6 +55,7 @@ Route::group(['domain' => 'cms.zl-my.com', 'namespace' => 'cms'], function () {
     Route::delete('doctors/{doctor}', 'DoctorController@destroy');
     Route::get('doctors/{doctor}/password', 'DoctorController@resetPassword');
     Route::post('doctors/{doctor}/password', 'DoctorController@updatePassword');
+    Route::get('doctors/{doctor}/reviews', 'DoctorController@reviews');
 
     // type
     Route::get('types', 'TypeController@index');
