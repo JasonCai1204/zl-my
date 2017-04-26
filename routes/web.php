@@ -121,6 +121,13 @@ Route::group(['domain' => 'cms.zl-my.com', 'namespace' => 'cms'], function () {
     Route::delete('masters/{master}', 'MasterController@destroy');
     Route::get('masters/{master}/password', 'MasterController@resetPassword');
     Route::post('masters/{master}/password', 'MasterController@updatePassword');
+
+    // review
+    Route::get('reviews', 'ReviewController@index');
+    Route::get('reviews/create', 'ReviewController@create');
+    Route::post('reviews', 'ReviewController@store');
+
+
 });
 
 
