@@ -119,6 +119,8 @@ Route::group(['namespace' => 'api'], function(){
     // CheckVersion
     Route::get('checkVersion','WebController@checkVersion');
 
+    Route::get('loadmore','NewsController@loadMore');
+
 });
 
 
