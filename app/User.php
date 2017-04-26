@@ -37,13 +37,6 @@ class User extends Authenticatable
         return $this->morphTo();
     }
 
-    public function patientReview()
-    {
-        return $this->hasMany('App\Review', 'patient_id');
-    }
 
-    public function doctorReview()
-    {
-        return $this->hasMany('App\Review', 'doctor_id');
-    }
+
 }
