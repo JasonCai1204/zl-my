@@ -73,7 +73,7 @@ class NewsController extends Controller
             ])->get()
         );
 
-        $news = App\News::where([
+        $items = App\News::where([
             ['published_at','!=' ,null],
             ['news_class_id', $request->news_class_id]
         ])->select('id','title','cover_image','published_at','sort')
@@ -82,13 +82,25 @@ class NewsController extends Controller
                ->take(10)
                ->get();
 
+        if (count($items) >0) {
+            foreach ($items as $item){
+                $news['news'][] = [
+                    'id' => $item->id,
+                    'title' => $item->title,
+                    'cover_image' => $item->cover_image,
+                    'published_at' => $item->published_at->format('Y-m-d'),
+                    'sort' => $item->sort,
+                ];
+            }
+        }
 
-        $count = $count-($request->skip+count($news));
+
+        $count = $count-($request->skip+count($items));
 
        return collect(['status' => 1,
             'msg' => '加载成功',
             'data' => [
-                'news' => $news,
+                'news' => isset($news['news']) ? $news['news'] : null,
                'count' => isset($count) && $count > 0 ? 1 : 0
         ]])->toJson();
 
