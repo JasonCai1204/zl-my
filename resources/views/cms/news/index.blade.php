@@ -20,8 +20,6 @@
                                     <th>标题</th>
                                     <th>文章类别</th>
                                     <th>时间</th>
-                                    {{--<th>首页推荐</th>--}}
-                                    {{--<th>当前页面推荐</th>--}}
                                     <th>发布</th>
                                     <th>更多</th>
                                 </tr>
@@ -29,7 +27,7 @@
                             <tbody>
                                 @foreach ($data as $item)
                                     <tr>
-                                        <td>{{ $item->title }}</td>
+                                        <td>{{ str_limit($item->title, 40) }}</td>
                                         <td>{{ $item->news_class->name or '' }}</td>
                                         <td>{{ $item->created_at }}</td>
                                         {{--<td>{{ $item->is_recommended ? '✓' : '' }}</td>--}}
