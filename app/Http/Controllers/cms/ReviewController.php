@@ -19,7 +19,7 @@ class ReviewController extends Controller
 
     public function index ()
     {
-        return view('cms.reviews.index',['reviews' => Review::orderBy('created_at','desc')->get()]);
+        return view('cms.reviews.index',['date' => Review::orderBy('created_at','desc')->get()]);
     }
 
     public function create ()
@@ -59,7 +59,7 @@ class ReviewController extends Controller
 
     public function show (Review $review)
     {
-        return view('cms.reviews.show', ['review' => $review]);
+        return view('cms.reviews.show', ['data' => $review]);
     }
 
     public function update (Request $request ,Review $review)
