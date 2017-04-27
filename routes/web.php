@@ -125,8 +125,11 @@ Route::group(['domain' => 'cms.zl-my.com', 'namespace' => 'cms'], function () {
 
     // review
     Route::get('reviews', 'ReviewController@index');
+    Route::get('reviews/{review}', 'ReviewController@show');
     Route::get('reviews/create', 'ReviewController@create');
     Route::post('reviews', 'ReviewController@store');
+    Route::put('reviews/{review}', 'ReviewController@update');
+
 
 
 });
@@ -218,6 +221,14 @@ Route::group(['namespace' => 'web'], function() {
     // Profile
     Route::get('account/user/profile','UserController@getProfile');
     Route::post('account/user/profile','UserController@postProfile');
+
+    // Review
+    Route::get('review/{doctor}/create','ReviewController@create');
+    Route::post('review','ReviewController@store');
+    Route::get('review/{doctor}/reviews','ReviewController@getDoctorReviews');
+    Route::get('review/{doctor}/loadMore','ReviewController@loadMoreDoctorReviews');
+    Route::get('review/{patient}/reviews','ReviewController@getPatientReviews');
+    Route::get('review/{patient}/loadMore','ReviewController@loadMorePatientReviews');
 
     // Contact
     Route::get('contact',function(){
