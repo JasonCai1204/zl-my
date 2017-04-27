@@ -9,7 +9,8 @@
 
             <div class="col-sm-10">
                 <div id="tool-bar">
-                    <form class="form-inline" action="{{ url('reviews/search') }}" method="get">
+                    <a type="button" class="btn btn-default" href="{{ url('reviews/create') }}" style="margin-right: 10px">添加评论</a>
+                    <form class="form-inline" action="{{ url('reviews/search') }}" method="get" style="display: inline-block">
                         <div class="form-group">
                             <label for="q" class="sr-only">搜索</label>
                             <input class="form-control" type="search" name="q" placeholder="搜索">
@@ -29,6 +30,7 @@
                                     <th>评级</th>
                                     <th>评论</th>
                                     <th>评论时间</th>
+                                    <th>状态</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -40,6 +42,15 @@
                                         <td>{{ $item->ratings }}</td>
                                         <td>{{ str_limit($item->reviews, 40) }}</td>
                                         <td>{{ $item->created_at }}</td>
+                                        <td>
+                                            @if ($item->status == 1)
+                                                ✅ 通过
+                                            @elseif ($item->status == -1)
+                                                ❌ 不通过
+                                            @else
+                                                🔘 待审核
+                                            @endif
+                                        </td>
                                         <td><a href="/reviews/{{ $item->id }}">详情 &gt;</a></td>
                                     </tr>
                                 @endforeach

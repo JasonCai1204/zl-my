@@ -9,7 +9,7 @@
                 <div class="panel-heading">添加评论</div>
 
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/reviews') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('reviews') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('patient_id') ? ' has-error' : '' }}">
@@ -74,7 +74,7 @@
                             <label for="reviews" class="col-md-4 control-label">评论*</label>
 
                             <div class="col-md-6">
-                                <textarea name="reviews" rows="3" class="form-control" required>{{ old('reviews') }}</textarea>
+                                <textarea name="reviews" rows="8" class="form-control" required>{{ old('reviews') }}</textarea>
 
                                 @if ($errors->has('reviews'))
                                     <span class="help-block">
