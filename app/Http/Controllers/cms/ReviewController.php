@@ -19,7 +19,7 @@ class ReviewController extends Controller
 
     public function index ()
     {
-        return view('cms.reviews.index',['date' => Review::orderBy('created_at','desc')->get()]);
+        return view('cms.reviews.index',['data' => Review::orderBy('created_at','desc')->get()]);
     }
 
     public function create ()
