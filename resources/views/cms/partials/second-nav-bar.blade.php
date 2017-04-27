@@ -1,7 +1,8 @@
 <div id="second-nav-bar" class="col-md-2">
     <ul class="nav nav-pills nav-stacked">
         @foreach ([
-            ['id' => 'order', 'name' => '预约单', 'uri' => '/orders'],
+            ['id' => 'order', 'name' => '订单', 'uri' => '/orders'],
+            ['id' => 'review', 'name' => '评论', 'uri' => '/reviews'],
             ['id' => 'hospital', 'name' => '医院', 'uri' => '/hospitals'],
             ['id' => 'doctor', 'name' => '医生', 'uri' => '/doctors'],
             ['id' => 'user', 'name' => '用户', 'uri' => '/users'],
