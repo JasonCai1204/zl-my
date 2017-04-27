@@ -5,13 +5,18 @@ namespace App\Http\Controllers\cms;
 use App\Doctor;
 use App\Patient;
 use App\Review;
-use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class ReviewController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('master');
+    }
+
     public function index ()
     {
         return view('cms.reviews.index',['reviews' => Review::orderBy('created_at','desc')->get()]);
@@ -24,7 +29,6 @@ class ReviewController extends Controller
             'doctors'  => Doctor::orderBy('created_at','desc')->get()
         ]);
     }
-
 
     public function store (Request $request)
     {
@@ -51,6 +55,22 @@ class ReviewController extends Controller
 
         return redirect('reviews');
 
+    }
+
+    public function show (Review $review)
+    {
+        return view('cms.reviews.show', ['review' => $review]);
+    }
+
+    public function update (Request $request ,Review $review)
+    {
+        $this->validate($request, [
+            'status'     => 'required|numeric',
+        ]);
+
+        $review->save();
+
+        return redirect('reviews');
     }
 
 }
