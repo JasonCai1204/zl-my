@@ -17,9 +17,17 @@ class ReviewController extends Controller
         $this->middleware('master');
     }
 
-    public function index ()
+    public function index (Request $request)
     {
-        return view('cms.reviews.index',['data' => Review::orderBy('created_at','desc')->get()]);
+        // TODO: Searching...
+        if ($request->has('q')) {
+             $doctors = Doctor::where('name', 'link', '%' . $request->q . '%')->get();
+             $patient = Patient::where('name', 'link', '%' . $request->q . '%')->get();
+             // ...
+        }
+
+        $reviews = Review::orderBy('created_at','desc')->get();
+        return view('cms.reviews.index', ['data' => $reviews]);
     }
 
     public function create ()
@@ -37,7 +45,7 @@ class ReviewController extends Controller
             'doctor_id'  => 'required|integer',
             'reviews'    => 'required',
             'ratings'    => 'required|integer',
-            'status'     => 'required|numeric',
+            'status'     => 'numeric'
         ]);
 
         $review = new Review;
@@ -45,7 +53,7 @@ class ReviewController extends Controller
         $review->doctor_id  = $request->doctor_id;
         $review->reviews    = $request->reviews;
         $review->ratings    = $request->ratings;
-        $review->status     = $request->status;
+        $review->status     = $request->has('status') ? 1 : -1;
 
         if ($request->has('published_at')) {
             $review->published_at = Carbon::now();
@@ -62,12 +70,13 @@ class ReviewController extends Controller
         return view('cms.reviews.show', ['data' => $review]);
     }
 
-    public function update (Request $request ,Review $review)
+    public function update (Request $request, Review $review)
     {
         $this->validate($request, [
-            'status'     => 'required|numeric',
+            'status' => 'numeric'
         ]);
 
+        $review->status = $request->has('status') ?  1 : -1;
         $review->save();
 
         return redirect('reviews');
