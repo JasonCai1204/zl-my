@@ -125,13 +125,10 @@ Route::group(['domain' => 'cms.zl-my.com', 'namespace' => 'cms'], function () {
 
     // review
     Route::get('reviews', 'ReviewController@index');
-    Route::get('reviews/{review}', 'ReviewController@show');
     Route::get('reviews/create', 'ReviewController@create');
+    Route::get('reviews/{review}', 'ReviewController@show');
     Route::post('reviews', 'ReviewController@store');
     Route::put('reviews/{review}', 'ReviewController@update');
-
-
-
 });
 
 
@@ -258,4 +255,3 @@ Route::group(['namespace' => 'web'], function() {
     // helper
     Route::post('helper/upload-file', 'HelperController@uploadFile');
 });
-
