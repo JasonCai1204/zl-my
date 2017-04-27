@@ -1,6 +1,6 @@
 @extends('cms.layouts.app')
 
-@section('title', '预约单')
+@section('title', '订单')
 
 @section('content')
     <div class="container">
@@ -13,7 +13,7 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th>编号</th>
+                                    <th>订单号</th>
                                     <th>患者姓名</th>
                                     <th>手机号码</th>
                                     <th>所患疾病</th>
@@ -30,7 +30,7 @@
                                         <td>{{ $item->patient_name }}</td>
                                         <td>{{ $item->phone_number }}</td>
                                         <td>{{ $item->instance ? $item->instance->name : '' }}</td>
-                                        <td>{{ $item->hospital ? $item->hospital->name : ($item->doctor ? $item->doctor->hospital->name : '') }}</td>
+                                        <td>{{ str_limit($item->hospital ? $item->hospital->name : ($item->doctor ? $item->doctor->hospital->name : ''), 16) }}</td>
                                         <td>{{ $item->doctor ? $item->doctor->name : '' }}</td>
                                         <td>{{ $item->created_at }}</td>
                                         <td><a href="/orders/{{ $item->id }}">详情 &gt;</a></td>

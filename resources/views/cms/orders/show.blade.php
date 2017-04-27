@@ -1,12 +1,12 @@
 @extends('cms.layouts.app')
 
-@section('title', '预约单详情')
+@section('title', '订单详情')
 
 @section('content')
     <div class="container">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">预约单详情</div>
+                <div class="panel-heading">订单详情</div>
 
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/orders/' . $data->id) }}">
@@ -14,7 +14,7 @@
                         {{ method_field('PUT') }}
 
                         <div class="form-group{{ $errors->has('id') ? ' has-error' : '' }}">
-                            <label for="id" class="col-md-4 control-label">编号</label>
+                            <label for="id" class="col-md-4 control-label">订单号</label>
 
                             <div class="col-md-6">
                                 <input id="id" type="text" class="form-control" name="id" value="{{ $data->id }}" readonly required>
@@ -225,7 +225,7 @@
 
                         @if ($data->user_id != null)
                         <div class="form-group">
-                            <label for="user_id" class="col-md-4 control-label">预约单所属用户</label>
+                            <label for="user_id" class="col-md-4 control-label">订单单所属用户</label>
 
                             <div class="col-md-6">
                                 <a href="{{ url('users/' . $data->user_id) }}" class="btn btn-link">{{ $data->user->name }}</a>
