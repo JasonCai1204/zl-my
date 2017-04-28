@@ -57,8 +57,10 @@
                                 @endforeach
                             </tbody>
                         </table>
-                    @else
+                    @elseif (!isset($q))
                         暂无评论。
+                    @else
+                        没有"{{ $q }}"的相关评论。
                     @endif
                     </div>
                 </div>
