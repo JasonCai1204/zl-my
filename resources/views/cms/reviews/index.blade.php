@@ -13,7 +13,7 @@
                     <form class="form-inline" action="{{ url('reviews') }}" method="get" style="display: inline-block">
                         <div class="form-group">
                             <label for="q" class="sr-only">搜索</label>
-                            <input class="form-control" type="search" name="q" placeholder="搜索">
+                            <input class="form-control" type="search" name="q" placeholder="搜索" value="{{ isset($q) ? $q : '' }}">
                         </div>
 
                         <button type="submit" class="btn btn-default">搜索</button>
