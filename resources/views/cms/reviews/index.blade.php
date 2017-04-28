@@ -10,7 +10,7 @@
             <div class="col-sm-10">
                 <div id="tool-bar">
                     <a type="button" class="btn btn-default" href="{{ url('reviews/create') }}" style="margin-right: 10px">添加评论</a>
-                    <form class="form-inline" action="{{ url('reviews/search') }}" method="get" style="display: inline-block">
+                    <form class="form-inline" action="{{ url('reviews') }}" method="get" style="display: inline-block">
                         <div class="form-group">
                             <label for="q" class="sr-only">搜索</label>
                             <input class="form-control" type="search" name="q" placeholder="搜索">
@@ -22,6 +22,7 @@
 
                 <div class="panel panel-default">
                     <div class="panel-body">
+                        @if (count($data) > 0)
                         <table class="table table-hover">
                             <thead>
                                 <tr>
@@ -56,6 +57,9 @@
                                 @endforeach
                             </tbody>
                         </table>
+                    @else
+                        暂无评论。
+                    @endif
                     </div>
                 </div>
 
