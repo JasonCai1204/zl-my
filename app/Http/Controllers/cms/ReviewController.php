@@ -8,6 +8,7 @@ use App\Review;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class ReviewController extends Controller
 {
@@ -21,12 +22,35 @@ class ReviewController extends Controller
     {
         // TODO: Searching...
         if ($request->has('q')) {
-             $doctors = Doctor::where('name', 'link', '%' . $request->q . '%')->get();
-             $patient = Patient::where('name', 'link', '%' . $request->q . '%')->get();
-             // ...
+
+             $reviews = collect();
+
+             $doctors = Doctor::where('name', 'like', '%' . $request->q . '%')
+                        ->orderBy(DB::raw('CONVERT(name USING gbk)'))
+                        ->get();
+
+             if ( count($doctors) > 0 ) {
+                 foreach ( $doctors as $doctor ) {
+                     $reviews = $reviews->merge($doctor->reviews);
+                 }
+             }
+
+             $patients = Patient::where('name', 'like', '%' . $request->q . '%')
+                        ->orderBy(DB::raw('CONVERT(name USING gbk)'))
+                        ->get();
+
+             if ( count($patients) > 0 ) {
+                 foreach ( $patients as $patient ) {
+                     $reviews = $reviews->merge($patient->reviews);
+                 }
+             }
+
+            $reviews = $reviews->unique();
+
+        } else {
+            $reviews = Review::orderBy('created_at','desc')->get();
         }
 
-        $reviews = Review::orderBy('created_at','desc')->get();
         return view('cms.reviews.index', ['data' => $reviews]);
     }
 
