@@ -17,7 +17,7 @@
                             <label for="id" class="col-md-4 control-label">订单号</label>
 
                             <div class="col-md-6">
-                                <input id="id" type="text" class="form-control" name="id" value="{{ $data->id }}" readonly required>
+                                <input type="text" class="form-control" name="id" value="{{ $data->id }}" readonly required>
                             </div>
                         </div>
 
@@ -25,7 +25,7 @@
                             <label for="patient_name" class="col-md-4 control-label">患者姓名*</label>
 
                             <div class="col-md-6">
-                                <input id="patient_name" type="text" class="form-control" name="patient_name" value="{{ old('patient_name') ?: $data->patient_name }}" required>
+                                <input type="text" class="form-control" name="patient_name" value="{{ old('patient_name') ?: $data->patient_name }}" required>
                             </div>
 
                             @if ($errors->has('patient_name'))
@@ -39,7 +39,7 @@
                             <label for="phone_number" class="col-md-4 control-label">手机号码*</label>
 
                             <div class="col-md-6">
-                                <input id="phone_number" type="number" class="form-control" name="phone_number" value="{{ old('phone_number') ?: $data->phone_number }}" required>
+                                <input type="number" class="form-control" name="phone_number" value="{{ old('phone_number') ?: $data->phone_number }}" required>
 
                                 @if ($errors->has('phone_number'))
                                     <span class="help-block">
@@ -54,7 +54,7 @@
                             <label for="instance_id" class="col-md-4 control-label">所患疾病</label>
 
                             <div class="col-md-6">
-                                <select id="instance_id" name="instance_id" class="form-control">
+                                <select name="instance_id" class="form-control">
                                     <option value="" disabled selected>请选择</option>
                                     @foreach ($types as $type)
                                         <option disabled>{{ $type->name }}</option>
@@ -76,7 +76,7 @@
                             <label for="hospital_id_or_doctor_id" class="col-md-4 control-label">预约医院和医生</label>
 
                             <div class="col-md-6">
-                                <select id="hospital_id_or_doctor_id" name="hospital_id_or_doctor_id" class="form-control">
+                                <select name="hospital_id_or_doctor_id" class="form-control">
                                     <option value="">请选择</option>
                                     @foreach ($hospitals as $hospital)
                                         <option value="{{ $hospital->id }}"{{ (old('hospital_id_or_doctor_id') == $hospital->id) || (old('hospital_id_or_doctor_id') == null && $data->doctor_id == null && $hospital->id == $data->hospital_id) ? ' selected' : '' }}>{{ $hospital->name }}</option>
@@ -99,10 +99,10 @@
 
                             <div class="col-md-6">
                                 <label class="radio-inline">
-                                    <input type="radio" name="gender" id="gender" value="1"{{ $data->gender == '1' ? ' checked' : '' }}> 👱男
+                                    <input type="radio" name="gender" value="1"{{ $data->gender == '1' ? ' checked' : '' }}> 👱男
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="gender" id="gender" value="0"{{ $data->gender == '0' ? ' checked' : '' }}> 👩女
+                                    <input type="radio" name="gender" value="0"{{ $data->gender == '0' ? ' checked' : '' }}> 👩女
                                 </label>
                             </div>
 
@@ -117,7 +117,7 @@
                             <label for="birthday" class="col-md-4 control-label">出生年月</label>
 
                             <div class="col-md-6">
-                                <input id="birthday" type="month" class="form-control" name="birthday" placeholder="yyyy-mm-dd" value="{{ (new DateTime(old('birthday') ?: $data->birthday))->format('Y-m') }}">
+                                <input type="month" class="form-control" name="birthday" placeholder="yyyy-mm-dd" value="{{ (new DateTime(old('birthday') ?: $data->birthday))->format('Y-m') }}">
 
                                 @if ($errors->has('birthday'))
                                     <span class="help-block">
@@ -131,7 +131,7 @@
                             <label for="weight" class="col-md-4 control-label">体重</label>
 
                             <div class="col-md-6">
-                                <select id="weight" name="weight" class="form-control">
+                                <select name="weight" class="form-control">
                                     <option value="">请选择</option>
                                     @for ($i = 30; $i < 95; $i = $i + 5)
                                         <option value="{{ ($i + 1) . '-' . ($i + 5) }}"{{ $data->weight == (($i + 1) . '-' . ($i + 5)) ? ' selected' : '' }}>{{ ($i + 1) . '-' . ($i + 5) }} kg</option>
@@ -150,7 +150,7 @@
                             <div class="col-md-6 col-md-offset-4">
                                 <div class="checkbox">
                                     <label>
-                                        <input id="smoking" type="checkbox" name="smoking"{{ old('smoking') || $data->smoking ? ' checked' : '' }}> 🚬吸烟
+                                        <input type="checkbox" name="smoking"{{ old('smoking') || $data->smoking ? ' checked' : '' }}> 🚬吸烟
                                     </label>
                                 </div>
 
@@ -166,7 +166,7 @@
                             <label for="wechat_id" class="col-md-4 control-label">微信号</label>
 
                             <div class="col-md-6">
-                                <input id="wechat_id" type="text" class="form-control" name="wechat_id" value="{{ old('wechat_id') ?: $data->wechat_id }}">
+                                <input type="text" class="form-control" name="wechat_id" value="{{ old('wechat_id') ?: $data->wechat_id }}">
                             </div>
 
                             @if ($errors->has('wechat_id'))
@@ -180,7 +180,7 @@
                             <label for="detail" class="col-md-4 control-label">病情描述</label>
 
                             <div class="col-md-6">
-                                <textarea id="detail" class="form-control" name="detail" rows="7" cols="40">{{ old('detail') ?: $data->detail }}</textarea>
+                                <textarea class="form-control" name="detail" rows="7" cols="40">{{ old('detail') ?: $data->detail }}</textarea>
                             </div>
 
                             @if ($errors->has('detail'))
@@ -211,7 +211,7 @@
                             <label for="created_at" class="col-md-4 control-label">下单时间</label>
 
                             <div class="col-md-6">
-                                <input id="created_at" type="datetime" class="form-control" name="created_at" placeholder="yyyy-mm-dd hh:mm:ss" value="{{ $data->created_at }}">
+                                <input type="datetime" class="form-control" name="created_at" placeholder="yyyy-mm-dd hh:mm:ss" value="{{ $data->created_at }}">
                             </div>
                         </div>
 
