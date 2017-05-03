@@ -1,0 +1,54 @@
+html {
+    font-family: 'Pingfang SC', Arial, sans-serif;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    background-color: #FFF:
+}
+
+a {
+    color: #0070C9;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* header */
+header {
+    background-image: linear-gradient(to bottom, rgba(40, 163, 118, .75), rgb(40, 163, 118));
+    height: 48px;
+}
+
+header h1 {
+    display: none;
+}
+
+header a {
+    display: block;
+    margin: 0 auto;
+    height: 48px;
+    width: 32px;
+    padding: 0 15px;
+    background: url(/storage/static/images/logo.png) center center no-repeat;
+    background-size: 32px 32px;
+}
+
+header a:hover {
+    opacity: .65;
+}
+
+/* page title */
+#page-title-with-background-image {
+    line-height: 125px;
+    background: url(/storage/static/images/typing-on-macbook.png) center center no-repeat;
+    background-size: cover;
+    color: #FFF;
+    font-size: 28px;
+    font-weight: normal;
+    text-align: center;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
