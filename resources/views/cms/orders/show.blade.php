@@ -208,10 +208,10 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="created_at" class="col-md-4 control-label">日期</label>
+                            <label for="created_at" class="col-md-4 control-label">下单时间</label>
 
                             <div class="col-md-6">
-                                <input id="created_at" type="day" class="form-control" name="created_at" value="{{ $data->created_at }}" readonly>
+                                <input id="created_at" type="datetime" class="form-control" name="created_at" placeholder="yyyy-mm-dd hh:mm:ss" value="{{ $data->created_at }}">
                             </div>
                         </div>
 
