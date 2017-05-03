@@ -41,7 +41,7 @@ class OrderController extends Controller
             'birthday' => 'date',
             'weight' => 'max:6',
             'wechat_id' => 'max:20',
-            'created_at' => 'required|date_format:Y-m-d',
+            'created_at' => 'required|date',
         ]);
 
         $hospital_id = $doctor_id = null;
