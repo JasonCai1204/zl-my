@@ -212,6 +212,12 @@
 
                             <div class="col-md-6">
                                 <input type="datetime" class="form-control" name="created_at" placeholder="yyyy-mm-dd hh:mm:ss" value="{{ $data->created_at }}">
+
+                                @if ($errors->has('created_at'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('created_at') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
 
