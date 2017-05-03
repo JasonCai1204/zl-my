@@ -39,18 +39,27 @@
 
             <div class="weui-cells">
 
+                <a href="/downloads" class="weui-cell weui-cell_access">
+                    <div class="weui-cell__bd">
+                        <p>应用下载</p>
+                    </div>
+                    <div class="weui-cell__ft"></div>
+                </a>
+
                 <a href="/support/qa" class="weui-cell weui-cell_access">
                     <div class="weui-cell__bd">
                         <p>常见问题</p>
                     </div>
                     <div class="weui-cell__ft"></div>
                 </a>
+
                 <a href="/about" class="weui-cell weui-cell_access">
                     <div class="weui-cell__bd">
                         <p>关于我们</p>
                     </div>
                     <div class="weui-cell__ft"></div>
                 </a>
+
                 <a href="/contact" class="weui-cell weui-cell_access">
                     <div class="weui-cell__bd">
                         <p>联系我们</p>
