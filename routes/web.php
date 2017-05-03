@@ -249,7 +249,7 @@ Route::group(['namespace' => 'web'], function() {
 
     // Download
     Route::get('downloads',function(){
-        return view('web.app.download');
+        return view('www.downloads');
     });
 
     // helper
