@@ -207,7 +207,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group{{ $errors->has('created_at') ? ' has-error' : '' }}">
                             <label for="created_at" class="col-md-4 control-label">下单时间</label>
 
                             <div class="col-md-6">
