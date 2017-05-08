@@ -13,27 +13,59 @@
                         {{ csrf_field() }}
                         {{ method_field('PUT') }}
 
-                        <div class="form-group">
+                        <div class="form-group{{ $errors->has('patient_id') ? ' has-error' : '' }}">
                             <label for="patient_id" class="col-md-4 control-label">评论者*</label>
 
                             <div class="col-md-6">
-                                <input class="form-control" name="patient_id" value="{{ $data->patient->name }}">
+                                <select class="form-control" name="patient_id" required>
+                                    @foreach ($patients as $patient)
+                                        <option value="{{ $patient->id }}"{{ old('patient_id') == $patient->id || (count($errors) == 0 && $data->patient_id == $patient->id) ? ' selected' : '' }}>{{ $patient->name }}</option>
+                                    @endforeach
+                                </select>
+
+                                @if ($errors->has('patient_id'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('patient_id') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group{{ $errors->has('doctor_id') ? ' has-error' : '' }}">
                             <label for="doctor_id" class="col-md-4 control-label">医生*</label>
 
                             <div class="col-md-6">
-                                <input class="form-control" name="doctor_id" value="{{ $data->doctor->name }}">
+                                <select class="form-control" name="doctor_id" required>
+                                    @foreach ($doctors as $doctor)
+                                        <option value="{{ $doctor->id }}"{{ old('doctor_id') == $doctor->id || (count($errors) == 0 && $data->doctor_id == $doctor->id) ? ' selected' : '' }}>{{ $doctor->name }}</option>
+                                    @endforeach
+                                </select>
+
+                                @if ($errors->has('doctor_id'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('doctor_id') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group{{ $errors->has('ratings') ? ' has-error' : '' }}">
                             <label for="ratings" class="col-md-4 control-label">评级*</label>
 
                             <div class="col-md-6">
-                                <input class="form-control" name="ratings" value="{{ $data->ratings }}">
+                                <select class="form-control" name="ratings" required>
+                                    <option value="1"{{ old('ratings') == '1' || (count($errors) == 0 && $data->rating == '1') ? ' selected' : '' }}>1</option>
+                                    <option value="2"{{ old('ratings') == '2' || (count($errors) == 0 && $data->rating == '2') ? ' selected' : '' }}>2</option>
+                                    <option value="3"{{ old('ratings') == '3' || (count($errors) == 0 && $data->rating == '3') ? ' selected' : '' }}>3</option>
+                                    <option value="4"{{ old('ratings') == '4' || (count($errors) == 0 && $data->rating == '4') ? ' selected' : '' }}>4</option>
+                                    <option value="5"{{ old('ratings') == '5' || (count($errors) == 0 && $data->rating == '5') ? ' selected' : '' }}>5</option>
+                                </select>
+
+                                @if ($errors->has('ratings'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('ratings') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
 
