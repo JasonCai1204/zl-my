@@ -97,12 +97,31 @@ class ReviewController extends Controller
     public function update (Request $request, Review $review)
     {
         $this->validate($request, [
-            'status' => 'numeric'
+            'patient_id' => 'required|integer',
+            'doctor_id'  => 'required|integer',
+            'reviews'    => 'required',
+            'ratings'    => 'required|integer',
+            'status'     => 'numeric'
         ]);
 
-        $review->status = $request->has('status') ?  1 : -1;
+        $review->patient_id = $request->patient_id;
+        $review->doctor_id  = $request->doctor_id;
+        $review->reviews    = $request->reviews;
+        $review->ratings    = $request->ratings;
+        $review->status     = $request->status;
+
+        if ($request->has('published_at')) {
+            $review->published_at = Carbon::now();
+        }
+
         $review->save();
 
+        return redirect('reviews');
+    }
+
+    public function destroy(Review $review)
+    {
+        $review->delete();
         return redirect('reviews');
     }
 
