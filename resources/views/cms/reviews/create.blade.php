@@ -84,6 +84,20 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('created_at') ? ' has-error' : '' }}">
+                            <label for="reviews" class="col-md-4 control-label">时间*</label>
+
+                            <div class="col-md-6">
+                                <input class="form-control" type="datetime" name="created_at" value="{{ date('Y-m-d H:i:s') }}" required>
+
+                                @if ($errors->has('created_at'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('created_at') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <div class="checkbox">
