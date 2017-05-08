@@ -54,11 +54,11 @@
 
                             <div class="col-md-6">
                                 <select class="form-control" name="ratings" required>
-                                    <option value="1"{{ old('ratings') == '1' || (count($errors) == 0 && $data->rating == '1') ? ' selected' : '' }}>1</option>
-                                    <option value="2"{{ old('ratings') == '2' || (count($errors) == 0 && $data->rating == '2') ? ' selected' : '' }}>2</option>
-                                    <option value="3"{{ old('ratings') == '3' || (count($errors) == 0 && $data->rating == '3') ? ' selected' : '' }}>3</option>
-                                    <option value="4"{{ old('ratings') == '4' || (count($errors) == 0 && $data->rating == '4') ? ' selected' : '' }}>4</option>
-                                    <option value="5"{{ old('ratings') == '5' || (count($errors) == 0 && $data->rating == '5') ? ' selected' : '' }}>5</option>
+                                    <option value="1"{{ old('ratings') == '1' || (count($errors) == 0 && $data->ratings == '1') ? ' selected' : '' }}>1</option>
+                                    <option value="2"{{ old('ratings') == '2' || (count($errors) == 0 && $data->ratings == '2') ? ' selected' : '' }}>2</option>
+                                    <option value="3"{{ old('ratings') == '3' || (count($errors) == 0 && $data->ratings == '3') ? ' selected' : '' }}>3</option>
+                                    <option value="4"{{ old('ratings') == '4' || (count($errors) == 0 && $data->ratings == '4') ? ' selected' : '' }}>4</option>
+                                    <option value="5"{{ old('ratings') == '5' || (count($errors) == 0 && $data->ratings == '5') ? ' selected' : '' }}>5</option>
                                 </select>
 
                                 @if ($errors->has('ratings'))
