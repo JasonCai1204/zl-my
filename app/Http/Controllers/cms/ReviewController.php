@@ -114,8 +114,8 @@ class ReviewController extends Controller
         $review->doctor_id  = $request->doctor_id;
         $review->reviews    = $request->reviews;
         $review->ratings    = $request->ratings;
-        $review->status     = $request->status;
-
+        $review->status     = $request->has('status') ? 1 : -1;
+        $review->created_at = $request->created_at;
         if ($request->has('published_at')) {
             $review->published_at = Carbon::now();
         }
