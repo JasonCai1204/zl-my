@@ -69,7 +69,8 @@ class ReviewController extends Controller
             'doctor_id'  => 'required|integer',
             'reviews'    => 'required',
             'ratings'    => 'required|integer',
-            'status'     => 'numeric'
+            'status'     => 'numeric',
+            'created_at' => 'required|date_format:Y-m-d H:i:s'
         ]);
 
         $review = new Review;
@@ -101,7 +102,8 @@ class ReviewController extends Controller
             'doctor_id'  => 'required|integer',
             'reviews'    => 'required',
             'ratings'    => 'required|integer',
-            'status'     => 'numeric'
+            'status'     => 'numeric',
+            'created_at' => 'required|date_format:Y-m-d H:i:s'
         ]);
 
         $review->patient_id = $request->patient_id;
