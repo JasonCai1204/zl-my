@@ -92,7 +92,11 @@ class ReviewController extends Controller
 
     public function show (Review $review)
     {
-        return view('cms.reviews.show', ['data' => $review]);
+        return view('cms.reviews.show', [
+            'data' => $review,
+            'patients' => Patient::orderBy('created_at','desc')->get(),
+            'doctors'  => Doctor::orderBy('created_at','desc')->get()
+        ]);
     }
 
     public function update (Request $request, Review $review)
