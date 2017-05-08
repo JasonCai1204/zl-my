@@ -129,6 +129,7 @@ Route::group(['domain' => 'cms.zl-my.com', 'namespace' => 'cms'], function () {
     Route::get('reviews/{review}', 'ReviewController@show');
     Route::post('reviews', 'ReviewController@store');
     Route::put('reviews/{review}', 'ReviewController@update');
+    Route::delete('reviews/{review}', 'ReviewController@destroy');
 });
 
 
