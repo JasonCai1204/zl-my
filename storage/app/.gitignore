@@ -1,12 +1,3 @@
 *
 !public/
 !.gitignore
-
-# public/images/doctor/avatar/*
-# !public/images/doctor/avatar/default.png
-
-# public/images/helper/photo/*
-# !public/images/helper/photo/default.png
-
-# public/images/type/icon/*
-# !public/images/type/icon/default.png
