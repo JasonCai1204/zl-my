@@ -44,7 +44,7 @@ class ReviewController extends Controller
           $review->doctor_id  = $request->doctor_id;
           $review->reviews    = $request->reviews;
           $review->ratings    = $request->ratings;
-          $review->status     = $request->status;
+          $review->status     = -1;
 
           if ($request->has('published_at')) {
               $review->published_at = Carbon::now();
@@ -56,7 +56,19 @@ class ReviewController extends Controller
 
     public function getDoctorReviews (Doctor $doctor)
     {
-        return view('', [ 'ratings' => count( $doctor->reviews()->where('status',1)->get() ), 'reviews', $doctor->reviews()->where('status',1)->orderBy('created_at','desc')->take(15)->get() ]);
+        $avg = (Review::where([['status', 1],['doctor_id', $doctor->id]])->pluck('ratings'))->avg();
+
+        if ($avg >= 4.5 ) {
+            $avg = intval(ceil($avg));
+        } else {
+            $avg = intval(floor($avg));
+        }
+
+        return view('www.doctors.show', [
+            'avg'  => $avg,
+            'counts' => count($doctor->reviews()->where('status',1)->get()),
+            'reviews' => $doctor->reviews()->where('status',1)->orderBy('created_at','desc')->take(15)->get()
+        ]);
     }
 
     public function getPatientReviews (Patient $patient)
@@ -75,14 +87,14 @@ class ReviewController extends Controller
 
     }
 
-    public function loadMorePatientReviews (Request $request, Patient $patient) {
-
-        $count   = count( $patient->reviews()->where('status',1)->orderBy('created_at','desc')->get() );
-
-        $reviews = $patient->reviews()->where('status',1)->orderBy('created_at','desc')->skip($request->skip)->take(15)->get();
-
-        $count   = $count - ( $request->skip + count( $reviews ) );
-
-    }
+//    public function loadMorePatientReviews (Request $request, Patient $patient) {
+//
+//        $count   = count( $patient->reviews()->where('status',1)->orderBy('created_at','desc')->get() );
+//
+//        $reviews = $patient->reviews()->where('status',1)->orderBy('created_at','desc')->skip($request->skip)->take(15)->get();
+//
+//        $count   = $count - ( $request->skip + count( $reviews ) );
+//
+//    }
 
 }
