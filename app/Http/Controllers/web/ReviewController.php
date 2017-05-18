@@ -64,11 +64,11 @@ class ReviewController extends Controller
             $avg = intval(floor($avg));
         }
 
-        return view('www.doctors.show', [
-            'avg'  => $avg,
-            'counts' => count($doctor->reviews()->where('status',1)->get()),
-            'reviews' => $doctor->reviews()->where('status',1)->orderBy('created_at','desc')->take(15)->get()
-        ]);
+//        return view('www.doctors.show', [
+//            'avg'  => $avg,
+//            'counts' => count($doctor->reviews()->where('status',1)->get()),
+//            'reviews' => $doctor->reviews()->where('status',1)->orderBy('created_at','desc')->take(15)->get()
+//        ]);
     }
 
     public function getPatientReviews (Patient $patient)
