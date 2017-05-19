@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\cms;
 
 use App\Doctor;
-use App\Patient;
+use App\User;
 use App\Review;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -20,7 +20,6 @@ class ReviewController extends Controller
 
     public function index (Request $request)
     {
-        // TODO: Searching...
         if ($request->has('q')) {
 
              $reviews = collect();
@@ -57,7 +56,7 @@ class ReviewController extends Controller
     public function create ()
     {
         return view('cms.reviews.create',[
-            'patients' => Patient::orderBy('created_at','desc')->get(),
+            'users' => User::orderBy('created_at','desc')->get(),
             'doctors'  => Doctor::orderBy('created_at','desc')->get()
         ]);
     }
@@ -65,7 +64,7 @@ class ReviewController extends Controller
     public function store (Request $request)
     {
         $this->validate($request, [
-            'patient_id' => 'required|integer',
+            'user_id' => 'required|integer',
             'doctor_id'  => 'required|integer',
             'reviews'    => 'required',
             'ratings'    => 'required|integer',
@@ -74,7 +73,7 @@ class ReviewController extends Controller
         ]);
 
         $review = new Review;
-        $review->patient_id = $request->patient_id;
+        $review->user_id = $request->user_id;
         $review->doctor_id  = $request->doctor_id;
         $review->reviews    = $request->reviews;
         $review->ratings    = $request->ratings;
@@ -94,7 +93,7 @@ class ReviewController extends Controller
     {
         return view('cms.reviews.show', [
             'data' => $review,
-            'patients' => Patient::orderBy('created_at','desc')->get(),
+            'users' => User::orderBy('created_at','desc')->get(),
             'doctors'  => Doctor::orderBy('created_at','desc')->get()
         ]);
     }
@@ -102,7 +101,7 @@ class ReviewController extends Controller
     public function update (Request $request, Review $review)
     {
         $this->validate($request, [
-            'patient_id' => 'required|integer',
+            'user_id' => 'required|integer',
             'doctor_id'  => 'required|integer',
             'reviews'    => 'required',
             'ratings'    => 'required|integer',
@@ -110,7 +109,7 @@ class ReviewController extends Controller
             'created_at' => 'required|date_format:Y-m-d H:i:s'
         ]);
 
-        $review->patient_id = $request->patient_id;
+        $review->user_id = $request->user_id;
         $review->doctor_id  = $request->doctor_id;
         $review->reviews    = $request->reviews;
         $review->ratings    = $request->ratings;

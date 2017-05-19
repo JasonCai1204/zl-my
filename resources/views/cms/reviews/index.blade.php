@@ -38,7 +38,8 @@
                             <tbody>
                                 @foreach ($data as $item)
                                     <tr>
-                                        <td>{{ $item->patient->name }}</td>
+                                        {{-- TODO: --}}
+                                        <td>{{ isset($item->user->name) ? $item->user->name : '' }}</td>
                                         <td>{{ $item->doctor->name }}</td>
                                         <td>{{ $item->ratings }}</td>
                                         <td>{{ str_limit($item->reviews, 40) }}</td>

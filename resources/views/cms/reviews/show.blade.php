@@ -13,19 +13,19 @@
                         {{ csrf_field() }}
                         {{ method_field('PUT') }}
 
-                        <div class="form-group{{ $errors->has('patient_id') ? ' has-error' : '' }}">
-                            <label for="patient_id" class="col-md-4 control-label">评论者*</label>
+                        <div class="form-group{{ $errors->has('user_id') ? ' has-error' : '' }}">
+                            <label for="user_id" class="col-md-4 control-label">评论者*</label>
 
                             <div class="col-md-6">
-                                <select class="form-control" name="patient_id" required>
-                                    @foreach ($patients as $patient)
-                                        <option value="{{ $patient->id }}"{{ old('patient_id') == $patient->id || (count($errors) == 0 && $data->patient_id == $patient->id) ? ' selected' : '' }}>{{ $patient->name }}</option>
+                                <select class="form-control" name="user_id" required>
+                                    @foreach ($users as $user)
+                                        <option value="{{ $user->id }}"{{ old('user_id') == $user->id || (count($errors) == 0 && $data->user_id == $user->id) ? ' selected' : '' }}>{{ $user->name }}</option>
                                     @endforeach
                                 </select>
 
-                                @if ($errors->has('patient_id'))
+                                @if ($errors->has('user_id'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('patient_id') }}</strong>
+                                        <strong>{{ $errors->first('user_id') }}</strong>
                                     </span>
                                 @endif
                             </div>

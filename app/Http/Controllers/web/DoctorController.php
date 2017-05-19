@@ -138,10 +138,21 @@ class DoctorController extends Controller
 
         $hospital_id = $doctor->hospital->id;
 
-        return view('web.doctors.show',[
+        $avg = (App\Review::where([['status', 1],['doctor_id', $id]])->pluck('ratings'))->avg();
+
+        if ($avg >= 4.5 ) {
+            $avg = intval(ceil($avg));
+        } else {
+            $avg = intval(floor($avg));
+        }
+
+        return view('www.doctors.show',[
             'doctor' => $doctor,
             'doctor_id' => $id,
-            'hospital_id' => $hospital_id
+            'hospital_id' => $hospital_id,
+            'avg'  => $avg,
+            'counts' => count($doctor->reviews()->where('status',1)->get()),
+            'reviews' => $doctor->reviews()->where('status',1)->orderBy('created_at','desc')->take(3)->get()
         ]);
 
     }

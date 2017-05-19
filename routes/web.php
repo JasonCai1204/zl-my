@@ -12,7 +12,7 @@
 */
 
 // cms
-Route::group(['domain' => 'cms.zl-my.com', 'namespace' => 'cms'], function () {
+Route::group(['domain' => 'cms.deego.app', 'namespace' => 'cms'], function () {
 
     Route::get('/', 'HomeController@index');
 
@@ -256,3 +256,5 @@ Route::group(['namespace' => 'web'], function() {
     // helper
     Route::post('helper/upload-file', 'HelperController@uploadFile');
 });
+
+Route::get('fix', 'web\ReviewController@fix');

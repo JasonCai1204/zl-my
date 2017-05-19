@@ -12,20 +12,20 @@
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('reviews') }}">
                         {{ csrf_field() }}
 
-                        <div class="form-group{{ $errors->has('patient_id') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('user_id') ? ' has-error' : '' }}">
                             <label for="patient_id" class="col-md-4 control-label">评论者*</label>
 
                             <div class="col-md-6">
-                                <select class="form-control" name="patient_id" required>
+                                <select class="form-control" name="user_id" required>
                                     <option value="" selected disabled>请选择</option>
-                                    @foreach ($patients as $patient)
-                                        <option value="{{ $patient->id }}"{{ old('patient_id') == $patient->id ? ' selected' : '' }}>{{ $patient->name }}</option>
+                                    @foreach ($users as $user)
+                                        <option value="{{ $user->id }}"{{ old('user_id') == $user->id ? ' selected' : '' }}>{{ $user->name }}</option>
                                     @endforeach
                                 </select>
 
-                                @if ($errors->has('patient_id'))
+                                @if ($errors->has('user_id'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('patient_id') }}</strong>
+                                        <strong>{{ $errors->first('user_id') }}</strong>
                                     </span>
                                 @endif
                             </div>
