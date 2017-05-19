@@ -33,7 +33,7 @@
                 <span class="star-light"></span>
                 <span class="star-light"></span>
                 <span class="star-outline"></span>
-                <span>72份评价</span>
+                <span class="desc">72份评价</span>
             </div>
 
             <a class="writing-review" href="#">撰写评论</a>
@@ -47,7 +47,7 @@
                         <span class="star-light"></span>
                         <span class="star-light"></span>
                         <span class="star-outline"></span>
-                        <span>评论人：周杰伦</span>
+                        <span class="desc">评论人：周杰伦</span>
                     </div>
                     <p>我爸已经于2016年10月13日在贵院做了右肺上叶癌根治术。手术非常顺利，恢复非常好。感谢殷伟强主任、贺院长及所有医务人员，是您们精湛的医术、无私的情怀、高尚的医德使我重拾一个温馨的家！ 我们全家感谢您们！！！</p>
                 </div>

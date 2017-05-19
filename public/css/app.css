@@ -152,6 +152,12 @@ header a:hover {
     margin-bottom: 76px;
 }
 
+.ratings {
+    -webkit-display: flex;
+    display: flex;
+    align-items: center;
+}
+
 .ratings .star-light {
     background: url(/storage/static/images/star_light.svg) center center no-repeat;
 }
@@ -166,13 +172,10 @@ header a:hover {
     width: 12.5px;
     height: 12px;
     background-size: 12.5px 12px;
-
-    float: left;
     margin-right: 1px;
-    margin-top: 4px;
 }
 
-.ratings span:last-child {
+.ratings span.desc {
     padding-left: 3px;
 }
 
@@ -203,4 +206,38 @@ header a:hover {
     border-bottom: 1px solid #E5E5E5;
     text-align: center;
     color: #28A376;
+}
+
+/* writing review page */
+.make-rating {
+    padding: 10px 0;
+    border-bottom: 1px solid #E5E5E5;
+}
+
+.make-rating .ratings {
+    justify-content: space-around;
+    width: 120px;
+    margin: 0 auto;
+}
+
+.make-rating .tips {
+    text-align: center;
+    color: #a0a0a0;
+    font-size: 12px;
+    line-height: 20px;
+}
+
+.writing-review-content {
+    padding: 0 15px;
+    margin-top: 15px;
+}
+
+#review-input {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 7px;
+    border: 1px solid #E5E5E5;
+    border-radius: 2px;
+    resize: none;
+    font-size: 14px;
 }
