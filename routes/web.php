@@ -256,5 +256,3 @@ Route::group(['namespace' => 'web'], function() {
     // helper
     Route::post('helper/upload-file', 'HelperController@uploadFile');
 });
-
-Route::get('fix', 'web\ReviewController@fix');

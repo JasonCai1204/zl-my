@@ -43,7 +43,7 @@ $(function() {
                   review += '<span class="star-outline"></span>';
               }
 
-              review += '<span class="desc">评论人：' + val.patientName + '</span></div>';
+              review += '<span class="desc">评论人：' + val.userName + '</span></div>';
               review += '<p>' + val.reviews + '</p></div>';
 
               reviews += review;

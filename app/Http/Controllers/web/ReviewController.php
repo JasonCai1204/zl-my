@@ -5,6 +5,7 @@ namespace App\Http\Controllers\web;
 use App\Doctor;
 use App\Patient;
 use App\Review;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -32,7 +33,7 @@ class ReviewController extends Controller
         ]);
 
         $review = new Review;
-        $review->patient_id = Auth::user()->id;
+        $review->user_id = Auth::user()->id;
         $review->doctor_id  = $request->doctor_id;
         $review->reviews    = $request->reviews;
         $review->ratings    = $request->ratings;
@@ -43,6 +44,8 @@ class ReviewController extends Controller
         }
 
         $review->save();
+
+        return redirect('doctor/' . $request->doctor_id);
     }
 
 
@@ -71,9 +74,9 @@ class ReviewController extends Controller
     public function loadMoreDoctorReviews (Request $request, Doctor $doctor) {
 
         $count   = count( $doctor->reviews()->where('status',1)->orderBy('created_at','desc')->get() );
-        $reviews = $doctor->reviews()->where('status',1)->orderBy('created_at','desc')->skip($request->skip)->take(3)->get();
+        $reviews = $doctor->reviews()->where('status',1)->orderBy('created_at','desc')->skip($request->skip)->take(15)->get();
         foreach ($reviews as $review) {
-            $review->patientName = $review->patient->name;
+            $review->userName = $review->user->name;
         }
         $count   = $count - ($request->skip + count( $reviews ));
 
@@ -81,8 +84,13 @@ class ReviewController extends Controller
 
     }
 
-    public function fix()
-    {
-        echo 'hello';
-    }
+    // public function fix()
+    // {
+    //     foreach (Review::all() as $index => $review) {
+    //         $user_id = $review->patient->users[0]->id;
+    //         $review->patient_id = $user_id;
+    //         $review->save();
+    //         echo($index . ' = ok<br>');
+    //     }
+    // }
 }

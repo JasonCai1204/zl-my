@@ -152,7 +152,7 @@ class DoctorController extends Controller
             'hospital_id' => $hospital_id,
             'avg'  => $avg,
             'counts' => count($doctor->reviews()->where('status',1)->get()),
-            'reviews' => $doctor->reviews()->where('status',1)->orderBy('created_at','desc')->take(3)->get()
+            'reviews' => $doctor->reviews()->where('status',1)->orderBy('created_at','desc')->take(15)->get()
         ]);
 
     }

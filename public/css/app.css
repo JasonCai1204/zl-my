@@ -209,6 +209,7 @@ header a:hover {
     border-bottom: 1px solid #E5E5E5;
     text-align: center;
     color: #28A376;
+    cursor: pointer;
 }
 
 /* writing review page */
