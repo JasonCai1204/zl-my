@@ -20,7 +20,7 @@ class News_classController extends Controller
         $news_classes = App\News_class::orderBy('type')->get();
 
         return view('cms.news_class.create', [
-            'classes' => ['资讯','指南'],
+            'classes' => ['资讯','科普'],
             'news_classes' => $news_classes
         ]);
     }
@@ -74,7 +74,7 @@ class News_classController extends Controller
 
         return view('cms.news_class.show', [
             'data' => $news_class,
-            'classes' => ['资讯','指南'],
+            'classes' => ['资讯','科普'],
             'news_classes' => $news_classes,
         ]);
     }

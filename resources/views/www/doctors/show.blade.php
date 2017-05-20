@@ -46,7 +46,7 @@
                             @for ($i = 1; $i < 5-$review->ratings; $i++)
                                 <span class="star-outline"></span>
                             @endfor
-                            <span class="desc">评论人：{{ $review->user->name }}</span>
+                            <span class="desc">评论人：{{ substr(str_limit($review->user->name, 2), 0, -3) . '**' }}</span>
                         </div>
                         <p>{{ $review->reviews }}</p>
                     </div>

@@ -42,7 +42,7 @@
                                             @endfor
                                         @endif
 
-                                        @if($class == '指南')
+                                        @if($class == '科普')
                                             @for ($i = 1; $i <= count($news_classes->where('type',2)) + 1; $i++)
                                                 <option value="{{ 2 . ',' . $i }}"{{ 2 . ',' . $i == old('type_and_sort') || (old('type_and_sort') == null && ( 2 . ',' . $i == $data->type . ',' . $data->sort)) ? ' selected' : '' }}>{{ $i }}</option>
 

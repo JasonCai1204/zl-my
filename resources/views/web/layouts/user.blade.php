@@ -30,7 +30,7 @@
         </a>
         <a href="guide" class="weui-tabbar__item">
             <img src="/storage/images/app/guide.png" alt="" class="weui-tabbar__icon">
-            <p class="weui-tabbar__label">指南</p>
+            <p class="weui-tabbar__label">科普</p>
         </a>
         <a href="recommends" class="weui-tabbar__item">
             <img src="/storage/images/app/thumbs_up.png" alt="" class="weui-tabbar__icon">
